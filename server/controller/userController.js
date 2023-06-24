@@ -3,7 +3,8 @@ const userModel = require("../models/userModel");
 class User {
 
     async getSingleUser(req, res) {
-        let { userId } = req.body;
+        let { userId } = req.params;
+        console.log(req.params);
         if (!userId) {
             return res.json({ error: "All filled must be required" });
         } else {

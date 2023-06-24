@@ -3,7 +3,7 @@ const { JWT_SECRET } = require("../config/keys");
 
 exports.verifyToken = (req, res, next) => {
   const token = req.headers.auth;
-
+  
   if (!token) {
     return res.status(401).json({ error: "Access denied. No token provided." });
   }

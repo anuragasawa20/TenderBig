@@ -4,7 +4,7 @@ const usersController = require("../controller/userController");
 const {isAdmin, verifyToken, isNotUser } = require("../middleware/auth")
 
 //Get user deatils
-router.get("/single-user", verifyToken, usersController.getSingleUser);
+router.get("/single-user/:userId", verifyToken, usersController.getSingleUser);
 
 //To get all users
 router.get("/allusers", verifyToken, usersController.getAllUser);

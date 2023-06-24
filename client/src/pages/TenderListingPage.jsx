@@ -123,6 +123,7 @@ const TenderListingPage = () => {
         const token = localStorage.getItem("token");
 
         const headers = {
+          "Content-Type": "application/json",
           auth: token,
         };
 

@@ -4,7 +4,7 @@ const tenderController = require("../controller/tenderController");
 const {verifyToken , isNotUser} = require("../middleware/auth")
 
 //To get all tenders registered and can also be filtered based on approved status and active
-router.get("/all-tenders", verifyToken, tenderController.getAllTender);
+router.post("/all-tenders", verifyToken, tenderController.getAllTender);
 
 //Prograsive search by query in url
 router.post("/search", verifyToken, tenderController.search);
@@ -25,9 +25,12 @@ router.get("/tender/:tenderId", verifyToken, tenderController.getSingleTender);
 router.get("/tender/byuserid", verifyToken, tenderController.getTendersByUserId);
 
 //Switch approved status of a tender
-router.post("/tender/:tenderId/switchApprovedStatus", verifyToken, isNotUser, tenderController.switchStatus);
+router.post("/tender/:tenderId/switchApprovedStatus", verifyToken, tenderController.switchStatus);
 
 //Switch active status of a tender
-router.post("/tender/:tenderId/switchActiveStatus", verifyToken, isNotUser, tenderController.switchActive);
+router.post("/tender/:tenderId/switchActiveStatus", verifyToken,  tenderController.switchActive);
+
+//Delete tender
+router.delete("/tender/:tenderId", verifyToken,  tenderController.deleteTender);
 
 module.exports = router;

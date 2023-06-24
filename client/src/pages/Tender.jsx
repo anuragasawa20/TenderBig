@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
@@ -176,7 +176,6 @@ const TenderByCategory = () => {
               {tenderDetails.tenderDetail.noticeType}
             </p>
           </div>
-
 
         </div>
       </div>

@@ -18,6 +18,8 @@ import AllTendersSection from './Admin/partials/dashboard/DashboardTenders';
 import AddUser from './Admin/AddUser';
 import NotFound from './components/NotFound';
 import DashboardHome from './Admin/partials/dashboard/DashboardHome';
+import DashboardTenderDetail from './Admin/partials/dashboard/DashboardTenderDetail';
+import DashboardUserDetail from './Admin/partials/dashboard/DashboardUserDetail';
 
 const checkIfUserIsAdmin = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -73,7 +75,15 @@ const App = () => {
           path="/dashboard/tender/forms"
           element={<PrivateRoute element={AdminForm} />}
         />
-        {/* <Route path='*' element={<NotFound />}></Route> */}
+        <Route
+          path="/dashboard/tender/:tenderId"
+          element={<PrivateRoute element={DashboardTenderDetail} />}
+        />
+        <Route
+          path="/dashboard/user/:userId"
+          element={<PrivateRoute element={DashboardUserDetail} />}
+        />
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

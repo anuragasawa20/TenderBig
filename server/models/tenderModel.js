@@ -89,7 +89,7 @@ const tenderModel = new mongoose.Schema(
             },
             district: {
                 type: String,
-                required: true
+                required: false
             },
             state: {
                 type: String,
@@ -145,7 +145,7 @@ const tenderModel = new mongoose.Schema(
         },
         active: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     { timestamps: true }

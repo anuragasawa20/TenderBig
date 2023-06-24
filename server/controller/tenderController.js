@@ -23,7 +23,7 @@ class Tender {
     async getAllTender(req, res) {
         try {
             const { approvedStatus, active, details, live } = req.body;
-
+console.log(details);
             const query = {};
             const userRole = req.userRole;
 
@@ -365,7 +365,7 @@ class Tender {
 
             const { region, geopolitical, country, sector, financier, state, city, product, userCategory } = req.query;
             const { details } = req.body;
-
+console.log(req.body);
             if (region && regionData.hasOwnProperty(region)) {
                 const countriesInRegion = regionData[region];
                 query['procurementSummary.country'] = { $in: countriesInRegion };
@@ -555,7 +555,7 @@ class Tender {
         try {
             const { tenderId } = req.params;
 
-            const tender = await tenderModel.findById(tenderId);
+            const tender = await tenderModel.findOne({tenderId: tenderId});
 
             if (!tender) {
                 return res.status(404).json({ error: "Tender not found." });
@@ -576,7 +576,7 @@ class Tender {
         try {
             const { tenderId } = req.params;
 
-            const tender = await tenderModel.findById(tenderId);
+            const tender = await tenderModel.findOne({tenderId: tenderId});
 
             if (!tender) {
                 return res.status(404).json({ error: "Tender not found." });
@@ -590,6 +590,23 @@ class Tender {
         } catch (err) {
             console.log(err);
             return res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    async deleteTender(req, res) {
+
+        const tenderId = req.params.tenderId;
+
+        try {
+            const deletedTender = await tenderModel.findOneAndDelete({ tenderId });
+
+            if (deletedTender) {
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(404);
+            }
+        } catch (error) {
+            res.sendStatus(500);
         }
     }
 
