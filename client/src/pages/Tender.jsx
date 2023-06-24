@@ -10,8 +10,14 @@ const TenderByCategory = () => {
   useEffect(() => {
     const fetchTenderDetails = async () => {
       try {
-        const baseUrl = "/apiTender/tenderdetails/tender";
-        const response = await axios.get(`${baseUrl}/${referenceNo}`);
+        const baseUrl = "http://localhost:5000/apiTender/tenderdetails/tender";
+        const token = localStorage.getItem("token");
+
+        const headers = {
+          auth: token,
+        };
+
+        const response = await axios.get(`${baseUrl}/${referenceNo}`, { headers });
         const tenderDetails = response.data.Product[0];
         console.log("tender id ", referenceNo);
         setTenderDetails(tenderDetails);

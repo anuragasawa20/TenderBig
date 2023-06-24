@@ -7,7 +7,7 @@ const {verifyToken , isNotUser} = require("../middleware/auth")
 router.get("/all-tenders", verifyToken, tenderController.getAllTender);
 
 //Prograsive search by query in url
-router.get("/search", verifyToken, tenderController.search);
+router.post("/search", verifyToken, tenderController.search);
 
 //Search from Form Data filled 
 router.post("/advance-search", verifyToken, tenderController.advanceSearch);

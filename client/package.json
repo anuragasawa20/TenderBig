@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "axios": "^1.4.0",
@@ -24,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-flatpickr": "^3.10.13",
     "react-icons": "^4.9.0",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.12.1",
     "react-select": "^5.7.3",
     "react-tilt": "^1.0.2",

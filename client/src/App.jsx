@@ -12,7 +12,6 @@ import SubscribePage from './pages/Subscribe';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminForm from './Admin/AdminForm';
-import Admin from "./Admin/Admin"
 import TenderByCategaries from './pages/TenderByCategaries';
 import DashboardUsers from './Admin/partials/dashboard/DashboardUsers';
 import AllTendersSection from './Admin/partials/dashboard/DashboardTenders';
@@ -74,7 +73,7 @@ const App = () => {
           path="/dashboard/tender/forms"
           element={<PrivateRoute element={AdminForm} />}
         />
-        <Route path='*' element={<NotFound />}></Route>
+        {/* <Route path='*' element={<NotFound />}></Route> */}
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -355,58 +355,64 @@ class Tender {
         }
     }
 
-  // Generalized search endpoint
-async search(req, res) {
-    try {
-        const query = {
-            'approvedStatus': true,
-            'active': true
-        };
+    // Generalized search endpoint
+    async search(req, res) {
+        try {
+            const query = {
+                'approvedStatus': true,
+                'active': true
+            };
 
-        const { region, geopolitical, country, sector, financier, state, city, product } = req.query;
-        const details = req.body;
+            const { region, geopolitical, country, sector, financier, state, city, product, userCategory } = req.query;
+            const { details } = req.body;
 
-        if (region && regionData.hasOwnProperty(region)) {
-            const countriesInRegion = regionData[region];
-            query['procurementSummary.country'] = { $in: countriesInRegion };
-        }
-        if (geopolitical && geopoliticalData.hasOwnProperty(geopolitical)) {
-            const countriesInGeopolitical = geopoliticalData[geopolitical];
-            query['procurementSummary.country'] = { $in: countriesInGeopolitical };
-        }
-        if (country) {
-            query['procurementSummary.country'] = country;
-        }
-        if (sector) {
-            query['sector'] = sector;
-        }
-        if (financier) {
-            query['otherInformation.financier'] = financier;
-        }
-        if (state) {
-            query['procurementSummary.state'] = state;
-        }
-        if (city) {
-            query['procurementSummary.city'] = city;
-        }
-        if (product) {
-            query['product'] = product;
-        }
-        console.log(req.body);
-console.log(details);
-        let projection = {};
-        if (details && Array.isArray(details)) {
-            projection = details.reduce((acc, field) => ({ ...acc, [field]: 1 }), {});
-        }
+            if (region && regionData.hasOwnProperty(region)) {
+                const countriesInRegion = regionData[region];
+                query['procurementSummary.country'] = { $in: countriesInRegion };
+            }
+            if (geopolitical && geopoliticalData.hasOwnProperty(geopolitical)) {
+                const countriesInGeopolitical = geopoliticalData[geopolitical];
+                query['procurementSummary.country'] = { $in: countriesInGeopolitical };
+            }
+            if (country) {
+                query['procurementSummary.country'] = country;
+            }
+            if (sector) {
+                query['sector'] = sector;
+            }
+            if (financier) {
+                query['otherInformation.financier'] = financier;
+            }
+            if (state) {
+                query['procurementSummary.state'] = state;
+            }
+            if (city) {
+                query['procurementSummary.city'] = city;
+            }
+            if (product) {
+                query['product'] = product;
+            }
+            if (userCategory) {
+                query['userCategory'] = userCategory;
+            }
+            console.log(details);
+            let projection;
+            if (details) {
+                projection = details.reduce((acc, field) => {
+                    acc[field] = 1;
+                    return acc;
+                }, {});
+            }
 
-        const results = await tenderModel.find(query, projection);
 
-        res.json(results);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred during the search' });
-    }
-};
+            const results = await tenderModel.find(query, projection);
+
+            res.json(results);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'An error occurred during the search' });
+        }
+    };
 
 
     // Advanced search endpoint
