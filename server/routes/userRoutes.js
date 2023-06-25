@@ -10,7 +10,7 @@ router.get("/single-user/:userId", verifyToken, usersController.getSingleUser);
 router.get("/allusers", verifyToken, usersController.getAllUser);
 
 //To update user role
-router.post("/updaterole", verifyToken, usersController.updateUserRole);
+router.put("/updaterole", verifyToken, usersController.updateUserRole);
 
 //Delete user
 router.delete("/delete/:userId", verifyToken, usersController.deleteUser);
