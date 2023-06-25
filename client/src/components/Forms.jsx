@@ -80,7 +80,7 @@ const Forms = () => {
     }
 
     const response = await fetch(
-      "http://localhost:5000/apiTender/tenderdetails/add-tender",
+      "/apiTender/tenderdetails/add-tender",
       {
         method: "POST",
         headers: {
@@ -107,7 +107,7 @@ const Forms = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/apiTender/tenderdetails"
+          "/apiTender/tenderdetails"
         );
         const data = await response.json();
         // Process the fetched data

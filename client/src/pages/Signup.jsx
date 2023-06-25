@@ -24,7 +24,7 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make API request with form data
-        fetch('http://localhost:5000/apiTender/signup', {
+        fetch('/apiTender/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

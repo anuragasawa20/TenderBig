@@ -10,7 +10,7 @@ const TenderByCategory = () => {
   useEffect(() => {
     const fetchTenderDetails = async () => {
       try {
-        const baseUrl = "http://localhost:5005/apiTender/tenderdetails/tender";
+        const baseUrl = "/apiTender/tenderdetails/tender";
         const token = localStorage.getItem("token");
 
         const headers = {
