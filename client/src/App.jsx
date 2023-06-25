@@ -47,7 +47,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/advance-search" element={<AdvancedSearch />} />
         <Route path="/category" element={<TenderByCategaries/>} />
-
         <Route path="/tenders" element={<TenderListingPage />} />
         <Route path="/tender/:referenceNo" element={<Tender />} />
         <Route path="/contact" element={<ContactUsPage />} />

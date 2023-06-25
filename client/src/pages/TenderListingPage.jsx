@@ -4,6 +4,7 @@ import {regionData, geopoliticalData} from "../constants/countriesData.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import { useSelector } from 'react-redux';
 
 const TenderCard = ({ title, deadline, location, referenceNo }) => {
   const navigate = useNavigate();

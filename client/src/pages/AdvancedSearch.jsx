@@ -1,204 +1,420 @@
-import React from "react";
-import Navbar from "../components/Navbar"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { locations } from "../constants/countriesData"
+import Navbar from '../components/Navbar';
 
-const FormPage = () => {
+const TenderCard = ({ tender }) => {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   return (
-    <>
-
-      <Navbar />
-      <div className="container mx-auto p-4">
-        <form className="mt-4">
-          <div className="max-w-6xl mx-auto p-6 bg-white rounded shadow border-[1px]">
-            <form className="space-y-4">
-              <h1 className="text-4xl font-bold text-[#414141]">Advanced Search</h1>
-              <p className="text-gray-600 my-2">
-                You can perform advanced search using the form below
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5">
-                <div className="flex items-center">
-                  <label htmlFor="tkid" className="w-full md:w-1/4">
-                    TKID:
-                  </label>
-                  <input
-                    id="tkid"
-                    name="tkid"
-                    type="text"
-                    placeholder="Enter TKID"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="keywords" className="w-full md:w-1/4">
-                    Keywords:
-                  </label>
-                  <input
-                    id="keywords"
-                    name="keywords"
-                    type="text"
-                    placeholder="Enter Keywords"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="tenderNo" className="w-full md:w-1/4">
-                    Tender No:
-                  </label>
-                  <input
-                    id="tenderNo"
-                    name="tenderNo"
-                    type="text"
-                    placeholder="Enter Tender No"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="location" className="w-full md:w-1/4">
-                    Location:
-                  </label>
-                  <select
-                    id="location"
-                    name="location"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  >
-                    <option value="">All Locations</option>
-                    <option value="Andaman and Nicobar Islands">
-                      Andaman and Nicobar Islands
-                    </option>
-                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                    <option value="Bihar">Bihar</option>
-                    <option value="Chandigarh">Chandigarh</option>
-                    <option value="Chhattisgarh">Chhattisgarh</option>
-                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                    <option value="Daman and Diu">Daman and Diu</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Delhi NCR">Delhi NCR</option>
-                    <option value="GoaGujarat">GoaGujarat</option>
-                    <option value="Haryana">Haryana</option>
-                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                    <option value="Jharkhand">Jharkhand</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Kerala">Kerala</option>
-                    <option value="Lakshadweep">Lakshadweep</option>
-                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Manipur">Manipur</option>
-                    <option value="Meghalaya">Meghalaya</option>
-                    <option value="Mizoram">Mizoram</option>
-                    <option value="Multi State">Multi State</option>
-                    <option value="Nagal">Nagal</option>
-                    <option value="Odisha">Odisha</option>
-                    <option value="Pondicherry">Pondicherry</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Rajasthan">Rajasthan</option>
-                    <option value="Sikkim">Sikkim</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-                    <option value="Telangana">Telangana</option>
-                    <option value="Tripura">Tripura</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Uttarakhand">Uttarakhand</option>
-                    <option value="West Bengal">West Bengal</option>
-
-                  </select>
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="organization" className="w-full md:w-1/4">
-                    Organization:
-                  </label>
-                  <input
-                    id="organization"
-                    name="organization"
-                    type="text"
-                    placeholder="Enter Organization"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="contractType" className="w-full md:w-1/4">
-                    Form Of Contract:
-                  </label>
-                  <select
-                    id="contractType"
-                    name="contractType"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  >
-                    <option value="">Please select Contract type</option>
-                    <option value="Buy">Buy</option>
-                    <option value="Sell">Sell</option>
-                    <option value="Contract">Contract</option>
-                  </select>
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="minValue" className="w-full md:w-1/4">
-                    Tender Min Value:
-                  </label>
-                  <input
-                    id="minValue"
-                    name="minValue"
-                    type="text"
-                    placeholder="Enter Tender Min Value"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="maxValue" className="w-full md:w-1/4">
-                    Tender Max Value:
-                  </label>
-                  <input
-                    id="maxValue"
-                    name="maxValue"
-                    type="text"
-                    placeholder="Enter Tender Max Value"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  />
-                </div>
-
-                <div className="flex items-center">
-                  <label htmlFor="portal" className="w-full md:w-1/4">
-                    Portal:
-                  </label>
-                  <select
-                    id="portal"
-                    name="portal"
-                    className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                  >
-                    <option value="">All Portals</option>
-                    <option value="">GeM</option>
-                    <option value="">Railway</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-red-700 text-white rounded  focus:outline-none focus:ring-2 focus:ring-red-700"
-                >
-                  Search
-                </button>
-                <button
-                  type="reset"
-                  className="ml-4 px-6 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                >
-                  Reset
-                </button>
-              </div>
-            </form>
-          </div>
-        </form>
+    <div className="max-w-full rounded-lg overflow-hidden shadow-lg border-2 border-red-700 mb-4">
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{tender.procurementSummary.summary}</div>
+        <p className="text-gray-700 text-base">
+          <strong>Deadline:</strong> {formatDate(tender.procurementSummary.deadline)}
+        </p>
+        <p className="text-gray-700 text-base">
+          <strong>Location:</strong> {tender.procurementSummary.city}, {tender.procurementSummary.country}
+        </p>
+        <p className="text-gray-700 text-base">
+          <strong>Product:</strong> {tender.product}
+        </p>
       </div>
-    </>
-
+    </div>
   );
 };
 
-export default FormPage;
 
+const AdvancedSearchForm = () => {
+
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const keywords = useSelector((state) => state.keywords);
+  const [formData, setFormData] = useState({
+    totNo: '',
+    documentNo: '',
+    location: '',
+    sector: '',
+    cpvNo: '',
+    finance: '',
+    deadlineFrom: '',
+    deadlineTo: '',
+    postingFrom: '',
+    postingTo: '',
+    purchaserName: '',
+    year: '',
+    keywords: []
+  });
+
+  const clearState = () => {
+    setFormData({
+      totNo: '',
+      documentNo: '',
+      location: '',
+      sector: '',
+      cpvNo: '',
+      finance: '',
+      deadlineFrom: '',
+      deadlineTo: '',
+      postingFrom: '',
+      postingTo: '',
+      purchaserName: '',
+      year: '',
+      keywords: []
+    });
+    setSelectedLocation('');
+  }
+
+
+  useEffect(() => {
+    const fetchByKeywords = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const headers = {
+          'Content-Type': 'application/json',
+          auth: token,
+        };
+
+        const body = {
+          keywords: keywords,
+          details: [
+            'procurementSummary.summary',
+            'procurementSummary.deadline',
+            'procurementSummary.city',
+            'procurementSummary.country',
+            'product',
+            'tenderId',
+          ],
+        };
+
+        const response = await axios.post('http://localhost:5000/apiTender/tenderdetails/advance-search', body, { headers });
+        console.log(response.data);
+        setTenderDetails(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchByKeywords();
+  }, [keywords]);
+
+
+
+  const handleLocationChange = (event) => {
+    const inputValue = event.target.value;
+    setSelectedLocation(inputValue);
+    setShowDropdown(inputValue !== '');
+  };
+
+  const filteredLocations = locations.filter((location) =>
+    location.toLowerCase().includes(selectedLocation.toLowerCase())
+  );
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'keywords') {
+      // Handle keywords array differently
+      setFormData((prevState) => ({
+        ...prevState,
+        keywords: value.split(',').map(keyword => keyword.trim())
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
+  };
+
+  const [tenderDetails, setTenderDetails] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    const headers = {
+      "Content-Type": "application/json",
+      auth: token,
+    };
+
+    // Create a new object with only the non-empty fields
+    const filteredFormData = {};
+    for (const key in formData) {
+      if (formData[key] !== '') {
+        filteredFormData[key] = formData[key];
+      }
+    }
+
+    // Add the selected location to the filteredFormData
+    filteredFormData.location = selectedLocation;
+
+    // Add the details array to the filteredFormData
+    filteredFormData.details = [
+      "procurementSummary.summary",
+      "procurementSummary.deadline",
+      "procurementSummary.city",
+      "procurementSummary.country",
+      "product",
+      "tenderId",
+    ];
+
+    try {
+      const response = await axios.post('http://localhost:5000/apiTender/tenderdetails/advance-search', filteredFormData, { headers });
+      console.log(response.data);
+      setTenderDetails(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <>
+      <Navbar />
+
+      <div className="container mx-auto p-4">
+        <div className="max-w-6xl mx-auto p-6 bg-white rounded shadow border-[1px]">
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <h1 className="text-4xl font-bold text-[#414141]">Advanced Search</h1>
+            <p className="text-gray-600 my-2">You can perform advanced search using the form below</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-5">
+              <div className="flex items-center">
+                <label htmlFor="totNo" className="w-full md:w-1/4">
+                  Tot No:
+                </label>
+                <input
+                  id="totNo"
+                  name="totNo"
+                  type="text"
+                  placeholder="Enter Tot No"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="documentNo" className="w-full md:w-1/4">
+                  Document No:
+                </label>
+                <input
+                  id="documentNo"
+                  name="documentNo"
+                  type="text"
+                  placeholder="Enter Document No"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="location" className="w-full md:w-1/4">
+                  Location:
+                </label>
+                <div className="relative w-full md:w-3/4">
+                  <input
+                    type="text"
+                    value={selectedLocation}
+                    onChange={handleLocationChange}
+                    onFocus={() => setShowDropdown(selectedLocation !== '')}
+                    className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                    placeholder="Search for a location"
+                  />
+                  {showDropdown && (
+                    <div className="absolute left-0 mt-2 w-full max-h-48 overflow-y-auto bg-white border border-gray-300 rounded shadow">
+                      {filteredLocations.map((location) => (
+                        <div
+                          key={location}
+                          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                          onClick={() => {
+                            setSelectedLocation(location);
+                            setShowDropdown(false);
+                          }}
+                        >
+                          {location}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="sector" className="w-full md:w-1/4">
+                  Sector:
+                </label>
+                <input
+                  id="sector"
+                  name="sector"
+                  type="text"
+                  placeholder="Enter Sector"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="cpvNo" className="w-full md:w-1/4">
+                  CPV No:
+                </label>
+                <input
+                  id="cpvNo"
+                  name="cpvNo"
+                  type="text"
+                  placeholder="Enter CPV No"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="finance" className="w-full md:w-1/4">
+                  Finance:
+                </label>
+                <input
+                  id="finance"
+                  name="finance"
+                  type="text"
+                  placeholder="Enter Finance"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="deadlineFrom" className="w-full md:w-1/4">
+                  Deadline From:
+                </label>
+                <input
+                  id="deadlineFrom"
+                  name="deadlineFrom"
+                  type="date"
+                  placeholder="Enter Deadline From"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="deadlineTo" className="w-full md:w-1/4">
+                  Deadline To:
+                </label>
+                <input
+                  id="deadlineTo"
+                  name="deadlineTo"
+                  type="date"
+                  placeholder="Enter Deadline To"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="postingFrom" className="w-full md:w-1/4">
+                  Posting From:
+                </label>
+                <input
+                  id="postingFrom"
+                  name="postingFrom"
+                  type="date"
+                  placeholder="Enter Posting From"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="postingTo" className="w-full md:w-1/4">
+                  Posting To:
+                </label>
+                <input
+                  id="postingTo"
+                  name="postingTo"
+                  type="date"
+                  placeholder="Enter Posting To"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="purchaserName" className="w-full md:w-1/4">
+                  Purchaser Name:
+                </label>
+                <input
+                  id="purchaserName"
+                  name="purchaserName"
+                  type="text"
+                  placeholder="Enter Purchaser Name"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="year" className="w-full md:w-1/4">
+                  Year:
+                </label>
+                <input
+                  id="year"
+                  name="year"
+                  type="text"
+                  placeholder="Enter Year"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex items-center">
+                <label htmlFor="keywords" className="w-full md:w-1/4">
+                  Keywords:
+                </label>
+                <input
+                  id="keywords"
+                  name="keywords"
+                  type="text"
+                  placeholder="Enter Keywords"
+                  className="w-full md:w-3/4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="px-6 py-2 bg-red-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+              >
+                Search
+              </button>
+              <button
+                type="reset"
+                className="ml-4 px-6 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                onClick={() => clearState()}
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+
+        </div>
+        {tenderDetails.length > 0 && (
+          <div className="mt-4 container">
+            {tenderDetails.map((tender) => (
+              <TenderCard key={tender.tenderId} tender={tender} />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default AdvancedSearchForm;

@@ -23,7 +23,7 @@ class Tender {
     async getAllTender(req, res) {
         try {
             const { approvedStatus, active, details, live } = req.body;
-console.log(details);
+            console.log(details);
             const query = {};
             const userRole = req.userRole;
 
@@ -365,7 +365,7 @@ console.log(details);
 
             const { region, geopolitical, country, sector, financier, state, city, product, userCategory } = req.query;
             const { details } = req.body;
-console.log(req.body);
+            console.log(req.body);
             if (region && regionData.hasOwnProperty(region)) {
                 const countriesInRegion = regionData[region];
                 query['procurementSummary.country'] = { $in: countriesInRegion };
@@ -418,7 +418,26 @@ console.log(req.body);
     // Advanced search endpoint
     async advanceSearch(req, res) {
         try {
-            let { totNo, documentNo, location, sector, cpvNo, finance, deadlineFrom, deadlineTo, postingFrom, postingTo, purchaserName, year, keywords } = req.body;
+            let { totNo, documentNo, location, sector, cpvNo, finance, deadlineFrom, deadlineTo, postingFrom, postingTo, purchaserName, year, keywords, details } = req.body;
+
+            // Check if all fields are empty
+            if (
+                !totNo &&
+                !documentNo &&
+                !location &&
+                !sector &&
+                !cpvNo &&
+                !finance &&
+                !deadlineFrom &&
+                !deadlineTo &&
+                !postingFrom &&
+                !postingTo &&
+                !purchaserName &&
+                !year &&
+                ((!keywords || (Array.isArray(keywords) && keywords.length === 0)) || (Array.isArray(keywords) && keywords.every(keyword => !keyword.trim())))
+            ) {
+                return res.status(400).json({ error: 'Search criteria are missing.' });
+            }
 
             const query = {
                 'approvedStatus': true,
@@ -512,36 +531,43 @@ console.log(req.body);
                 };
             }
 
-            if (keywords && Array.isArray(keywords)) {
-                query['$or'] = keywords.map((keyword) => ({
+            if (keywords && Array.isArray(keywords) && keywords.length > 0) {
+                query.$or = keywords.map((keyword) => ({
                     $or: [
-                        { 'summary': { $regex: keyword, $options: 'i' } },
+                        { summary: { $regex: keyword, $options: 'i' } },
                         { 'procurementSummary.summary': { $regex: keyword, $options: 'i' } },
                         { 'otherInformation.noticeType': { $regex: keyword, $options: 'i' } },
                         { 'purchaserDetail.purchaser': { $regex: keyword, $options: 'i' } },
                         { 'tenderDetail.description': { $regex: keyword, $options: 'i' } },
                         { 'tenderDetail.organization': { $regex: keyword, $options: 'i' } },
                         { 'tenderDetail.noticeType': { $regex: keyword, $options: 'i' } },
-                        { 'product': { $regex: keyword, $options: 'i' } },
-                        { 'sector': { $regex: keyword, $options: 'i' } }
+                        { product: { $regex: keyword, $options: 'i' } },
+                        { sector: { $regex: keyword, $options: 'i' } }
                     ]
                 }));
-            }
-            if (keywords && typeof keywords === 'string') {
-                query['$or'] = [
-                    { 'summary': { $regex: keywords, $options: 'i' } },
+            } else if (keywords && typeof keywords === 'string' && keywords !== '') {
+                query.$or = [
+                    { summary: { $regex: keywords, $options: 'i' } },
                     { 'procurementSummary.summary': { $regex: keywords, $options: 'i' } },
                     { 'otherInformation.noticeType': { $regex: keywords, $options: 'i' } },
                     { 'purchaserDetail.purchaser': { $regex: keywords, $options: 'i' } },
                     { 'tenderDetail.description': { $regex: keywords, $options: 'i' } },
                     { 'tenderDetail.organization': { $regex: keywords, $options: 'i' } },
                     { 'tenderDetail.noticeType': { $regex: keywords, $options: 'i' } },
-                    { 'product': { $regex: keywords, $options: 'i' } },
-                    { 'sector': { $regex: keywords, $options: 'i' } }
+                    { product: { $regex: keywords, $options: 'i' } },
+                    { sector: { $regex: keywords, $options: 'i' } }
                 ];
             }
 
-            const tenders = await tenderModel.find(query);
+            let projection;
+            if (details) {
+                projection = details.reduce((acc, field) => {
+                    acc[field] = 1;
+                    return acc;
+                }, {});
+            }
+
+            const tenders = await tenderModel.find(query, projection);
 
             res.json(tenders);
         } catch (error) {
@@ -555,7 +581,7 @@ console.log(req.body);
         try {
             const { tenderId } = req.params;
 
-            const tender = await tenderModel.findOne({tenderId: tenderId});
+            const tender = await tenderModel.findOne({ tenderId: tenderId });
 
             if (!tender) {
                 return res.status(404).json({ error: "Tender not found." });
@@ -576,7 +602,7 @@ console.log(req.body);
         try {
             const { tenderId } = req.params;
 
-            const tender = await tenderModel.findOne({tenderId: tenderId});
+            const tender = await tenderModel.findOne({ tenderId: tenderId });
 
             if (!tender) {
                 return res.status(404).json({ error: "Tender not found." });

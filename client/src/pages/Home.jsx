@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setKeywords } from "../Redux/store";
 import Home2 from "./Home2";
 import Home3 from "./Home3";
 import Home4 from "./Home4";
@@ -6,9 +8,23 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar"
 
 const HomePage = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchKeywords, setSearchKeywords] = useState("");
+
+  const handleSearch = () => {
+    const keywordsArray = searchKeywords.split(" ").map((keyword) => keyword.trim());
+    dispatch(setKeywords(keywordsArray));
+    // Clear the search input
+    setSearchKeywords("");
+    navigate("/advance-search")
+  };
+
+
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="px-3 md:p-4 ">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center  ">
           <div className="w-full md:w-1/4 hidden sm:grid mt-10 ">
@@ -176,12 +192,18 @@ const HomePage = () => {
                 <div className="flex items-center rounded-lg bg-white w-full max-w-ls py-4 ">
                   <input
                     type="text"
-                    placeholder="Enter your keyword to search for tenders"
+                    placeholder="Enter your keywords separated by commas"
+                    value={searchKeywords}
+                    onChange={(e) => setSearchKeywords(e.target.value)}
                     className="w-full md:w-2/3 lg:w-full py-2 px-4 border-2 border-red-700 rounded-l focus:outline-none focus:border-red-700 bg-transparent text-gray-800 placeholder-gray-400"
                   />
-                  <button className=" ml-0 md:mt-0 bg-red-700  hover:text-black text-white py-2 md:py-[8px] px-2 md:px-[50px] shadow-lg transition-colors border-[2px] border-red-700">
+                  <button
+                    className="ml-0 md:mt-0 bg-red-700 hover:text-black text-white py-2 md:py-[8px] px-2 md:px-[50px] shadow-lg transition-colors border-[2px] border-red-700"
+                    onClick={handleSearch}
+                  >
                     Search
                   </button>
+
                 </div>
               </div>
               <div className="flex justify-end">
