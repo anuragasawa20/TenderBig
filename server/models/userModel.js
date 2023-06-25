@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
             default: "user"
         },
         phoneNumber: {
-            type: String,
+            type: Number,
             required: true,
         },
         subscription: {
