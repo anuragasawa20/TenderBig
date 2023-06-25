@@ -18,4 +18,7 @@ router.delete("/delete/:userId", verifyToken, isNotUser, usersController.deleteU
 //New users
 router.get("/created/:weeks", verifyToken, isNotUser, usersController.newUsers);
 
+//statistics
+router.get("/statistics", verifyToken, isNotUser, usersController.statistics);
+
 module.exports = router;

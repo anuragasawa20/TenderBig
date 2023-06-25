@@ -33,4 +33,7 @@ router.post("/tender/:tenderId/switchActiveStatus", verifyToken,  tenderControll
 //Delete tender
 router.delete("/tender/:tenderId", verifyToken,  tenderController.deleteTender);
 
+//Statistics
+router.get("/statistics", verifyToken,  tenderController.statistics);
+
 module.exports = router;

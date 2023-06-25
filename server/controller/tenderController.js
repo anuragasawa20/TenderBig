@@ -636,6 +636,34 @@ class Tender {
         }
     }
 
+    async statistics(req, res){
+        try {
+            const totalCount = await tenderModel.countDocuments({});
+            const activeApprovedCount = await tenderModel.countDocuments({ active: true, approvedStatus: true });
+            const activeCount = await tenderModel.countDocuments({ active: true });
+            const approvedCount = await tenderModel.countDocuments({ approvedStatus: true });
+            const contractorCount = await tenderModel.countDocuments({ userCategory: 'contractor' });
+            const subcontractorCount = await tenderModel.countDocuments({ userCategory: 'subcontractor' });
+            const adminCount = await tenderModel.countDocuments({ userCategory: 'admin' });
+            const hrCount = await tenderModel.countDocuments({ userCategory: 'hr' });
+            const employeeCount = await tenderModel.countDocuments({ userCategory: 'employee' });
+        
+            res.json({
+              totalCount,
+              activeApprovedCount,
+              activeCount,
+              approvedCount,
+              contractorCount,
+              subcontractorCount,
+              adminCount,
+              hrCount,
+              employeeCount
+            });
+          } catch (error) {
+            res.status(500).json({ error: 'Unable to fetch tender statistics.' });
+          }
+    }
+
 }
 
 const tenderController = new Tender();

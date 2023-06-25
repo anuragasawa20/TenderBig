@@ -98,6 +98,30 @@ class User {
         }
     }
 
+    async statistics(req, res) {
+        try {
+            const totalCount = await userModel.countDocuments();
+            const adminCount = await userModel.countDocuments({ userRole: 'admin' });
+            const employeeCount = await userModel.countDocuments({ userRole: 'employee' });
+            const hrCount = await userModel.countDocuments({ userRole: 'hr' });
+            const userCount = await userModel.countDocuments({ userRole: 'user' });
+            const activeSubscriptionCount = await userModel.countDocuments({ 'subscription.status': 'active' });
+            const inactiveSubscriptionCount = await userModel.countDocuments({ 'subscription.status': 'inactive' });
+
+            res.json({
+                totalCount,
+                adminCount,
+                employeeCount,
+                hrCount,
+                userCount,
+                activeSubscriptionCount,
+                inactiveSubscriptionCount
+            });
+        } catch (error) {
+            res.status(500).json({ error: 'An error occurred while fetching user statistics.',error });
+        }
+    }
+
 }
 
 const usersController = new User();
