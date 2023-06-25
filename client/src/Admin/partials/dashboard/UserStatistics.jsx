@@ -49,6 +49,10 @@ const UserStatistics = () => {
             <h2 className="text-xl font-semibold mb-4">Regular Users</h2>
             <p className="text-2xl font-bold">{statistics.userCount}</p>
           </div>
+          <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+            <h2 className="text-xl font-semibold mb-4">Subscription Active</h2>
+            <p className="text-2xl font-bold">{statistics.activeSubscriptionCount}</p>
+          </div>
         </div>
       ) : (
         <p>Loading statistics...</p>
