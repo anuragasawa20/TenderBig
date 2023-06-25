@@ -9,6 +9,7 @@ import AddUser from '../Admin/partials/dashboard/AddUser';
 import AdminForm from '../Admin/partials/dashboard/AdminTenderForm';
 import DashboardTenderDetail from '../Admin/partials/dashboard/DashboardTenderDetail';
 import DashboardUserDetail from '../Admin/partials/dashboard/DashboardUserDetail';
+import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 const DashboardRoutes = () => {
   return (
@@ -28,6 +29,10 @@ const DashboardRoutes = () => {
       <Route
         path="/tenders"
         element={<PrivateRoute element={AllTendersSection} />}
+      />
+      <Route
+        path="/tenders/currenttenders"
+        element={<PrivateRoute element={DashboardCurrentTenders} />}
       />
       <Route
         path="/tender/forms"

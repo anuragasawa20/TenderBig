@@ -35,7 +35,9 @@ const Login = () => {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user.data));
                 // Navigate to the desired page
-                navigate("/");
+                const user = data.user.data
+                if(user.userRole == "admin") navigate("/dashboard/admin");
+                else navigate("/");
                 console.log("Login successful");
             })
             .catch((error) => {

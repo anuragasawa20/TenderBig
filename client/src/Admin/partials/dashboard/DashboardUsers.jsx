@@ -116,6 +116,7 @@ function DashboardUsers() {
             <div className="grid grid-cols-15 gap-6">
               {/*---------> Table (Top Channels) */}
               <section className="container mx-auto p-6 font-mono overflow-x-auto">
+              <h1 className="text-xl font-bold mb-4">All User</h1>
                 <div className="flex mb-4">
                   {/* Search bar */}
                   <input

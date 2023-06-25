@@ -118,6 +118,7 @@ const AllTendersSection = () => {
             <div className="grid grid-cols-15 gap-6">
               {/* Table */}
               <section className="container mx-auto p-6 font-mono overflow-x-auto">
+              <h1 className="text-xl font-bold mb-4">All Tenders</h1>
                 <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg overflow-x-auto">
                   <div className="w-full overflow-x-auto">
                     <div className="table-container overflow-x-auto">

@@ -3,8 +3,19 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { locations } from "../constants/countriesData"
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
+
 
 const TenderCard = ({ tender }) => {
+
+  const navigate = useNavigate();
+  
+  const handleViewDetails = (referenceNo) => {
+    navigate(`/tender/${referenceNo}`, {
+      state: { referenceNo },
+    });
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
@@ -12,9 +23,13 @@ const TenderCard = ({ tender }) => {
   };
 
   return (
-    <div className="max-w-full rounded-lg overflow-hidden shadow-lg border-2 border-red-700 mb-4">
+    <div className="max-w-full rounded-lg overflow-hidden mb-4 bg-white shadow-lg p-4 border-[2px]">
       <div className="px-6 py-4">
+      <div className="flex justify-between">
         <div className="font-bold text-xl mb-2">{tender.procurementSummary.summary}</div>
+        <span className="bg-green-500 text-white font-bold py-1 px-2 rounded mr-2 mb-2 h-8 ml-3">
+          Live
+        </span></div>
         <p className="text-gray-700 text-base">
           <strong>Deadline:</strong> {formatDate(tender.procurementSummary.deadline)}
         </p>
@@ -24,6 +39,12 @@ const TenderCard = ({ tender }) => {
         <p className="text-gray-700 text-base">
           <strong>Product:</strong> {tender.product}
         </p>
+        <button
+        className="bg-red-700 hover:bg-red-700 text-white font-bold mt-2 py-1 px-2 rounded transition-colors"
+        onClick={() => handleViewDetails(tender.tenderId)}
+      >
+        View Details
+      </button>
       </div>
     </div>
   );
