@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "./partials/Sidebar";
-import Header from "./partials/Header";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
 
 const Forms = () => {
   const [formValues, setFormValues] = useState({
