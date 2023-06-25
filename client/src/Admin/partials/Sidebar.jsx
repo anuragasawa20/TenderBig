@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import SidebarLinkGroup from './SidebarLinkGroup';
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
@@ -736,16 +742,16 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                               </span>
                             </NavLink>
                           </li>
-                          <li className="mb-1 last:mb-0">
+                          <li className="mb-1 last:mb-0" onClick={()=>{logout()}}>
                             <NavLink
                               end
-                              to="/settings/feedback"
+                              to="/"
                               className={({ isActive }) =>
                                 'block transition duration-150 truncate ' + (isActive ? 'text-indigo-500' : 'text-slate-400 hover:text-slate-200')
                               }
                             >
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Give Feedback
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200" >
+                               Logout
                               </span>
                             </NavLink>
                           </li>
