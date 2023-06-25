@@ -24,28 +24,28 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="px-3 md:p-4 ">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center  ">
-          <div className="w-full md:w-1/4 hidden sm:grid mt-10 ">
-            <ul className=" md:mt-7">
-              <h1 className="text-2xl font-bold  text-gray-700 ">
-                Tenders Categories
-              </h1>
+    <Navbar/>
+    <div className="px-3 md:p-4 ">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center  ">
+        <div className="w-full md:w-1/4 hidden sm:grid mt-10 ">
+          <ul className=" ">
+            <h1 className="text-2xl font-bold  text-gray-700 ">
+              Our Services
+            </h1>
 
-              <li className=" pb-2 border-white border-2 hover:border-red-700  mt-6">
-                <hr className="border-gray-400 pb-3 " />
-                <NavLink
-                  to="/tenders"
-                  className="text-gray-600  flex items-center justify-between"
-                >
-                  <span className="px-1">Tenders By Region</span>
-                  <img
-                    src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
-                    className="w-5 h-5"
-                    alt="Right Arrow"
-                  />
-                </NavLink>
+            <li className=" pb-2 border-white border-2 hover:border-red-700  mt-6">
+              <hr className="border-gray-400 pb-3 " />
+              <NavLink
+                to="/tenders"
+                className="text-gray-600  flex items-center justify-between"
+              >
+                <span className="px-1">Tenders By Region</span>
+                <img
+                  src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
+                  className="w-5 h-5"
+                  alt="Right Arrow"
+                />
+              </NavLink>
               </li>
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700  hover:bg-blu">

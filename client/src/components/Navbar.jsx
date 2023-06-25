@@ -7,9 +7,14 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   const logout = () => {
@@ -25,161 +30,265 @@ const Navbar = () => {
   };
 
   return (
-    <div className="">
-      <nav className="bg-white w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:bg-white ">
-          <div className="flex items-center justify-between h-16 ">
+    <div>
+      <nav className="bg-white shadow">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <a
-                href="/"
-                className="text-3xl font-bold tracking-wider text-red-700"
-              >
+              <Link to="/" className="flex items-center">
                 <img className="w-[120px]" src={logo} alt="logo" />
-              </a>
+              </Link>
             </div>
-            <div className="flex-1 flex items-center  sm:items-stretch justify-end">
+            <div className="flex-1 flex items-center justify-end sm:items-stretch">
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <div>
-                    <Link
-                      to="/"
-                      className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 text-gray-600 hover:text-white px-3 py-2 rounded-md  w-[90px]"
-                    >
-                      Home
-                    </Link>
-                  </div>
-
-                  <div>
-                    <Link
-                      to="/tenders"
-                      className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 text-gray-600 hover:text-white px-3 py-2 rounded-md  w-[90px]"
-                    >
-                      Tenders
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      to="/forms"
-                      className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 text-gray-600 hover:text-white px-3 py-2 rounded-md  w-[90px]"
-                    >
-                      Apply For Tender
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      to="/category"
-                      className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 text-gray-600 hover:text-white px-3 py-2 rounded-md  w-[90px]"
-                    >
-                      Tender by category
-                    </Link>
-                  </div>
-                  <div>
-                    <Link
-                      to="/contact"
-                      className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 text-gray-600 hover:text-white px-3 py-2 rounded-md  w-[90px]"
-                    >
-                      Contact
-                    </Link>
-                  </div>
-                  <select
-                    onChange={handleServiceSelect}
-                    className="bg-white border-[2px] border-red-700"
+                  <Link
+                    to="/"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
-                    <option value="" className="text-white bg-red-700 text-xl p-2 focus:bg-white focus:text-black">Services</option>
-
-                    <option value="/career-manpower" className="text-white bg-red-700 text-xl p-2">Career & Man Power</option>
-                    <option value="/registration-certificate" className="text-white bg-red-700 text-xl p-2">
-                      Registration / Certificate
-                    </option>
-                    <option value="/license" className="text-white bg-red-700 text-xl p-2">License</option>
-                  </select>
+                    Home
+                  </Link>
+                  <Link
+                    to="/tenders"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                  >
+                    Tenders
+                  </Link>
+                  <Link
+                    to="/forms"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                  >
+                    Apply For Tender
+                  </Link>
+                  <Link
+                    to="/category"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                  >
+                    Tender by category
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                  >
+                    Contact
+                  </Link>
+                  <div className="relative">
+                    <button
+                      onClick={toggleDropdown}
+                      className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                    >
+                      Services
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform ${
+                          dropdownOpen ? "rotate-180" : ""
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                    {dropdownOpen && (
+                      <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px]">
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        >
+                        <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                          Career & Man Power
+                          
+                        </Link>
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        ><svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                          Registration / Certificate
+                        </Link>
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        ><svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                          License
+                        </Link>
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        ><svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                          Auction Material
+                        </Link>
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        ><svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                          Joint Venture
+                        </Link><Link
+                        to="/contact"
+                        className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                      ><svg
+                      xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                        Online Bidding
+                      </Link>
+                      </div>
+                    )}
+                  </div>
                   {auth ? (
-                    <>
-                      <Link
-                        onClick={logout}
-                        className="bg-red-700 text-lg font-medium transition-colors duration-300 text-white hover:text-white px-3 py-2 rounded-md w-[90px]"
-                      >
-                        Logout
-                      </Link>
-                    </>
+                    <button
+                      onClick={logout}
+                      className="bg-red-700 text-white px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                    >
+                      Logout
+                    </button>
                   ) : (
-                    <>
-                      <Link
-                        to="/login"
-                        className="bg-red-700 text-lg font-medium transition-colors duration-300 text-white hover:text-white px-3 py-2 rounded-md w-[90px]"
-                      >
-                        Login
-                      </Link>
-                    </>
+                    <Link
+                      to="/login"
+                      className="bg-red-700 text-white px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                    >
+                      Login
+                    </Link>
                   )}
                 </div>
               </div>
-              <div className="sm:hidden ml-6 fixed">
+              <div className="sm:hidden ml-6">
                 <button
                   type="button"
                   className="text-gray-600 hover:text-red-700 focus:outline-none"
                   onClick={toggleMenu}
                 >
-                  <img
-                    src="https://www.svgrepo.com/show/12219/menu.svg"
-                    alt="Toggle Menu"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
                     className="w-6 h-6"
-                  />
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3 9a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H3zm0 4a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H3zm0 4a1 1 0 1 1 0-2h14a1 1 0 1 1 0 2H3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <hr />
       </nav>
       {menuOpen && (
-        <div className="flex justify-end ">
-          <div className="mt-12 sm:hidden overflow bg-red-700 max-w-[250px] p-2 text-white fixed ">
-            <div className="space-y-2 mt-2">
-              <div>
-                <Link
-                  to="/"
-                  className="mt-2 hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
-                  onClick={toggleMenu}
-                >
-                  Home
-                </Link>
-              </div>
-
-              <div>
-                <Link
-                  to="/tenders"
-                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
-                  onClick={toggleMenu}
-                >
-                  Tenders
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/forms"
-                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
-                >
-                  Apply For Tender
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/about"
-                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
-                  onClick={toggleMenu}
-                >
-                  About
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/login"
-                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]  bg-red-700"
-                  onClick={toggleMenu}
-                >
-                  Login
-                </Link>
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-75">
+          <div className="flex justify-end">
+            <div className="mt-12 px-2 sm:hidden">
+              <div className="bg-white divide-y-2 divide-gray-200 shadow-lg rounded-lg overflow-hidden">
+                <div className="px-4 py-2 space-y-2">
+                  <Link
+                    to="/"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to="/tenders"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    Tenders
+                  </Link>
+                  <Link
+                    to="/forms"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
+                  >
+                    Apply For Tender
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
+                    onClick={toggleMenu}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    to="/login"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 bg-red-700 text-white"
+                    onClick={toggleMenu}
+                  >
+                    Login
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

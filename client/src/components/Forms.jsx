@@ -1,472 +1,198 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const Forms = () => {
   const [formValues, setFormValues] = useState({
-    summary: '',
-    sector: '',
-    cpvNo: '',
-    country: '',
-    state: '',
-    city: '',
-    procurementSummarySummary: '',
-    procurementSummaryDeadline: '',
-    noticeType: '',
-    totNo: '',
-    documentNo: '',
-    competition: '',
-    financier: '',
-    ownership: '',
-    tenderValue: '',
-    purchaser: '',
-    paddress: '',
-    pcity: '',
-    pdistrict: '',
-    pstate: '',
-    ppin: '',
-    ptelfax: '',
-    email: '',
-    url: '',
-    description: '',
-    organization: '',
-    tenderDetailNoticeType: '',
-    product: '',
+    summary: "",
+    sector: "",
+    cpvNo: "",
+    country: "",
+    state: "",
+    city: "",
+    procurementSummarySummary: "",
+    procurementSummaryDeadline: "",
+    noticeType: "",
+    totNo: "",
+    documentNo: "",
+    competition: "",
+    financier: "",
+    ownership: "",
+    tenderValue: "",
+    purchaser: "",
+    paddress: "",
+    pcity: "",
+    pdistrict: "",
+    pstate: "",
+    ppin: "",
+    ptelfax: "",
+    email: "",
+    url: "",
+    description: "",
+    organization: "",
+    tenderDetailNoticeType: "",
+    product: "",
   });
 
-  function clearInputValue() {
-    setFormValues({
-      summary: "",
-      sector: "",
-      cpvNo: "",
-      country: "",
-      state: "",
-      city: "",
-      procurementSummarySummary: "",
-      procurementSummaryDeadline: "",
-      noticeType: "",
-      totNo: "",
-      documentNo: "",
-      competition: "",
-      financier: "",
-      ownership: "",
-      tenderValue: "",
-      purchaser: "",
-      paddress: "",
-      pcity: "",
-      pdistrict: "",
-      pstate: "",
-      ppin: "",
-      ptelfax: "",
-      email: "",
-      url: "",
-      description: "",
-      organization: "",
-      tenderDetailNoticeType: "",
-      product: "",
-    });
-  }
+  const [isError, setIsError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
+  const navigate = useNavigate();
+
+  const clearInputValue = () => {
+    setFormValues((prevValues) => {
+      const clearedValues = {};
+      for (const key in prevValues) {
+        clearedValues[key] = "";
+      }
+      return clearedValues;
+    });
+  };
+
+  const totalPages = Math.ceil(Object.keys(formValues).length / itemsPerPage);
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const formFields = Object.keys(formValues).slice(startIndex, endIndex);
 
   const handleFormSubmit = async (e) => {
-    console.log()
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/apiTender/tenderdetails/add-tender', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        auth: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0OTFiY2Y5ZWUyMmQ3OWNjMzA5MWQzOCIsInVzZXJJZCI6IjgzOGRmZSIsIm5hbWUiOiJNYXJpZSBQZXJleiIsImVtYWlsIjoiYXNobGV5aG9kc0BleGFtcGxlLm9yZyIsInVzZXJSb2xlIjoidXNlciIsInVzZXJDYXRlZ29yeSI6ImNvbnRyYWN0b3IiLCJwaG9uZU51bWJlciI6IjAwMTEzLTE5Mi01NjU0eDQ4MSIsImNvdW50cnkiOiJCb3Rzd2FuYSIsInN0YXRlIjoiTWlzc291cmkiLCJjaXR5IjoiS2VubmV0aGhhdmVuIiwiX192IjowfSwiaWF0IjoxNjg3MjcyNzQ4fQ.7CoLHhsy6sGqnrbXUNFCLgAB__8n0Tc28vv8kFHDgzU',
 
-        // auth: `${JSON.parse(localStorage.getItem('token'))}`
-      },
-      body: JSON.stringify(formValues),
-    });
+    const isFormValid = Object.values(formValues).every(
+      (value) => value !== ""
+    );
+    if (!isFormValid) {
+      setIsError(true);
+      return;
+    }
+
+    const response = await fetch(
+      "http://localhost:5000/apiTender/tenderdetails/add-tender",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0OTFiY2Y5ZWUyMmQ3OWNjMzA5MWQzOCIsInVzZXJJZCI6IjgzOGRmZSIsIm5hbWUiOiJNYXJpZSBQZXJleiIsImVtYWlsIjoiYXNobGV5aG9kc0BleGFtcGxlLm9yZyIsInVzZXJSb2xlIjoidXNlciIsInVzZXJDYXRlZ29yeSI6ImNvbnRyYWN0b3IiLCJwaG9uZU51bWJlciI6IjAwMTEzLTE5Mi01NjU0eDQ4MSIsImNvdW50cnkiOiJCb3Rzd2FuYSIsInN0YXRlIjoiTWlzc291cmkiLCJjaXR5IjoiS2VubmV0aGhhdmVuIiwiX192IjowfSwiaWF0IjoxNjg3MjcyNzQ4fQ.7CoLHhsy6sGqnrbXUNFCLgAB__8n0Tc28vv8kFHDgzU",
+        },
+        body: JSON.stringify(formValues),
+      }
+    );
 
     console.log(response);
     clearInputValue();
   };
 
-  const handleChange = (e) => {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
-  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/apiTender/tenderdetails"
+        );
+        const data = await response.json();
+        // Process the fetched data
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const showForm = () => {
-    setIsVisible(!isVisible);
-  };
+    fetchData();
+  }, []);
 
   return (
     <>
-    <Navbar/>
-
-    <div className="container mx-auto py-8 md:max-w-7xl">
-      <div className="space-y-8">
-        <div className="flex items-center justify-center flex-col md:flex-row">
-          <form
-            onSubmit={handleFormSubmit}
-            className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
-          >
-            <h1 className="text-3xl font-bold text-center mb-4">
-              Tenders Forms
-            </h1>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Summery
-              </label>
-              <input required
-                type="text"
-                id="summary" name="summary" value={formValues.summary} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Sector
-              </label>
-              <input required
-                type="text"
-                id="sector" name="sector" value={formValues.sector} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="mobile" className="flex items-center">
-                <AiOutlinePhone className="mr-2" />
-                CPV No
+      <Navbar />
+      <div className="container mx-auto px-4 max-w-7xl ">
+        <h1 className="text-2xl font-bold mt-4 mb-8">Tender Form</h1>
+        {isError && (
+          <div className="text-white bg-red-700 text-xl p-3 mb-4 rounded-lg shadow-lg">
+            ALL FIELDS ARE MANDATORY
+          </div>
+        )}
+        <form onSubmit={handleFormSubmit}>
+          {formFields.map((field) => (
+            <div key={field} className="mb-6">
+              <label htmlFor={field} className="font-medium text-gray-800">
+                {field}
               </label>
               <input
                 type="text"
-                id="cpvNo" name="cpvNo" value={formValues.cpvNo} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
+                id={field}
+                name={field}
+                value={formValues[field]}
+                onChange={handleInputChange}
+                className="w-full px-4 py-2 mt-2 rounded-md border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Country
-              </label>
-              <input required
-                type="text"
-                id="country" name="country" value={formValues.country} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                State
-              </label>
-              <input required
-                type="text"
-                id="state" name="state" value={formValues.state} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                City
-              </label>
-              <input required
-                type="text"
-                id="city" name="city" value={formValues.city} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
+          ))}
 
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Procurement Summary
-              </label>
-              <input required
-                type="text"
-                id="procurementSummarySummary" name="procurementSummarySummary" value={formValues.procurementSummarySummary} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Procurement Deadline
-              </label>
-              <input required
-                type="date"
-                id="procurementSummaryDeadline" name="procurementSummaryDeadline" value={formValues.procurementSummaryDeadline} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Notice type
-              </label>
-              <input required
-                type="text"
-                id="noticeType" name="noticeType" value={formValues.noticeType} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                TOT NO
-              </label>
-              <input required
-                type="text"
-                id="totNo" name="totNo" value={formValues.totNo} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Documentation NO
-              </label>
-              <input required
-                type="text"
-                id="documentNo" name="documentNo" value={formValues.documentNo} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Competition
-              </label>
-              <input required
-                type="text"
-                id="competition" name="competition" value={formValues.competition} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Financer
-              </label>
-              <input required
-                type="text"
-                id="financier" name="financier" value={formValues.financier} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Ownership
-              </label>
-              <input required
-                type="text"
-                id="ownership" name="ownership" value={formValues.ownership} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Tender Value
-              </label>
-              <input required
-                type="text"
-                id="tenderValue" name="tenderValue" value={formValues.tenderValue} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                purchaser
-              </label>
-              <input required
-                type="text"
-                id="purchaser" name="purchaser" value={formValues.purchaser} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Address
-              </label>
-              <input required
-                type="text"
-                id="paddress" name="paddress" value={formValues.paddress} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                City
-              </label>
-              <input required
-                type="text"
-                id="pcity" name="pcity" value={formValues.pcity} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Distic
-              </label>
-              <input required
-                type="text"
-                id="pdistrict" name="pdistrict" value={formValues.pdistrict} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                State
-              </label>
-              <input required
-                type="text"
-                id="pstate" name="pstate" value={formValues.pstate} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Pin-code
-              </label>
-              <input required
-                type="text"
-                id="ppin" name="ppin" value={formValues.ppin} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Fax
-              </label>
-              <input 
-                type="text"
-                id="ptelfax" name="ptelfax" value={formValues.ptelfax} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Email
-              </label>
-              <input required
-                type="email"
-                id="email" name="email" value={formValues.email} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                URL
-              </label>
-
-              <input required
-                type="text"
-                id="url" name="url" value={formValues.url} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="company" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Description
-              </label>
-              <input
-                type="text"
-                id="description" name="description" value={formValues.description} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="organization" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Organization
-              </label>
-              <input required
-                type="text"
-                id="organization" name="organization" value={formValues.organization} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="notice" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Tender Notice Type
-              </label>
-              <input
-                type="text"
-                id="tenderDetailNoticeType" name="tenderDetailNoticeType" value={formValues.tenderDetailNoticeType} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="product" className="flex items-center">
-                <RiBuilding2Line className="mr-2" />
-                Product
-              </label>
-              <input required
-                type="text"
-                id="product" name="product" value={formValues.product} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="services" className="flex items-center">
-                Select
-              </label>
-              <select
-                id="services" name="userCategory" value={formValues.userCategory} onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 w-full"
+          <div className="flex justify-between">
+            <div className="grid grid-cols-2">
+              <button
+                type="button"
+                onClick={goToPreviousPage}
+                className={`px-4 py-2 rounded-md ${
+                  currentPage === 1
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-blue-500 text-white"
+                }`}
+                disabled={currentPage === 1}
               >
-                <option value="">Select an option</option>
-                <option value="contractor">Contractor</option>
-                <option value="subcontractor">Sub Contractor</option>
-              </select>
+                Previous
+              </button>
+              <button
+                type="button"
+                onClick={goToNextPage}
+                className={`px-4 py-2 md:mx-6 mx-3 rounded-md ${
+                  currentPage === totalPages
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : "bg-blue-500 text-white"
+                }`}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
             </div>
-            <button
-              type="submit"
-              className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-            >
-              Submit
-            </button>
-          </form>
-        </div>
+            <div className="flex justify-end ">
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-md bg-green-500 text-white"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                onClick={clearInputValue}
+                className="ml-4 px-4 py-2 rounded-md bg-red-500 text-white"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-
-    </div>
     </>
   );
 };
 
 export default Forms;
-
-
-
-
