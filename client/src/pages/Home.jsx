@@ -5,7 +5,8 @@ import Home2 from "./Home2";
 import Home3 from "./Home3";
 import Home4 from "./Home4";
 import { NavLink, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar"
+import Navbar from "../components/Navbar";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 const HomePage = () => {
@@ -188,12 +189,16 @@ const HomePage = () => {
               </div>
 
               <div className="flex justify-center mt-5 md:mt-8">
-                <button className="bg-red-700  text-white py-3 px-8 rounded-lg shadow-lg transition-colors">
-                  Gem Registration
-                </button>
-                <button className="ml-4 bg-red-700  text-white py-3 px-8 rounded-lg shadow-lg transition-colors">
-                  Tenders Database
-                </button>
+                <Link to="/gemregistration">
+                  <button className="bg-red-700  text-white py-3 px-8 rounded-lg shadow-lg transition-colors">
+                    Gem Registration
+                  </button>
+                </Link>
+                <Link to="/tenders">
+                  <button className="ml-4 bg-red-700  text-white py-3 px-8 rounded-lg shadow-lg transition-colors">
+                    Tenders Database
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
