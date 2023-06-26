@@ -1,15 +1,10 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 import { locations } from "../../../constants/countriesData"
 
 
-const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit }) => {
+const OtherInformationAndPurchaserDetail = ({ formData, handleChange }) => {
   return (
     <>
       {/* otherInformation and purchaserDetail Sections */}
