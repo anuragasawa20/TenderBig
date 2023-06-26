@@ -3,10 +3,12 @@ import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { navigateToContactPage } from "../components/utils.js";
 
-const ContactUsPage = () => {
+const EarnGems = () => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [mobile, setMobile] = useState("");
@@ -61,7 +63,7 @@ const ContactUsPage = () => {
               className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
             >
               <h1 className="text-3xl font-bold text-center mb-4">
-                Contact Us
+                Gem Registration
               </h1>
               <div className="mb-4">
                 <label htmlFor="name" className="flex items-center">
@@ -128,7 +130,7 @@ const ContactUsPage = () => {
                   <option value="">Select an option</option>
                   <option value="Career&ManPower">Career & Man Power</option>
                   <option value="Registration/Certificate">Registration / Certificate</option>
-                  <option value="Earn Gems">Earn</option>
+                  <option value="Earn Gems" selected>Earn Gems</option>
                   <option value="Joint Venture">License</option>
                   <option value="Auction (Material)">Auction Material</option>
                   <option value="Joint Venture">Joint Venture</option>
@@ -188,4 +190,4 @@ const ContactUsPage = () => {
   );
 };
 
-export default ContactUsPage;
+export default EarnGems;
