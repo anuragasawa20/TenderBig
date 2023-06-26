@@ -8,6 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -23,10 +24,9 @@ const Navbar = () => {
   };
 
   const handleServiceSelect = (event) => {
-    const selectedService = event.target.value;
-    if (selectedService) {
-      navigate(selectedService);
-    }
+    const selected = event.target.value;
+    setSelectedService(selected);
+    navigate(`/contact?service=${selected}`);
   };
 
   return (
@@ -60,12 +60,7 @@ const Navbar = () => {
                   >
                     Apply For Tender
                   </Link>
-                  <Link
-                    to="/category"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
-                  >
-                    Tender by category
-                  </Link>
+
                   <Link
                     to="/contact"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
@@ -99,111 +94,117 @@ const Navbar = () => {
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                         >
-                        <svg
-                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
                         }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                           Career & Man Power
-                          
                         </Link>
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
-                        ><svg
-                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
                         }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                           Registration / Certificate
                         </Link>
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
-                        ><svg
-                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                        }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90}`}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />{" "}
+                          </svg>
                           License
                         </Link>
+
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
-                        ><svg
-                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                          onClick={() => setSelectedService("License")}
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
                         }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                           Auction Material
                         </Link>
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
-                        ><svg
-                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
                         }`}
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
                           Joint Venture
-                        </Link><Link
-                        to="/contact"
-                        className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
-                      ><svg
-                      xmlns="https://www.svgrepo.com/show/498932/settings.svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        </Link>
+                        <Link
+                          to="/contact"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
                       }`}
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                        Online Bidding
-                      </Link>
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Online Bidding
+                        </Link>
                       </div>
                     )}
                   </div>
@@ -249,46 +250,195 @@ const Navbar = () => {
         </div>
       </nav>
       {menuOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-75">
-          <div className="flex justify-end">
-            <div className="mt-12 px-2 sm:hidden">
-              <div className="bg-white divide-y-2 divide-gray-200 shadow-lg rounded-lg overflow-hidden">
-                <div className="px-4 py-2 space-y-2">
-                  <Link
-                    to="/"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
-                    onClick={toggleMenu}
+        <div className="flex justify-end ">
+          <div className="mt-12 sm:hidden overflow bg-red-700 max-w-[250px] p-2 text-white fixed ">
+            <div className="space-y-2 mt-2">
+              <div>
+                <Link
+                  to="/"
+                  className="mt-2 hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
+                  onClick={toggleMenu}
+                >
+                  Home
+                </Link>
+              </div>
+
+              <div>
+                <Link
+                  to="/tenders"
+                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
+                  onClick={toggleMenu}
+                >
+                  Tenders
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to="/forms"
+                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
+                >
+                  Apply For Tender
+                </Link>
+              </div>
+              <div className="relative">
+                <button
+                  onClick={toggleDropdown}
+                  className=" bg-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                >
+                  Services
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className={`ml-1 h-4 w-4 inline-block transform ${
+                      dropdownOpen ? "rotate-180" : ""
+                    }`}
                   >
-                    Home
-                  </Link>
-                  <Link
-                    to="/tenders"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
-                    onClick={toggleMenu}
-                  >
-                    Tenders
-                  </Link>
-                  <Link
-                    to="/forms"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
-                  >
-                    Apply For Tender
-                  </Link>
-                  <Link
-                    to="/about"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300"
-                    onClick={toggleMenu}
-                  >
-                    About
-                  </Link>
-                  <Link
-                    to="/login"
-                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 bg-red-700 text-white"
-                    onClick={toggleMenu}
-                  >
-                    Login
-                  </Link>
-                </div>
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px]">
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 text-white bg-red-700 text-lg "
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Career & Man Power
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Registration / Certificate
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90}`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />{" "}
+                      </svg>
+                      License
+                    </Link>
+
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                      onClick={() => setSelectedService("License")}
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Auction Material
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                        }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Joint Venture
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                      }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Online Bidding
+                    </Link>
+                  </div>
+                )}
+              </div>
+              <div>
+                <Link
+                  to="/about"
+                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]"
+                  onClick={toggleMenu}
+                >
+                  About
+                </Link>
+              </div>
+
+              <div>
+                <Link
+                  to="/login"
+                  className="hover:bg-red-700 text-lg font-medium transition-colors duration-300 px-3 py-2 rounded-md w-[90px]  bg-red-700"
+                  onClick={toggleMenu}
+                >
+                  Login
+                </Link>
               </div>
             </div>
           </div>

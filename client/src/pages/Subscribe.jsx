@@ -7,7 +7,7 @@ const SubscribePage = () => {
     useEffect(() => {
         const fetchRazorpayKey = async () => {
             try {
-                const keyResponse = await fetch('http://localhost:8000/apiTender/payment/razorpaykey');
+                const keyResponse = await fetch('/apiTender/payment/razorpaykey');
                 const keyData = await keyResponse.json();
                 setKey(keyData.key);
             } catch (error) {
