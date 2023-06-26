@@ -63,11 +63,10 @@ const ContactUsPage = () => {
       .post("http://localhost:5000/apiTender/post-contactform", formData)
       .then((response) => {
         console.log("Form data sent successfully:", response.data);
-        // Handle success, e.g., show a success message to the user
+        alert("We will contact you soon!!!")
       })
       .catch((error) => {
         console.error("Error sending form data:", error);
-        // Handle error, e.g., show an error message to the user
       });
   };
 
@@ -187,7 +186,6 @@ const ContactUsPage = () => {
             <AiOutlinePhone className="text-red-700 text-3xl mb-2" />
             <span className="font-semibold">Phone</span>
             <p className="mt-2">Sales: 8875515555 </p>
-            {/*<p>Support: 8875515555 </p>*/}
           </motion.div>
           <motion.div
             className="bg-white p-8 border-2 rounded-lg shadow-lg flex items-center justify-center flex-col text-center"
