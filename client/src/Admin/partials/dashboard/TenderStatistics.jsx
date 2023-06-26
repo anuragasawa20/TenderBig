@@ -18,7 +18,7 @@ const TenderStatistics = () => {
         };
 
         const response = await axios.get(
-          "http://localhost:5000/apiTender/tenderdetails/statistics",
+          "http://localhost:3000/apiTender/tenderdetails/statistics",
           config
         );
         setStatistics(response.data);
@@ -34,7 +34,7 @@ const TenderStatistics = () => {
       clearInterval(interval);
     };
   }, []);
-  
+
   const renderChart = () => {
     if (!statistics) {
       return null;
@@ -84,64 +84,58 @@ const TenderStatistics = () => {
   };
 
   return (
-    <div className="p-4 border-2 border-gray-200 border rounded-lg dark:border-gray-700">
-
+    <div className="p-4 border-gray-200 border rounded-lg dark:border-gray-700">
       <h1 className="text-2xl font-bold mb-6">Tender Statistics</h1>
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div className="flex items-center justify-center rounded bg-gray-50 h-68">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="flex items-center justify-center rounded bg-gray-50 md:h-68">
           <div className="container">
             {renderChart()}
           </div>
         </div>
-        <div className="flex items-center justify-center rounded bg-gray-50 h-68">
+        <div className="flex items-center justify-center rounded bg-gray-50 md:h-68">
           {statistics ? (
-            <>
-              <div className="grid grid-cols-2 gap-2">
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Total Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.totalCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Reviewed and Approved Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.activeApprovedCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Reviewed Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.activeCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Approved Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.approvedCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Contractor Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.contractorCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Subcontractor Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.subcontractorCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Admin Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.adminCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">HR Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.hrCount}</p>
-                </div>
-                <div className="bg-white rounded-lg shadow p-2 border border-gray-300">
-                  <h2 className="text-lg font-semibold mb-2">Employee Tenders</h2>
-                  <p className="text-lg font-bold">{statistics.employeeCount}</p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Total Tenders</h2>
+                <p className="text-lg font-bold">{statistics.totalCount}</p>
               </div>
-            </>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Reviewed and Approved Tenders</h2>
+                <p className="text-lg font-bold">{statistics.activeApprovedCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Reviewed Tenders</h2>
+                <p className="text-lg font-bold">{statistics.activeCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Approved Tenders</h2>
+                <p className="text-lg font-bold">{statistics.approvedCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Contractor Tenders</h2>
+                <p className="text-lg font-bold">{statistics.contractorCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Subcontractor Tenders</h2>
+                <p className="text-lg font-bold">{statistics.subcontractorCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Admin Tenders</h2>
+                <p className="text-lg font-bold">{statistics.adminCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">HR Tenders</h2>
+                <p className="text-lg font-bold">{statistics.hrCount}</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-2 border-2 border-red-800">
+                <h2 className="text-lg font-semibold mb-2">Employee Tenders</h2>
+                <p className="text-lg font-bold">{statistics.employeeCount}</p>
+              </div>
+            </div>
           ) : (
-
             <p className="text-2xl font-bold">Loading...</p>
-
           )}
         </div>
-
       </div>
     </div>
   );
