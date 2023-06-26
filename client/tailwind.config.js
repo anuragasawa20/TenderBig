@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      cursor: {
+        pointer: "pointer",
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

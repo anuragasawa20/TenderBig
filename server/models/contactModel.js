@@ -5,19 +5,19 @@ const contactFormSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    companyName: {
+    company: {
         type: String,
         required: true,
     },
-    mobileNumber: {
-        type: String,
+    mobile: {
+        type: Number,
         required: true
     },
     email: {
         type: String,
         required: true,
     },
-    service: {
+    selectedService: {
         type: String,
         required: true,
     },

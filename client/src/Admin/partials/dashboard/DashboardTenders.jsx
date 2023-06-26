@@ -125,7 +125,7 @@ const AllTendersSection = () => {
                       <table className="w-full">
                         <thead>
                           <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                            <th className="px-4 py-3">Summary</th>
+                            <th className="px-4 py-3 ">Summary</th>
                             <th className="px-4 py-3">Sector</th>
                             <th className="px-4 py-3">Deadline</th>
                             <th className="px-4 py-3">Publish Date</th>
@@ -142,9 +142,6 @@ const AllTendersSection = () => {
                                 className="px-2 py-1 w-full border border-gray-300 rounded-md"
                               />
                             </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
                             <th>
                               <select
                                 value={userCategoryFilter}
@@ -170,13 +167,12 @@ const AllTendersSection = () => {
                                 <option value="No">No</option>
                               </select>
                             </th>
-                            <th></th>
                           </tr>
                         </thead>
                         <tbody className="bg-white">
                           {filteredAndPaginatedTenders.map((tender) => (
                             <tr className="text-gray-700" key={tender._id}>
-                              <td className="px-4 py-3 border" onClick={() => viewTenderDetails(tender.tenderId)}>{tender.summary}</td>
+                              <td className="px-4 py-3 border cursor-pointer" onClick={() => viewTenderDetails(tender.tenderId)}>{tender.summary}</td>
                               <td className="px-4 py-3 border">{tender.sector}</td>
                               <td className="px-4 py-3 border">
                                 {formatDate(tender.procurementSummary.deadline)}

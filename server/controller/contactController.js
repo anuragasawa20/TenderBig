@@ -4,18 +4,18 @@ class Contact {
 
     async postContactForm(req, res) {
         try {
-            const { name, companyName, mobileNumber, email, service } = req.body;
+            const { name, company, mobile, email, selectedService } = req.body;
 
-            if (!name || !companyName || !mobileNumber || !email || !service) {
+            if (!name || !company || !mobile || !email || !selectedService) {
                 return res.status(400).json({ error: "All fields are required" });
             }
 
             const contactForm = new ContactForm({
                 name,
-                companyName,
-                mobileNumber,
+                company,
+                mobile,
                 email,
-                service
+                selectedService
             });
 
             await contactForm.save();

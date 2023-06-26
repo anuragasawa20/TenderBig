@@ -172,7 +172,7 @@ function DashboardUsers() {
                             <td className="px-4 py-3 border">
                               <div className="flex items-center text-sm">
                                 <div onClick={() => { showDetails(user.userId) }}>
-                                  <p className="font-semibold text-black">{user.name}</p>
+                                  <p className="font-semibold text-black cursor-pointer">{user.name}</p>
                                 </div>
                               </div>
                             </td>
