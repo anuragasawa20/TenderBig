@@ -6,9 +6,9 @@ import logo from "../assets/logo.png"
 
 const Footer = () => {
   return (
-    <footer className="footer ">
+    <footer className="footer">
       <div
-        className="container mx-auto pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-gray-600"
+        className=" mt-8 w-full pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-gray-600"
         style={{
           backgroundImage: `url(${footer})`,
         }}

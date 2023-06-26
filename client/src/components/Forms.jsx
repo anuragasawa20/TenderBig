@@ -78,14 +78,14 @@ const Forms = () => {
       setIsError(true);
       return;
     }
-
+    const token = localStorage.getItem("token")
     const response = await fetch(
       "/apiTender/tenderdetails/add-tender",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0OTFiY2Y5ZWUyMmQ3OWNjMzA5MWQzOCIsInVzZXJJZCI6IjgzOGRmZSIsIm5hbWUiOiJNYXJpZSBQZXJleiIsImVtYWlsIjoiYXNobGV5aG9kc0BleGFtcGxlLm9yZyIsInVzZXJSb2xlIjoidXNlciIsInVzZXJDYXRlZ29yeSI6ImNvbnRyYWN0b3IiLCJwaG9uZU51bWJlciI6IjAwMTEzLTE5Mi01NjU0eDQ4MSIsImNvdW50cnkiOiJCb3Rzd2FuYSIsInN0YXRlIjoiTWlzc291cmkiLCJjaXR5IjoiS2VubmV0aGhhdmVuIiwiX192IjowfSwiaWF0IjoxNjg3MjcyNzQ4fQ.7CoLHhsy6sGqnrbXUNFCLgAB__8n0Tc28vv8kFHDgzU",
+          auth: token
         },
         body: JSON.stringify(formValues),
       }
@@ -102,22 +102,6 @@ const Forms = () => {
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "/apiTender/tenderdetails"
-        );
-        const data = await response.json();
-        // Process the fetched data
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -151,11 +135,10 @@ const Forms = () => {
               <button
                 type="button"
                 onClick={goToPreviousPage}
-                className={`px-4 py-2 rounded-md ${
-                  currentPage === 1
+                className={`px-4 py-2 rounded-md ${currentPage === 1
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : "bg-blue-500 text-white"
-                }`}
+                  }`}
                 disabled={currentPage === 1}
               >
                 Previous
@@ -163,11 +146,10 @@ const Forms = () => {
               <button
                 type="button"
                 onClick={goToNextPage}
-                className={`px-4 py-2 md:mx-6 mx-3 rounded-md ${
-                  currentPage === totalPages
+                className={`px-4 py-2 md:mx-6 mx-3 rounded-md ${currentPage === totalPages
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : "bg-blue-500 text-white"
-                }`}
+                  }`}
                 disabled={currentPage === totalPages}
               >
                 Next

@@ -10,6 +10,8 @@ import AdminForm from '../Admin/partials/dashboard/AdminTenderForm';
 import DashboardTenderDetail from '../Admin/partials/dashboard/DashboardTenderDetail';
 import DashboardUserDetail from '../Admin/partials/dashboard/DashboardUserDetail';
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
+import ContactFormList from '../Admin/partials/dashboard/ContactPage';
+
 
 const DashboardRoutes = () => {
   return (
@@ -25,6 +27,10 @@ const DashboardRoutes = () => {
       <Route
         path="/addusers"
         element={<PrivateRoute element={AddUser} />}
+      />
+      <Route
+        path="/user/:userId"
+        element={<PrivateRoute element={DashboardUserDetail} />}
       />
       <Route
         path="/tenders"
@@ -43,9 +49,10 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={DashboardTenderDetail} />}
       />
       <Route
-        path="/user/:userId"
-        element={<PrivateRoute element={DashboardUserDetail} />}
+        path="/contactrequests"
+        element={<PrivateRoute element={ContactFormList} />}
       />
+      
     </Routes>
   );
 };

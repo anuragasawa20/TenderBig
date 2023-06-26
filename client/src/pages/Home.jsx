@@ -6,6 +6,7 @@ import Home3 from "./Home3";
 import Home4 from "./Home4";
 import { NavLink, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer";
 
 const HomePage = () => {
 
@@ -258,6 +259,7 @@ const HomePage = () => {
       <Home2 />
       <Home3 />
       <Home4 />
+      <Footer/>
     </>
   );
 };
