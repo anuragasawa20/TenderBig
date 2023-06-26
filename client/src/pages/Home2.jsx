@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const TenderCard = ({ heading, subheading }) => {
   return (
@@ -35,7 +35,7 @@ const Home2 = () => {
           <div className="flex items-center ">
             <img
               className="h-[60px] w-[60px] rounded-lg object-cover"
-              src="https://www.defenceprocurementinternational.com/Content/Features/Images/defence-tenders-inside.jpg"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbRaegO1q6JJvf6SX3o2JirYfE6Dq6ScMh4ltzfpPz8cynSwPIQQ6O2j2L3V09IJIqvo4&usqp=CAU"
               alt="Logo"
             />
             <TenderCard
@@ -43,7 +43,7 @@ const Home2 = () => {
               subheading="Tenders from Defence Industries"
             />
           </div>
-          <div className="flex items-center  ">
+          <div className="flex items-center">
             <img
               className="h-[60px] w-[60px] rounded-lg object-cover"
               src="https://www.freightender.com/wp-content/uploads/2020/03/coche_def.jpg"
@@ -121,11 +121,13 @@ const Home2 = () => {
             />
           </div>
         </div>
-        <div className="flex justify-center m-10">
-          <button className="bg-red-700 p-3 rounded-lg text-white   border-[2px]  hover:border-black">
-            View More Tenders Categories
-          </button>
-        </div>
+        <Link to="/tenders">
+          <div className="flex justify-center m-10">
+            <button className="bg-red-700 p-3 rounded-lg text-white   border-[2px]  hover:border-black">
+              View More Tenders Categories
+            </button>
+          </div>
+        </Link>
       </div>
     </>
   );

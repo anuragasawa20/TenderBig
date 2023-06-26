@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const TenderCard = ({ heading, subheading, details }) => {
   return (
@@ -47,9 +47,9 @@ Brass Screws of Size 20 Mm (Quantity Required: 2000 Nos)"
         />
       </div>
       <div className="text-center mt-8">
-        <a href="#" className="text-red-700 font-medium hover:underline">
+        <Link to="/tenders" className="text-red-700 font-medium hover:underline">
           View More Local Tenders
-        </a>
+        </Link>
       </div>
 
       <h2 className="text-2xl font-bold mt-12 mb-4 text-gray-700">
@@ -82,9 +82,9 @@ Insumos Y Equipamiento Para Laboratorios Del Ministerio De Salud"
         />
       </div>
       <div className="text-center mt-8">
-        <a href="#" className="text-red-700 font-medium hover:underline">
+        <Link to="/tenders" className="text-red-700 font-medium hover:underline">
           View More Global Tenders
-        </a>
+        </Link>
       </div>
     </div>
   );
