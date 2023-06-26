@@ -299,7 +299,7 @@ const Forms = () => {
         console.error("Error:", error);
         alert("Oops something went wrong!!!");
         clearInputs();
-        window.location.href = '/forms';
+        window.location.href = '/dashboard/tenders';
       });
   };
 
