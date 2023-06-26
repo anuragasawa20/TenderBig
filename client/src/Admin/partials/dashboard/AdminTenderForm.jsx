@@ -293,13 +293,13 @@ const Forms = () => {
         console.log("Success:", data);
         alert("Submitted")
         clearInputs();
-        window.location.href = '/forms';
+        window.location.href = '/dashboard/tenders';
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Oops something went wrong!!!");
         clearInputs();
-        window.location.href = '/forms';
+        window.location.href = '/dashboard/tenders';
       });
   };
 
