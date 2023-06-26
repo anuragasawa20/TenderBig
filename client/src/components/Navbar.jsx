@@ -55,6 +55,12 @@ const Navbar = () => {
                     Tenders
                   </Link>
                   <Link
+                    to="/earngems"
+                    className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                  >
+                    Earn Gems
+                  </Link>
+                  <Link
                     to="/forms"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
