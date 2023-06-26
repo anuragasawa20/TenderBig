@@ -7,24 +7,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { navigateToContactPage } from "../components/utils.js";
-<<<<<<< HEAD
 import axios from "axios";
-=======
->>>>>>> 13142f64f6f4a16eafd00acb2b8724fdacade3be
 
 const ContactUsPage = () => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedService, setSelectedService] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     sendDataToAPI(selectedService);
-=======
-    navigateToContactPage(selectedService);
->>>>>>> 13142f64f6f4a16eafd00acb2b8724fdacade3be
   };
 
   const [isVisible, setIsVisible] = useState(false);
@@ -49,17 +43,12 @@ const ContactUsPage = () => {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-<<<<<<< HEAD
   const selectedServiceFromNavbar = queryParams.get("service");
 
-=======
-  const selectedService = queryParams.get("service");
->>>>>>> 13142f64f6f4a16eafd00acb2b8724fdacade3be
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
   };
 
-<<<<<<< HEAD
   const sendDataToAPI = (selectedService) => {
     const formData = {
       name,
@@ -82,8 +71,6 @@ const ContactUsPage = () => {
       });
   };
 
-=======
->>>>>>> 13142f64f6f4a16eafd00acb2b8724fdacade3be
   return (
     <>
       <Navbar selectedService={selectedService} />
@@ -162,11 +149,7 @@ const ContactUsPage = () => {
                 <select
                   id="services"
                   className="border border-gray-300 rounded px-3 py-2 w-full"
-<<<<<<< HEAD
                   value={selectedService || selectedServiceFromNavbar}
-=======
-                  value={selectedService}
->>>>>>> 13142f64f6f4a16eafd00acb2b8724fdacade3be
                   onChange={handleServiceChange}
                 >
                   <option value="">Select an option</option>
