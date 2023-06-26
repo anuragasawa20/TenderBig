@@ -204,6 +204,7 @@ const HomePage = () => {
       <Home2 />
       <Home3 />
       <Home4 />
+      <Footer/>
     </>
   );
 };

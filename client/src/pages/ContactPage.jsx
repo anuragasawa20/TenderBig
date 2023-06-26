@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import { navigateToContactPage } from "../components/utils.js";
+import Footer from "../components/Footer";
 
 const ContactUsPage = () => {
   const [name, setName] = useState("");
@@ -184,6 +185,7 @@ const ContactUsPage = () => {
           </motion.div>
         </motion.div>
       </div>
+      <Footer/>
     </>
   );
 };

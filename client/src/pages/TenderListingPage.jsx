@@ -4,6 +4,7 @@ import {regionData, geopoliticalData} from "../constants/countriesData.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 const TenderCard = ({ title, deadline, location, referenceNo }) => {
   const navigate = useNavigate();
@@ -448,6 +449,7 @@ const TenderListingPage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

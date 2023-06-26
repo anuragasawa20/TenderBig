@@ -29,33 +29,70 @@ const UserStatistics = () => {
       <h1 className="text-2xl font-bold mb-6">User Statistics</h1>
       {statistics ? (
         <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">Total Users</h2>
+          <p className="text-2xl font-bold">{statistics.totalCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">Admin Users</h2>
+          <p className="text-2xl font-bold">{statistics.adminCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">Employee Users</h2>
+          <p className="text-2xl font-bold">{statistics.employeeCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">HR Users</h2>
+          <p className="text-2xl font-bold">{statistics.hrCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">Regular Users</h2>
+          <p className="text-2xl font-bold">{statistics.userCount}</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+          <h2 className="text-xl font-semibold mb-4">Subscription Active</h2>
+          <p className="text-2xl font-bold">{statistics.activeSubscriptionCount}</p>
+        </div>
+      </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4">
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">Total Users</h2>
-            <p className="text-2xl font-bold">{statistics.totalCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">Admin Users</h2>
-            <p className="text-2xl font-bold">{statistics.adminCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">Employee Users</h2>
-            <p className="text-2xl font-bold">{statistics.employeeCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">HR Users</h2>
-            <p className="text-2xl font-bold">{statistics.hrCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">Regular Users</h2>
-            <p className="text-2xl font-bold">{statistics.userCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
           <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
-            <h2 className="text-xl font-semibold mb-4">Subscription Active</h2>
-            <p className="text-2xl font-bold">{statistics.activeSubscriptionCount}</p>
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 border border-gray-300">
+            <h2 className="text-xl font-semibold mb-4"></h2>
+            <p className="text-2xl font-bold"></p>
           </div>
         </div>
-      ) : (
-        <p>Loading statistics...</p>
       )}
     </div>
   );

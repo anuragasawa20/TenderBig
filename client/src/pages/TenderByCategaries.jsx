@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const TenderCard = ({ sectorName, sectorData }) => {
   return (
@@ -67,6 +68,7 @@ const App = () => {
         ))}
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
