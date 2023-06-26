@@ -22,25 +22,25 @@ const Footer = () => {
 
             <div className="container flex justify-center cursor-pointer">
               <Link
-                to="/contact"
+                to="/"
                 className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Home
               </Link>
               <Link
-                to="/contact"
+                to="/tenders"
                 className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Tenders
               </Link>
               <Link
-                to="/contact"
+                to="/gemregistration"
                 className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Gems Registration
               </Link>
               <Link
-                to="/contact"
+                to="/forms"
                 className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Apply For Tender
