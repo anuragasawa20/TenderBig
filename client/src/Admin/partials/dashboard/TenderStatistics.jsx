@@ -28,8 +28,13 @@ const TenderStatistics = () => {
     };
 
     fetchTenderStatistics();
-  }, []);
+    const interval = setInterval(fetchTenderStatistics, 5000);
 
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  
   const renderChart = () => {
     if (!statistics) {
       return null;
@@ -132,7 +137,7 @@ const TenderStatistics = () => {
             </>
           ) : (
 
-            <p className="text-2xl font-bold">Loading</p>
+            <p className="text-2xl font-bold">Loading...</p>
 
           )}
         </div>

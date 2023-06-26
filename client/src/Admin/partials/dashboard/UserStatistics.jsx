@@ -8,7 +8,12 @@ const UserStatistics = () => {
   const [statistics, setStatistics] = useState(null);
 
   useEffect(() => {
-    fetchUserStatistics();
+    fetchUserStatistics(); 
+    const interval = setInterval(fetchUserStatistics, 5000); 
+
+    return () => {
+      clearInterval(interval); 
+    };
   }, []);
 
   const fetchUserStatistics = async () => {
@@ -115,7 +120,7 @@ const UserStatistics = () => {
         </>
       ) : (
         
-            <p className="text-2xl font-bold">Loading</p>
+            <p className="text-2xl font-bold">Loading...</p>
           
       )}
         </div>
