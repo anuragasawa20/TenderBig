@@ -63,7 +63,7 @@ const EarnGems = () => {
               className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
             >
               <h1 className="text-3xl font-bold text-center mb-4">
-                Earn your gems
+                Gem Registration
               </h1>
               <div className="mb-4">
                 <label htmlFor="name" className="flex items-center">

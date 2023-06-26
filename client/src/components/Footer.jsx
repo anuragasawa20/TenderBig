@@ -1,27 +1,58 @@
 import React from "react";
-import footer from "../assets/footer.png";
-import logo from "../assets/logo.png"
-
-
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div
-        className=" mt-8 w-full pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-gray-600"
-        style={{
-          backgroundImage: `url(${footer})`,
-        }}
-        
+        className=" mt-8 w-full pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-red-800"
+      // style={{
+      //   backgroundImage: `url(${footer})`,
+      // }}
+
       >
         <div className="max-w-6xl mx-auto mb-[152px] mt-10">
           <div className="">
-            <img
+            {/* <img
               src={logo}
               width={80}
               height={60}
               className="mb-8"
-            />
+            /> */}
+
+            <div className="container flex justify-center cursor-pointer">
+              <Link
+                to="/contact"
+                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+              >
+                Home
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+              >
+                Tenders
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+              >
+                Gems Registration
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+              >
+                Apply For Tender
+              </Link>
+              <Link
+                to="/contact"
+                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+              >
+                Contact
+              </Link>
+            </div>
+
 
             <hr className="border-white border-b-1 mb-4" />
           </div>

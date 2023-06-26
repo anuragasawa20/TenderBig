@@ -12,14 +12,14 @@ import Signup from './pages/Signup';
 import TenderByCategaries from './pages/TenderByCategaries';
 import NotFound from './components/NotFound';
 import DashboardRoutes from './Routes/DashboardRoutes';
-import EarnGems from './pages/EarnGems';
+import EarnGems from './pages/GemRegistration';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/earngems" element={<EarnGems/>}></Route>
+        <Route path="/gemregistration" element={<EarnGems/>}></Route>
         <Route path="/advance-search" element={<AdvancedSearch />} />
         <Route path="/category" element={<TenderByCategaries />} />
         <Route path="/tenders" element={<TenderListingPage />} />
