@@ -26,7 +26,7 @@ const UserStatistics = () => {
       };
 
       const response = await axios.get(
-        'http://localhost:3000/apiTender/userdetails/statistics',
+        'http://localhost:5000/apiTender/userdetails/statistics',
         config
       );
       setStatistics(response.data);

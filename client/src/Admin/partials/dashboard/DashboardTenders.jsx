@@ -20,6 +20,7 @@ const AllTendersSection = () => {
   const [userCategoryFilter, setUserCategoryFilter] = useState("");
   const [approvedFilter, setApprovedFilter] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc"); // Track the current sort order
 
   useEffect(() => {
     const fetchTenderData = async () => {
@@ -66,7 +67,6 @@ const AllTendersSection = () => {
     fetchTenderData();
   }, []);
 
-
   const filteredTenderData = tenderData.filter((tender) => {
     if (
       (userCategoryFilter === "" || tender.userCategory === userCategoryFilter) &&
@@ -78,8 +78,17 @@ const AllTendersSection = () => {
     return false;
   });
 
+  const sortedTenderData = filteredTenderData.sort((a, b) => {
+    const publishDateA = new Date(a.tenderDetail.publishDate);
+    const publishDateB = new Date(b.tenderDetail.publishDate);
+    if (sortOrder === "asc") {
+      return publishDateA - publishDateB;
+    } else {
+      return publishDateB - publishDateA;
+    }
+  });
 
-  const filteredAndPaginatedTenders = filteredTenderData.slice(
+  const filteredAndPaginatedTenders = sortedTenderData.slice(
     startIndex,
     startIndex + tendersPerPage
   );
@@ -96,13 +105,12 @@ const AllTendersSection = () => {
   const navigate = useNavigate();
 
   const viewTenderDetails = (tenderId) => {
-    navigate(`/dashboard/tender/${tenderId}`)
+    navigate(`/dashboard/tender/${tenderId}`);
   };
-  
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-    <div className="flex h-screen overflow-hidden ">
+    <div className="flex h-screen overflow-hidden">
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
@@ -118,17 +126,27 @@ const AllTendersSection = () => {
             <div className="grid grid-cols-15 gap-6">
               {/* Table */}
               <section className="container mx-auto p-6 font-mono overflow-x-auto">
-              <h1 className="text-xl font-bold mb-4">All Tenders</h1>
+                <h1 className="text-xl font-bold mb-4">All Tenders</h1>
                 <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg overflow-x-auto">
                   <div className="w-full overflow-x-auto">
                     <div className="table-container overflow-x-auto">
                       <table className="w-full">
                         <thead>
                           <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                            <th className="px-4 py-3 ">Summary</th>
+                            <th className="px-4 py-3">Summary</th>
                             <th className="px-4 py-3">Sector</th>
                             <th className="px-4 py-3">Deadline</th>
-                            <th className="px-4 py-3">Publish Date</th>
+                            <th
+                              className="px-4 py-3 cursor-pointer"
+                              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+                            >
+                              Publish Date
+                              {sortOrder === "asc" ? (
+                                <span>&#x25B2;</span>
+                              ) : (
+                                <span>&#x25BC;</span>
+                              )}
+                            </th>
                             <th className="px-4 py-3">User Category</th>
                             <th className="px-4 py-3">Approved</th>
                           </tr>
@@ -172,7 +190,12 @@ const AllTendersSection = () => {
                         <tbody className="bg-white">
                           {filteredAndPaginatedTenders.map((tender) => (
                             <tr className="text-gray-700" key={tender._id}>
-                              <td className="px-4 py-3 border cursor-pointer" onClick={() => viewTenderDetails(tender.tenderId)}>{tender.summary}</td>
+                              <td
+                                className="px-4 py-3 border cursor-pointer"
+                                onClick={() => viewTenderDetails(tender.tenderId)}
+                              >
+                                {tender.summary}
+                              </td>
                               <td className="px-4 py-3 border">{tender.sector}</td>
                               <td className="px-4 py-3 border">
                                 {formatDate(tender.procurementSummary.deadline)}
@@ -183,8 +206,11 @@ const AllTendersSection = () => {
                               <td className="px-4 py-3 border">{tender.userCategory}</td>
                               <td className="px-4 py-3 text-xs border">
                                 <span
-                                  className={`px-2 py-1 font-semibold leading-tight ${tender.approvedStatus ? "text-green-700 bg-green-100" : "text-red-700 bg-red-100"
-                                    } rounded-sm`}
+                                  className={`px-2 py-1 font-semibold leading-tight ${
+                                    tender.approvedStatus
+                                      ? "text-green-700 bg-green-100"
+                                      : "text-red-700 bg-red-100"
+                                  } rounded-sm`}
                                 >
                                   {tender.approvedStatus ? "Yes" : "No"}
                                 </span>
