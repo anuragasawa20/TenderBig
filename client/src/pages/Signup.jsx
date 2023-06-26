@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make API request with form data
-        fetch('/apiTender/signup', {
+        fetch('http://localhost:5000/apiTender/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -198,6 +199,7 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 };

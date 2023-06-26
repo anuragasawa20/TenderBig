@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const NotFound = () => {
 
@@ -9,6 +10,7 @@ const NotFound = () => {
         <h1 className="text-6xl mt-10 mb-5">404</h1>
         <p className="text-xl">Oops! Page not found</p>
       </div>
+      <Footer/>
     </>
   );
 };

@@ -4,6 +4,7 @@ import {regionData, geopoliticalData} from "../constants/countriesData.js";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
 
 const TenderCard = ({ title, deadline, location, referenceNo }) => {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const TenderListingPage = () => {
         const product = encodeURIComponent(selectedProduct);
         const userCategory =  encodeURIComponent(selectedUserCategory);
 
-        const baseUrl = "/apiTender/tenderdetails/search";
+        const baseUrl = "http://localhost:5000/apiTender/tenderdetails/search";
 
         const detailsArray = [
           "procurementSummary.summary",
@@ -448,6 +449,7 @@ const TenderListingPage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

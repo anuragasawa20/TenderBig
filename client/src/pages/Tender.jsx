@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const TenderByCategory = () => {
   const { referenceNo } = useParams();
@@ -10,7 +11,7 @@ const TenderByCategory = () => {
   useEffect(() => {
     const fetchTenderDetails = async () => {
       try {
-        const baseUrl = "/apiTender/tenderdetails/tender";
+        const baseUrl = "http://localhost:5000/apiTender/tenderdetails/tender";
         const token = localStorage.getItem("token");
 
         const headers = {
@@ -179,6 +180,7 @@ const TenderByCategory = () => {
 
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

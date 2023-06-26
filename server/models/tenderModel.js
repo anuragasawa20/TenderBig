@@ -33,11 +33,11 @@ const tenderModel = new mongoose.Schema(
             },
             city: {
                 type: String,
-                required: true
+                required: false
             },
             summary: {
                 type: String,
-                required: true
+                required: false
             },
             deadline: {
                 type: Date,
@@ -85,7 +85,7 @@ const tenderModel = new mongoose.Schema(
             },
             city: {
                 type: String,
-                required: true
+                required: false
             },
             district: {
                 type: String,
@@ -137,7 +137,7 @@ const tenderModel = new mongoose.Schema(
         userCategory: {
             type: String,
             enum: ["subcontractor", "contractor", "admin", "hr", "employee"],
-            required: false
+            required: true
         },
         product: {
             type: String,

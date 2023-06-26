@@ -94,112 +94,84 @@ class Tender {
         } = req.body;
 
         const userId = req.userId;
-        // Validation
-        if (
-            !summary |
-            !sector |
-            !country |
-            !state |
-            !city |
-            !procurementSummarySummary |
-            !procurementSummaryDeadline |
-            !noticeType |
-            !totNo |
-            !documentNo |
-            !competition |
-            !financier |
-            !ownership |
-            !tenderValue |
-            !purchaser |
-            !paddress |
-            !pcity |
-            !pdistrict |
-            !pstate |
-            !email |
-            !url |
-            !organization |
-            !userCategory
-        ) {
-            return res.json({ error: "All filled must be required" });
-        }
-        else {
-            try {
-                summary = toTitleCase(summary);
-                procurementSummarySummary = toTitleCase(procurementSummarySummary);
-                documentNo = toUpperCase(documentNo);
-                financier = toTitleCase(financier);
-                paddress = toTitleCase(paddress);
-                organization = toUpperCase(organization);
 
-                const tenderId = generateUUID();
+        try {
+            summary = toTitleCase(summary);
+            procurementSummarySummary = toTitleCase(procurementSummarySummary);
+            documentNo = toUpperCase(documentNo);
+            financier = toTitleCase(financier);
+            paddress = toTitleCase(paddress);
+            organization = toUpperCase(organization);
 
-                const procurementSummary = {
-                    country,
-                    state,
-                    city,
-                    summary: procurementSummarySummary,
-                    deadline: new Date(procurementSummaryDeadline)
-                };
+            const tenderId = generateUUID();
 
-                const otherInformation = {
-                    noticeType,
-                    totNo,
-                    documentNo,
-                    competition,
-                    financier,
-                    ownership,
-                    tenderValue
-                };
+            const procurementSummary = {
+                country,
+                state,
+                city,
+                summary: procurementSummarySummary,
+                deadline: new Date(procurementSummaryDeadline)
+            };
 
-                const purchaserDetail = {
-                    purchaser,
-                    address: paddress,
-                    city: pcity,
-                    district: pdistrict,
-                    state: pstate,
-                    pin: ppin,
-                    telfax: ptelfax,
-                    email,
-                    url
-                };
+            const otherInformation = {
+                noticeType,
+                totNo,
+                documentNo,
+                competition,
+                financier,
+                ownership,
+                tenderValue
+            };
 
-                const tenderDetail = {
-                    description,
-                    publishDate: new Date(),
-                    organization,
-                    noticeType: tenderDetailNoticeType
-                };
+            const purchaserDetail = {
+                purchaser,
+                address: paddress,
+                city: pcity,
+                district: pdistrict,
+                state: pstate,
+                pin: ppin,
+                telfax: ptelfax,
+                email,
+                url
+            };
 
-                const newTender = new tenderModel({
-                    tenderId,
-                    userId,
-                    summary,
-                    sector,
-                    cpvNo,
-                    procurementSummary,
-                    otherInformation,
-                    purchaserDetail,
-                    tenderDetail,
-                    approvedStatus: false,
-                    userCategory,
-                    product
+            const tenderDetail = {
+                description,
+                publishDate: new Date(),
+                organization,
+                noticeType: tenderDetailNoticeType
+            };
+
+            const newTender = new tenderModel({
+                tenderId,
+                userId,
+                summary,
+                sector,
+                cpvNo,
+                procurementSummary,
+                otherInformation,
+                purchaserDetail,
+                tenderDetail,
+                approvedStatus: false,
+                userCategory,
+                product
+            });
+
+            newTender.save()
+                .then((data) => {
+                    return res.json({
+                        success: "Tender filled successfully.",
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
                 });
 
-                newTender.save()
-                    .then((data) => {
-                        return res.json({
-                            success: "Tender filled successfully.",
-                        });
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-
-            } catch (err) {
-                console.log(err);
-                return res.status(500).json({ error: err });
-            }
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ error: err });
         }
+
     }
 
     async postEditTender(req, res) {
@@ -636,7 +608,7 @@ class Tender {
         }
     }
 
-    async statistics(req, res){
+    async statistics(req, res) {
         try {
             const totalCount = await tenderModel.countDocuments({});
             const activeApprovedCount = await tenderModel.countDocuments({ active: true, approvedStatus: true });
@@ -647,21 +619,21 @@ class Tender {
             const adminCount = await tenderModel.countDocuments({ userCategory: 'admin' });
             const hrCount = await tenderModel.countDocuments({ userCategory: 'hr' });
             const employeeCount = await tenderModel.countDocuments({ userCategory: 'employee' });
-        
+
             res.json({
-              totalCount,
-              activeApprovedCount,
-              activeCount,
-              approvedCount,
-              contractorCount,
-              subcontractorCount,
-              adminCount,
-              hrCount,
-              employeeCount
+                totalCount,
+                activeApprovedCount,
+                activeCount,
+                approvedCount,
+                contractorCount,
+                subcontractorCount,
+                adminCount,
+                hrCount,
+                employeeCount
             });
-          } catch (error) {
+        } catch (error) {
             res.status(500).json({ error: 'Unable to fetch tender statistics.' });
-          }
+        }
     }
 
 }

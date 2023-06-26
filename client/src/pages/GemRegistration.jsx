@@ -7,6 +7,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { navigateToContactPage } from "../components/utils.js";
+import Footer from "../components/Footer";
 
 const EarnGems = () => {
   const [name, setName] = useState("");
@@ -186,6 +187,7 @@ const EarnGems = () => {
           </motion.div>
         </motion.div>
       </div>
+      <Footer/>
     </>
   );
 };
