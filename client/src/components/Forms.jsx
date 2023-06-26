@@ -1,12 +1,204 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Navbar from "./Navbar";
+import { locations } from "../constants/countriesData"
 
-const Forms = () => {
-  const [formValues, setFormValues] = useState({
+const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit }) => {
+  return (
+    <>
+      {/* otherInformation and purchaserDetail Sections */}
+      <div className="grid grid-cols-2 gap-4">
+        {/* otherInformation Section */}
+        <div className="border border-gray-500 p-2 rounded-lg mt-2">
+          <h2 className="text-lg font-semibold mb-4">Other Information</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <label className="block mb-2">
+              Notice Type:
+              <input
+                type="text"
+                name="noticeType"
+                value={formData.noticeType}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Total No:
+              <input
+                type="text"
+                name="totNo"
+                value={formData.totNo}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Document No:
+              <input
+                type="text"
+                name="documentNo"
+                value={formData.documentNo}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Competition:
+              <input
+                type="text"
+                name="competition"
+                value={formData.competition}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Financier:
+              <input
+                type="text"
+                name="financier"
+                value={formData.financier}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Ownership:
+              <input
+                type="text"
+                name="ownership"
+                value={formData.ownership}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+          </div>
+          <label className="block mb-2">
+            Tender Value:
+            <input
+              type="text"
+              name="tenderValue"
+              value={formData.tenderValue}
+              onChange={handleChange}
+              className="border rounded px-3 py-2 mt-1 w-full"
+            />
+          </label>
+        </div>
+
+        {/* purchaserDetail Section */}
+        <div className="border border-gray-500 p-2 rounded-lg mt-2">
+          <h2 className="text-lg font-semibold mb-4">Purchaser Detail</h2>
+          <div className="grid grid-cols-2 gap-4">
+            <label className="block mb-2">
+              Purchaser:
+              <input
+                type="text"
+                name="purchaser"
+                value={formData.purchaser}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Address:
+              <input
+                type="text"
+                name="paddress"
+                value={formData.paddress}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              City:
+              <input
+                type="text"
+                name="pcity"
+                value={formData.pcity}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              District:
+              <input
+                type="text"
+                name="pdistrict"
+                value={formData.pdistrict}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              State:
+              <input
+                type="text"
+                name="pstate"
+                value={formData.pstate}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              PIN:
+              <input
+                type="text"
+                name="ppin"
+                value={formData.ppin}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Phone/Fax:
+              <input
+                type="text"
+                name="ptelfax"
+                value={formData.ptelfax}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+            <label className="block mb-2">
+              Email:
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 mt-1 w-full"
+              />
+            </label>
+          </div>
+          <label className="block mb-2">
+            URL:
+            <input
+              type="text"
+              name="url"
+              value={formData.url}
+              onChange={handleChange}
+              className="border rounded px-3 py-2 mt-1 w-full"
+            />
+          </label>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 mt-8 mx-4 rounded hover:bg-blue-600"
+      >
+        Submit
+      </button>
+    </>
+  );
+};
+
+const TenderForm = () => {
+  const [formData, setFormData] = useState({
     summary: "",
     sector: "",
     cpvNo: "",
+    userCategory: "",
+    product: "",
     country: "",
     state: "",
     city: "",
@@ -31,150 +223,289 @@ const Forms = () => {
     description: "",
     organization: "",
     tenderDetailNoticeType: "",
-    product: "",
   });
 
-  const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-
-  const navigate = useNavigate();
-
-  const clearInputValue = () => {
-    setFormValues((prevValues) => {
-      const clearedValues = {};
-      for (const key in prevValues) {
-        clearedValues[key] = "";
-      }
-      return clearedValues;
+  const clearInputs = () => {
+    setFormData({
+      summary: "",
+      sector: "",
+      cpvNo: "",
+      userCategory: "",
+      product: "",
+      country: "",
+      state: "",
+      city: "",
+      procurementSummarySummary: "",
+      procurementSummaryDeadline: "",
+      noticeType: "",
+      totNo: "",
+      documentNo: "",
+      competition: "",
+      financier: "",
+      ownership: "",
+      tenderValue: "",
+      purchaser: "",
+      paddress: "",
+      pcity: "",
+      pdistrict: "",
+      pstate: "",
+      ppin: "",
+      ptelfax: "",
+      email: "",
+      url: "",
+      description: "",
+      organization: "",
+      tenderDetailNoticeType: "",
     });
-  };
+  }
 
-  const totalPages = Math.ceil(Object.keys(formValues).length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const goToNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const goToPreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const formFields = Object.keys(formValues).slice(startIndex, endIndex);
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-
-    const isFormValid = Object.values(formValues).every(
-      (value) => value !== ""
-    );
-    if (!isFormValid) {
-      setIsError(true);
-      return;
-    }
-    const token = localStorage.getItem("token")
-    const response = await fetch(
-      "/apiTender/tenderdetails/add-tender",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          auth: token
-        },
-        body: JSON.stringify(formValues),
-      }
-    );
-
-    console.log(response);
-    clearInputValue();
-  };
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+
+    const token = localStorage.getItem("token");
+
+    const requestBody = JSON.stringify(formData);
+
+    fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        auth: token,
+      },
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Submitted")
+        clearInputs();
+        window.location.href = '/forms';
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Oops something went wrong!!!");
+        clearInputs();
+        window.location.href = '/forms';
+      });
+  };
+
+
+  const nextPage = () => {
+    setCurrentPage(2);
+  };
+
+  const previousPage = () => {
+    setCurrentPage(1);
+  };
+
+
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 max-w-7xl ">
-        <h1 className="text-2xl font-bold mt-4 mb-8">Tender Form</h1>
-        {isError && (
-          <div className="text-white bg-red-700 text-xl p-3 mb-4 rounded-lg shadow-lg">
-            ALL FIELDS ARE MANDATORY
-          </div>
-        )}
-        <form onSubmit={handleFormSubmit}>
-          {formFields.map((field) => (
-            <div key={field} className="mb-6">
-              <label htmlFor={field} className="font-medium text-gray-800">
-                {field}
+      <div className="max-w-3xl mx-auto px-4 py-8 border border-gray-700 rounded-lg shadow-lg mt-6 mb-6">
+        {currentPage === 1 && (
+          <form onSubmit={handleSubmit}>
+            {/* Global Section */}
+              <h2 className="text-lg font-semibold mb-4 text-center">Submit Tender Request</h2>
+            <div className="border border-gray-500 p-2 rounded-lg">
+              <label className="block mb-2">
+                Summary:
+                <input
+                  type="text"
+                  name="summary"
+                  value={formData.summary}
+                  onChange={handleChange}
+                  className="border rounded px-3 py-2 mt-1 w-full"
+                />
               </label>
-              <input
-                type="text"
-                id={field}
-                name={field}
-                value={formValues[field]}
-                onChange={handleInputChange}
-                className="w-full px-4 py-2 mt-2 rounded-md border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-              />
+              <div className="grid grid-cols-2 gap-4">
+                <label className="block mb-2">
+                  Sector:
+                  <input
+                    type="text"
+                    name="sector"
+                    value={formData.sector}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+                <label className="block mb-2">
+                  CPV No:
+                  <input
+                    type="text"
+                    name="cpvNo"
+                    value={formData.cpvNo}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+                <label className="block mb-2">
+                  User Category:
+                  <select
+                    name="userCategory"
+                    value={formData.userCategory}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  >
+                    <option value="">Select User Category</option>
+                    <option value="contractor">Contractor</option>
+                    <option value="subcontractor">Subcontractor</option>
+                  </select>
+                </label>
+                <label className="block mb-2">
+                  Product:
+                  <input
+                    type="text"
+                    name="product"
+                    value={formData.product}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+              </div>
             </div>
-          ))}
 
-          <div className="flex justify-between">
-            <div className="grid grid-cols-2">
-              <button
-                type="button"
-                onClick={goToPreviousPage}
-                className={`px-4 py-2 rounded-md ${currentPage === 1
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-500 text-white"
-                  }`}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
-              <button
-                type="button"
-                onClick={goToNextPage}
-                className={`px-4 py-2 md:mx-6 mx-3 rounded-md ${currentPage === totalPages
-                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-500 text-white"
-                  }`}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
+            {/* procurementSummary and tenderDetail Sections */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Procurement Summary Section */}
+              <div className="border border-gray-500 p-2 rounded-lg mt-2">
+                <h2 className="text-lg font-semibold mb-4">Procurement Summary</h2>
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="block mb-2">
+                    Country:
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      className="border rounded px-3 py-2 mt-1 w-full"
+                    >
+                      {locations.map((country, index) => (
+                        <option key={index} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block mb-2">
+                    State:
+                    <input
+                      type="text"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className="border rounded px-3 py-2 mt-1 w-full"
+                    />
+                  </label>
+                  <label className="block mb-2">
+                    City:
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      className="border rounded px-3 py-2 mt-1 w-full"
+                    />
+                  </label>
+                  <label className="block mb-2">
+                    Deadline:
+                    <input
+                      type="date"
+                      name="procurementSummaryDeadline"
+                      value={formData.procurementSummaryDeadline}
+                      onChange={handleChange}
+                      className="border rounded px-3 py-2 mt-1 w-full"
+                    />
+                  </label>
+                </div>
+                <label className="block mb-2">
+                  Summary:
+                  <input
+                    type="text"
+                    name="procurementSummarySummary"
+                    value={formData.procurementSummarySummary}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+              </div>
+
+              {/* tenderDetail Section */}
+              <div className="border border-gray-500 p-2 rounded-lg mt-2">
+                <h2 className="text-lg font-semibold mb-4">Tender Detail</h2>
+                <label className="block mb-2">
+                  Description:
+                  <input
+                    type="text"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+                <label className="block mb-2">
+                  Organization:
+                  <input
+                    type="text"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+                <label className="block mb-2">
+                  Notice Type:
+                  <input
+                    type="text"
+                    name="tenderDetailNoticeType"
+                    value={formData.tenderDetailNoticeType}
+                    onChange={handleChange}
+                    className="border rounded px-3 py-2 mt-1 w-full"
+                  />
+                </label>
+              </div>
             </div>
-            <div className="flex justify-end ">
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-md bg-green-500 text-white"
-              >
-                Submit
-              </button>
-              <button
-                type="button"
-                onClick={clearInputValue}
-                className="ml-4 px-4 py-2 rounded-md bg-red-500 text-white"
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-        </form>
+            <button
+              type="button"
+              onClick={nextPage}
+              className="bg-blue-500 text-white px-4 py-2 mt-8 rounded hover:bg-blue-600"
+            >
+              Next
+            </button>
+          </form>
+        )}
+
+        {currentPage === 2 && (
+          <form onSubmit={handleSubmit}>
+            <OtherInformationAndPurchaserDetail
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+
+            <button
+              type="button"
+              onClick={previousPage}
+              className="bg-blue-500 text-white px-4 py-2 mt-8 rounded hover:bg-blue-600"
+            >
+              Previous
+            </button>
+          </form>
+        )}
       </div>
     </>
   );
 };
 
-export default Forms;
+export default TenderForm;
