@@ -9,7 +9,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
       {/* otherInformation and purchaserDetail Sections */}
       <div className="grid grid-cols-2 gap-4">
         {/* otherInformation Section */}
-        <div className="border border-gray-500 p-2 rounded-lg mt-2">
+        <div className="bg-gray-300 p-2 rounded-lg mt-2">
           <h2 className="text-lg font-semibold mb-4">Other Information</h2>
           <div className="grid grid-cols-2 gap-4">
             <label className="block mb-2 font-semibold italic text-slate-600">
@@ -86,7 +86,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
         </div>
 
         {/* purchaserDetail Section */}
-        <div className="border border-gray-500 p-2 rounded-lg mt-2">
+        <div className="bg-gray-300 p-2 rounded-lg mt-2">
           <h2 className="text-lg font-semibold mb-4">Purchaser Detail</h2>
           <div className="grid grid-cols-2 gap-4">
             <label className="block mb-2 font-semibold italic text-slate-600">
@@ -314,82 +314,82 @@ const TenderForm = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 max-w-3xl mx-auto px-4 py-8 border border-gray-700 rounded-lg shadow-lg mt-6 mb-6">
+      <div className="max-w-3xl mx-auto px-4 py-8 mt-6 mb-6">
                 {currentPage === 1 && (
                   <form onSubmit={handleSubmit}>
                     {/* Global Section */}
                     <h2 className="text-2xl font-bold   mb-4 text-center">Submit Tender Request</h2>
-                    <div className="border border-gray-500 p-2 rounded-lg">
-                      <label className="block mb-2 font-semibold italic text-slate-600">
+                    <div className="bg-red-700 p-2 rounded-lg">
+                      <label className="block mb-2 font-semibold italic text-white">
                         Summary:
                         <input required
                           type="text"
                           name="summary"
                           value={formData.summary}
                           onChange={handleChange}
-                          className="border rounded px-3 py-2 mt-1 w-full"
+                          className="border rounded px-3 py-2 mt-1 w-full text-black"
                         />
                       </label>
-                      <div className="grid grid-cols-2 gap-4">
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                      <div className=" grid grid-cols-2 gap-4 ">
+                        <label className="block mb-2 font-semibold italic text-white ">
                           Sector:
                           <input required
                             type="text"
                             name="sector"
                             value={formData.sector}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white ">
                           CPV No:
                           <input
                             type="text"
                             name="cpvNo"
                             value={formData.cpvNo}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white ">
                           User Category:
                           <select required
                             name="userCategory"
                             value={formData.userCategory}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           >
                             <option value="">Select User Category</option>
                             <option value="contractor">Contractor</option>
                             <option value="subcontractor">Sub Contractor</option>
                           </select>
                         </label>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white ">
                           Product:
                           <input required
                             type="text"
                             name="product"
                             value={formData.product}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
                       </div>
                     </div>
 
                     {/* procurementSummary and tenderDetail Sections */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className=" grid grid-cols-2 gap-4 ">
                       {/* Procurement Summary Section */}
-                      <div className="border border-gray-500 p-2 rounded-lg mt-2">
-                        <h2 className="text-lg font-semibold mb-4">Procurement Summary</h2>
+                      <div className="bg-red-700 p-2 rounded-lg mt-2">
+                        <h2 className="text-lg font-semibold mb-4 text-white">Procurement Summary</h2>
                         <div className="grid grid-cols-2 gap-4">
-                          <label className="block mb-2 font-semibold italic text-slate-600">
+                          <label className="block mb-2 font-semibold italic text-white">
                             Country:
                             <select required
                               name="country"
                               value={formData.country}
                               onChange={handleChange}
-                              className="border rounded px-3 py-2 mt-1 w-full"
+                              className="border rounded px-3 py-2 mt-1 w-full text-black"
                             >
                               {locations.map((country, index) => (
                                 <option key={index} value={country}>
@@ -399,80 +399,80 @@ const TenderForm = () => {
                             </select>
                           </label>
 
-                          <label className="block mb-2 font-semibold italic text-slate-600">
+                          <label className="block mb-2 font-semibold italic text-white">
                             State:
                             <input required
                               type="text"
                               name="state"
                               value={formData.state}
                               onChange={handleChange}
-                              className="border rounded px-3 py-2 mt-1 w-full"
+                              className="border rounded px-3 py-2 mt-1 w-full text-black"
                             />
                           </label>
-                          <label className="block mb-2 font-semibold italic text-slate-600">
+                          <label className="block mb-2 font-semibold italic text-white">
                             City:
                             <input 
                               type="text"
                               name="city"
                               value={formData.city}
                               onChange={handleChange}
-                              className="border rounded px-3 py-2 mt-1 w-full"
+                              className="border rounded px-3 py-2 mt-1 w-full text-black"
                             />
                           </label>
-                          <label className="block mb-2 font-semibold italic text-slate-600">
+                          <label className="block mb-2 font-semibold italic text-white">
                             Deadline:
                             <input required
                               type="date"
                               name="procurementSummaryDeadline"
                               value={formData.procurementSummaryDeadline}
                               onChange={handleChange}
-                              className="border rounded px-3 py-2 mt-1 w-full"
+                              className="border rounded px-3 py-2 mt-1 w-full text-black"
                             />
                           </label>
                         </div>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white">
                           Summary:
                           <input 
                             type="text"
                             name="procurementSummarySummary"
                             value={formData.procurementSummarySummary}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
                       </div>
 
                       {/* tenderDetail Section */}
-                      <div className="border border-gray-500 p-2 rounded-lg mt-2">
-                        <h2 className="text-lg font-semibold mb-4">Tender Detail</h2>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                      <div className="bg-red-700 p-2 rounded-lg mt-2">
+                        <h2 className="text-lg font-semibold mb-4 text-white">Tender Detail</h2>
+                        <label className="block mb-2 font-semibold italic text-white">
                           Description:
                           <input 
                             type="text"
                             name="description"
                             value={formData.description}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white">
                           Organization:
                           <input required
                             type="text"
                             name="organization"
                             value={formData.organization}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
-                        <label className="block mb-2 font-semibold italic text-slate-600">
+                        <label className="block mb-2 font-semibold italic text-white">
                           Notice Type:
                           <input required
                             type="text"
                             name="tenderDetailNoticeType"
                             value={formData.tenderDetailNoticeType}
                             onChange={handleChange}
-                            className="border rounded px-3 py-2 mt-1 w-full"
+                            className="border rounded px-3 py-2 mt-1 w-full text-black"
                           />
                         </label>
                       </div>

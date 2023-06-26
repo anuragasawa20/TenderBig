@@ -330,9 +330,11 @@ class Tender {
     // Generalized search endpoint
     async search(req, res) {
         try {
+            const currentDate = new Date();
             const query = {
                 'approvedStatus': true,
-                'active': true
+                'active': true,
+                'procurementSummary.deadline': { $gte: currentDate }
             };
 
             const { region, geopolitical, country, sector, financier, state, city, product, userCategory } = req.query;
