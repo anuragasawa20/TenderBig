@@ -17,7 +17,7 @@ function DashboardUsers() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "/apiTender/userdetails/allusers",
+          "http://localhost:5000/apiTender/userdetails/allusers",
           {
             method: "GET",
             headers: {

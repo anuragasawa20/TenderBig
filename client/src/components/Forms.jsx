@@ -12,7 +12,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
         Fields marked with an asterisk (*) are mandatory.
       </p>
       {/* otherInformation and purchaserDetail Sections */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* otherInformation Section */}
         <div className="p-2 rounded-lg mt-2">
           <h2 className="text-2xl font-bold mb-4 ">Other Information</h2>
@@ -204,26 +204,39 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
         </div>
       </div>
 
-      <div className="center">
+      <div className="center flex flex-col items-center">
 
-        <button
-          type="button"
-          onClick={previousPage}
-          className="bg-red-700 text-white px-4 py-2 mt-8 rounded hover:bg-red-800 align-center"
-        >
-          <span style={{ color: 'white' }}>
-            <GrFormPrevious />
-          </span>
-        </button>
+        <div className="flex justify-between w-full">
 
-        <button
-          type="submit"
-          className="bg-red-700 mx-6 text-white px-4 py-2 mt-8 rounded hover:bg-red-800 w-3/4"
-        >
-          Submit
-        </button>
+          <div className="w-1/4">
+            <button
+              type="button"
+              onClick={previousPage}
+              className="bg-red-700 text-white px-4 py-2 mt-8 rounded hover:bg-red-800 align-center"
+            >
+              <span style={{ color: 'white' }}>
+                <GrFormPrevious />
+              </span>
+            </button>
+
+          </div>
+
+          <div className="w-3/4">
+
+            <button
+              type="submit"
+              className="bg-red-700 mx-6 text-white px-4 py-2 mt-8 rounded-lg font-semibold hover:bg-red-800 w-2/4"
+            >
+              Submit
+            </button>
+
+          </div>
+        </div>
+
 
       </div>
+
+
 
     </>
   );
@@ -314,7 +327,7 @@ const TenderForm = () => {
 
     const requestBody = JSON.stringify(formData);
 
-    fetch("/apiTender/tenderdetails/add-tender", {
+    fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -350,14 +363,14 @@ const TenderForm = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-3xl mx-auto px-4 py-8 mb-6">
+      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
         {currentPage === 1 && (
           <form onSubmit={handleSubmit}>
             {/* Global Section */}
             <h2 className="text-2xl font-bold mb-4 text-center ">Submit Tender Request</h2>
             <p className="text-red-700 font-thin font-serif text-sm">
-        Fields marked with an asterisk (*) are mandatory.
-      </p>
+              Fields marked with an asterisk (*) are mandatory.
+            </p>
             <div className="p-2 rounded-lg">
               <label className="block mb-2 font-semibold relative">
                 Summary
@@ -430,7 +443,7 @@ const TenderForm = () => {
             </div>
 
             {/* procurementSummary and tenderDetail Sections */}
-            <div className=" grid grid-cols-2 gap-4 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Procurement Summary Section */}
               <div className=" p-2 rounded-lg mt-2">
                 <h2 className="text-2xl font-bold mb-4 ">Procurement Summary</h2>

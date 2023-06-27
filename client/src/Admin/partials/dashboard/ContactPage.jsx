@@ -19,7 +19,7 @@ const ContactFormList = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "/apiTender/get-allcontactforms",
+        "http://localhost:5000/apiTender/get-allcontactforms",
         {
           headers: {
             Authorization: `Bearer ${token}`,

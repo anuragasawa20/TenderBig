@@ -280,7 +280,7 @@ const Forms = () => {
 
     const requestBody = JSON.stringify(formData);
 
-    fetch("/apiTender/tenderdetails/add-tender", {
+    fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
