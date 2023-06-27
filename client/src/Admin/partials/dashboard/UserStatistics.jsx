@@ -26,7 +26,11 @@ const UserStatistics = () => {
       };
 
       const response = await axios.get(
+<<<<<<< HEAD
         'http://localhost:3000/apiTender/userdetails/statistics',
+=======
+        '/apiTender/userdetails/statistics',
+>>>>>>> b0c65e6572290f603089c8e12ee23845966f2d80
         config
       );
       setStatistics(response.data);

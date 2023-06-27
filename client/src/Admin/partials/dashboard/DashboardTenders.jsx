@@ -25,7 +25,7 @@ const AllTendersSection = () => {
   useEffect(() => {
     const fetchTenderData = async () => {
       try {
-        const Url = "http://localhost:3000/apiTender/tenderdetails/all-tenders";
+        const Url = "http://localhost:5000/apiTender/tenderdetails/all-tenders";
 
         const detailsArray = [
           "tenderId",

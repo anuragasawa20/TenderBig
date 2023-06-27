@@ -18,7 +18,7 @@ const TenderStatistics = () => {
         };
 
         const response = await axios.get(
-          "http://localhost:3000/apiTender/tenderdetails/statistics",
+          "http://localhost:5000/apiTender/tenderdetails/statistics",
           config
         );
         setStatistics(response.data);
@@ -48,8 +48,6 @@ const TenderStatistics = () => {
         "Contractor Tenders",
         "Subcontractor Tenders",
         "Admin Tenders",
-        "HR Tenders",
-        "Employee Tenders"
       ],
       datasets: [
         {
@@ -61,10 +59,8 @@ const TenderStatistics = () => {
             statistics.contractorCount,
             statistics.subcontractorCount,
             statistics.adminCount,
-            statistics.hrCount,
-            statistics.employeeCount
           ],
-          backgroundColor: "rgba(75, 192, 192, 0.6)",
+          backgroundColor: "#6CA0DC",
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1
         }
@@ -146,12 +142,14 @@ const TenderStatistics = () => {
                 <hr />
                 <p className="text-lg font-bold">{statistics.employeeCount}</p>
               </div>
+
             </div>
-          ) : (
-            <p className="text-2xl font-bold">Loading...</p>
-          )}
-        </div>
+          </>
+        ) : (
+          <p className="text-2xl font-bold">Loading...</p>
+        )}
       </div>
+
     </div>
     </div>
   );

@@ -3,19 +3,25 @@ import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { navigateToContactPage } from "../components/utils.js";
-import Footer from "../components/Footer";
+import axios from "axios";
 
 const ContactUsPage = () => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedService, setSelectedService] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    navigateToContactPage(selectedService);
+    sendDataToAPI(selectedService);
+    setName("");
+    setCompany("");
+    setMobile("");
+    setEmail("");
+    setSelectedService("");
   };
 
   const [isVisible, setIsVisible] = useState(false);
@@ -40,9 +46,32 @@ const ContactUsPage = () => {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const selectedService = queryParams.get("service");
+  const selectedServiceFromNavbar = queryParams.get("service");
+
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
+  };  
+
+  const sendDataToAPI = (selectedService) => {
+    const formData = {
+      name,
+      company,
+      mobile,
+      email,
+      selectedService,
+    };
+
+    axios
+      .post("/apiTender/post-contactform", formData)
+      .then((response) => {
+        console.log("Form data sent successfully:", response.data);
+        alert("We will contact you soon!!!")
+        setIsVisible(false);
+      })
+      .catch((error) => {
+        console.error("Error sending form data:", error);
+        alert("Oops something went wrong!!!")
+      });
   };
 
   return (
@@ -69,7 +98,7 @@ const ContactUsPage = () => {
                   <AiOutlineUser className="mr-2" />
                   Name
                 </label>
-                <input
+                <input required
                   type="text"
                   id="name"
                   className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -82,7 +111,7 @@ const ContactUsPage = () => {
                   <RiBuilding2Line className="mr-2" />
                   Company Name
                 </label>
-                <input
+                <input required
                   type="text"
                   id="company"
                   className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -108,7 +137,7 @@ const ContactUsPage = () => {
                   <AiOutlineMail className="mr-2" />
                   Email Address
                 </label>
-                <input
+                <input required
                   type="email"
                   id="email"
                   className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -120,16 +149,17 @@ const ContactUsPage = () => {
                 <label htmlFor="services" className="flex items-center">
                   Select Services
                 </label>
-                <select
+                <select required
                   id="services"
                   className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={selectedService}
+                  value={selectedService || selectedServiceFromNavbar}
                   onChange={handleServiceChange}
                 >
                   <option value="">Select an option</option>
                   <option value="Career&ManPower">Career & Man Power</option>
-                  <option value="Registration/Certificate">Registration / Certificate</option>
-                  <option value="Earn Gems">Earn</option>
+                  <option value="Registration/Certificate">
+                    Registration / Certificate
+                  </option>
                   <option value="Joint Venture">License</option>
                   <option value="Auction (Material)">Auction Material</option>
                   <option value="Joint Venture">Joint Venture</option>
@@ -185,7 +215,6 @@ const ContactUsPage = () => {
           </motion.div>
         </motion.div>
       </div>
-      <Footer/>
     </>
   );
 };

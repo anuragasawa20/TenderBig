@@ -62,7 +62,7 @@ class Auth {
                 ...error,
                 password: "",
                 name: "",
-                emsil: "",
+                email: "",
                 phoneNumber: "Number already exists",
               };
               return res.json({ error });
