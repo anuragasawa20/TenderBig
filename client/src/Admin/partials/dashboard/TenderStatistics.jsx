@@ -3,8 +3,6 @@ import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 
 const TenderStatistics = () => {
   const [statistics, setStatistics] = useState(null);
@@ -20,7 +18,7 @@ const TenderStatistics = () => {
         };
 
         const response = await axios.get(
-          "/apiTender/tenderdetails/statistics",
+          "http://localhost:5000/apiTender/tenderdetails/statistics",
           config
         );
         setStatistics(response.data);
@@ -82,64 +80,67 @@ const TenderStatistics = () => {
 
   return (
     <div>
-      <div className="p-4">
-        {statistics ? (
-          <>
-            <h1 className="text-2xl font-bold mb-6 text-left">Tender Statistics</h1>
+      <div className="p-4 border-gray-200 border rounded-lg dark:border-gray-200">
+      <h1 className="text-2xl font-bold mb-6">Tender Statistics</h1>
 
-            <div className="p-4 rounded-lg dark:border-gray-700">
+      {statistics ? (
+        <div className="flex flex-wrap my-5">
+          <div className="w-full sm:w-1/2 md:w-auto bg-white rounded-lg p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 sm:mb-0 sm:mr-4 grow">
+            <p className="text-lg mb-2 text-gray-500">Total Tenders</p>
+            <hr />
+            <p className="text-lg font-bold">{statistics.totalCount}</p>
+          </div>
+          <div className="w-full sm:w-1/2 md:w-auto bg-white rounded-lg p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 sm:mb-0 sm:mr-4 grow">
+            <p className="text-lg mb-2 text-gray-500">Reviewed & Approved Tenders</p>
+            <hr />
+            <p className="text-lg font-bold">{statistics.activeApprovedCount}</p>
+          </div>
+          <div className="w-full sm:w-1/2 md:w-auto bg-white rounded-lg p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 sm:mb-0 sm:mr-4 grow">
+            <p className="text-lg mb-2 text-gray-500">Reviewed Tenders</p>
+            <hr />
+            <p className="text-lg font-bold">{statistics.activeCount}</p>
+          </div>
+          <div className="w-full sm:w-1/2 md:w-auto bg-white rounded-lg p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] mb-4 sm:mb-0 sm:mr-4 grow">
+            <p className="text-lg mb-2 text-gray-500">Approved Tenders</p>
+            <hr />
+            <p className="text-lg font-bold">{statistics.approvedCount}</p>
+          </div>
+          <div className="w-full sm:w-1/2 md:w-auto bg-white rounded-lg p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)] grow">
+            <p className="text-lg mb-2 text-gray-500">Contractor Tenders</p>
+            <hr />
+            <p className="text-lg font-bold">{statistics.contractorCount}</p>
+          </div>
+        </div>
+      ) : (
+        <p className="text-2xl font-bold">Loading...</p>
+      )}
 
-              <div className="grid grid-cols-3 gap-20 mb-4">
-
-                <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                  <h3 className="text-lg font-bold mb-2 border-b-2 border-gray-200 py-2 text-stone-500">Total Tenders</h3>
-                  <h1 className="text-2xl font-bold ">{statistics.totalCount}</h1>
-                </div>
-
-
-                <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                  <h3 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Reviewed and Approved Tenders</h3>
-                  <h1 className="text-2xl font-bold">{statistics.activeApprovedCount}</h1>
-                </div>
-
-                <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                  <h2 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Admin Tenders</h2>
-                  <h1 className="text-2xl font-bold">{statistics.adminCount}</h1>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="flex items-center justify-center rounded bg-gray-50 md:h-68">
+          <div className="container">{renderChart()}</div>
+        </div>
+        <div className="flex items-center justify-center rounded">
+          {statistics ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-white rounded-lg m-2 p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                <p className="text-lg mb-2 text-gray-500">Subcontractor Tenders</p>
+                <hr />
+                <p className="text-lg font-bold">{statistics.subcontractorCount}</p>
               </div>
-
-              <div className="grid grid-cols-2 gap-20 mb-4">
-
-                <div className="flex items-center justify-center rounded h-68 bg-white">
-                  <div className="container">
-                    <h1 className="text-lg font-bold text-stone-500 text-left mx-5">Tender Statistics</h1>
-                    {renderChart()}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 mb-4 p-2">
-
-                  <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 mt-3 hover:border-4 hover:shadow-lg text-center">
-                    <h2 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Reviewed Tenders</h2>
-                      <h1 className="text-2xl font-bold"> {statistics.activeCount} </h1>
-                  </div>
-
-                  <div className="bg-white shadow-lg p-2 border-2 mt-3 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                    <h2 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Approved Tenders</h2>
-                    <h1 className="text-2xl font-bold">{statistics.approvedCount}</h1>
-                  </div>
-
-                  <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                    <h2 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Contractor Tenders</h2>
-                    <h1 className="text-2xl font-bold">{statistics.contractorCount}</h1>
-                  </div>
-
-                  <div className="bg-white shadow-lg p-2 border-2 hover:border-blue-500 hover:border-4 hover:shadow-lg text-center">
-                    <h2 className="text-lg font-bold mb-2 border-b-2 border-gray-300 py-2 text-stone-500">Subcontractor Tenders</h2>
-                    <h1 className="text-2xl font-bold">{statistics.subcontractorCount}</h1>
-                  </div>
-
-                </div>
+              <div className="bg-white rounded-lg m-2 p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                <p className="text-lg mb-2 text-gray-500">Admin Tenders</p>
+                <hr />
+                <p className="text-lg font-bold">{statistics.adminCount}</p>
+              </div>
+              <div className="bg-white rounded-lg m-2 p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                <p className="text-lg mb-2 text-gray-500">HR Tenders</p>
+                <hr />
+                <p className="text-lg font-bold">{statistics.hrCount}</p>
+              </div>
+              <div className="bg-white rounded-lg m-2 p-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                <p className="text-lg mb-2 text-gray-500">Employee Tenders</p>
+                <hr />
+                <p className="text-lg font-bold">{statistics.employeeCount}</p>
               </div>
 
             </div>
@@ -149,6 +150,7 @@ const TenderStatistics = () => {
         )}
       </div>
 
+    </div>
     </div>
   );
 };
