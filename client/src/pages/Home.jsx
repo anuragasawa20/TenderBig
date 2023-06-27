@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setKeywords } from "../Redux/store";
 import Home2 from "./Home2";
@@ -120,6 +120,34 @@ const HomePage = () => {
                 </NavLink>
               </li>
               <hr className="border-gray-400" />
+              <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
+                <NavLink
+                  to="/contact"
+                  className="text-gray-600 flex items-center justify-between"
+                >
+                  <span>Apply for Tender</span>
+                  <img
+                    src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
+                    className="w-5 h-5"
+                    alt="Right Arrow"
+                  />
+                </NavLink>
+              </li>
+              <hr className="border-gray-400" />
+              <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
+                <NavLink
+                  to="/gemregistration"
+                  className="text-gray-600 flex items-center justify-between"
+                >
+                  <span>Gem Registration</span>
+                  <img
+                    src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
+                    className="w-5 h-5"
+                    alt="Right Arrow"
+                  />
+                </NavLink>
+              </li>
+              <hr className="border-gray-400" />
               <hr className="border-gray-100" />
             </ul>
           </div>
@@ -209,7 +237,7 @@ const HomePage = () => {
       <Home2 />
       <Home3 />
       <Home4 />
-      <Footer/>
+      <Footer />
     </>
   );
 };
