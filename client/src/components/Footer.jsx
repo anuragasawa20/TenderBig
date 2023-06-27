@@ -5,11 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div
-        className=" mt-8 w-full pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-red-800"
-      // style={{
-      //   backgroundImage: `url(${footer})`,
-      // }}
-
+        className=" mt-8 w-full pb-16 pt-1 px-4 md:px-6 lg:px-8 xl:px-10 text-white bg-[#212121]"
       >
         <div className="max-w-6xl mx-auto mb-[152px] mt-10">
           <div className="">
@@ -183,6 +179,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
     </footer>
   );
 };
