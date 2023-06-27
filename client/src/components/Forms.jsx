@@ -3,8 +3,35 @@ import Navbar from "./Navbar";
 import { locations } from "../constants/countriesData"
 import Footer from "./Footer";
 import { GrFormPrevious } from 'react-icons/gr';
+import PropTypes from "prop-types";
 
-const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit, previousPage }) => {
+
+const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPage }) => {
+  OtherInformationAndPurchaserDetail.propTypes = {
+    formData: PropTypes.shape({
+      // Include all the properties from the formData object
+      noticeType: PropTypes.string.isRequired,
+      totNo: PropTypes.string.isRequired,
+      documentNo: PropTypes.string.isRequired,
+      competition: PropTypes.string.isRequired,
+      financier: PropTypes.string.isRequired,
+      ownership: PropTypes.string.isRequired, // Add this line for formData.ownership
+      tenderValue: PropTypes.string.isRequired,
+      purchaser: PropTypes.string.isRequired,
+      paddress: PropTypes.string.isRequired,
+      pcity: PropTypes.string.isRequired,
+      pdistrict: PropTypes.string.isRequired,
+      pstate: PropTypes.string.isRequired,
+      ppin: PropTypes.string.isRequired,
+      ptelfax: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired,
+    }).isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    previousPage: PropTypes.func.isRequired,
+  };
+
   return (
     <>
       <h2 className="text-2xl font-bold mb-4 text-center">Submit Tender Request</h2>

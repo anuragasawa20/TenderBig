@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
@@ -23,12 +23,6 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const handleServiceSelect = (event) => {
-    const selected = event.target.value;
-    setSelectedService(selected);
-    navigate(`/contact?service=${selected}`);
-  };
-
   return (
     <div>
       <nav className="bg-white shadow">
@@ -48,23 +42,26 @@ const Navbar = () => {
                   >
                     Home
                   </Link>
+                  
                   <Link
                     to="/tenders"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
                     Tenders
                   </Link>
+
                   <Link
                     to="/gemregistration"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
                     Gems Registration
                   </Link>
+
                   <Link
                     to="/forms"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
-                    Apply For Tender
+                    Apply for Tenders
                   </Link>
 
                   <Link
@@ -95,7 +92,7 @@ const Navbar = () => {
                       </svg>
                     </button>
                     {dropdownOpen && (
-                      <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px]">
+                      <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px] z-10">
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
@@ -115,6 +112,7 @@ const Navbar = () => {
                           </svg>
                           Career & Man Power
                         </Link>
+
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
@@ -134,6 +132,7 @@ const Navbar = () => {
                           </svg>
                           Registration / Certificate
                         </Link>
+
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
@@ -173,6 +172,7 @@ const Navbar = () => {
                           </svg>
                           Auction Material
                         </Link>
+
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
@@ -192,6 +192,7 @@ const Navbar = () => {
                           </svg>
                           Joint Venture
                         </Link>
+                        
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
