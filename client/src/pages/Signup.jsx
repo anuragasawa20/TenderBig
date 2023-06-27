@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { locations } from "../constants/countriesData"
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -36,21 +37,26 @@ const Signup = () => {
             .then((data) => {
                 // Handle response data
                 console.log(data);
-                setSuccessMessage(data.success);
-                // Clear input fields
-                setFormData({
-                    name: '',
-                    email: '',
-                    password: '',
-                    phoneNumber: '',
-                    country: '',
-                    state: '',
-                    city: ''
-                });
+                if (data.error) {
+                    if (data.error.email) alert(data.error.email);
+                    if (data.error.phoneNumber) alert(data.error.phoneNumber);
+                } else {
+                    setSuccessMessage(data.success);
+                    // Clear input fields
+                    setFormData({
+                        name: '',
+                        email: '',
+                        password: '',
+                        phoneNumber: '',
+                        country: '',
+                        state: '',
+                        city: ''
+                    });
+                }
             })
             .catch((error) => {
                 // Handle error
-                console.error(error);
+                console.log(error);
             });
     };
 
@@ -79,7 +85,7 @@ const Signup = () => {
                                             Name
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                             type="text"
                                             id="name"
                                             name="name"
@@ -94,7 +100,7 @@ const Signup = () => {
                                             Email
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                             type="email"
                                             id="email"
                                             name="email"
@@ -109,7 +115,7 @@ const Signup = () => {
                                             Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                             type="password"
                                             id="password"
                                             name="password"
@@ -124,8 +130,8 @@ const Signup = () => {
                                             Phone Number
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                            type="text"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                            type="number"
                                             id="phoneNumber"
                                             name="phoneNumber"
                                             value={formData.phoneNumber}
@@ -136,7 +142,7 @@ const Signup = () => {
                                     </div>
                                     <div className="flex items-center justify-between mb-4">
                                         <button
-                                            className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                                            className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
                                             type="submit"
                                         >
                                             Sign Up
@@ -146,11 +152,27 @@ const Signup = () => {
                             </div>
                             <div className="w-1/2 pl-2">
                                 <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
+                                    <label className="block font-semibold">
+                                        Country
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <select required
+                                            name="country"
+                                            value={formData.country}
+                                            onChange={handleChange}
+                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            {locations.map((country, index) => (
+                                                <option key={index} value={country}>
+                                                    {country}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
+                                    {/* <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
                                         Country
                                     </label>
                                     <input
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                         type="text"
                                         id="country"
                                         name="country"
@@ -158,14 +180,14 @@ const Signup = () => {
                                         placeholder="Enter your country"
                                         onChange={handleChange}
                                         required
-                                    />
+                                    /> */}
                                 </div>
                                 <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="state">
                                         State
                                     </label>
                                     <input
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                         type="text"
                                         id="state"
                                         name="state"
@@ -179,7 +201,7 @@ const Signup = () => {
                                         City
                                     </label>
                                     <input
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-700"
                                         type="text"
                                         id="city"
                                         name="city"
@@ -199,7 +221,7 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 };

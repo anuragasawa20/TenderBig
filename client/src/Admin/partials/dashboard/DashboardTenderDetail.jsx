@@ -17,7 +17,7 @@ function DashboardTenderDetail() {
     const fetchTenderDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}`,
+          `/apiTender/tenderdetails/tender/${tenderId}`,
           {
             method: 'GET',
             headers: {

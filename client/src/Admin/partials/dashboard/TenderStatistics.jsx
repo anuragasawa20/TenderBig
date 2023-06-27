@@ -85,7 +85,7 @@ const TenderStatistics = () => {
   };
 
   return (
-    <div className="p-4 border-gray-200 border rounded-lg dark:border-gray-700">
+    <div className="p-4">
       <h1 className="text-2xl font-bold mb-6">Tender Statistics</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div className="flex items-center justify-center rounded bg-gray-50 h-68">
