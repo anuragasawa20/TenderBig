@@ -13,7 +13,7 @@ router.get("/allusers", verifyToken, isNotUser, usersController.getAllUser);
 router.put("/updaterole", verifyToken,isNotUser, usersController.updateUserRole);
 
 //Delete user
-router.delete("/delete/:userId", verifyToken, isNotUser, usersController.deleteUser);
+router.delete("/delete/:userId", verifyToken, usersController.deleteUser);
 
 //New users
 router.get("/created/:weeks", verifyToken, isNotUser, usersController.newUsers);

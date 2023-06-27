@@ -415,7 +415,7 @@ class Tender {
 
             const query = {
                 'approvedStatus': true,
-                'active': true
+                'active': true,
             };
 
             if (totNo) {
@@ -635,6 +635,33 @@ class Tender {
             });
         } catch (error) {
             res.status(500).json({ error: 'Unable to fetch tender statistics.' });
+        }
+    }
+
+    async latest(req, res) {
+        const { weekNumber } = req.query;
+console.log("Called");
+        if (!weekNumber) {
+            return res.status(400).json({ error: "Week number is required" });
+        }
+
+        const currentYear = new Date().getFullYear();
+        const firstDayOfYear = new Date(currentYear, 0, 1);
+
+        const startDate = new Date(firstDayOfYear);
+        startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
+
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 7);
+
+        try {
+            const tenders = await tenderModel.find({
+                "tenderDetail.publishDate": { $gte: startDate, $lt: endDate }
+            }).sort({ "tenderDetail.publishDate": -1 });
+
+            res.json(tenders);
+        } catch (error) {
+            res.status(500).json({ error: "Internal server error" });
         }
     }
 

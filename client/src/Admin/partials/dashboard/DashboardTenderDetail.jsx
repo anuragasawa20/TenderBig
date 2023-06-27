@@ -17,7 +17,7 @@ function DashboardTenderDetail() {
     const fetchTenderDetails = async () => {
       try {
         const response = await axios.get(
-          `/apiTender/tenderdetails/tender/${tenderId}`,
+          `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}`,
           {
             method: 'GET',
             headers: {
@@ -40,7 +40,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to approve the tender
       await axios.post(
-        `/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
+        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
         {},
         {
           headers: {
@@ -62,7 +62,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to reject the tender
       await axios.post(
-        `/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
+        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
         {},
         {
           headers: {
@@ -263,8 +263,6 @@ function DashboardTenderDetail() {
               </button>
             </div>
 
-            {/* Cards */}
-            <div className="grid grid-cols-15 gap-6"></div>
           </div>
         </main>
       </div>

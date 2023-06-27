@@ -189,7 +189,7 @@ const AdvancedSearchForm = () => {
     ];
 
     try {
-      const response = await axios.post('/apiTender/tenderdetails/advance-search', filteredFormData, { headers });
+      const response = await axios.post('http://localhost:5000/apiTender/tenderdetails/advance-search', filteredFormData, { headers });
       console.log(response.data);
       setTenderDetails(response.data);
     } catch (error) {

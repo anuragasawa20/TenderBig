@@ -37,7 +37,7 @@ const Login = () => {
                 localStorage.setItem("user", JSON.stringify(data.user.data));
                 // Navigate to the desired page
                 const user = data.user.data
-                if(user.userRole == "admin") navigate("/dashboard/admin");
+                if (user.userRole == "admin") navigate("/dashboard/admin");
                 else navigate("/");
                 console.log("Login successful");
             })
@@ -51,53 +51,45 @@ const Login = () => {
     return (
         <>
             <Navbar />
-
-            <div className="min-h-screen flex justify-center items-center">
-                <div className="p-6 bg-white rounded-lg shadow-md flex">
-                    <div className="w-1/2">
-                        <img
-                            src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                            alt="Illustration"
+            <div className='m-10 place-content-center flex justify-center'>
+                <div className="mx-auto mt-6 px-4 py-8 shadow-2xl p-6 bg-white rounded-lg flex flex-col md:flex-row place-content-center">
+                    <div className="w-full md:w-1/2 mb-4 md:mb-0 m-2">
+                        <img className="w-80"
+                            src={`${import.meta.env.BASE_URL}login.jpg`}
+                            alt="login"
                         />
                     </div>
-                    <div className="w-1/2 bg-white">
-                        <h1 className="text-3xl font-bold mb-4">Login</h1>
+                    <div className="w-full md:w-1/2 m-2">
+                        <h2 className="text-2xl font-bold mb-4 text-center ">Login</h2>
                         <form onSubmit={handleLogin}>
                             <div className="mb-4">
-                                <label
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                    htmlFor="email"
-                                >
+                                <label className="block mb-2 font-semibold">
                                     Email
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input required
+                                        type="text"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        placeholder="Enter Email" />
                                 </label>
-                                <input
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    placeholder="Enter your email"
-                                    required
-                                    onChange={handleInputChange}
-                                />
                             </div>
                             <div className="mb-4">
-                                <label
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                    htmlFor="password"
-                                >
+                                <label className="block mb-2 font-semibold" htmlFor="password">
                                     Password
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        placeholder="Enter your password"
+                                        onChange={handleInputChange}
+                                        required
+                                    />
                                 </label>
-                                <input
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    value={formData.password}
-                                    placeholder="Enter your password"
-                                    required
-                                    onChange={handleInputChange}
-                                />
                             </div>
                             <div className="flex items-center justify-between mb-4">
                                 <button
@@ -125,7 +117,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 };

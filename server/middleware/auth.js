@@ -13,7 +13,6 @@ exports.verifyToken = (req, res, next) => {
     req.userRole = decoded.data.userRole;
     req.userId = decoded.data.userId;
     req._id = decoded.data._id;
-    console.log(decoded);
     next();
   } catch (err) {
     console.error(err);
@@ -31,8 +30,6 @@ exports.isAdmin = (req, res, next) => {
   try {
     console.log(token);
     const decoded = jwt.verify(token, JWT_SECRET);
-    console.log(decoded);
-    console.log(decoded.userRole);
     if ( decoded.data.userRole != "admin" ) {
       return res.status(403).json({ error: "Access denied. Admin role required." });
     }

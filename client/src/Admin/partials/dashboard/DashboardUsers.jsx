@@ -17,7 +17,7 @@ function DashboardUsers() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "/apiTender/userdetails/allusers",
+          "http://localhost:5000/apiTender/userdetails/allusers",
           {
             method: "GET",
             headers: {
@@ -67,9 +67,11 @@ function DashboardUsers() {
         user.subscription.status === "active") ||
       (subscriptionStatus === "inactive" &&
         (!user.subscription || user.subscription.status === "inactive"));
-
-    return nameMatch && emailMatch && userTypeMatch && subscriptionStatusMatch;
+  
+    // Check if any of the conditions is true
+    return (nameMatch || emailMatch) && userTypeMatch && subscriptionStatusMatch;
   });
+  
 
   // Pagination
   const indexOfLastUser = currentPage * usersPerPage;

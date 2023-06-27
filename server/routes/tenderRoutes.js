@@ -25,15 +25,18 @@ router.get("/tender/:tenderId", verifyToken, tenderController.getSingleTender);
 router.get("/tender/byuserid", verifyToken, tenderController.getTendersByUserId);
 
 //Switch approved status of a tender
-router.post("/tender/:tenderId/switchApprovedStatus", verifyToken, tenderController.switchStatus);
+router.post("/tender/:tenderId/switchApprovedStatus", verifyToken, isNotUser, tenderController.switchStatus);
 
 //Switch active status of a tender
-router.post("/tender/:tenderId/switchActiveStatus", verifyToken,  tenderController.switchActive);
+router.post("/tender/:tenderId/switchActiveStatus", verifyToken, isNotUser, tenderController.switchActive);
 
 //Delete tender
 router.delete("/tender/:tenderId", verifyToken,  tenderController.deleteTender);
 
 //Statistics
-router.get("/statistics", verifyToken,  tenderController.statistics);
+router.get("/statistics", verifyToken, isNotUser, tenderController.statistics);
+
+//Latest Tenders
+router.get("/latest", tenderController.latest);
 
 module.exports = router;
