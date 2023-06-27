@@ -39,7 +39,7 @@ function UserDetails() {
     try {
       // Make API call to delete the user
       await axios.delete(
-        `http://localhost:5000/apiTender/userdetails/delete/${userId}`,
+        `/apiTender/userdetails/delete/${userId}`,
         {
           headers: {
             'Content-Type': 'application/json',

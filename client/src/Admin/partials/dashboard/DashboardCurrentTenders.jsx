@@ -24,7 +24,7 @@ const CurrentTenders = () => {
   useEffect(() => {
     const fetchTenderData = async () => {
       try {
-        const Url = "http://localhost:5000/apiTender/tenderdetails/all-tenders";
+        const Url = "/apiTender/tenderdetails/all-tenders";
 
         const approvedStatus = true;
         const active = true;
