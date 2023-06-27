@@ -39,7 +39,7 @@ function UserDetails() {
     try {
       // Make API call to delete the user
       await axios.delete(
-        `http://localhost:5000/apiTender/userdetails/delete/${userId}`,
+        `/apiTender/userdetails/delete/${userId}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function UserDetails() {
     try {
       // Make API call to update the user role
       await axios.put(
-        'http://localhost:5000/apiTender/userdetails/updaterole',
+        '/apiTender/userdetails/updaterole',
         {
           userId: userId,
           userRole: selectedRole,
@@ -153,13 +153,13 @@ function UserDetails() {
                   </select>
                   <div className="mt-4 flex justify-between">
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                      className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded"
                       onClick={() => handleUpdateRole(user.userId, selectedRole)}
                     >
                       Update Role
                     </button>
                     <button
-                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                      className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded"
                       onClick={handleDelete}
                     >
                       Delete
