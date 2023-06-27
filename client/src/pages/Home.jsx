@@ -125,7 +125,7 @@ const HomePage = () => {
                   to="/contact"
                   className="text-gray-600 flex items-center justify-between"
                 >
-                  <span>Apply for Tender</span>
+                  <span>Tender Filling</span>
                   <img
                     src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
                     className="w-5 h-5"
