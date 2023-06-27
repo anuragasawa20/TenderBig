@@ -17,7 +17,7 @@ function DashboardTenderDetail() {
     const fetchTenderDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}`,
+          `/apiTender/tenderdetails/tender/${tenderId}`,
           {
             method: 'GET',
             headers: {
@@ -40,7 +40,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to approve the tender
       await axios.post(
-        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
+        `/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
         {},
         {
           headers: {
@@ -50,7 +50,6 @@ function DashboardTenderDetail() {
         }
       );
       setApprove(!approve)
-      alert("Approved");
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -62,7 +61,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to reject the tender
       await axios.post(
-        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
+        `/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
         {},
         {
           headers: {
@@ -72,7 +71,6 @@ function DashboardTenderDetail() {
         }
       );
       setActive(!active);
-      alert("Inspected")
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -110,14 +108,14 @@ function DashboardTenderDetail() {
         <main>
           {/* Site header */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+          <div className="px-4 sm:px-6 lg:px-8 py-8 max-w-9xl mx-auto">
             {/* Dashboard actions */}
             <div className="container mx-auto px-4 py-8 max-w-7xl">
               <h1 className="text-3xl font-bold mb-8">Tender Details</h1>
 
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
                 <div className="bg-white rounded-lg shadow-md p-6 border-gray-400 border-[1px]">
-                  <h2 className="text-2xl font-bold mb-4 text-red-700">
+                  <h2 className="text-2xl font-bold mb-4 text-[#182235]">
                     Procurement Summary
                   </h2>
                   <p className="mb-2">
@@ -136,7 +134,7 @@ function DashboardTenderDetail() {
 
                 <div className="grid grid-cols-2 gap-8">
                   <div className="bg-white rounded-lg shadow-md p-6 border-gray-400 border-[1px]">
-                    <h2 className="text-2xl font-bold mb-4 text-red-700">
+                    <h2 className="text-2xl font-bold mb-4 text-[#182235]">
                       Other Information
                     </h2>
                     <p className="mb-2">
@@ -170,7 +168,7 @@ function DashboardTenderDetail() {
                   </div>
 
                   <div className="bg-white rounded-lg shadow-md p-6 border-gray-400 border-[1px]">
-                    <h2 className="text-2xl font-bold mb-4 text-red-700">
+                    <h2 className="text-2xl font-bold mb-4 text-[#182235]">
                       Purchaser's Detail
                     </h2>
                     <p className="mb-2">
@@ -213,7 +211,7 @@ function DashboardTenderDetail() {
                 </div>
 
                 <div className="bg-white rounded-lg shadow-md p-6 border-gray-400 border-[1px]">
-                  <h2 className="text-2xl font-bold mb-4 text-red-700">
+                  <h2 className="text-2xl font-bold mb-4 text-[#182235]">
                     Tender Details
                   </h2>
                   <p className="mb-2">
@@ -243,20 +241,20 @@ function DashboardTenderDetail() {
             <div className="flex justify-center">
             
               <button
-                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mr-2"
+                className="bg-[#182235] hover:bg-[#111a2b]  text-white font-bold py-2 px-4 rounded mr-2"
                 onClick={handleApprove}
               >
                 {tenderDetails.approvedStatus ? 'Reject' : 'Approve'}
               </button>
 
               <button
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2"
+                className="bg-[#182235] hover:bg-[#111a2b]  text-white font-bold py-2 px-4 rounded mr-2"
                 onClick={handleReject}
               >
                 {tenderDetails.active ? 'Ignore' : 'Inspected'}
               </button>
               <button
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                className="bg-[#182235] hover:bg-[#111a2b]  text-white font-bold py-2 px-4 rounded"
                 onClick={handleDelete}
               >
                 Delete

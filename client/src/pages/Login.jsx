@@ -22,7 +22,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         // Make API request to login
-        fetch("http://localhost:5000/apiTender/signin", {
+        fetch("/apiTender/signin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const Login = () => {
                 localStorage.setItem("user", JSON.stringify(data.user.data));
                 // Navigate to the desired page
                 const user = data.user.data
-                if (user.userRole == "admin") navigate("/dashboard/admin");
+                if (user.userRole == "admin") navigate("/dashboard/users");
                 else navigate("/");
                 console.log("Login successful");
             })

@@ -26,7 +26,7 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make API request with form data
-        fetch('http://localhost:5000/apiTender/signup', {
+        fetch('/apiTender/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,9 +75,6 @@ const Signup = () => {
 
                     <div className="w-full md:w-1/2">
                         <h2 className="text-2xl font-bold mb-4 text-center ">Sign Up</h2>
-                        <p className="text-red-700 font-thin font-serif text-sm">
-                            Fields marked with an asterisk (*) are mandatory.
-                        </p>
                         {successMessage && (
                             <div className="mb-4 text-green-500">{successMessage}</div>
                         )}

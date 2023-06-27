@@ -16,7 +16,7 @@ function UserDetails() {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/apiTender/userdetails/single-user/${userId}`,
+          `/apiTender/userdetails/single-user/${userId}`,
           {
             method: 'GET',
             headers: {

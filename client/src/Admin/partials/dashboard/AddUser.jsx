@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Sidebar from "../Sidebar";
 import Header from "../Header";
+import { Link } from 'react-router-dom';
+import { locations } from "../../../constants/countriesData"
 
 const AddUser = () => {
     const [formData, setFormData] = useState({
@@ -24,7 +26,7 @@ const AddUser = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make API request with form data
-        fetch('http://localhost:5000/apiTender/signup', {
+        fetch('/apiTender/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +37,7 @@ const AddUser = () => {
             .then((data) => {
                 // Handle response data
                 console.log(data);
-                setSuccessMessage(data.success);
+                if(data.success) setSuccessMessage("User added successfully.");
                 // Clear input fields
                 setFormData({
                     name: '',
@@ -61,21 +63,17 @@ const AddUser = () => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             {/* Content area */}
-            <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+            <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden ">
                 <main>
                     {/*  Site header 
         import Header from '../partials/Header';
         */}
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-                    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        {/* Dashboard actions */}
 
-                        {/* Cards */}
-                        <div className="grid grid-cols-15 gap-6">
-                            {/*---------> Table (Top Channels) */}
-                            <div className="min-h-screen flex justify-center items-center">
-                                <div className="w-1/2 bg-white">
-                                    <h1 className="text-3xl font-bold mb-4">Add User</h1>
+                    <div className="px-4 sm:px-6 lg:px-8 py-8 flex justify-center shadow-2xl rounded-lg">
+                        {/* Dashboard actions */}
+                                <div className="md:w-1/2">
+                                    <h2 className="text-2xl font-bold mb-4 text-center ">Add User</h2>
                                     {successMessage && (
                                         <div className="mb-4 text-green-500">{successMessage}</div>
                                     )}
@@ -83,125 +81,125 @@ const AddUser = () => {
                                         <div className="w-1/2 pr-2">
                                             <form onSubmit={handleSubmit}>
                                                 <div className="mb-4">
-                                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                                                    <label className="block mb-2 font-semibold relative">
                                                         Name
+                                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                                        <input
+                                                            required
+                                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                            type="text"
+                                                            id="name"
+                                                            name="name"
+                                                            value={formData.name}
+                                                            placeholder="Enter your name"
+                                                            onChange={handleChange}
+                                                        />
                                                     </label>
-                                                    <input
-                                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                        type="text"
-                                                        id="name"
-                                                        name="name"
-                                                        value={formData.name}
-                                                        placeholder="Enter your name"
-                                                        onChange={handleChange}
-                                                        required
-                                                    />
                                                 </div>
-                                                <div className="mb-4">
-                                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                                        Email
-                                                    </label>
-                                                    <input
-                                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                        type="email"
-                                                        id="email"
+                                                <label className="block mb-2 font-semibold">
+                                                    Email
+                                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                                    <input required
+                                                        type="text"
                                                         name="email"
                                                         value={formData.email}
-                                                        placeholder="Enter your email"
                                                         onChange={handleChange}
-                                                        required
-                                                    />
-                                                </div>
+                                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                        placeholder="Enter Email" />
+                                                </label>
                                                 <div className="mb-4">
-                                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                                                    <label className="block mb-2 font-semibold" htmlFor="password">
                                                         Password
+                                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                                        <input
+                                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                            type="password"
+                                                            id="password"
+                                                            name="password"
+                                                            value={formData.password}
+                                                            placeholder="Enter your password"
+                                                            onChange={handleChange}
+                                                            required
+                                                        />
                                                     </label>
-                                                    <input
-                                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                        type="password"
-                                                        id="password"
-                                                        name="password"
-                                                        value={formData.password}
-                                                        placeholder="Enter your password"
-                                                        onChange={handleChange}
-                                                        required
-                                                    />
                                                 </div>
                                                 <div className="mb-4">
-                                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneNumber">
+                                                    <label className="block mb-2 font-semibold" htmlFor="phoneNumber">
                                                         Phone Number
+                                                        <span className="text-red-700 relative top-0 right-0">*</span>
+
+                                                        <input
+                                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                            type="number"
+                                                            id="phoneNumber"
+                                                            name="phoneNumber"
+                                                            value={formData.phoneNumber}
+                                                            placeholder="Enter your phone number"
+                                                            onChange={handleChange}
+                                                            required
+                                                        />
                                                     </label>
-                                                    <input
-                                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                        type="text"
-                                                        id="phoneNumber"
-                                                        name="phoneNumber"
-                                                        value={formData.phoneNumber}
-                                                        placeholder="Enter your phone number"
-                                                        onChange={handleChange}
-                                                        required
-                                                    />
                                                 </div>
                                                 <div className="flex items-center justify-between mb-4">
                                                     <button
-                                                        className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                                                        className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
                                                         type="submit"
                                                     >
-                                                        Sign Up
+                                                        Add
                                                     </button>
                                                 </div>
                                             </form>
                                         </div>
                                         <div className="w-1/2 pl-2">
                                             <div className="mb-4">
-                                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="country">
+                                                <label className="block font-semibold">
                                                     Country
+                                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                                    <select required
+                                                        name="country"
+                                                        value={formData.country}
+                                                        onChange={handleChange}
+                                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                    >
+                                                        {locations.map((country, index) => (
+                                                            <option key={index} value={country}>
+                                                                {country}
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                 </label>
-                                                <input
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                    type="text"
-                                                    id="country"
-                                                    name="country"
-                                                    value={formData.country}
-                                                    placeholder="Enter your country"
-                                                    onChange={handleChange}
-                                                    required
-                                                />
                                             </div>
                                             <div className="mb-4">
-                                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="state">
+                                                <label className="block font-semibold">
                                                     State
+                                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                                    <input required
+                                                        type="text"
+                                                        name="state"
+                                                        value={formData.state}
+                                                        onChange={handleChange}
+                                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                        placeholder="Enter State"
+                                                    />
                                                 </label>
-                                                <input
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                    type="text"
-                                                    id="state"
-                                                    name="state"
-                                                    value={formData.state}
-                                                    placeholder="Enter your state"
-                                                    onChange={handleChange}
-                                                />
                                             </div>
                                             <div className="mb-4">
-                                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="city">
+                                                <label className="block font-semibold">
                                                     City
+                                                    <input
+                                                        type="text"
+                                                        name="city"
+                                                        value={formData.city}
+                                                        onChange={handleChange}
+                                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                        placeholder="Enter City"
+                                                    />
                                                 </label>
-                                                <input
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                                    type="text"
-                                                    id="city"
-                                                    name="city"
-                                                    value={formData.city}
-                                                    placeholder="Enter your city"
-                                                    onChange={handleChange}
-                                                />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
-                    </div>
                 </main>
 
             </div>
