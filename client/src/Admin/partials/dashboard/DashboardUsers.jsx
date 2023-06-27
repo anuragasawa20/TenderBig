@@ -3,6 +3,9 @@ import axios from "axios";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 function DashboardUsers() {
   const [userData, setUserData] = useState([]);
@@ -215,17 +218,12 @@ function DashboardUsers() {
                         onClick={previousPage}
                         disabled={currentPage === 1}
                       >
-                        <svg
-                          className="w-4 h-4 fill-current"
-                          aria-hidden="true"
-                          viewBox="0 0 20 20"
-                        >
+                        <FontAwesomeIcon icon={faArrowLeft} />
                           <path
                             fillRule="evenodd"
                             d="M5.293 6.707a1 1 0 010-1.414L2.414 2.343A1 1 0 113.828.93L7.586 4.686a1 1 0 010 1.414L3.828 9.07a1 1 0 11-1.414-1.414L5.293 6.707z"
                             clipRule="evenodd"
                           ></path>
-                        </svg>
                       </button>
                       <span className="px-2 text-sm">{currentPage}</span>
                       <button
@@ -233,17 +231,12 @@ function DashboardUsers() {
                         onClick={nextPage}
                         disabled={currentPage === Math.ceil(filteredData.length / usersPerPage)}
                       >
-                        <svg
-                          className="w-4 h-4 fill-current"
-                          aria-hidden="true"
-                          viewBox="0 0 20 20"
-                        >
+                        <FontAwesomeIcon icon={faArrowRight} />
                           <path
                             fillRule="evenodd"
                             d="M14.707 13.293a1 1 0 010 1.414l-3.758 3.758a1 1 0 11-1.414-1.414L12.586 14H7a1 1 0 110-2h5.586l-3.293-3.293a1 1 0 111.414-1.414l3.758 3.758z"
                             clipRule="evenodd"
                           ></path>
-                        </svg>
                       </button>
                     </div>
                   </div>
