@@ -16,10 +16,10 @@ import ContactFormList from '../Admin/partials/dashboard/ContactPage';
 const DashboardRoutes = () => {
   return (
     <Routes>
-      <Route
+      {/* <Route
         path="/admin"
         element={<PrivateRoute element={DashboardHome} />}
-      />
+      /> */}
       <Route
         path="/users"
         element={<PrivateRoute element={DashboardUsers} />}

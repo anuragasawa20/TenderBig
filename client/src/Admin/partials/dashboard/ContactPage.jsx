@@ -22,7 +22,7 @@ const response = await axios.get(
   "/apiTender/get-allcontactforms",
   {
     headers: {
-      Authorization: `Bearer ${token}`,
+      auth: token,
     },
   }
 );

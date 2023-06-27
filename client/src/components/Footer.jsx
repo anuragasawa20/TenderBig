@@ -13,41 +13,34 @@ const Footer = () => {
       >
         <div className="max-w-6xl mx-auto mb-[152px] mt-10">
           <div className="">
-            {/* <img
-              src={logo}
-              width={80}
-              height={60}
-              className="mb-8"
-            /> */}
-
             <div className="container flex justify-center cursor-pointer">
               <Link
                 to="/"
-                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                className="text-white-600 hover:text-black px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Home
               </Link>
               <Link
                 to="/tenders"
-                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                className="text-white-600 hover:text-black px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Tenders
               </Link>
               <Link
                 to="/gemregistration"
-                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                className="text-white-600 hover:text-black px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Gems Registration
               </Link>
               <Link
                 to="/forms"
-                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                className="text-white-600 hover:text-black px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Apply For Tender
               </Link>
               <Link
                 to="/contact"
-                className="text-white-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                className="text-white-600 hover:text-black px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
               >
                 Contact
               </Link>
