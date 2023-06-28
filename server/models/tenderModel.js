@@ -47,7 +47,7 @@ const tenderModel = new mongoose.Schema(
         otherInformation: {
             noticeType: {
                 type: String,
-                required: true
+                required: false
             },
             totNo: {
                 type: String,
