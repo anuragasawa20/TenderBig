@@ -38,7 +38,7 @@ const HomePage = () => {
               <li className=" pb-2 border-white border-2 hover:border-red-700  mt-6">
                 <hr className="border-gray-400 pb-3 " />
                 <NavLink
-                  to="/contact"
+                  to="/careerandmanpower"
                   className="text-gray-600  flex items-center justify-between"
                 >
                   <span className="px-1">Career & ManPower</span>

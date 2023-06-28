@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import AdvancedSearch from './pages/AdvancedSearch';
 import TenderListingPage from './pages/TenderListingPage';
@@ -12,12 +11,18 @@ import TenderByCategaries from './pages/TenderByCategaries';
 import NotFound from './components/NotFound';
 import DashboardRoutes from './Routes/DashboardRoutes';
 import EarnGems from './pages/GemRegistration';
+import CareerAndManpower from './pages/sub-pages/CareerAndManpower';
+import Employer from './pages/sub-pages/Employer';
+import Seeker from './pages/sub-pages/Seeker';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/employer' element={<Employer/>}></Route>
+        <Route path='/seeker' element={<Seeker/>}></Route>
+        <Route path='/careerandmanpower' element={<CareerAndManpower/>}></Route>
         <Route path="/gemregistration" element={<EarnGems/>}></Route>
         <Route path="/advance-search" element={<AdvancedSearch />} />
         <Route path="/category" element={<TenderByCategaries />} />
