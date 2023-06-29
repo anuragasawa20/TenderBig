@@ -51,10 +51,10 @@ const Navbar = () => {
                   </Link>
 
                   <Link
-                    to="/gemregistration"
+                    to="/gems"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
-                    Gems Registration
+                    Gems
                   </Link>
 
                   <Link

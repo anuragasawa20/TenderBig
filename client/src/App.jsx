@@ -21,17 +21,17 @@ import AuctionMaterial from './pages/sub-pages/AuctionMaterial';
 import JointVenture from './pages/sub-pages/JointVenture';
 import TenderFilling from './pages/sub-pages/TenderFilling';
 import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
-import TenderFillingOnline from './pages/sub-pages/tenderFillingOnline';
+import Gems from './pages/sub-pages/Gems';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/gems" element={<Gems />} />
         <Route path='/employer' element={<Employer/>}></Route>
         <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
         <Route path='/tenderfillingoffline' element={<TenderFillingOffline/>}></Route>
-        <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>
         <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/registration' element={<Registration/>}></Route>
         <Route path='/auctionmaterial' element={<AuctionMaterial/>}></Route>
