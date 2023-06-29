@@ -39,6 +39,17 @@ class Contact {
         }
     }
 
+    async getByService(req, res) {
+        try {
+            const { selectedService } = req.params;
+            const contactForms = await ContactForm.find({ selectedService });
+            res.json(contactForms);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server Error' });
+        }
+    }
+
 }
 
 const contactController = new Contact();

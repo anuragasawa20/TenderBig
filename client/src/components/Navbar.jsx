@@ -42,7 +42,7 @@ const Navbar = () => {
                   >
                     Home
                   </Link>
-                  
+
                   <Link
                     to="/tenders"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
@@ -80,9 +80,8 @@ const Navbar = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        className={`ml-1 h-4 w-4 inline-block transform ${
-                          dropdownOpen ? "rotate-180" : ""
-                        }`}
+                        className={`ml-1 h-4 w-4 inline-block transform ${dropdownOpen ? "rotate-180" : ""
+                          }`}
                       >
                         <path
                           fillRule="evenodd"
@@ -192,7 +191,7 @@ const Navbar = () => {
                           </svg>
                           Joint Venture
                         </Link>
-                        
+
                         <Link
                           to="/contact"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
@@ -215,6 +214,7 @@ const Navbar = () => {
                       </div>
                     )}
                   </div>
+
                   {auth ? (
                     <button
                       onClick={logout}
@@ -297,9 +297,8 @@ const Navbar = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className={`ml-1 h-4 w-4 inline-block transform ${
-                      dropdownOpen ? "rotate-180" : ""
-                    }`}
+                    className={`ml-1 h-4 w-4 inline-block transform ${dropdownOpen ? "rotate-180" : ""
+                      }`}
                   >
                     <path
                       fillRule="evenodd"

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
 
-const ContactFormList = () => {
+const RegistrationCertification = () => {
   const [contactForms, setContactForms] = useState([]);
   const [sortOption, setSortOption] = useState("receivedAt");
-  const [isDescending, setIsDescending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [formsPerPage] = useState(10);
   const [selectedService, setSelectedService] = useState("All");
@@ -19,7 +18,7 @@ const ContactFormList = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/apiTender/get-allcontactforms",
+        "http://localhost:5000/apiTender/Registration%20%2F%20Certificate",
         {
           headers: {
             auth: token,
@@ -49,10 +48,6 @@ const ContactFormList = () => {
         return forms.sort((a, b) => a.email.localeCompare(b.email));
       case "mobile":
         return forms.sort((a, b) => a.mobile.localeCompare(b.mobile));
-      case "selectedService":
-        return forms.sort((a, b) =>
-          a.selectedService.localeCompare(b.selectedService)
-        );
       default:
         return forms;
     }
@@ -99,88 +94,37 @@ const ContactFormList = () => {
       {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       {/* Content area */}
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
         <main>
           {/* Site header */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-            <h1 className="text-xl font-bold mb-4">Contact Requests</h1>
-
-            {/* Filters */}
-            <div className="flex items-center space-x-4 mb-4">
-              <div>
-                <label htmlFor="service" className="text-sm font-medium">
-                  Select Service:
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                  value={selectedService}
-                  onChange={(e) => handleServiceChange(e.target.value)}
-                >
-                  <option value="All">All</option>
-                  <option value="Career & Man Power">Career & Man Power</option>
-                  <option value="Registration / Certificate">
-                    Registration / Certificate
-                  </option>
-                  <option value="License">License</option>
-                  <option value="Auction Material">Auction Material</option>
-                  <option value="Joint Venture">Joint Venture</option>
-                  <option value="Online Bidding">Online Bidding</option>
-                  <option value="Tender Result">Tender Result</option>
-                </select>
-              </div>
-              <button
-                type="button"
-                className="text-sm text-gray-500 hover:text-primary-500 focus:outline-none"
-                onClick={handleResetFilters}
-              >
-                Reset Filters
-              </button>
-            </div>
-
+          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl overflow-x-auto mx-auto">
+            <h1 className="text-xl font-bold mb-4">Requests for Registration/Certificate</h1>
             {/* Table */}
-            <div className="shadow overflow-hidden rounded-lg border">
+            <div className="shadow overflow-hidden rounded-lg overflow-x-auto border">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                      onClick={() => handleSortOptionChange("name")}
-                    >
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                       Name
                     </th>
                     <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                      onClick={() => handleSortOptionChange("company")}
-                    >
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                       Company
                     </th>
                     <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                      onClick={() => handleSortOptionChange("email")}
-                    >
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                       Email
                     </th>
                     <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                      onClick={() => handleSortOptionChange("mobile")}
-                    >
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                       Mobile
                     </th>
                     <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b"
-                      onClick={() => handleSortOptionChange("receivedAt")}
-                    >
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b">
                       Received At
-                    </th>
-                    <th
-                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b"
-                      onClick={() => handleSortOptionChange("selectedService")}
-                    >
-                      Services
                     </th>
                   </tr>
                 </thead>
@@ -201,9 +145,6 @@ const ContactFormList = () => {
                       </td>
                       <td className="py-2 px-4 whitespace-nowrap border-b">
                         {formatReceivedAt(form.createdAt)}
-                      </td>
-                      <td className="py-2 px-4 whitespace-nowrap border-b">
-                        {form.selectedService}
                       </td>
                     </tr>
                   ))}
@@ -241,4 +182,4 @@ const ContactFormList = () => {
   );
 };
 
-export default ContactFormList;
+export default RegistrationCertification;

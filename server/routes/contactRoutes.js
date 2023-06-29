@@ -5,5 +5,6 @@ const {verifyToken , isNotUser} = require("../middleware/auth")
 
 router.post("/post-contactform", contactController.postContactForm);
 router.get("/get-allcontactforms",verifyToken,isNotUser, contactController.getContactForms);
+router.get("/:selectedService", contactController.getByService);
 
 module.exports = router;
