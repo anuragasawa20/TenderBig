@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
-import { locations } from "../../../constants/countriesData";
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
+import { locations } from "../../../../constants/countriesData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -325,7 +325,7 @@ const Forms = () => {
 
     const requestBody = JSON.stringify(formData);
 
-    fetch("/apiTender/tenderdetails/add-tender", {
+    fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

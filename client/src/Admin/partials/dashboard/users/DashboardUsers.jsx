@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@ function DashboardUsers() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "/apiTender/userdetails/allusers",
+          "http://localhost:5000/apiTender/userdetails/allusers",
           {
             method: "GET",
             headers: {

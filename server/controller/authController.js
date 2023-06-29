@@ -9,7 +9,7 @@ class Auth {
 
   /* User Registration/Signup controller  */
   async postSignup(req, res) {
-    let { name, email, password, phoneNumber, country, state, city } = req.body;
+    let { name, email, password, phoneNumber, userRole, country, state, city } = req.body;
     let error = {};
     if (
       !name ||
@@ -74,6 +74,7 @@ class Auth {
                 name,
                 email,
                 password,
+                userRole,
                 phoneNumber,
                 country,
                 state,

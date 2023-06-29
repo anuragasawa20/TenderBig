@@ -4,7 +4,7 @@ class User {
 
     async getSingleUser(req, res) {
         let { userId } = req.params;
-        console.log(req.params);
+
         if (!userId) {
             return res.json({ error: "All filled must be required" });
         } else {
@@ -122,6 +122,16 @@ class User {
         }
     }
 
+    async ByUserRole (req, res){
+        try {
+            const { userRole } = req.params;
+            const users = await userModel.find({ userRole });
+            res.json(users);
+          } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server Error' });
+          }
+    }
 }
 
 const usersController = new User();

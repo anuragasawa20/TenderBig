@@ -18,6 +18,9 @@ router.delete("/delete/:userId", verifyToken, usersController.deleteUser);
 //New users
 router.get("/created/:weeks", verifyToken, isNotUser, usersController.newUsers);
 
+//Users By role
+router.get("/users/:userRole", usersController.ByUserRole);
+
 //statistics
 router.get("/statistics", verifyToken, isNotUser, usersController.statistics);
 

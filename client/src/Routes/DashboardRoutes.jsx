@@ -3,12 +3,24 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 
 import DashboardHome from '../Admin/partials/dashboard/DashboardHome';
-import DashboardUsers from '../Admin/partials/dashboard/DashboardUsers';
-import AllTendersSection from '../Admin/partials/dashboard/DashboardTenders';
-import AddUser from '../Admin/partials/dashboard/AddUser';
-import AdminForm from '../Admin/partials/dashboard/AdminTenderForm';
-import DashboardTenderDetail from '../Admin/partials/dashboard/DashboardTenderDetail';
-import DashboardUserDetail from '../Admin/partials/dashboard/DashboardUserDetail';
+//Tenders
+import AllTendersSection from '../Admin/partials/dashboard/tenders/DashboardTenders';
+import Subcontractor from '../Admin/partials/dashboard/tenders/SubcontractorTenders';
+import Contractor from '../Admin/partials/dashboard/tenders/ContractorTenders';
+import AdminForm from '../Admin/partials/dashboard/tenders/AdminTenderForm';
+import DashboardTenderDetail from '../Admin/partials/dashboard/tenders/DashboardTenderDetail';
+
+//Users
+import AddAdmin from '../Admin/partials/dashboard/users/AddAdmin';
+import AddEmployee from '../Admin/partials/dashboard/users/AddEmployee';
+import AddHR from '../Admin/partials/dashboard/users/Addhr';
+
+import AllAdmin from '../Admin/partials/dashboard/users/AllAdmin';
+import AllEmployee from '../Admin/partials/dashboard/users/AllEmployee';
+import AllHR from '../Admin/partials/dashboard/users/AllHR';
+import DashboardUsers from '../Admin/partials/dashboard/users/DashboardUsers';
+import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUserDetail';
+
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 import ContactFormList from '../Admin/partials/dashboard/ContactPage';
 
@@ -25,8 +37,28 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={DashboardUsers} />}
       />
       <Route
-        path="/addusers"
-        element={<PrivateRoute element={AddUser} />}
+        path="/alladmin"
+        element={<PrivateRoute element={AllAdmin} />}
+      />
+      <Route
+        path="/allhr"
+        element={<PrivateRoute element={AllHR} />}
+      />
+      <Route
+        path="/allemployee"
+        element={<PrivateRoute element={AllEmployee} />}
+      />
+      <Route
+        path="/addadmin"
+        element={<PrivateRoute element={AddAdmin} />}
+      />
+      <Route
+        path="/addhr"
+        element={<PrivateRoute element={AddHR} />}
+      />
+      <Route
+        path="/addemployee"
+        element={<PrivateRoute element={AddEmployee} />}
       />
       <Route
         path="/user/:userId"
@@ -35,6 +67,14 @@ const DashboardRoutes = () => {
       <Route
         path="/tenders"
         element={<PrivateRoute element={AllTendersSection} />}
+      />
+      <Route
+        path="/contractor"
+        element={<PrivateRoute element={Contractor} />}
+      />
+      <Route
+        path="/subcontractor"
+        element={<PrivateRoute element={Subcontractor} />}
       />
       <Route
         path="/tenders/currenttenders"

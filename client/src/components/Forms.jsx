@@ -2,8 +2,9 @@ import { useState } from "react";
 import Navbar from "./Navbar";
 import { locations } from "../constants/countriesData"
 import Footer from "./Footer";
-import { GrFormPrevious } from 'react-icons/gr';
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPage }) => {
@@ -236,16 +237,13 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPa
         <div className="flex justify-between w-full">
 
           <div className="w-1/4">
-            <button
+          <button
               type="button"
               onClick={previousPage}
-              className="bg-red-700 text-white px-4 py-2 mt-8 rounded hover:bg-red-800 align-center"
+              className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 mt-8 rounded align-center"
             >
-              <span style={{ color: 'white' }}>
-                <GrFormPrevious />
-              </span>
+              <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-
           </div>
 
           <div className="w-3/4">
@@ -354,7 +352,7 @@ const TenderForm = () => {
 
     const requestBody = JSON.stringify(formData);
 
-    fetch("/apiTender/tenderdetails/add-tender", {
+    fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

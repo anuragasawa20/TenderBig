@@ -63,7 +63,7 @@ const ContactUsPage = () => {
     };
 
     axios
-      .post("/apiTender/post-contactform", formData)
+      .post("http://localhost:5000/apiTender/post-contactform", formData)
       .then((response) => {
         console.log("Form data sent successfully:", response.data);
         alert("We will contact you soon!!!")

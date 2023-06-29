@@ -209,106 +209,79 @@ class Tender {
             product
         } = req.body;
 
-        // Validation
-        if (
-            !summary |
-            !sector |
-            !country |
-            !state |
-            !city |
-            !procurementSummarySummary |
-            !procurementSummaryDeadline |
-            !noticeType |
-            !totNo |
-            !documentNo |
-            !competition |
-            !financier |
-            !ownership |
-            !tenderValue |
-            !purchaser |
-            !paddress |
-            !pcity |
-            !pdistrict |
-            !pstate |
-            !email |
-            !url |
-            !organization
-        ) {
-            return res.json({ error: "All filled must be required" });
-        }
-        else {
-            try {
-                summary = toTitleCase(summary);
-                procurementSummarySummary = toTitleCase(procurementSummarySummary);
-                documentNo = toUpperCase(documentNo);
-                financier = toTitleCase(financier);
-                paddress = toTitleCase(paddress);
-                organization = toUpperCase(organization);
 
-                const procurementSummary = {
-                    country,
-                    state,
-                    city,
-                    summary: procurementSummarySummary,
-                    deadline: new Date(procurementSummaryDeadline)
-                };
+        try {
+            summary = toTitleCase(summary);
+            procurementSummarySummary = toTitleCase(procurementSummarySummary);
+            documentNo = toUpperCase(documentNo);
+            financier = toTitleCase(financier);
+            paddress = toTitleCase(paddress);
+            organization = toUpperCase(organization);
 
-                const otherInformation = {
-                    noticeType,
-                    totNo,
-                    documentNo,
-                    competition,
-                    financier,
-                    ownership,
-                    tenderValue
-                };
+            const procurementSummary = {
+                country,
+                state,
+                city,
+                summary: procurementSummarySummary,
+                deadline: new Date(procurementSummaryDeadline)
+            };
 
-                const purchaserDetail = {
-                    purchaser,
-                    address: paddress,
-                    city: pcity,
-                    district: pdistrict,
-                    state: pstate,
-                    pin: ppin,
-                    telfax: ptelfax,
-                    email,
-                    url
-                };
+            const otherInformation = {
+                noticeType,
+                totNo,
+                documentNo,
+                competition,
+                financier,
+                ownership,
+                tenderValue
+            };
 
-                const tenderDetail = {
-                    description,
-                    publishDate: new Date(),
-                    organization,
-                    noticeType: tenderDetailNoticeType
-                };
+            const purchaserDetail = {
+                purchaser,
+                address: paddress,
+                city: pcity,
+                district: pdistrict,
+                state: pstate,
+                pin: ppin,
+                telfax: ptelfax,
+                email,
+                url
+            };
 
-                // Update the existing tender in the database
-                const updatedTender = await tenderModel.findOneAndUpdate(
-                    { tenderId: tenderId },
-                    {
-                        summary,
-                        sector,
-                        cpvNo,
-                        procurementSummary,
-                        otherInformation,
-                        purchaserDetail,
-                        tenderDetail,
-                        userCategory,
-                        product
-                    });
+            const tenderDetail = {
+                description,
+                publishDate: new Date(),
+                organization,
+                noticeType: tenderDetailNoticeType
+            };
 
-                if (!updatedTender) {
-                    return res.status(404).json({ error: 'Tender not found' });
-                }
-
-                return res.json({
-                    success: 'Tender updated successfully',
+            // Update the existing tender in the database
+            const updatedTender = await tenderModel.findOneAndUpdate(
+                { tenderId: tenderId },
+                {
+                    summary,
+                    sector,
+                    cpvNo,
+                    procurementSummary,
+                    otherInformation,
+                    purchaserDetail,
+                    tenderDetail,
+                    userCategory,
+                    product
                 });
-            } catch (err) {
-                console.error(err);
-                return res.status(500).json({ error: 'An error occurred while updating the tender' });
+
+            if (!updatedTender) {
+                return res.status(404).json({ error: 'Tender not found' });
             }
+
+            return res.json({
+                success: 'Tender updated successfully',
+            });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'An error occurred while updating the tender' });
         }
+
     }
 
     async getTendersByUserId(req, res) {
@@ -387,7 +360,6 @@ class Tender {
             res.status(500).json({ error: 'An error occurred during the search' });
         }
     };
-
 
     // Advanced search endpoint
     async advanceSearch(req, res) {
@@ -638,32 +610,17 @@ class Tender {
         }
     }
 
-    async latest(req, res) {
-        const { weekNumber } = req.query;
-console.log("Called");
-        if (!weekNumber) {
-            return res.status(400).json({ error: "Week number is required" });
-        }
-
-        const currentYear = new Date().getFullYear();
-        const firstDayOfYear = new Date(currentYear, 0, 1);
-
-        const startDate = new Date(firstDayOfYear);
-        startDate.setDate(startDate.getDate() + (weekNumber - 1) * 7);
-
-        const endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 7);
+    async tenderByUser(req, res) {
+        const { userCategory } = req.params;
 
         try {
-            const tenders = await tenderModel.find({
-                "tenderDetail.publishDate": { $gte: startDate, $lt: endDate }
-            }).sort({ "tenderDetail.publishDate": -1 });
-
+            const tenders = await tenderModel.find({ userCategory }).select('tenderId summary sector procurementSummary.deadline tenderDetail.publishDate userCategory approvedStatus active');
             res.json(tenders);
         } catch (error) {
-            res.status(500).json({ error: "Internal server error" });
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
+
 
 }
 

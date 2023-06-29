@@ -36,7 +36,7 @@ router.delete("/tender/:tenderId", verifyToken,  tenderController.deleteTender);
 //Statistics
 router.get("/statistics", verifyToken, isNotUser, tenderController.statistics);
 
-//Latest Tenders
-router.get("/latest", tenderController.latest);
+//tender by User category
+router.get("/:userCategory", tenderController.tenderByUser);
 
 module.exports = router;

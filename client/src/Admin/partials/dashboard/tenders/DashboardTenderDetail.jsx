@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import Sidebar from '../Sidebar';
-import Header from '../Header';
+import Sidebar from '../../Sidebar';
+import Header from '../../Header';
 
 function DashboardTenderDetail() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,7 +17,7 @@ function DashboardTenderDetail() {
     const fetchTenderDetails = async () => {
       try {
         const response = await axios.get(
-          `/apiTender/tenderdetails/tender/${tenderId}`,
+          `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}`,
           {
             method: 'GET',
             headers: {
@@ -40,7 +40,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to approve the tender
       await axios.post(
-        `/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
+        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchApprovedStatus`,
         {},
         {
           headers: {
@@ -61,7 +61,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to reject the tender
       await axios.post(
-        `/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
+        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}/switchActiveStatus`,
         {},
         {
           headers: {
@@ -81,7 +81,7 @@ function DashboardTenderDetail() {
     try {
       // Make API call to delete the tender
       await axios.delete(
-        `/apiTender/tenderdetails/tender/${tenderId}`,
+        `http://localhost:5000/apiTender/tenderdetails/tender/${tenderId}`,
         {
           headers: {
             'Content-Type': 'application/json',

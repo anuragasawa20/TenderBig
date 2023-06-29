@@ -17,7 +17,7 @@ const FileUpload = () => {
             selectedFiles.forEach((file) => {
                 formData.append('files', file);
             });
-
+console.log("got file")
             axios
                 .post('http://localhost:5000/api/upload', formData)
                 .then((response) => {

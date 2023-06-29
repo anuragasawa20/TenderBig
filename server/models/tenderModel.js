@@ -130,10 +130,6 @@ const tenderModel = new mongoose.Schema(
                 required: false
             }
         },
-        approvedStatus: {
-            type: Boolean,
-            default: false
-        },
         userCategory: {
             type: String,
             enum: ["subcontractor", "contractor", "admin", "hr", "employee"],
@@ -143,7 +139,14 @@ const tenderModel = new mongoose.Schema(
             type: String,
             required: true
         },
+        docurl: {
+            type:String
+        },
         active: {
+            type: Boolean,
+            default: false
+        },
+        approvedStatus: {
             type: Boolean,
             default: false
         }

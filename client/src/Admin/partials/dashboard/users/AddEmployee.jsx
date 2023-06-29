@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import Sidebar from "../Sidebar";
-import Header from "../Header";
-import { locations } from "../../../constants/countriesData"
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
+import { locations } from "../../../../constants/countriesData"
 
-const AddUser = () => {
+const AddEmployee = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
+        userRole: 'employee',
         phoneNumber: '',
         country: '',
         state: '',
@@ -25,7 +26,7 @@ const AddUser = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Make API request with form data
-        fetch('/apiTender/signup', {
+        fetch('http://localhost:5000/apiTender/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,6 +43,7 @@ const AddUser = () => {
                     name: '',
                     email: '',
                     password: '',
+                    userRole: 'employee',
                     phoneNumber: '',
                     country: '',
                     state: '',
@@ -51,6 +53,7 @@ const AddUser = () => {
             .catch((error) => {
                 // Handle error
                 console.error(error);
+                alert("All fields are required!!!")
             });
     };
 
@@ -72,7 +75,7 @@ const AddUser = () => {
                     <div className="px-4 sm:px-6 lg:px-8 py-8 flex justify-center shadow-2xl rounded-lg">
                         {/* Dashboard actions */}
                         <div className="md:w-1/2">
-                            <h2 className="text-2xl font-bold mb-4 text-center ">Add User</h2>
+                            <h2 className="text-2xl font-bold mb-4 text-center ">Add Employee</h2>
                             {successMessage && (
                                 <div className="mb-4 text-green-500">{successMessage}</div>
                             )}
@@ -205,4 +208,4 @@ const AddUser = () => {
     );
 };
 
-export default AddUser;
+export default AddEmployee;
