@@ -7,9 +7,9 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FileUpload from "../file-uploading/FileUpload";
 
-const Seeker = () => {
-    const [name, setName] = useState("");
-    const [company, setCompany] = useState("");
+const AuctionMaterial = () => {
+    const [TBnumber, setTBnumber] = useState("");
+    const [Tlink, setTlink] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
     const [GST, setGST] = useState("");
@@ -38,8 +38,8 @@ const Seeker = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         sendDataToAPI();
-        setName("");
-        setCompany("");
+        setTBnumber("");
+        setTlink("");
         setMobile("");
         setEmail("");
         setGST("");
@@ -49,8 +49,8 @@ const Seeker = () => {
 
     const sendDataToAPI = () => {
         const formData = {
-            name,
-            company,
+            TBnumber,
+            Tlink,
             mobile,
             email,
             GST,
@@ -87,66 +87,39 @@ const Seeker = () => {
                             className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
                         >
                             <h1 className="text-3xl font-bold text-center mb-4">
-                                Seeker Space
+                                Auction Materials
                             </h1>
                             <div className="mb-4">
-                                <label htmlFor="name" className="flex items-center">
+                                <label htmlFor="TBnumber" className="flex items-center">
                                     <AiOutlineUser className="mr-2" />
-                                    Name
+                                    Tender Bid Number
                                 </label>
                                 <input
                                     required
-                                    type="text"
-                                    id="name"
+                                    type="number"
+                                    id="TBnumber"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
+                                    value={TBnumber}
+                                    onChange={(e) => setTBnumber(e.target.value)}
                                 />
+                                {/* <p>Cost - info Required</p> */}
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="company" className="flex items-center">
+                                <label htmlFor="Tlink" className="flex items-center">
                                     <RiBuilding2Line className="mr-2" />
-                                    Company Name
+                                    Tender Link
                                 </label>
                                 <input
                                     required
-                                    type="text"
-                                    id="company"
+                                    type="URL"
+                                    id="Tlink"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={company}
-                                    onChange={(e) => setCompany(e.target.value)}
+                                    value={Tlink}
+                                    onChange={(e) => setTlink(e.target.value)}
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="mobile" className="flex items-center">
-                                    <AiOutlinePhone className="mr-2" />
-                                    Mobile Number
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="mobile"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={mobile}
-                                    onChange={(e) => setMobile(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    Email Address
-                                </label>
-                                <input
-                                    required
-                                    type="email"
-                                    id="email"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            
-                            <p>Upload Resume</p>
+
+                            <p>Upload Necessary Documents</p>
                             <hr />
                             <FileUpload />
 
@@ -202,4 +175,4 @@ const Seeker = () => {
     );
 };
 
-export default Seeker;
+export default AuctionMaterial;

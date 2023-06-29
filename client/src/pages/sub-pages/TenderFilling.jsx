@@ -1,20 +1,29 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
+import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import { RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
 import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import Footer from "../../components/Footer";
-import FileUpload from "../file-uploading/FileUpload";
 
-const Seeker = () => {
+const TenderFilling = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
-    const [webAddress, setWebAddress] = useState("");
+    const [selectedService, setSelectedService] = useState("");
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        sendDataToAPI(selectedService);
+        setName("");
+        setCompany("");
+        setMobile("");
+        setEmail("");
+        setSelectedService("");
+    };
+
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -35,45 +44,32 @@ const Seeker = () => {
         },
     };
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        sendDataToAPI();
-        setName("");
-        setCompany("");
-        setMobile("");
-        setEmail("");
-        setGST("");
-        setPAN("");
-        setWebAddress("");
-    };
-
-    const sendDataToAPI = () => {
+    const sendDataToAPI = (selectedService) => {
         const formData = {
             name,
             company,
             mobile,
             email,
-            GST,
-            PAN,
-            webAddress,
+            selectedService,
         };
 
         axios
             .post("http://localhost:5000/apiTender/post-contactform", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
-                alert("We will contact you soon!!!");
+                alert("We will contact you soon!!!")
                 setIsVisible(false);
             })
             .catch((error) => {
                 console.error("Error sending form data:", error);
-                alert("Oops something went wrong!!!");
+                alert("Oops something went wrong!!!")
             });
     };
 
     return (
         <>
-            <Navbar />
+            <Navbar selectedService={selectedService} />
+
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="space-y-8">
                     <div className="flex items-center justify-center flex-col md:flex-row">
@@ -87,77 +83,30 @@ const Seeker = () => {
                             className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
                         >
                             <h1 className="text-3xl font-bold text-center mb-4">
-                                Seeker Space
+                                Tender Filling
                             </h1>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="flex items-center">
-                                    <AiOutlineUser className="mr-2" />
-                                    Name
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="name"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="company" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Company Name
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="company"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={company}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="mobile" className="flex items-center">
-                                    <AiOutlinePhone className="mr-2" />
-                                    Mobile Number
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="mobile"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={mobile}
-                                    onChange={(e) => setMobile(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    Email Address
-                                </label>
-                                <input
-                                    required
-                                    type="email"
-                                    id="email"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                            
-                            <p>Upload Resume</p>
-                            <hr />
-                            <FileUpload />
 
-                            <button
-                                type="submit"
-                                className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-                            >
-                                Submit
-                            </button>
+                            <p className="flex justify-center p-2">State you Designation</p>
+                            <Link to="/tenderfillingonline">
+                                <button
+                                    type="submit"
+                                    className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
+                                >
+                                    Online Mode
+                                </button>
+                            </Link>
+                            <p className="flex justify-center p-3">OR</p>
+                            <Link to="/tenderfillingoffline">
+                                <button
+                                    type="submit"
+                                    className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
+                                >
+                                    Offline Mode
+                                </button>
+                            </Link>
                         </form>
                     </div>
+
                     <motion.div
                         className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8"
                         variants={sectionVariants}
@@ -202,4 +151,4 @@ const Seeker = () => {
     );
 };
 
-export default Seeker;
+export default TenderFilling;
