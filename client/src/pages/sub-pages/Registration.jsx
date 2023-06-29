@@ -6,15 +6,17 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FileUpload from "../file-uploading/FileUpload";
+import { useLocation } from "react-router-dom";
 
-const Seeker = () => {
+const Registration = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
     const [GST, setGST] = useState("");
     const [PAN, setPAN] = useState("");
-    const [webAddress, setWebAddress] = useState("");
+    const [aadhar, setAadhar] = useState("");
+    const [selectedService, setSelectedService] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -44,7 +46,16 @@ const Seeker = () => {
         setEmail("");
         setGST("");
         setPAN("");
-        setWebAddress("");
+        setAadhar("");
+        setSelectedService("");
+    };
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const selectedServiceFromNavbar = queryParams.get("service");
+
+    const handleServiceChange = (e) => {
+        setSelectedService(e.target.value);
     };
 
     const sendDataToAPI = () => {
@@ -55,7 +66,7 @@ const Seeker = () => {
             email,
             GST,
             PAN,
-            webAddress,
+            aadhar,
         };
 
         axios
@@ -87,7 +98,7 @@ const Seeker = () => {
                             className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
                         >
                             <h1 className="text-3xl font-bold text-center mb-4">
-                                Seeker Space
+                                Registration
                             </h1>
                             <div className="mb-4">
                                 <label htmlFor="name" className="flex items-center">
@@ -145,9 +156,70 @@ const Seeker = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            
-                            <p>Upload Resume</p>
-                            <hr />
+                            <div className="mb-4">
+                                <label htmlFor="GST" className="flex items-center">
+                                    <AiOutlineMail className="mr-2" />
+                                    GST
+                                </label>
+                                <input
+                                    required
+                                    type="number"
+                                    id="GST"
+                                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                                    value={GST}
+                                    onChange={(e) => setGST(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="PAN" className="flex items-center">
+                                    <AiOutlineMail className="mr-2" />
+                                    PAN Number
+                                </label>
+                                <input
+                                    required
+                                    type="number"
+                                    id="PAN"
+                                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                                    value={PAN}
+                                    onChange={(e) => setPAN(e.target.value)}
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="aadhar" className="flex items-center">
+                                    <AiOutlineMail className="mr-2" />
+                                    16-digit Aadhar Number
+                                </label>
+                                <input
+                                    required
+                                    type="number"
+                                    id="aadhar"
+                                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                                    value={aadhar}
+                                    onChange={(e) => setAadhar(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label htmlFor="services" className="flex items-center">
+                                    Select Tenders
+                                </label>
+                                <select required
+                                    id="services"
+                                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                                    value={selectedService || selectedServiceFromNavbar}
+                                    onChange={handleServiceChange}
+                                >
+                                    <option value="">Select an option</option>
+                                    <option value="Career&ManPower">tender - price</option>
+                                    <option value="Registration/Certificate">tender - price</option>
+                                    <option value="Joint Venture">tender - price</option>
+                                    <option value="Auction (Material)">tender - price</option>
+                                    <option value="Joint Venture">tender - price</option>
+                                    <option value="Tender Result">tender - price</option>
+                                    <option value="Tender Result">tender - price</option>
+                                </select>
+                            </div>
+
                             <FileUpload />
 
                             <button
@@ -202,4 +274,4 @@ const Seeker = () => {
     );
 };
 
-export default Seeker;
+export default Registration;

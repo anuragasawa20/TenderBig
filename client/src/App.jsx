@@ -14,6 +14,14 @@ import EarnGems from './pages/GemRegistration';
 import CareerAndManpower from './pages/sub-pages/CareerAndManpower';
 import Employer from './pages/sub-pages/Employer';
 import Seeker from './pages/sub-pages/Seeker';
+import RegAndCert from './pages/sub-pages/RegAndCert';
+import Registration from './pages/sub-pages/Registration';
+import Certification from './pages/sub-pages/Certification';
+import AuctionMaterial from './pages/sub-pages/AuctionMaterial';
+import JointVenture from './pages/sub-pages/JointVenture';
+import TenderFilling from './pages/sub-pages/TenderFilling';
+import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
+import TenderFillingOnline from './pages/sub-pages/tenderFillingOnline';
 
 const App = () => {
   return (
@@ -21,6 +29,15 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/employer' element={<Employer/>}></Route>
+        <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
+        <Route path='/tenderfillingoffline' element={<TenderFillingOffline/>}></Route>
+        <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>
+        <Route path='/regandcert' element={<RegAndCert/>}></Route>
+        <Route path='/registration' element={<Registration/>}></Route>
+        <Route path='/auctionmaterial' element={<AuctionMaterial/>}></Route>
+        <Route path='/jointventure' element={<JointVenture/>}></Route>
+        <Route path='/certification' element={<Certification/>}></Route>
+        <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/seeker' element={<Seeker/>}></Route>
         <Route path='/careerandmanpower' element={<CareerAndManpower/>}></Route>
         <Route path="/gemregistration" element={<EarnGems/>}></Route>

@@ -52,7 +52,7 @@ const HomePage = () => {
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700  hover:bg-blu">
                 <NavLink
-                  to="/contact"
+                  to="/regandcert"
                   className="text-gray-600  flex items-center justify-between"
                 >
                   <span>Registration/Certification</span>
@@ -80,7 +80,7 @@ const HomePage = () => {
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
                 <NavLink
-                  to="/contact"
+                  to="/auctionmaterial"
                   className="text-gray-600  flex items-center justify-between"
                 >
                   <span>Auction Material</span>
@@ -94,7 +94,7 @@ const HomePage = () => {
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
                 <NavLink
-                  to="/contact"
+                  to="/jointventure"
                   className="text-gray-600  flex items-center justify-between"
                 >
                   <span>Joint Venture</span>
@@ -108,21 +108,7 @@ const HomePage = () => {
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
                 <NavLink
-                  to="/contact"
-                  className="text-gray-600  flex items-center justify-between"
-                >
-                  <span>Online Bidding</span>
-                  <img
-                    src="https://www.reshot.com/preview-assets/icons/ZP2WDL9B8N/arrow-right-ZP2WDL9B8N.svg"
-                    className="w-5 h-5"
-                    alt="Right Arrow"
-                  />
-                </NavLink>
-              </li>
-              <hr className="border-gray-400" />
-              <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
-                <NavLink
-                  to="/contact"
+                  to="/tenderfilling"
                   className="text-gray-600 flex items-center justify-between"
                 >
                   <span>Tender Filling</span>

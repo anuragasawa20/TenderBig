@@ -5,16 +5,13 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import FileUpload from "../file-uploading/FileUpload";
 
-const Seeker = () => {
+const Certification = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
-    const [webAddress, setWebAddress] = useState("");
+    const [registration, setRegistration] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -42,9 +39,7 @@ const Seeker = () => {
         setCompany("");
         setMobile("");
         setEmail("");
-        setGST("");
-        setPAN("");
-        setWebAddress("");
+        setRegistration("");
     };
 
     const sendDataToAPI = () => {
@@ -53,9 +48,7 @@ const Seeker = () => {
             company,
             mobile,
             email,
-            GST,
-            PAN,
-            webAddress,
+            registration
         };
 
         axios
@@ -87,7 +80,7 @@ const Seeker = () => {
                             className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
                         >
                             <h1 className="text-3xl font-bold text-center mb-4">
-                                Seeker Space
+                                Certification
                             </h1>
                             <div className="mb-4">
                                 <label htmlFor="name" className="flex items-center">
@@ -146,9 +139,20 @@ const Seeker = () => {
                                 />
                             </div>
                             
-                            <p>Upload Resume</p>
-                            <hr />
-                            <FileUpload />
+                            <div className="mb-4">
+                                <label htmlFor="registration" className="flex items-center">
+                                    <AiOutlineMail className="mr-2" />
+                                    Registration Number
+                                </label>
+                                <input
+                                    required
+                                    type="registration"
+                                    id="registration"
+                                    className="border border-gray-300 rounded px-3 py-2 w-full"
+                                    value={registration}
+                                    onChange={(e) => setRegistration(e.target.value)}
+                                />
+                            </div>
 
                             <button
                                 type="submit"
@@ -202,4 +206,4 @@ const Seeker = () => {
     );
 };
 
-export default Seeker;
+export default Certification;
