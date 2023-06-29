@@ -10,10 +10,6 @@ import FileUpload from "../file-uploading/FileUpload";
 const AuctionMaterial = () => {
     const [TBnumber, setTBnumber] = useState("");
     const [Tlink, setTlink] = useState("");
-    const [mobile, setMobile] = useState("");
-    const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
     const [webAddress, setWebAddress] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
@@ -40,26 +36,18 @@ const AuctionMaterial = () => {
         sendDataToAPI();
         setTBnumber("");
         setTlink("");
-        setMobile("");
-        setEmail("");
-        setGST("");
-        setPAN("");
         setWebAddress("");
     };
 
     const sendDataToAPI = () => {
         const formData = {
-            TBnumber,
-            Tlink,
-            mobile,
-            email,
-            GST,
-            PAN,
+            tenderBidNo:TBnumber,
+            url:Tlink,
             webAddress,
         };
 
         axios
-            .post("http://localhost:5000/apiTender/post-contactform", formData)
+            .post("http://localhost:5000/apiTender/services/aumt/auction-material", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

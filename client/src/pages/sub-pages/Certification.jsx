@@ -48,11 +48,11 @@ const Certification = () => {
             company,
             mobile,
             email,
-            registration
+            regno:registration
         };
 
         axios
-            .post("http://localhost:5000/apiTender/post-contactform", formData)
+            .post("http://localhost:5000/apiTender/services/cert/certification", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

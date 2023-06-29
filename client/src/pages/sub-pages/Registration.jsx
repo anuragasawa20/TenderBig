@@ -13,8 +13,8 @@ const Registration = () => {
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
+    const [gst, setGST] = useState("");
+    const [pan, setPAN] = useState("");
     const [aadhar, setAadhar] = useState("");
     const [selectedService, setSelectedService] = useState("");
     const [isVisible, setIsVisible] = useState(false);
@@ -64,13 +64,14 @@ const Registration = () => {
             company,
             mobile,
             email,
-            GST,
-            PAN,
+            gst,
+            pan,
             aadhar,
+            tender:selectedService
         };
 
         axios
-            .post("http://localhost:5000/apiTender/post-contactform", formData)
+            .post("http://localhost:5000/apiTender/services/register/registration", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
@@ -135,7 +136,7 @@ const Registration = () => {
                                 </label>
                                 <input
                                     required
-                                    type="text"
+                                    type="number"
                                     id="mobile"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={mobile}
@@ -163,10 +164,10 @@ const Registration = () => {
                                 </label>
                                 <input
                                     required
-                                    type="number"
+                                    type="text"
                                     id="GST"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={GST}
+                                    value={gst}
                                     onChange={(e) => setGST(e.target.value)}
                                 />
                             </div>
@@ -177,10 +178,10 @@ const Registration = () => {
                                 </label>
                                 <input
                                     required
-                                    type="number"
+                                    type="text"
                                     id="PAN"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={PAN}
+                                    value={pan}
                                     onChange={(e) => setPAN(e.target.value)}
                                 />
                             </div>

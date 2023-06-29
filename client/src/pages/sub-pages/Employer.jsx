@@ -12,9 +12,9 @@ const Employer = () => {
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
-    const [webAddress, setWebAddress] = useState("");
+    const [gst, setGST] = useState("");
+    const [pan, setPAN] = useState("");
+    const [url, setWebAddress] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -53,13 +53,13 @@ const Employer = () => {
             company,
             mobile,
             email,
-            GST,
-            PAN,
-            webAddress,
+            gst,
+            pan,
+            url,
         };
 
         axios
-            .post("http://localhost:5000/apiTender/post-contactform", formData)
+            .post("http://localhost:5000/apiTender/services/employer/submit-form", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
@@ -124,7 +124,7 @@ const Employer = () => {
                                 </label>
                                 <input
                                     required
-                                    type="text"
+                                    type="number"
                                     id="mobile"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={mobile}
@@ -152,10 +152,10 @@ const Employer = () => {
                                 </label>
                                 <input
                                     required
-                                    type="number"
+                                    type="text"
                                     id="GST"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={GST}
+                                    value={gst}
                                     onChange={(e) => setGST(e.target.value)}
                                 />
                             </div>
@@ -166,10 +166,10 @@ const Employer = () => {
                                 </label>
                                 <input
                                     required
-                                    type="number"
+                                    type="text"
                                     id="PAN"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={PAN}
+                                    value={pan}
                                     onChange={(e) => setPAN(e.target.value)}
                                 />
                             </div>
@@ -183,7 +183,7 @@ const Employer = () => {
                                     type="url"
                                     id="webAddress"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={webAddress}
+                                    value={url}
                                     onChange={(e) => setWebAddress(e.target.value)}
                                 />
                             </div>

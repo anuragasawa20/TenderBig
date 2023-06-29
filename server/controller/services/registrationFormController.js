@@ -3,7 +3,7 @@ const RegistrationForm = require('../../models/services/Registration&Certificati
 // Controller for submitting a registration form
 const submitForm = async (req, res) => {
     try {
-        const { name, userId, company, mobile, email, gst, pan, aadhar, url } = req.body;
+        const { name, userId, company, mobile, email, gst, pan, aadhar, tender, url } = req.body;
 
         const registrationForm = new RegistrationForm({
             name,
@@ -14,6 +14,7 @@ const submitForm = async (req, res) => {
             gst,
             pan,
             aadhar,
+            tender,
             url,
         });
 

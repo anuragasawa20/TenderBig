@@ -12,9 +12,6 @@ const Seeker = () => {
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [GST, setGST] = useState("");
-    const [PAN, setPAN] = useState("");
-    const [webAddress, setWebAddress] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -42,9 +39,6 @@ const Seeker = () => {
         setCompany("");
         setMobile("");
         setEmail("");
-        setGST("");
-        setPAN("");
-        setWebAddress("");
     };
 
     const sendDataToAPI = () => {
@@ -52,14 +46,11 @@ const Seeker = () => {
             name,
             company,
             mobile,
-            email,
-            GST,
-            PAN,
-            webAddress,
+            email
         };
 
         axios
-            .post("http://localhost:5000/apiTender/post-contactform", formData)
+            .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
@@ -124,7 +115,7 @@ const Seeker = () => {
                                 </label>
                                 <input
                                     required
-                                    type="text"
+                                    type="number"
                                     id="mobile"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={mobile}
