@@ -79,7 +79,7 @@ const OtherInformationAndPurchaserDetail = ({
     );
 };
 
-const TenderForm = () => {
+const JointVenture = () => {
     const [formData, setFormData] = useState({
         summary: "",
         sector: "",
@@ -546,4 +546,4 @@ const TenderForm = () => {
     );
 };
 
-export default TenderForm;
+export default JointVenture;
