@@ -1,195 +1,379 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { navigateToContactPage } from "../components/utils.js";
+import { locations } from "../constants/countriesData"
 import Footer from "../components/Footer";
 
-const EarnGems = () => {
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [email, setEmail] = useState("");
+const JointVenture = () => {
+  const [formData, setFormData] = useState({
+    summary: "",
+    sector: "",
+    PANnumber: "",
+    name: "",
+    aadhar: "",
+    webAddress: "",
+    GSTnumber: "",
+    workratio: "",
+    userCategory: "",
+    TotalValuation: "",
+    country: "",
+    state: "",
+    city: "",
+    procurementSummarySummary: "",
+    procurementSummaryDeadline: "",
+    noticeType: "",
+    totNo: "",
+    documentNo: "",
+    competition: "",
+    financier: "",
+    ownership: "",
+    tenderValue: "",
+    purchaser: "",
+    paddress: "",
+    pcity: "",
+    pdistrict: "",
+    pstate: "",
+    ppin: "",
+    ptelfax: "",
+    email: "",
+    url: "",
+    description: "",
+    organization: "",
+    tenderDetailNoticeType: "",
+  });
 
-  const handleFormSubmit = (e) => {
+  const clearInputs = () => {
+    setFormData({
+      summary: "",
+      sector: "",
+      PANnumber: "",
+      name: "",
+      webAddress: "",
+      aadhar: "",
+      GSTnumber: "",
+      workratio: "",
+      userCategory: "",
+      TotalValuation: "",
+      country: "",
+      state: "",
+      city: "",
+      procurementSummarySummary: "",
+      procurementSummaryDeadline: "",
+      noticeType: "",
+      totNo: "",
+      documentNo: "",
+      competition: "",
+      financier: "",
+      ownership: "",
+      tenderValue: "",
+      purchaser: "",
+      paddress: "",
+      pcity: "",
+      pdistrict: "",
+      pstate: "",
+      ppin: "",
+      ptelfax: "",
+      email: "",
+      url: "",
+      description: "",
+      organization: "",
+      tenderDetailNoticeType: "",
+    });
+  }
+
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [checkbox, setCheckbox] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  function handleCheckbox(e) {
+    setCheckbox(e.target.checked);
+  }
+  <input value="test" type="checkbox" onChange={handleChange} />
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    navigateToContactPage(selectedService);
-  };
+    console.log(formData);
 
-  const [isVisible, setIsVisible] = useState(false);
+    const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    const requestBody = JSON.stringify(formData);
 
-  const sectionVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
+    fetch("/apiTender/tenderdetails/add-tender", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        auth: token,
       },
-    },
-  };
-
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const selectedService = queryParams.get("service");
-  const handleServiceChange = (e) => {
-    setSelectedService(e.target.value);
+      body: requestBody,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Submitted")
+        clearInputs();
+        window.location.href = '/forms';
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Oops something went wrong!!!");
+        clearInputs();
+        window.location.href = '/forms';
+      });
   };
 
   return (
     <>
-      <Navbar selectedService={selectedService} />
+      <Navbar />
+      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+        <form onSubmit={handleSubmit}>
+          {/* Global Section */}
+          <h2 className="text-2xl font-bold mb-4 text-center ">Gem Registration</h2>
 
-      <div className="container mx-auto py-8 md:max-w-7xl">
-        <div className="space-y-8">
-          <div className="flex items-center justify-center flex-col md:flex-row">
-            <img
-              src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?w=740&t=st=1687066253~exp=1687066853~hmac=42f23f007ad72bd2ca440a69684ce6508082c1182b3c54179addffc4163960af"
-              className="w-4/5 md:w-1/2"
-              alt="Contact illustration"
-            />
-            <form
-              onSubmit={handleFormSubmit}
-              className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
-            >
-              <h1 className="text-3xl font-bold text-center mb-4">
-                Gem Registration
-              </h1>
-              <div className="mb-4">
-                <label htmlFor="name" className="flex items-center">
-                  <AiOutlineUser className="mr-2" />
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="company" className="flex items-center">
-                  <RiBuilding2Line className="mr-2" />
-                  Company Name
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="mobile" className="flex items-center">
-                  <AiOutlinePhone className="mr-2" />
-                  Mobile Number
-                </label>
-                <input
-                  type="text"
-                  id="mobile"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="flex items-center">
-                  <AiOutlineMail className="mr-2" />
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="services" className="flex items-center">
-                  Select Services
-                </label>
-                <select
-                  id="services"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={selectedService}
-                  onChange={handleServiceChange}
-                >
-                  <option value="">Select an option</option>
-                  <option value="Career&ManPower">Career & Man Power</option>
-                  <option value="Registration/Certificate">Registration / Certificate</option>
-                  <option value="Earn Gems" selected>Earn Gems</option>
-                  <option value="Joint Venture">License</option>
-                  <option value="Auction (Material)">Auction Material</option>
-                  <option value="Joint Venture">Joint Venture</option>
-                  <option value="Tender Result">Online Bidding</option>
-                  <option value="Tender Result">Tender Result</option>
-                </select>
-              </div>
-              <button
-                type="submit"
-                className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8"
-          variants={sectionVariants}
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-        >
-          <motion.div
-            className="bg-white p-8 border-2 rounded-lg shadow-lg flex items-center justify-center flex-col text-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AiOutlinePhone className="text-red-700 text-3xl mb-2" />
-            <span className="font-semibold">Phone</span>
-            <p className="mt-2">Sales: 8875515555 </p>
-            {/*<p>Support: 8875515555 </p>*/}
-          </motion.div>
-          <motion.div
-            className="bg-white p-8 border-2 rounded-lg shadow-lg flex items-center justify-center flex-col text-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <RiMapPin2Line className="text-red-700 text-3xl mb-2" />
-            <span className="font-semibold">Address</span>
-            <p className="mt-2">
-              S-3, Vinayak Jaipur, fwefsdfrgh, loream dndnvnuidnvuwzxm,njd n
-              sjvbvsbdj vvjhbwejk as, 300000
+          <div className="p-2 rounded-lg">
+            <p className="text-red-700 font-thin font-serif text-sm">
+              Fields marked with an asterisk (*) are mandatory.
             </p>
-          </motion.div>
-          <motion.div
-            className="bg-white p-8 border-2 rounded-lg shadow-lg flex items-center justify-center flex-col text-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AiOutlineMail className="text-red-700 text-3xl mb-2" />
-            <span className="font-semibold">E-Mail</span>
-            <p className="mt-2">Info@tender.com</p>
-          </motion.div>
-        </motion.div>
+            <label className="block mb-2 font-semibold relative">
+              Full Name
+              <span className="text-red-700 relative top-0 right-0">*</span>
+              <input
+                required
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                placeholder="Project"
+              />
+            </label>
+            <label className="block mb-2 font-semibold relative">
+              Email
+              <span className="text-red-700 relative top-0 right-0">*</span>
+              <input
+                required
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                placeholder="Email"
+              />
+            </label>
+            <label className="block mb-2 font-semibold relative">
+              Contact Number
+              <span className="text-red-700 relative top-0 right-0">*</span>
+              <input
+                required
+                type="tel"
+                name="number"
+                value={formData.number}
+                onChange={handleChange}
+                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                placeholder="Mobile"
+              />
+            </label>
+            <label className="block mb-2 font-semibold relative">
+              16-Digit Aadhar Number
+              <span className="text-red-700 relative top-0 right-0">*</span>
+              <input
+                required
+                type="text"
+                name="aadhar"
+                value={formData.aadhar}
+                onChange={handleChange}
+                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                placeholder="Aadhar Number"
+              />
+            </label>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="relative">
+                <label className="block mb-2 font-semibold">
+                  Company Name
+                  <span className="text-red-700 relative top-0 right-0">*</span>
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="sector"
+                  value={formData.sector}
+                  onChange={handleChange}
+                  className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                  placeholder="Company Name"
+                />
+              </div>
+              <div className="relative">
+                <label className="block mb-2 font-semibold">
+                  PAN Number
+                </label>
+                <input
+                  type="text"
+                  name="PANnumber"
+                  value={formData.PANnumber}
+                  onChange={handleChange}
+                  className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                  placeholder="Enter PAN No"
+                />
+              </div>
+              <div className="relative">
+                <label className="block mb-2 font-semibold">
+                  Website Address
+                </label>
+                <input
+                  type="URL"
+                  name="webAddress"
+                  value={formData.webAddress}
+                  onChange={handleChange}
+                  className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                  placeholder="Website URL"
+                />
+              </div>
+              <label className="block mb-2 font-semibold">
+                GST Number
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <input
+                  required
+                  type="number"
+                  name="GSTnumber"
+                  value={formData.GSTnumber}
+                  onChange={handleChange}
+                  className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                  placeholder="GST number"
+                />
+              </label>
+              <div className="grid gap-4 mt-1.5 mb-1.5">
+                <label className="block font-semibold">
+                  Bussiness Start Date
+                  <span className="text-red-700 relative top-0 right-0">*</span>
+                  <input
+                    type="date"
+                    name="startDate"
+                    value={formData.startDate}
+                    onChange={handleChange}
+                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    placeholder="Enter Start Date"
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className=" p-2 rounded-lg mt-2">
+              <div>
+                <h2 className="text-2xl font-bold mb-4">Business Office Building</h2>
+                <label className="block mb-2 font-semibold relative">
+                  Street Address
+                  <span className="text-red-700 relative top-0 right-0">*</span>
+                  <input
+                    required
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    placeholder="Project"
+                  />
+                </label>
+                <label className="block mb-2 font-semibold relative">
+                  Adress Line 2
+                  <input
+                    required
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    placeholder="Project"
+                  />
+                </label>
+                <div className="flex">
+                  <div className="grid gap-4 mt-1.5 mb-1.5 basis-1/2 m-1">
+                    <label className="block font-semibold">
+                      City
+                      <span className="text-red-700 relative top-0 right-0">*</span>
+                      <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        placeholder="Enter City"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="grid gap-4 mt-1.5 mb-1.5 basis-1/2 m-1">
+                    <label className="block font-semibold">
+                      Zip Code
+                      <span className="text-red-700 relative top-0 right-0">*</span>
+                      <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        placeholder="Enter City"
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="flex">
+                  <label className="block font-semibold py-2 basis-1/2 m-1">
+                    State
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input required
+                      type="text"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                      placeholder="Enter State"
+                    />
+                  </label>
+                  <label className="block font-semibold py-2 basis-1/2 m-1">
+                    Country
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <select required
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    >
+                      {locations.map((country, index) => (
+                        <option key={index} value={country}>
+                          {country}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mx-3 font-bold">
+            <p>Cost of Registration : <span className="text-red-600">xyzw</span></p>
+          </div>
+          <div className="flex m-3">
+            <input value="test" type="checkbox" onChange={handleCheckbox} />
+            <p className="mx-2">Do you agree to the terms and conditions?</p>
+          </div>
+            <button
+              type="submit"
+              className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
+            >
+              Submit
+            </button>
+        </form>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };
 
-export default EarnGems;
+export default JointVenture;
