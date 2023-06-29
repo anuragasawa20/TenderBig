@@ -3,7 +3,6 @@ import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
-import React from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Footer from "../components/Footer"
