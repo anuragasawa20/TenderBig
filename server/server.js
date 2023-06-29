@@ -18,6 +18,7 @@ const tenderRouter = require("./routes/tenderRoutes");
 const userRouter = require("./routes/userRoutes");
 const contactRouter = require("./routes/contactRoutes");
 const authRouter = require("./routes/authRoutes");
+const servicesRouter = require("./routes/services");
 const paymentRouter = require("./routes/paymentRoutes");
 
 // Routes
@@ -25,6 +26,7 @@ app.use("/apiTender/tenderdetails", tenderRouter);
 app.use("/apiTender/userdetails", userRouter);
 app.use("/apiTender", contactRouter);
 app.use("/apiTender", authRouter);
+app.use("/apiTender/services", servicesRouter);
 app.use("/apiTender/payment", paymentRouter);
 
 // Serve the React app for all other routes
