@@ -1,0 +1,114 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
+
+const Product = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState("");
+
+  useEffect(() => {
+    // Fetch all products
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=products");
+      console.log(response.data[0].products)
+      setProducts(response.data[0].products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addProduct = async () => {
+    try {
+      const response = await axios.post("http://localhost:5000/apiTender/options/products", { products: [newProduct] });
+      setProducts(response.data.products);
+      setNewProduct("");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteProduct = async (product) => {
+    try {
+      const response = await axios.delete(`http://localhost:5000/apiTender/options/products/${product}`);
+      setProducts(response.data.products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar */}
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      {/* Content area */}
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <main>
+          {/* Site header */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            <h1 className="text-xl font-bold mb-4">Product</h1>
+
+            {/* Product list */}
+            <div className="mb-4">
+              <h2 className="text-lg font-medium mb-2">Existing Products:</h2>
+              {products.length > 0 ? (
+                <ul className="list-disc list-inside">
+                  {products.map((product) => (
+                    <li key={product} className="flex items-center">
+                      <span>{product}</span>
+                      <button
+                        className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
+                        onClick={() => deleteProduct(product)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No products found.</p>
+              )}
+            </div>
+
+            {/* Add product form */}
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Enter new product"
+                className="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-1"
+                value={newProduct}
+                onChange={(e) => setNewProduct(e.target.value)}
+              />
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                onClick={addProduct}
+              >
+                Add Product
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default Product;

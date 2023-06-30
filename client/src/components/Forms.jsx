@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import { locations } from "../constants/countriesData"
 import Footer from "./Footer";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
+import axios from "axios";
 
 const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPage }) => {
   OtherInformationAndPurchaserDetail.propTypes = {
@@ -16,7 +16,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPa
       documentNo: PropTypes.string.isRequired,
       competition: PropTypes.string.isRequired,
       financier: PropTypes.string.isRequired,
-      ownership: PropTypes.string.isRequired, // Add this line for formData.ownership
+      ownership: PropTypes.string.isRequired,
       tenderValue: PropTypes.string.isRequired,
       purchaser: PropTypes.string.isRequired,
       paddress: PropTypes.string.isRequired,
@@ -237,7 +237,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, previousPa
         <div className="flex justify-between w-full">
 
           <div className="w-1/4">
-          <button
+            <button
               type="button"
               onClick={previousPage}
               className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 mt-8 rounded align-center"
@@ -334,14 +334,41 @@ const TenderForm = () => {
     });
   }
 
-  const [currentPage, setCurrentPage] = useState(1);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  };
+
+  useEffect(() => {
+    // Fetch all sectors
+    fetchSectors();
+    fetchProducts();
+  }, []);
+
+  const [sectors, setSectors] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const fetchSectors = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=sectors");
+      console.log(response.data[0].sectors)
+      setSectors(response.data[0].sectors);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=products");
+      console.log(response.data[0].products)
+      setProducts(response.data[0].products);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -375,7 +402,7 @@ const TenderForm = () => {
       });
   };
 
-
+  const [currentPage, setCurrentPage] = useState(1);
   const nextPage = () => {
     setCurrentPage(2);
   };
@@ -416,16 +443,22 @@ const TenderForm = () => {
                     Sector
                     <span className="text-red-700 relative top-0 right-0">*</span>
                   </label>
-                  <input
+                  <select
                     required
-                    type="text"
                     name="sector"
                     value={formData.sector}
                     onChange={handleChange}
                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                    placeholder="Enter Sector"
-                  />
+                  >
+                    <option value="">Select Sector</option>
+                    {sectors.map((sector) => (
+                      <option key={sector} value={sector}>
+                        {sector}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+
 
                 <label className="block mb-2 font-semibold">
                   CPV No
@@ -455,14 +488,20 @@ const TenderForm = () => {
                 <label className="block mb-2 font-semibold">
                   Product
                   <span className="text-red-700 relative top-0 right-0">*</span>
-                  <input required
-                    type="text"
+                  <select
+                    required
                     name="product"
                     value={formData.product}
                     onChange={handleChange}
                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                    placeholder="Enter Product"
-                  />
+                  >
+                    <option value="">Select Product</option>
+                    {products.map((product) => (
+                      <option key={product} value={product}>
+                        {product}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
             </div>
