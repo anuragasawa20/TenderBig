@@ -16,7 +16,7 @@ const Department = () => {
   const fetchDepartments = async () => {
     try {
       const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=departments");
-      console.log(response.data[0].departments)
+      console.log(response.data[0].departments);
       setDepartments(response.data[0].departments);
     } catch (error) {
       console.error(error);
@@ -54,40 +54,6 @@ const Department = () => {
 
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <h1 className="text-xl font-bold mb-4">Department</h1>
-
-            {/* Department list */}
-            <div className="mb-4">
-              <h2 className="text-lg font-medium mb-2">Existing Departments:</h2>
-              {departments.length > 0 ? (
-                <ul className="list-disc list-inside">
-                  {departments.map((department) => (
-                    <li key={department} className="flex items-center">
-                      <span>{department}</span>
-                      <button
-                        className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                        onClick={() => deleteDepartment(department)}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-4 h-4"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No departments found.</p>
-              )}
-            </div>
-
             {/* Add department form */}
             <div className="flex">
               <input
@@ -103,6 +69,48 @@ const Department = () => {
               >
                 Add Department
               </button>
+            </div>
+            {/* Department list */}
+            <div className="mb-4">
+              <h2 className="text-lg font-medium mb-2">Existing Departments:</h2>
+              {departments.length > 0 ? (
+                <table className="min-w-full">
+                  <thead>
+                    <tr>
+                      <th className="py-2 px-4 bg-gray-100 border-b font-medium text-gray-700">Department Name</th>
+                      <th className="py-2 px-4 bg-gray-100 border-b"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {departments.map((department) => (
+                      <tr key={department}>
+                        <td className="py-2 px-4 border-b">{department}</td>
+                        <td className="py-2 px-4 border-b">
+                          <button
+                            className="text-red-600 hover:text-red-800 focus:outline-none"
+                            onClick={() => deleteDepartment(department)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No departments found.</p>
+              )}
             </div>
           </div>
         </main>

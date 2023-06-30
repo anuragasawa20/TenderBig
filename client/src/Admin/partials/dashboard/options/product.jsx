@@ -16,7 +16,7 @@ const Product = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=products");
-      console.log(response.data[0].products)
+      console.log(response.data[0].products);
       setProducts(response.data[0].products);
     } catch (error) {
       console.error(error);
@@ -54,40 +54,6 @@ const Product = () => {
 
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <h1 className="text-xl font-bold mb-4">Product</h1>
-
-            {/* Product list */}
-            <div className="mb-4">
-              <h2 className="text-lg font-medium mb-2">Existing Products:</h2>
-              {products.length > 0 ? (
-                <ul className="list-disc list-inside">
-                  {products.map((product) => (
-                    <li key={product} className="flex items-center">
-                      <span>{product}</span>
-                      <button
-                        className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                        onClick={() => deleteProduct(product)}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className="w-4 h-4"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No products found.</p>
-              )}
-            </div>
-
             {/* Add product form */}
             <div className="flex">
               <input
@@ -103,6 +69,48 @@ const Product = () => {
               >
                 Add Product
               </button>
+            </div>
+            {/* Product list */}
+            <div className="mb-4">
+              <h2 className="text-lg font-medium mb-2">Existing Products:</h2>
+              {products.length > 0 ? (
+                <table className="min-w-full">
+                  <thead>
+                    <tr>
+                      <th className="py-2 px-4 bg-gray-100 border-b font-medium text-gray-700">Product Name</th>
+                      <th className="py-2 px-4 bg-gray-100 border-b"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {products.map((product) => (
+                      <tr key={product}>
+                        <td className="py-2 px-4 border-b">{product}</td>
+                        <td className="py-2 px-4 border-b">
+                          <button
+                            className="text-red-600 hover:text-red-800 focus:outline-none"
+                            onClick={() => deleteProduct(product)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p>No products found.</p>
+              )}
             </div>
           </div>
         </main>
