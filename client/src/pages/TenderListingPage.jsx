@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
-const TenderCard = ({ title, deadline, location, referenceNo }) => {
+const TenderCard = ({ title, deadline, location, referenceNo, tenderId}) => {
   const navigate = useNavigate();
 
-  const handleViewDetails = (referenceNo) => {
-    navigate(`/tender/${referenceNo}`, {
-      state: { referenceNo },
+  const handleViewDetails = (tenderId) => {
+    navigate(`/tender/${tenderId}`, {
+      state: { tenderId },
     });
   };
 
@@ -29,7 +29,7 @@ const TenderCard = ({ title, deadline, location, referenceNo }) => {
 
       <button
         className="bg-red-700 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors"
-        onClick={() => handleViewDetails(referenceNo)}
+        onClick={() => handleViewDetails(tenderId)}
       >
         View Details
       </button>
@@ -93,11 +93,11 @@ const TenderListingPage = () => {
         const baseUrl = "http://localhost:5000/apiTender/tenderdetails/search";
 
         const detailsArray = [
-          "procurementSummary.summary",
+          "summary",
           "procurementSummary.deadline",
-          "procurementSummary.city",
           "procurementSummary.country",
-          "tenderId",
+          "otherInformation.totNo",
+          "tenderId"
         ];
 
         let searchUrl = `${baseUrl}?`;
@@ -133,7 +133,7 @@ const TenderListingPage = () => {
         if (response.status === 401) {
           // Unauthorized - display error message
           console.error("Unauthorized. Sign in first.");
-          // Update the code here to display the error message on the screen as needed
+          
           return;
         }
 
@@ -141,7 +141,7 @@ const TenderListingPage = () => {
       } catch (error) {
         if (error.response && error.response.status === 401) {
           console.error("Unauthorized. Sign in first.");
-          // Update the code here to display the error message on the screen as needed
+          
         } else {
           console.error("Error fetching tender data:", error);
         }
@@ -201,6 +201,12 @@ const TenderListingPage = () => {
     );
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   return (
     <>
       <Navbar />
@@ -216,10 +222,11 @@ const TenderListingPage = () => {
                 {currentItems.map((tender, index) => (
                   <TenderCard
                     key={index}
-                    title={tender.procurementSummary.summary}
-                    deadline={tender.procurementSummary.deadline}
+                    title={tender.summary}
+                    deadline={formatDate(tender.procurementSummary.deadline)}
                     location={tender.procurementSummary.country}
-                    referenceNo={tender.tenderId}
+                    referenceNo={tender.otherInformation.totNo}
+                    tenderId={tender.tenderId}
                   />
                 ))}
                 <div className="flex justify-between mt-4">

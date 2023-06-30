@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
-  const auth = localStorage.getItem("user");
-
+  const auth = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -21,6 +20,10 @@ const Navbar = () => {
   const logout = () => {
     localStorage.clear();
     navigate("/");
+  };
+
+  const dashboard = () => {
+    navigate("/dashboard/users");
   };
 
   return (
@@ -216,12 +219,28 @@ const Navbar = () => {
                   </div>
 
                   {auth ? (
-                    <button
-                      onClick={logout}
-                      className="bg-red-700 text-white px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
-                    >
-                      Logout
-                    </button>
+                    <>
+                      <button
+                        onClick={logout}
+                        className="bg-red-700 text-white px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                      >
+                        Logout
+                      </button>
+
+                      {
+                        (auth.userRole == "admin") ? (
+                          <button
+                            onClick={dashboard}
+                            className="bg-[#182235] text-white px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
+                          >
+                            Dashboard
+                          </button>
+                        ) : (
+                          <>
+                          </>
+                        )
+                      }
+                    </>
                   ) : (
                     <Link
                       to="/login"
@@ -230,6 +249,7 @@ const Navbar = () => {
                       Login
                     </Link>
                   )}
+
                 </div>
               </div>
               <div className="sm:hidden ml-6">

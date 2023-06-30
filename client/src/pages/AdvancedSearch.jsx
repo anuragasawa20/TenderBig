@@ -25,29 +25,35 @@ const TenderCard = ({ tender }) => {
 
   return (
     <div className="max-w-full rounded-lg overflow-hidden mb-4 bg-white shadow-lg p-4 border-[2px]">
-      <div className="px-6 py-4">
-      <div className="flex justify-between">
-        <div className="font-bold text-xl mb-2">{tender.procurementSummary.summary}</div>
-        <span className="bg-green-500 text-white font-bold py-1 px-2 rounded mr-2 mb-2 h-8 ml-3">
-          Live
-        </span></div>
-        <p className="text-gray-700 text-base">
-          <strong>Deadline:</strong> {formatDate(tender.procurementSummary.deadline)}
-        </p>
-        <p className="text-gray-700 text-base">
-          <strong>Location:</strong> {tender.procurementSummary.city}, {tender.procurementSummary.country}
-        </p>
-        <p className="text-gray-700 text-base">
-          <strong>Product:</strong> {tender.product}
-        </p>
-        <button
-        className="bg-red-700 hover:bg-red-700 text-white font-bold mt-2 py-1 px-2 rounded transition-colors"
-        onClick={() => handleViewDetails(tender.tenderId)}
+  <div className="px-6 py-4">
+    <div className="flex justify-between">
+      <div className="font-bold text-xl mb-2">{tender.procurementSummary.summary}</div>
+      <span
+        className={`${
+          new Date(tender.procurementSummary.deadline) < new Date() ? 'bg-red-700' : 'bg-green-500'
+        } text-white font-bold py-1 px-2 rounded mr-2 mb-2 h-8 ml-3`}
       >
-        View Details
-      </button>
-      </div>
+        {new Date(tender.procurementSummary.deadline) < new Date() ? 'Closed' : 'Live'}
+      </span>
     </div>
+    <p className="text-gray-700 text-base">
+      <strong>Deadline:</strong> {formatDate(tender.procurementSummary.deadline)}
+    </p>
+    <p className="text-gray-700 text-base">
+      <strong>Location:</strong> {tender.procurementSummary.city}, {tender.procurementSummary.country}
+    </p>
+    <p className="text-gray-700 text-base">
+      <strong>Product:</strong> {tender.product}
+    </p>
+    <button
+      className="bg-red-700 hover:bg-red-700 text-white font-bold mt-2 py-1 px-2 rounded transition-colors"
+      onClick={() => handleViewDetails(tender.tenderId)}
+    >
+      View Details
+    </button>
+  </div>
+</div>
+
   );
 };
 
