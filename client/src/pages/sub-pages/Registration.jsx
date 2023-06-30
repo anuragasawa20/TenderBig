@@ -6,17 +6,21 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FileUpload from "../file-uploading/FileUpload";
-import { useLocation } from "react-router-dom";
 
 const Registration = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
-    const [gst, setGST] = useState("");
-    const [pan, setPAN] = useState("");
-    const [aadhar, setAadhar] = useState("");
-    const [selectedService, setSelectedService] = useState("");
+    const [cprofile, setCprofile] = useState("");
+    const [companyEstd, setCompanyEstd] = useState("");
+    const [CIN, setCIN] = useState("");
+    const [liscence, setLiscence] = useState("");
+    const [cpname, setCpname] = useState("");
+    const [fname, setFname] = useState("");
+    const [companypost, setCompanypost] = useState("");
+    const [GST, setGST] = useState("");
+    const [PAN, setPAN] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -44,18 +48,15 @@ const Registration = () => {
         setCompany("");
         setMobile("");
         setEmail("");
+        setCIN("");
+        setCprofile("");
+        setCompanyEstd("");
+        setCompanypost("");
+        setLiscence("");
+        setCpname("");
+        setFname("");
         setGST("");
         setPAN("");
-        setAadhar("");
-        setSelectedService("");
-    };
-
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const selectedServiceFromNavbar = queryParams.get("service");
-
-    const handleServiceChange = (e) => {
-        setSelectedService(e.target.value);
     };
 
     const sendDataToAPI = () => {
@@ -63,15 +64,11 @@ const Registration = () => {
             name,
             company,
             mobile,
-            email,
-            gst,
-            pan,
-            aadhar,
-            tender:selectedService
+            email
         };
 
         axios
-            .post("http://localhost:5000/apiTender/services/register/registration", formData)
+            .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
@@ -89,11 +86,6 @@ const Registration = () => {
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="space-y-8">
                     <div className="flex items-center justify-center flex-col md:flex-row">
-                        <img
-                            src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?w=740&t=st=1687066253~exp=1687066853~hmac=42f23f007ad72bd2ca440a69684ce6508082c1182b3c54179addffc4163960af"
-                            className="w-4/5 md:w-1/2"
-                            alt="Contact illustration"
-                        />
                         <form
                             onSubmit={handleFormSubmit}
                             className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
@@ -101,20 +93,6 @@ const Registration = () => {
                             <h1 className="text-3xl font-bold text-center mb-4">
                                 Registration
                             </h1>
-                            <div className="mb-4">
-                                <label htmlFor="name" className="flex items-center">
-                                    <AiOutlineUser className="mr-2" />
-                                    Name
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="name"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
                             <div className="mb-4">
                                 <label htmlFor="company" className="flex items-center">
                                     <RiBuilding2Line className="mr-2" />
@@ -132,7 +110,7 @@ const Registration = () => {
                             <div className="mb-4">
                                 <label htmlFor="mobile" className="flex items-center">
                                     <AiOutlinePhone className="mr-2" />
-                                    Mobile Number
+                                    Contact Number
                                 </label>
                                 <input
                                     required
@@ -157,70 +135,142 @@ const Registration = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="cprofile" className="flex items-center">
+                                        <AiOutlineUser className="mr-2" />
+                                        Company Profile
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="cprofile"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={cprofile}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="companyEstd" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Company Establishment Year
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="companyEstd"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={companyEstd}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="CIN" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        CIN / Registration Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="CIN"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={CIN}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="liscence" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Lisence Name / Gem
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="liscence"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={liscence}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
+                            </div>
                             <div className="mb-4">
-                                <label htmlFor="GST" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    GST
+                                <label htmlFor="cpname" className="flex items-center">
+                                    <RiBuilding2Line className="mr-2" />
+                                    Director / Name of the contacting Person
                                 </label>
                                 <input
                                     required
                                     type="text"
-                                    id="GST"
+                                    id="cpname"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={gst}
-                                    onChange={(e) => setGST(e.target.value)}
+                                    value={cpname}
+                                    onChange={(e) => setCompany(e.target.value)}
                                 />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="PAN" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    PAN Number
+                                <label htmlFor="fname" className="flex items-center">
+                                    <RiBuilding2Line className="mr-2" />
+                                    Father Name
                                 </label>
                                 <input
                                     required
                                     type="text"
-                                    id="PAN"
+                                    id="fname"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={pan}
-                                    onChange={(e) => setPAN(e.target.value)}
+                                    value={fname}
+                                    onChange={(e) => setCompany(e.target.value)}
                                 />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="aadhar" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    16-digit Aadhar Number
+                                <label htmlFor="companypost" className="flex items-center">
+                                    <RiBuilding2Line className="mr-2" />
+                                    Post Of Company
                                 </label>
                                 <input
                                     required
-                                    type="number"
-                                    id="aadhar"
+                                    type="text"
+                                    id="companypost"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={aadhar}
-                                    onChange={(e) => setAadhar(e.target.value)}
+                                    value={companypost}
+                                    onChange={(e) => setCompany(e.target.value)}
                                 />
                             </div>
-
-                            <div className="mb-4">
-                                <label htmlFor="services" className="flex items-center">
-                                    Select Tenders
-                                </label>
-                                <select required
-                                    id="services"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={selectedService || selectedServiceFromNavbar}
-                                    onChange={handleServiceChange}
-                                >
-                                    <option value="">Select an option</option>
-                                    <option value="Career&ManPower">tender - price</option>
-                                    <option value="Registration/Certificate">tender - price</option>
-                                    <option value="Joint Venture">tender - price</option>
-                                    <option value="Auction (Material)">tender - price</option>
-                                    <option value="Joint Venture">tender - price</option>
-                                    <option value="Tender Result">tender - price</option>
-                                    <option value="Tender Result">tender - price</option>
-                                </select>
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="GST" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        GST Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="GST"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={GST}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="PAN" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        PAN Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="PAN"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={PAN}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
                             </div>
 
+
+                            <p className="font-bold">Upload Resume</p>
+                            <hr />
                             <FileUpload />
 
                             <button
