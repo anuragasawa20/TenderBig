@@ -32,6 +32,12 @@ import OnlineBidding from '../Admin/partials/dashboard/requests/Online-Bidding';
 import RegistrationCertification from '../Admin/partials/dashboard/requests/RegistrationCertificate';
 import TenderResult from '../Admin/partials/dashboard/requests/Tender-Result';
 
+//Options
+import Department from '../Admin/partials/dashboard/options/department';
+import Sector from '../Admin/partials/dashboard/options/sector';
+import Category from '../Admin/partials/dashboard/options/category';
+import Product from '../Admin/partials/dashboard/options/product';
+
 
 const DashboardRoutes = () => {
   return (
@@ -48,6 +54,7 @@ const DashboardRoutes = () => {
         path="/user/:userId"
         element={<PrivateRoute element={DashboardUserDetail} />}
       />
+
       <Route
         path="/alladmin"
         element={<PrivateRoute element={AllAdmin} />}
@@ -60,6 +67,7 @@ const DashboardRoutes = () => {
         path="/allemployee"
         element={<PrivateRoute element={AllEmployee} />}
       />
+
       <Route
         path="/addadmin"
         element={<PrivateRoute element={AddAdmin} />}
@@ -72,6 +80,7 @@ const DashboardRoutes = () => {
         path="/addemployee"
         element={<PrivateRoute element={AddEmployee} />}
       />
+
       <Route
         path="/tenders"
         element={<PrivateRoute element={AllTendersSection} />}
@@ -84,6 +93,7 @@ const DashboardRoutes = () => {
         path="/subcontractor"
         element={<PrivateRoute element={Subcontractor} />}
       />
+
       <Route
         path="/tenders/currenttenders"
         element={<PrivateRoute element={DashboardCurrentTenders} />}
@@ -123,7 +133,24 @@ const DashboardRoutes = () => {
       <Route
         path="/tenderresult"
         element={<PrivateRoute element={TenderResult} />}
-      />      
+      />
+
+      <Route
+        path="/department"
+        element={<PrivateRoute element={Department} />}
+      />
+      <Route
+        path="/category"
+        element={<PrivateRoute element={Category} />}
+      />
+      <Route
+        path="/sector"
+        element={<PrivateRoute element={Sector} />}
+      />
+      <Route
+        path="/product"
+        element={<PrivateRoute element={Product} />}
+      />
     </Routes>
   );
 };
