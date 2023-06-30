@@ -71,7 +71,7 @@ const Certification = () => {
                 <div className="space-y-8">
                     <div className="flex items-center justify-center flex-col md:flex-row">
                         <img
-                            src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?w=740&t=st=1687066253~exp=1687066853~hmac=42f23f007ad72bd2ca440a69684ce6508082c1182b3c54179addffc4163960af"
+                            src={`${import.meta.env.BASE_URL}cert.jpg`}
                             className="w-4/5 md:w-1/2"
                             alt="Contact illustration"
                         />

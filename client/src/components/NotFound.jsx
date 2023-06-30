@@ -6,11 +6,14 @@ const NotFound = () => {
   return (
     <>
       <Navbar />
-      <div className="text-center">
-        <h1 className="text-6xl mt-10 mb-5">404</h1>
-        <p className="text-xl">Oops! Page not found</p>
+      <div className="text-center flex justify-center">
+        <img
+          src={`${import.meta.env.BASE_URL}404.jpg`}
+          className="w-4/5 md:w-1/2 m-2"
+          alt="NOT FOUND"
+        />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -23,7 +23,7 @@ class Tender {
     async getAllTender(req, res) {
         try {
             const { approvedStatus, active, details, live } = req.body;
-            console.log(details);
+
             const query = {};
             const userRole = req.userRole;
 

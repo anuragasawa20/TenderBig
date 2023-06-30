@@ -8,21 +8,6 @@ import axios from "axios";
 import Footer from "../../components/Footer";
 
 const CareerAndManpower = () => {
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [email, setEmail] = useState("");
-  const [selectedService, setSelectedService] = useState("");
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    sendDataToAPI(selectedService);
-    setName("");
-    setCompany("");
-    setMobile("");
-    setEmail("");
-    setSelectedService("");
-  };
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -44,42 +29,19 @@ const CareerAndManpower = () => {
     },
   };
 
-  const sendDataToAPI = (selectedService) => {
-    const formData = {
-      name,
-      company,
-      mobile,
-      email,
-      selectedService,
-    };
-
-    axios
-      .post("http://localhost:5000/apiTender/post-contactform", formData)
-      .then((response) => {
-        console.log("Form data sent successfully:", response.data);
-        alert("We will contact you soon!!!")
-        setIsVisible(false);
-      })
-      .catch((error) => {
-        console.error("Error sending form data:", error);
-        alert("Oops something went wrong!!!")
-      });
-  };
-
   return (
     <>
-      <Navbar selectedService={selectedService} />
+      <Navbar/>
 
       <div className="container mx-auto py-8 md:max-w-7xl">
         <div className="space-y-8">
           <div className="flex items-center justify-center flex-col md:flex-row">
             <img
-              src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?w=740&t=st=1687066253~exp=1687066853~hmac=42f23f007ad72bd2ca440a69684ce6508082c1182b3c54179addffc4163960af"
+              src={`${import.meta.env.BASE_URL}c&m.jpg`}
               className="w-4/5 md:w-1/2"
               alt="Contact illustration"
             />
-            <form
-              onSubmit={handleFormSubmit}
+            <div
               className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
             >
               <h1 className="text-3xl font-bold text-center mb-4">
@@ -104,7 +66,7 @@ const CareerAndManpower = () => {
                   Seeker
                 </button>
               </Link>
-            </form>
+            </div>
           </div>
 
           <motion.div
