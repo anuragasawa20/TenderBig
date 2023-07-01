@@ -68,7 +68,7 @@ const Signup = () => {
 
                     <div className="w-full md:w-1/2 mb-4 md:mb-0">
                         <img
-                            src={`${import.meta.env.BASE_URL}signup.jpg`}
+                            src={`${import.meta.env.BASE_URL}illustartion/signup.jpg`}
                             alt="Illustration"
                         />
                     </div>

@@ -1,12 +1,13 @@
 const optionsModel = require('../models/optionsModel');
+const { toTitleCase } = require("../config/functions");
 
 const optionsController = {
     insertSectors: async (req, res) => {
         try {
             const { sectors } = req.body;
-            console.log(sectors);
+            const sectorsTitleCase = sectors.map(toTitleCase);
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { sectors: { $each: sectors } } }, { new: true, upsert: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { sectors: { $each: sectorsTitleCase } } }, { new: true, upsert: true });
 
             res.json(updatedModel);
         } catch (error) {
@@ -18,8 +19,9 @@ const optionsController = {
     insertProducts: async (req, res) => {
         try {
             const { products } = req.body;
+            const productsTitleCase = products.map(toTitleCase);
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { products: { $each: products } } }, { new: true, upsert: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { products: { $each: productsTitleCase } } }, { new: true, upsert: true });
 
             res.json(updatedModel);
         } catch (error) {
@@ -31,8 +33,9 @@ const optionsController = {
     insertDepartments: async (req, res) => {
         try {
             const { departments } = req.body;
+            const departmentsTitleCase = departments.map(toTitleCase);
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { departments: { $each: departments } } }, { new: true, upsert: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { departments: { $each: departmentsTitleCase } } }, { new: true, upsert: true });
 
             res.json(updatedModel);
         } catch (error) {
@@ -44,8 +47,9 @@ const optionsController = {
     insertCategories: async (req, res) => {
         try {
             const { categories } = req.body;
+            const categoriesTitleCase = categories.map(toTitleCase);
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { categories: { $each: categories } } }, { new: true, upsert: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { categories: { $each: categoriesTitleCase } } }, { new: true, upsert: true });
 
             res.json(updatedModel);
         } catch (error) {

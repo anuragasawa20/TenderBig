@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Sector = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,6 +26,11 @@ const Sector = () => {
   };
 
   const addSector = async () => {
+    if (!newSector.trim()) {
+      // If newSector is empty or contains only whitespace, return early without making the API call.
+      return;
+    }
+  
     try {
       const response = await axios.post("http://localhost:5000/apiTender/options/sectors", { sectors: [newSector] });
       setSectors(response.data.sectors);
@@ -32,7 +39,7 @@ const Sector = () => {
       console.error(error);
     }
   };
-
+  
   const deleteSector = async (sector) => {
     try {
       const response = await axios.delete(`http://localhost:5000/apiTender/options/sectors/${sector}`);
@@ -92,18 +99,7 @@ const Sector = () => {
                             className="text-red-600 hover:text-red-800 focus:outline-none"
                             onClick={() => deleteSector(sector)}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-4 h-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            <FontAwesomeIcon icon={faTrash} />
                           </button>
                         </td>
                       </tr>

@@ -82,7 +82,7 @@ const ContactUsPage = () => {
         <div className="space-y-8">
           <div className="flex items-center justify-center flex-col md:flex-row">
             <img
-              src={`${import.meta.env.BASE_URL}contact.jpg`}
+              src={`${import.meta.env.BASE_URL}illustartion/contact.jpg`}
               className="w-4/5 md:w-1/2"
               alt="Contact illustration"
             />

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Category = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,6 +26,11 @@ const Category = () => {
   };
 
   const addCategory = async () => {
+    if (!newCategory.trim()) {
+      // If newCategory is empty or contains only whitespace, return early without making the API call.
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:5000/apiTender/options/categories", { categories: [newCategory] });
       setCategories(response.data.categories);
@@ -32,6 +39,7 @@ const Category = () => {
       console.error(error);
     }
   };
+
 
   const deleteCategory = async (category) => {
     try {
@@ -55,8 +63,8 @@ const Category = () => {
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <h1 className="text-xl font-bold mb-4">Category</h1>
 
-{/* Add category form */}
-<div className="flex">
+            {/* Add category form */}
+            <div className="flex">
               <input
                 type="text"
                 placeholder="Enter new category"
@@ -71,7 +79,7 @@ const Category = () => {
                 Add Category
               </button>
             </div>
-            
+
             {/* Category list */}
             <div className="mb-4">
               <h2 className="text-lg font-medium mb-2">Existing Categories:</h2>
@@ -92,18 +100,7 @@ const Category = () => {
                             className="text-red-600 hover:text-red-800 focus:outline-none"
                             onClick={() => deleteCategory(category)}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="w-4 h-4"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M6 6a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V6zm2 1v8h4V7H8z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            <FontAwesomeIcon icon={faTrash} />
                           </button>
                         </td>
                       </tr>
