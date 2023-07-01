@@ -2,13 +2,10 @@ const mongoose = require("mongoose");
 
 const seekerModelSchema = new mongoose.Schema(
     {
-        name: {
-            type: String
-        },
         userId: {
             type: String
         },
-        company: {
+        companyName: {
             type: String
         },
         mobile: {
@@ -17,7 +14,64 @@ const seekerModelSchema = new mongoose.Schema(
         email: {
             type: String
         },
-        resumeurl: {
+        work: {
+            type: String
+        },
+        jobpost: {
+            type: String
+        },
+        exp: {
+            type: Number
+        },
+        salary: {
+            type: Number
+        },
+        companyUrl: {
+            type: String
+        },
+        companyProfile: {
+            type: String
+        },
+        companyPNumber: {
+            type: Number
+        },
+        regNo: {
+            type: String
+        },
+        gst: {
+            type: String
+        },
+        pan: {
+            type: String
+        },
+        address: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        zip: {
+            type: Number
+        },
+        state: {
+            type: String
+        },
+        country: {
+            type: String
+        },
+        office: {
+            type: String
+        },
+        holidays: {
+            type: Number
+        },
+        workingDays: {
+            type: Number
+        },
+        post: {
+            type: String
+        },
+        url: {
             type: String
         }
     },

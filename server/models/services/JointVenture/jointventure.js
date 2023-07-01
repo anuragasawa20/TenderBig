@@ -2,76 +2,58 @@ const mongoose = require("mongoose");
 
 const jointventureSchema = new mongoose.Schema(
     {
-        company: {
-            projectName: {
-                type: String
-            },
-            companyName: {
-                type: String
-            },
-            panNumber: {
-                type: String
-            },
-            websiteAddress: {
-                type: String
-            },
-            totalValuation: {
-                type: String
-            },
-            gstNumber: {
-                type: String
-            },
-            workRatio: {
-                type: String
-            },
-            startDate: {
-                type: Date
-            },
-            endDate: {
-                type: Date
-            },
+        projectName: {
+            type: String
         },
-        personal: {
-            fullName: {
-                type: String
-            },
-            email: {
-                type: String
-            },
-            contactNumber: {
-                type: String
-            },
-            aadharNumber: {
-                type: String
-            },
-            country: {
-                type: String
-            },
-            state: {
-                type: String
-            },
-            city: {
-                type: String
-            },
-            deadline: {
-                type: Date
-            },
-            summary: {
-                type: String
-            },
+        companyName: {
+            type: String
         },
-        tender: {
-            description: {
-                type: String
-            },
-            organization: {
-                type: String
-            },
-            noticeType: {
-                type: String
-            }
+        panNumber: {
+            type: String
         },
-        url: {
+        websiteAddress: {
+            type: String
+        },
+        gst: {
+            type: String
+        },
+        workRatio: {
+            type: String
+        },
+        companyemail: {
+            type: String
+        },
+        companycontact: {
+            type: Number
+        },
+        cin: {
+            type: String
+        },
+        regNo: {
+            type: String
+        },
+        address: {
+            type: String
+        },
+        country: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        zip: {
+            type: Number
+        },
+        tenderName: {
+            type: String
+        },
+        cinUrl: {
+            type: String
+        },
+        gstUrl: {
+            type: String
+        },
+        panUrl: {
             type: String
         },
     },

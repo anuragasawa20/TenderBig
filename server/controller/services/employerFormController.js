@@ -1,27 +1,81 @@
 const EmployerForm = require('../../models/services/CareerManPower/employerModel');
 
-// Controller for form submission
+
 const submitForm = async (req, res) => {
     try {
-        const { name, userId, company, mobile, email, gst, pan, url, resumeurl } = req.body;
-
-        const employerForm = new EmployerForm({
+        // Extract the form data from the request body
+        const {
             name,
-            userId,
+            fathername,
+            aadhar,
+            tenMark,
+            twelveMark,
+            jobpost,
+            jobexp,
+            address,
             company,
+            city,
+            state,
+            country,
             mobile,
             email,
+            zip,
+            pastSalary,
+            expactedSalary,
+            hobbies,
             gst,
             pan,
-            url,
-            resumeurl,
+        } = req.body;
+
+        console.log(req)
+        console.log(req.files)
+        //   console.log(req)
+        // Get the file URLs from the multer file uploads
+        const cvUrl = req.files.resume[0].filename;
+        const profileUrl = req.files.profilePhoto[0].filename;
+        const aadharUrl = req.files.aadhar[0].filename;
+
+        // Create a new instance of the EmployerForm model
+        const employer = new EmployerForm({
+            name,
+            fathername,
+            aadhar,
+            tenMark,
+            twelveMark,
+            jobpost,
+            jobexp,
+            address,
+            company,
+            city,
+            state,
+            country,
+            mobile,
+            email,
+            zip,
+            pastSalary,
+            expactedSalary,
+            hobbies,
+            gst,
+            pan,
+            cvUrl,
+            profileUrl,
+            aadharUrl,
         });
 
-        const savedForm = await employerForm.save();
-        res.json(savedForm);
+        // Save the employer form data to the database
+        const savedForm = await employer.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Form submitted successfully",
+            data: savedForm,
+        });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server Error' });
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while submitting the form",
+            error: error.message,
+        });
     }
 };
 

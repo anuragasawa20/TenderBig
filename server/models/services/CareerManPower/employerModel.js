@@ -2,13 +2,43 @@ const mongoose = require("mongoose");
 
 const employerModelSchema = new mongoose.Schema(
     {
-        name: {
-            type: String
-        },
         userId: {
             type: String
         },
+        name: {
+            type: String
+        },
+        fathername: {
+            type: String
+        },
+        aadhar: {
+            type: String
+        },
+        tenMark: {
+            type: Number
+        },
+        twelveMark: {
+            type: Number
+        },
+        jobpost: {
+            type: String
+        },
+        jobexp: {
+            type: Number
+        },
+        address: {
+            type: String
+        },
         company: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        state: {
+            type: String
+        },
+        country: {
             type: String
         },
         mobile: {
@@ -17,16 +47,32 @@ const employerModelSchema = new mongoose.Schema(
         email: {
             type: String
         },
+        zip: {
+            type: Number
+        },
+        pastSalary: {
+            type: Number
+        },
+        expactedSalary: {
+            type: Number
+        },
+        hobbies: {
+            type: [String],
+            default: []
+        },
         gst: {
             type: String
         },
         pan: {
             type: String
         },
-        url: {
+        cvUrl: {
             type: String
         },
-        resumeurl: {
+        profileUrl: {
+            type: String
+        },
+        aadharUrl: {
             type: String
         }
     },

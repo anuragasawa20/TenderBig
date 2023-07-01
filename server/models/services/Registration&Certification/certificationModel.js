@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const certificationModelSchema = new mongoose.Schema(
     {
-        name: {
+        userId: {
             type: String
         },
-        userId: {
+        name: {
             type: String
         },
         company: {

@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 
 const registrationModelSchema = new mongoose.Schema(
     {
-        name: {
-            type: String
-        },
         userId: {
             type: String
         },
@@ -17,16 +14,28 @@ const registrationModelSchema = new mongoose.Schema(
         email: {
             type: String
         },
+        companyProfile:{
+            type: String
+        },
+        estYear:{
+            type: String
+        },
+        regNo:{
+            type: String
+        },
+        lisenceName:{
+            type: String
+        },
+        contactPerson:{
+            type: String
+        },
+        fatherName:{
+            type: String
+        },
+        post:{
+            type: String
+        },
         gst: {
-            type: String
-        },
-        pan: {
-            type: String
-        },
-        aadhar: {
-            type: String
-        },
-        tender: {
             type: String
         },
         url: {

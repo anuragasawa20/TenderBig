@@ -3,27 +3,55 @@ const RegistrationForm = require('../../models/services/Registration&Certificati
 // Controller for submitting a registration form
 const submitForm = async (req, res) => {
     try {
-        const { name, userId, company, mobile, email, gst, pan, aadhar, tender, url } = req.body;
-
-        const registrationForm = new RegistrationForm({
-            name,
-            userId,
-            company,
-            mobile,
-            email,
-            gst,
-            pan,
-            aadhar,
-            tender,
-            url,
+        // Extract the form data from the request body
+        const {
+          userId,
+          company,
+          mobile,
+          email,
+          companyProfile,
+          estYear,
+          regNo,
+          lisenceName,
+          contactPerson,
+          fatherName,
+          post,
+          gst,
+          url
+        } = req.body;
+    
+        // Create a new instance of the RegistrationForm model
+        const registration = new RegistrationForm({
+          userId,
+          company,
+          mobile,
+          email,
+          companyProfile,
+          estYear,
+          regNo,
+          lisenceName,
+          contactPerson,
+          fatherName,
+          post,
+          gst,
+          url
         });
-
-        const savedForm = await registrationForm.save();
-        res.json(savedForm);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server Error' });
-    }
+    
+        // Save the registration form data to the database
+        const savedForm = await registration.save();
+    
+        res.status(200).json({
+          success: true,
+          message: "Form submitted successfully",
+          data: savedForm,
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          message: "An error occurred while submitting the form",
+          error: error.message,
+        });
+      }
 };
 
 // Controller for getting all registration forms

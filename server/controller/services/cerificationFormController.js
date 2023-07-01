@@ -3,22 +3,40 @@ const CertificationForm = require('../../models/services/Registration&Certificat
 // Controller for submitting a certification form
 const submitForm = async (req, res) => {
   try {
-    const { name, userId, company, mobile, email, regno } = req.body;
-
-    const certificationForm = new CertificationForm({
-      name,
+    // Extract the form data from the request body
+    const {
       userId,
+      name,
       company,
       mobile,
       email,
-      regno,
+      regno
+    } = req.body;
+
+    // Create a new instance of the CertificationForm model
+    const certification = new CertificationForm({
+      userId,
+      name,
+      company,
+      mobile,
+      email,
+      regno
     });
 
-    const savedForm = await certificationForm.save();
-    res.json(savedForm);
+    // Save the certification form data to the database
+    const savedForm = await certification.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Form submitted successfully",
+      data: savedForm,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server Error' });
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while submitting the form",
+      error: error.message,
+    });
   }
 };
 

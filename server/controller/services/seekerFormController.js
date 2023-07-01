@@ -3,22 +3,76 @@ const SeekerForm = require('../../models/services/CareerManPower/seekerModel');
 // Controller for form submission
 const submitForm = async (req, res) => {
     try {
-        const { name, userId, company, mobile, email, resumeurl } = req.body;
-
-        const seekerForm = new SeekerForm({
-            name,
+        // Extract the form data from the request body
+        const {
             userId,
-            company,
+            companyName,
             mobile,
             email,
-            resumeurl,
+            work,
+            jobpost,
+            exp,
+            salary,
+            companyUrl,
+            companyProfile,
+            companyPNumber,
+            regNo,
+            gst,
+            pan,
+            address,
+            city,
+            zip,
+            state,
+            country,
+            office,
+            holidays,
+            workingDays,
+            post,
+            url,
+        } = req.body;
+
+        // Create a new instance of the SeekerForm model
+        const seeker = new SeekerForm({
+            userId,
+            companyName,
+            mobile,
+            email,
+            work,
+            jobpost,
+            exp,
+            salary,
+            companyUrl,
+            companyProfile,
+            companyPNumber,
+            regNo,
+            gst,
+            pan,
+            address,
+            city,
+            zip,
+            state,
+            country,
+            office,
+            holidays,
+            workingDays,
+            post,
+            url,
         });
 
-        const savedForm = await seekerForm.save();
-        res.json(savedForm);
+        // Save the seeker form data to the database
+        const savedForm = await seeker.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Form submitted successfully",
+            data: savedForm,
+        });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server Error' });
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while submitting the form",
+            error: error.message,
+        });
     }
 };
 

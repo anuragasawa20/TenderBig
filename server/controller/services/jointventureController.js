@@ -3,68 +3,64 @@ const JointVentureForm = require("../../models/services/JointVenture/jointventur
 // Submit Joint Venture form
 const submitForm = async (req, res) => {
     try {
+        // Extract the form data from the request body
         const {
             projectName,
             companyName,
             panNumber,
             websiteAddress,
-            totalValuation,
-            gstNumber,
+            gst,
             workRatio,
-            startDate,
-            endDate,
-            fullName,
-            email,
-            contactNumber,
-            aadharNumber,
+            companyemail,
+            companycontact,
+            cin,
+            regNo,
+            address,
             country,
-            state,
             city,
-            deadline,
-            summary,
-            description,
-            organization,
-            noticeType,
-            url
+            zip,
+            tenderName,
+            cinUrl,
+            gstUrl,
+            panUrl,
         } = req.body;
 
-        const formData = {
-            company: {
-                projectName,
-                companyName,
-                panNumber,
-                websiteAddress,
-                totalValuation,
-                gstNumber,
-                workRatio,
-                startDate,
-                endDate
-            },
-            personal: {
-                fullName,
-                email,
-                contactNumber,
-                aadharNumber,
-                country,
-                state,
-                city,
-                deadline,
-                summary
-            },
-            tender: {
-                description,
-                organization,
-                noticeType
-            },
-            url
-        };
+        // Create a new instance of the JointVentureForm model
+        const jointventure = new JointVentureForm({
+            projectName,
+            companyName,
+            panNumber,
+            websiteAddress,
+            gst,
+            workRatio,
+            companyemail,
+            companycontact,
+            cin,
+            regNo,
+            address,
+            country,
+            city,
+            zip,
+            tenderName,
+            cinUrl,
+            gstUrl,
+            panUrl,
+        });
 
-        const jointventureForm = new JointVentureForm(formData);
-        const savedForm = await jointventureForm.save();
-        res.json(savedForm);
+        // Save the joint venture form data to the database
+        const savedForm = await jointventure.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Form submitted successfully",
+            data: savedForm,
+        });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server Error' });
+        res.status(500).json({
+            success: false,
+            message: "An error occurred while submitting the form",
+            error: error.message,
+        });
     }
 };
 

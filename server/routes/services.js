@@ -7,12 +7,23 @@ const certificationController = require('../controller/services/cerificationForm
 const auctionMaterialsController = require('../controller/services/auctionMaterialFormController');
 const jointventureController = require('../controller/services/jointventureController');
 const tenderOfflineController = require("../controller/services/offlineTenderFormController");
-
+const gemregistrationController = require("../controller/services/gemregistrationFormController");
+const multer = require('multer');
+// Configure multer for handling file uploads
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: function (req, file, cb) {
+      // Generate unique filenames for uploaded files if needed
+      cb(null, Date.now() + '-' + file.originalname);
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 //Career & Man Power
 
 //Employer
 // Route for form submission
-router.post('/employer/submit-form', employerController.submitForm);
+router.post('/employer/submit-form',upload.any(),employerController.submitForm);
 
 // Route for getting all forms
 router.get('/employer/forms', employerController.getAllForms);
@@ -81,5 +92,15 @@ router.get("tender/getall", tenderOfflineController.getAllForms);
 
 // Get Single Tender Offline Form by ID
 router.get("tender/offline/:id", tenderOfflineController.getSingleForm);
+
+//Gem Registration
+// Submit Gem Registration Form
+router.post("/gem/submit", gemregistrationController.submitForm);
+
+// Get All Gem Registration Forms
+router.get("gem/getall", gemregistrationController.getAllForms);
+
+// Get Single Gem Registration by ID
+router.get("gem/:id", gemregistrationController.getFormById);
 
 module.exports = router;

@@ -46,7 +46,7 @@ console.log("got file")
                     <p>Drop the PDF files here...</p>
                 ) : (
                     <p style={{ color: 'blue', cursor: 'pointer' }}>
-                        Drag and drop PDF files here, or click to select files
+                        Upload
                     </p>
                 )}
             </div>
