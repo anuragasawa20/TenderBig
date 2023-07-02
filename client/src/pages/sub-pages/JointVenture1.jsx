@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FileUpload from "../file-uploading/FileUpload";
 import { Link } from "react-router-dom";
+import { MultiStepProgressBar } from "../../components/Progressbar";
 
 const JointVenture1 = () => {
     const [formData, setFormData] = useState({
@@ -139,6 +140,9 @@ const JointVenture1 = () => {
         <>
             <Navbar />
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+                <div className="my-5">
+                    <MultiStepProgressBar step={1} />
+                </div>
                 {/* Global Section */}
                 <h2 className="text-2xl font-bold mb-4 text-center ">Joint Venture Request</h2>
                 <form>

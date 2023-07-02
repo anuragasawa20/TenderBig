@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
+import { MultiStepProgressBar } from "../../components/Progressbar";
 
 
 const JointVenture3 = () => {
@@ -115,8 +116,10 @@ const JointVenture3 = () => {
         fetch("/apiTender/tenderdetails/add-tender", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                auth: token,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
             },
             body: requestBody,
         })
@@ -139,6 +142,9 @@ const JointVenture3 = () => {
         <>
             <Navbar />
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+                <div className="my-5">
+                    <MultiStepProgressBar step={3} />
+                </div>
                 <form onSubmit={handleSubmit}>
                     {/* Global Section */}
                     <h2 className="text-2xl font-bold mb-4">Partnership</h2>
@@ -242,7 +248,7 @@ const JointVenture3 = () => {
                             type="button"
                             className="bg-red-700 text-white px-4 py-2 mt-8 rounded hover:bg-red-800"
                         >
-                            Back
+                            Previous
                         </button>
                     </Link>
                     <button
