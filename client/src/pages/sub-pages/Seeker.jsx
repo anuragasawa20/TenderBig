@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 const Seeker = () => {
-    const [name, setName] = useState("");
+
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
@@ -54,7 +54,6 @@ const Seeker = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         sendDataToAPI();
-        setName("");
         setCompany("");
         setMobile("");
         setEmail("");
@@ -82,10 +81,29 @@ const Seeker = () => {
 
     const sendDataToAPI = () => {
         const formData = {
-            name,
             company,
             mobile,
-            email
+            email,
+            cwork,
+            jobpost,
+            experience,
+            salary,
+            curl,
+            companyprofile,
+            contactpnumber,
+            regno,
+            GST,
+            PAN,
+            addressline1,
+            addressline2,
+            city,
+            zipcode,
+            state,
+            country,
+            officetiming,
+            holidays,
+            workingdays,
+            seekerpost
         };
 
         axios

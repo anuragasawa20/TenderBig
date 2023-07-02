@@ -93,15 +93,14 @@ const getAllForms = async (req, res) => {
 const getSingleForm = async (req, res) => {
     try {
         const { id } = req.params;
-        const form = await EmployerForm.findById(id);
+        let form = await EmployerForm.findById(id);
         if (!form) {
             return res.status(404).json({ error: 'Form not found' });
         }
-        console.log(form.cvUrl)
-        console.log(form.profileUrl)
-        console.log(form.aadharUrl)
-        form.cvUrl = getLink(form.cvUrl)
-        console.log(getLink(form.cvUrl))
+
+        form.cvUrl = await getLink(form.cvUrl)
+        form.profileUrl = await getLink(form.profileUrl)
+        form.aadharUrl = await getLink(form.aadharUrl)
         res.json(form);
     } catch (error) {
         console.error(error);

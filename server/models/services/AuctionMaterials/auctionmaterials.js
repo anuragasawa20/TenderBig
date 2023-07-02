@@ -5,14 +5,28 @@ const auctionmaterialsModelSchema = new mongoose.Schema(
         userId: {
             type: String
         },
-        tenderBidNo: {
+        tenderNumber: {
             type: String
         },
+        companyName: {
+            type: String
+        },
+        regNumber: {
+            type: String
+        },
+        workExp: { type: String },
+        gst: { type: String },
+        aadharCardDirectors: { type: String },
+        panCardDirectors: { type: String },
+        companyAddress: { type: String },
+        website: { type: String },
+        projectMailId: { type: String },
+        contractPName: { type: String },
+        contactNumber: { type: String },
+        auctionMaterials: { type: String },
+        otherDetails: { type: String },
         url: {
-            type: String
-        },
-        docurl: {
-            type: String
+            type: [String]
         }
     },
     { timestamps: true }

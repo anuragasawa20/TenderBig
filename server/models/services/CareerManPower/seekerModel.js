@@ -59,7 +59,7 @@ const seekerModelSchema = new mongoose.Schema(
         country: {
             type: String
         },
-        office: {
+        officetime: {
             type: String
         },
         holidays: {
@@ -71,7 +71,7 @@ const seekerModelSchema = new mongoose.Schema(
         post: {
             type: String
         },
-        url: {
+        resumeurl: {
             type: String
         }
     },
