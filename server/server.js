@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, './dist')));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true, parameterLimit: 50000 }));
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Import Router
 const tenderRouter = require("./routes/tenderRoutes");

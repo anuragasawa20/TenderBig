@@ -1,5 +1,5 @@
 const EmployerForm = require('../../models/services/CareerManPower/employerModel');
-
+const { getFileByFilename, uploadFileToS3} = require('../../config/s3function')
 
 const submitForm = async (req, res) => {
     try {
@@ -27,13 +27,15 @@ const submitForm = async (req, res) => {
             pan,
         } = req.body;
 
-        console.log(req)
-        console.log(req.files)
-        //   console.log(req)
-        // Get the file URLs from the multer file uploads
-        const cvUrl = req.files.resume[0].filename;
-        const profileUrl = req.files.profilePhoto[0].filename;
-        const aadharUrl = req.files.aadhar[0].filename;
+        const resumeFile = getFileByFilename(req.files, 'resume');
+        const profileFile = getFileByFilename(req.files, 'profilePhoto');
+        const aadharFile = getFileByFilename(req.files, 'aadhar');
+
+        // Get the file names
+
+        const cvUrl = (await uploadFileToS3(resumeFile));
+        const profileUrl = (await uploadFileToS3(profileFile));
+        const aadharUrl = (await uploadFileToS3(aadharFile));
 
         // Create a new instance of the EmployerForm model
         const employer = new EmployerForm({
