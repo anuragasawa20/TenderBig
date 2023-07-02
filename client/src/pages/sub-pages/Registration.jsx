@@ -147,7 +147,7 @@ const Registration = () => {
                                         id="cprofile"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={cprofile}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => setCprofile(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -161,7 +161,7 @@ const Registration = () => {
                                         id="companyEstd"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={companyEstd}
-                                        onChange={(e) => setCompany(e.target.value)}
+                                        onChange={(e) => setCompanyEstd(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -177,7 +177,7 @@ const Registration = () => {
                                         id="CIN"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={CIN}
-                                        onChange={(e) => setCompany(e.target.value)}
+                                        onChange={(e) => setCIN(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -191,7 +191,7 @@ const Registration = () => {
                                         id="liscence"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={liscence}
-                                        onChange={(e) => setCompany(e.target.value)}
+                                        onChange={(e) => setLiscence(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -206,7 +206,7 @@ const Registration = () => {
                                     id="cpname"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={cpname}
-                                    onChange={(e) => setCompany(e.target.value)}
+                                    onChange={(e) => setCpname(e.target.value)}
                                 />
                             </div>
                             <div className="mb-4">
@@ -220,7 +220,7 @@ const Registration = () => {
                                     id="fname"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={fname}
-                                    onChange={(e) => setCompany(e.target.value)}
+                                    onChange={(e) => setFname(e.target.value)}
                                 />
                             </div>
                             <div className="mb-4">
@@ -234,7 +234,7 @@ const Registration = () => {
                                     id="companypost"
                                     className="border border-gray-300 rounded px-3 py-2 w-full"
                                     value={companypost}
-                                    onChange={(e) => setCompany(e.target.value)}
+                                    onChange={(e) => setCompanypost(e.target.value)}
                                 />
                             </div>
                             <div className="flex">
@@ -249,7 +249,7 @@ const Registration = () => {
                                         id="GST"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={GST}
-                                        onChange={(e) => setCompany(e.target.value)}
+                                        onChange={(e) => setGST(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -263,7 +263,7 @@ const Registration = () => {
                                         id="PAN"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={PAN}
-                                        onChange={(e) => setCompany(e.target.value)}
+                                        onChange={(e) => setPAN(e.target.value)}
                                     />
                                 </div>
                             </div>

@@ -22,7 +22,10 @@ import JointVenture1 from './pages/sub-pages/JointVenture1';
 import JointVenture2 from './pages/sub-pages/JointVenture2';
 import JointVenture3 from './pages/sub-pages/JointVenture3';
 import TenderFilling from './pages/sub-pages/TenderFilling';
+import TenderFillingOnline from './pages/sub-pages/TenderFillingOnline';
 import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
+import CompanyCert from './pages/sub-pages/CompanyCert';
+import IndividualCert from './pages/sub-pages/IndividualCert';
 import Gems from './pages/sub-pages/Gems';
 
 const App = () => {
@@ -33,7 +36,10 @@ const App = () => {
         <Route path="/gems" element={<Gems />} />
         <Route path='/employer' element={<Employer/>}></Route>
         <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
+        <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>
         <Route path='/tenderfillingoffline' element={<TenderFillingOffline/>}></Route>
+        <Route path='/companycertification' element={<CompanyCert/>}></Route>
+        <Route path='/individualcertification' element={<IndividualCert/>}></Route>
         <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/registration' element={<Registration/>}></Route>
         <Route path='/auctionmaterial' element={<AuctionMaterial/>}></Route>
