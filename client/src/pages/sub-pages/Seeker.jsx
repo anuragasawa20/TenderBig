@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import FileUpload from "../file-uploading/FileUpload";
 
 const Seeker = () => {
     const [name, setName] = useState("");
@@ -115,215 +114,227 @@ const Seeker = () => {
                             <h1 className="text-3xl font-bold text-center mb-4">
                                 Seeker Space
                             </h1>
-                            <div className="mb-4">
-                                <label htmlFor="company" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Company Name
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="company"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={company}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="company" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Company Name
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="company"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={company}
+                                        onChange={(e) => setCompany(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="mobile" className="flex items-center">
+                                        <AiOutlinePhone className="mr-2" />
+                                        Contact Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="mobile"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={mobile}
+                                        onChange={(e) => setMobile(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="mobile" className="flex items-center">
-                                    <AiOutlinePhone className="mr-2" />
-                                    Contact Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="mobile"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={mobile}
-                                    onChange={(e) => setMobile(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="email" className="flex items-center">
+                                        <AiOutlineMail className="mr-2" />
+                                        Email Address
+                                    </label>
+                                    <input
+                                        required
+                                        type="email"
+                                        id="email"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="cwork" className="flex items-center">
+                                        <AiOutlineUser className="mr-2" />
+                                        Company Work
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="cwork"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={cwork}
+                                        onChange={(e) => setCwork(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    Email Address
-                                </label>
-                                <input
-                                    required
-                                    type="email"
-                                    id="email"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="jobpost" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Job Post
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="jobpost"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={jobpost}
+                                        onChange={(e) => setJobpost(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="experience" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Experience
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="experience"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={experience}
+                                        onChange={(e) => setExperience(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="salary" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Salary
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="salary"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={salary}
+                                        onChange={(e) => setSalary(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="cwork" className="flex items-center">
-                                    <AiOutlineUser className="mr-2" />
-                                    Company Work
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="cwork"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={cwork}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="curl" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Company Website
+                                    </label>
+                                    <input
+                                        required
+                                        type="URL"
+                                        id="curl"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={curl}
+                                        onChange={(e) => setCurl(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="companyprofile" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Company Profile
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="companyprofile"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={companyprofile}
+                                        onChange={(e) => setCompanyprofile(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="contactpnumber" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Contact P Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="contactpnumber"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={contactpnumber}
+                                        onChange={(e) => setContactpnumber(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="jobpost" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Job Post
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="jobpost"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={jobpost}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="regno" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Registration Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="regno"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={regno}
+                                        onChange={(e) => setRegno(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="GST" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        GST Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="GST"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={GST}
+                                        onChange={(e) => setGST(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="PAN" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        PAN Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="PAN"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={PAN}
+                                        onChange={(e) => setPAN(e.target.value)}
+                                    />
+                                </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="experience" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Experience
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="experience"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={experience}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="salary" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Salary
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="salary"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={salary}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="curl" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Company Website
-                                </label>
-                                <input
-                                    required
-                                    type="URL"
-                                    id="curl"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={curl}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="companyprofile" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Company Profile
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="companyprofile"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={companyprofile}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="contactpnumber" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Contact P Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="contactpnumber"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={contactpnumber}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="regno" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Registration Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="regno"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={regno}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="GST" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    GST Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="GST"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={GST}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="PAN" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    PAN Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="PAN"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={PAN}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="addressline1" className="flex items-center">
-                                    <AiOutlineUser className="mr-2" />
-                                    Address Line 1
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="addressline1"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={addressline1}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="addressline2" className="flex items-center">
-                                    <AiOutlineUser className="mr-2" />
-                                    Address Line 2
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="addressline2"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={addressline2}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="addressline1" className="flex items-center">
+                                        <AiOutlineUser className="mr-2" />
+                                        Address Line 1
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="addressline1"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={addressline1}
+                                        onChange={(e) => setAddressline1(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="addressline2" className="flex items-center">
+                                        <AiOutlineUser className="mr-2" />
+                                        Address Line 2
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="addressline2"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={addressline2}
+                                        onChange={(e) => setAddressLine2(e.target.value)}
+                                    />
+                                </div>
                             </div>
                             <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -337,7 +348,7 @@ const Seeker = () => {
                                         id="city"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={city}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => setCity(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -351,11 +362,9 @@ const Seeker = () => {
                                         id="zipcode"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={zipcode}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => setZipcode(e.target.value)}
                                     />
                                 </div>
-                            </div>
-                            <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="state" className="flex items-center">
                                         <AiOutlineUser className="mr-2" />
@@ -367,7 +376,7 @@ const Seeker = () => {
                                         id="state"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={state}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => setState(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -381,71 +390,74 @@ const Seeker = () => {
                                         id="country"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={country}
-                                        onChange={(e) => setName(e.target.value)}
+                                        onChange={(e) => setCountry(e.target.value)}
                                     />
                                 </div>
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="officetiming" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Office Timing
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="officetiming"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={officetiming}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="holidays" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Holidays
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="holidays"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={holidays}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="workingdays" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Working Days
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="workingdays"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={workingdays}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="seekerpost" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Post of the seeker
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="seekerpost"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={seekerpost}
-                                    onChange={(e) => setCompany(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="officetiming" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Office Timing
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="officetiming"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={officetiming}
+                                        onChange={(e) => setOfficetiming(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="holidays" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Holidays
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="holidays"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={holidays}
+                                        onChange={(e) => setHolidays(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="workingdays" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Working Days
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="workingdays"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={workingdays}
+                                        onChange={(e) => setWorkingdays(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="seekerpost" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Post of the seeker
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="seekerpost"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={seekerpost}
+                                        onChange={(e) => setSeekerpost(e.target.value)}
+                                    />
+                                </div>
                             </div>
 
-
-                            <p className="font-bold">Upload Resume</p>
-                            <hr />
-                            <FileUpload />
+                            <label className="block mb-2 font-semibold">
+                                Upload Resume
+                                <span className="text-red-700 relative top-0 right-0">* - </span>
+                                <input type="file" name="resume" accept=".pdf" required />
+                            </label>
 
                             <button
                                 type="submit"
