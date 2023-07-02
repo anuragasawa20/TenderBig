@@ -69,16 +69,9 @@ const AuctionMaterial = () => {
         <>
             <Navbar />
             <div className="container mx-auto py-8 md:max-w-7xl">
-                <div className="mx-auto mt-6 px-4 py-8 shadow-2xl p-6 bg-white rounded-lg flex flex-col md:flex-row">
-
-                    <div className="w-full md:w-1/2 mb-4 md:mb-0">
-                        <img
-                            src={`${import.meta.env.BASE_URL}illustartion/auction.jpg`}
-                            alt="Illustration"
-                        />
-                    </div>
-
+                <div className="shadow-2xl p-6 bg-white rounded-lg  md:flex-row">
                     <form onSubmit={handleSubmit}>
+                    <h2 className="text-2xl font-bold mb-4 text-center">Auction Material</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className=" p-2 rounded-lg">
                                 <label className="block font-semibold">
