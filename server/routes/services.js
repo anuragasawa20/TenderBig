@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const {upload} = require('../middleware/multer')
 const employerController = require('../controller/services/employerFormController');
 const seekerController = require('../controller/services/seekerFormController');
 const registrationController = require('../controller/services/registrationFormController');
@@ -8,17 +9,7 @@ const auctionMaterialsController = require('../controller/services/auctionMateri
 const jointventureController = require('../controller/services/jointventureController');
 const tenderOfflineController = require("../controller/services/offlineTenderFormController");
 const gemregistrationController = require("../controller/services/gemregistrationFormController");
-const multer = require('multer');
-// Configure multer for handling file uploads
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: function (req, file, cb) {
-      // Generate unique filenames for uploaded files if needed
-      cb(null, Date.now() + '-' + file.originalname);
-    },
-  });
-  
-  const upload = multer({ storage: storage });
+
 //Career & Man Power
 
 //Employer

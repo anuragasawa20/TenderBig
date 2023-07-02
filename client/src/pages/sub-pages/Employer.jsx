@@ -213,7 +213,6 @@ const Employer = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
 
         var requestBody = new FormData();
 
@@ -221,8 +220,13 @@ const Employer = () => {
         Object.entries(formData).forEach(([key, value]) => {
             requestBody.append(key, value);
         });
+        // Append uploaded files to the request body
+        requestBody.append("resume", e.target.resume.files[0]);
+        requestBody.append("profilePhoto", e.target.profilePhoto.files[0]);
+        requestBody.append("aadhar", e.target.aadhar.files[0]);
+
         const token = localStorage.getItem('token');
-        console.log(requestBody.get('gst'))
+
         fetch('http://localhost:5000/apiTender/services/employer/submit-form', {
             method: 'POST',
             headers: {
@@ -232,14 +236,20 @@ const Employer = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
-                // alert('Submitted');
-                // clearInputs();
+                if(data.success == true){
+                    alert('Submitted');
+                    clearInputs();
+                    window.location.href = '/employer';
+                }
+                else{
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/employer';
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
                 alert('Oops something went wrong!!!');
-                // clearInputs();
+                clearInputs();
             });
     };
 
