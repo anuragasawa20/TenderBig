@@ -22,7 +22,7 @@ const Seeker = () => {
     const [GST, setGST] = useState("");
     const [PAN, setPAN] = useState("");
     const [addressline1, setAddressline1] = useState("");
-    const [addressline2, setAddressLine2] = useState("");
+    const [addressline2, setAddressline2] = useState("");
     const [city, setCity] = useState("");
     const [zipcode, setZipcode] = useState("");
     const [state, setState] = useState("");
@@ -69,7 +69,7 @@ const Seeker = () => {
         setGST("");
         setPAN("");
         setAddressline1("");
-        setAddressLine2("");
+        setAddressline2("");
         setCity("");
         setZipcode("");
         setState("");
@@ -85,7 +85,27 @@ const Seeker = () => {
             name,
             company,
             mobile,
-            email
+            email,
+            cwork,
+            jobpost,
+            experience,
+            salary,
+            curl,
+            companyprofile,
+            contactpnumber,
+            regno,
+            GST,
+            PAN,
+            addressline1,
+            addressline2,
+            city,
+            zipcode,
+            state,
+            country,
+            officetiming,
+            holidays,
+            workingdays,
+            seekerpost,
         };
 
         axios
@@ -332,7 +352,7 @@ const Seeker = () => {
                                         id="addressline2"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={addressline2}
-                                        onChange={(e) => setAddressLine2(e.target.value)}
+                                        onChange={(e) => setAddressline2(e.target.value)}
                                     />
                                 </div>
                             </div>

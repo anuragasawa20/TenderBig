@@ -64,7 +64,16 @@ const Registration = () => {
             name,
             company,
             mobile,
-            email
+            email,
+            CIN,
+            cprofile,
+            companyEstd,
+            companypost,
+            liscence,
+            cpname,
+            fname,
+            GST,
+            PAN,
         };
 
         axios

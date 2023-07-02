@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import FileUpload from "../file-uploading/FileUpload";
 import JointVenture2 from "../../pages/sub-pages/JointVenture2";
+import { ProgressBar } from "react-bootstrap";
 
 
 const JointVenture1 = () => {
@@ -21,7 +22,7 @@ const JointVenture1 = () => {
         CIN: "",
         webAddress: "",
         GSTnumber: "",
-        workratio: "",
+        workRatio: "",
         userCategory: "",
         TotalValuation: "",
         CRegnumber: "",
@@ -68,7 +69,7 @@ const JointVenture1 = () => {
             webAddress: "",
             aadhar: "",
             GSTnumber: "",
-            workratio: "",
+            workRatio: "",
             userCategory: "",
             TotalValuation: "",
             country: "",
@@ -149,6 +150,7 @@ const JointVenture1 = () => {
                 {currentPage === 1 && (
                     <form onSubmit={handleSubmit}>
                         {/* Global Section */}
+                        <ProgressBar/>
                         <h2 className="text-2xl font-bold mb-4 text-center ">Joint Venture Request</h2>
 
                         <div className="p-2 rounded-lg">
