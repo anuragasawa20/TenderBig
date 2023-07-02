@@ -24,6 +24,7 @@ import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUser
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 //Contact Requests
+import ContactFormList from '../Admin/partials/dashboard/requests/ContactPage';
 import CareerManPower from '../Admin/partials/dashboard/requests/Career&ManPower';
 import AuctionMaterial from '../Admin/partials/dashboard/requests/Auction-Material';
 import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture';
@@ -46,6 +47,8 @@ const DashboardRoutes = () => {
         path="/admin"
         element={<PrivateRoute element={DashboardHome} />}
       /> */}
+
+      {/* Users */}
       <Route
         path="/users"
         element={<PrivateRoute element={DashboardUsers} />}
@@ -54,7 +57,6 @@ const DashboardRoutes = () => {
         path="/user/:userId"
         element={<PrivateRoute element={DashboardUserDetail} />}
       />
-
       <Route
         path="/alladmin"
         element={<PrivateRoute element={AllAdmin} />}
@@ -68,6 +70,7 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={AllEmployee} />}
       />
 
+      {/* Add User */}
       <Route
         path="/addadmin"
         element={<PrivateRoute element={AddAdmin} />}
@@ -81,6 +84,7 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={AddEmployee} />}
       />
 
+      {/* Tenders */}
       <Route
         path="/tenders"
         element={<PrivateRoute element={AllTendersSection} />}
@@ -105,6 +109,12 @@ const DashboardRoutes = () => {
       <Route
         path="/tender/:tenderId"
         element={<PrivateRoute element={DashboardTenderDetail} />}
+      />
+
+      {/* Requests */}
+      <Route
+        path="/contact"
+        element={<PrivateRoute element={ContactFormList} />}
       />
       <Route
         path="/career&manpower"
@@ -135,6 +145,7 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={TenderResult} />}
       />
 
+      {/* Options */}
       <Route
         path="/department"
         element={<PrivateRoute element={Department} />}

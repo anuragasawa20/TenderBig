@@ -1,5 +1,6 @@
 const crypto = require('crypto')
-const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 require('dotenv').config();
 
 const s3 = new S3Client({
@@ -29,3 +30,13 @@ exports.uploadFileToS3 = async (file) => {
 
     return fileName;
 };
+
+exports.getLink = async (fileName)=>{
+    const getObjectParams = {
+        Bucket: process.env.BUCKET_NAME,
+        Key:fileName,
+    }
+    const command = new GetObjectCommand(getObjectParams);
+    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+    return url;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
+import Sidebar from "../../Sidebar";
+import Header from "../../Header";
 
 const ContactFormList = () => {
   const [contactForms, setContactForms] = useState([]);

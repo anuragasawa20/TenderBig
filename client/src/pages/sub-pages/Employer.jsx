@@ -61,8 +61,8 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                     <input
                         required
                         type="number"
-                        name="expactedSalary"
-                        value={formData.expactedSalary}
+                        name="expectedSalary"
+                        value={formData.expectedSalary}
                         onChange={handleChange}
                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         placeholder="Enter Salary"
@@ -116,7 +116,7 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                 <label className="block mb-2 font-semibold">
                     Upload Profile Photo
                     <span className="text-red-700 relative top-0 right-0">*</span>
-                    <input type="file" name="profilePhoto" accept=".pdf" required />
+                    <input type="file" name="profilePhoto" accept=".jpg,.jpeg,.png" required />
                 </label>
                 <label className="block mb-2 font-semibold">
                     Upload Aadhar
@@ -172,7 +172,7 @@ const Employer = () => {
         email: "",
         zip: "",
         pastSalary: "",
-        expactedSalary: "",
+        expectedSalary: "",
         hobbies: "",
         gst: "",
         pan: "",
@@ -196,7 +196,7 @@ const Employer = () => {
             email: "",
             zip: "",
             pastSalary: "",
-            expactedSalary: "",
+            expectedSalary: "",
             hobbies: "",
             gst: "",
             pan: "",

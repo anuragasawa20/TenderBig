@@ -53,7 +53,7 @@ const employerModelSchema = new mongoose.Schema(
         pastSalary: {
             type: Number
         },
-        expactedSalary: {
+        expectedSalary: {
             type: Number
         },
         hobbies: {

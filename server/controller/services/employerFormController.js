@@ -1,9 +1,8 @@
 const EmployerForm = require('../../models/services/CareerManPower/employerModel');
-const { getFileByFilename, uploadFileToS3} = require('../../config/s3function')
+const { getFileByFilename, uploadFileToS3, getLink} = require('../../config/s3function')
 
 const submitForm = async (req, res) => {
     try {
-        // Extract the form data from the request body
         const {
             name,
             fathername,
@@ -21,7 +20,7 @@ const submitForm = async (req, res) => {
             email,
             zip,
             pastSalary,
-            expactedSalary,
+            expectedSalary,
             hobbies,
             gst,
             pan,
@@ -30,8 +29,6 @@ const submitForm = async (req, res) => {
         const resumeFile = getFileByFilename(req.files, 'resume');
         const profileFile = getFileByFilename(req.files, 'profilePhoto');
         const aadharFile = getFileByFilename(req.files, 'aadhar');
-
-        // Get the file names
 
         const cvUrl = (await uploadFileToS3(resumeFile));
         const profileUrl = (await uploadFileToS3(profileFile));
@@ -55,7 +52,7 @@ const submitForm = async (req, res) => {
             email,
             zip,
             pastSalary,
-            expactedSalary,
+            expectedSalary,
             hobbies,
             gst,
             pan,
@@ -64,7 +61,6 @@ const submitForm = async (req, res) => {
             aadharUrl,
         });
 
-        // Save the employer form data to the database
         const savedForm = await employer.save();
 
         res.status(200).json({
@@ -85,7 +81,7 @@ const submitForm = async (req, res) => {
 // Controller for getting all forms
 const getAllForms = async (req, res) => {
     try {
-        const forms = await EmployerForm.find();
+        const forms = await EmployerForm.find().select('name jobexp country expectedSalary');
         res.json(forms);
     } catch (error) {
         console.error(error);
@@ -101,6 +97,11 @@ const getSingleForm = async (req, res) => {
         if (!form) {
             return res.status(404).json({ error: 'Form not found' });
         }
+        console.log(form.cvUrl)
+        console.log(form.profileUrl)
+        console.log(form.aadharUrl)
+        form.cvUrl = getLink(form.cvUrl)
+        console.log(getLink(form.cvUrl))
         res.json(form);
     } catch (error) {
         console.error(error);
