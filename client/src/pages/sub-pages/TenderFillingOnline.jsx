@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
-// import { locations } from "../../constants/countriesData";
+import { locations } from "../../constants/countriesData";
 import Footer from "../../components/Footer";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -54,7 +54,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.directorname}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Notice Type"
+
                         />
                     </label>
                     <label className="block mb-2 font-semibold">
@@ -66,7 +66,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.fname}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter TOT No" />
+                        />
                     </label>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                         <label className="block mb-2 font-semibold">
@@ -78,7 +78,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                                 value={formData.iDOB}
                                 onChange={handleChange}
                                 className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                placeholder="Enter Document No" />
+                            />
                         </label>
 
                     </div>
@@ -91,7 +91,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.paadhar}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Financier" />
+                        />
                     </label>
                     <label className="block mb-4 font-semibold">
                         PAN card
@@ -102,7 +102,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.pPANnum}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Ownership" />
+                        />
                     </label>
                     <label className="block mb-2 font-semibold">
                         Contact Number
@@ -114,7 +114,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.pmobile}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            placeholder="Enter Tender Value"
+
                         />
                     </label>
                 </div>
@@ -131,7 +131,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.pemail}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Competition" />
+                        />
                     </label>
                     <label className="block mb-2 font-semibold basis-1/2 mx-1">
                         Account Holder Name
@@ -142,7 +142,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.accholdername}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter URL" />
+                        />
                     </label>
                     <label className="block mb-2 font-semibold">
                         Account Number
@@ -153,7 +153,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             value={formData.accnumber}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter URL" />
+                        />
                     </label>
                     <div className="flex">
                         <label className="block mb-2 font-semibold basis-1/2 mx-1">
@@ -165,7 +165,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                                 value={formData.expirydate}
                                 onChange={handleChange}
                                 className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                placeholder="Enter URL" />
+                            />
                         </label>
                     </div>
 
@@ -223,6 +223,7 @@ const TenderForm = () => {
         cname: "",
         cPANnum: "",
         cGSTnum: "",
+        des: "",
         vendor: "",
         mobile: "",
         accholdername: "",
@@ -231,7 +232,11 @@ const TenderForm = () => {
         regno: "",
         userCategory: "",
         product: "",
-        country: "",
+        companyaddress1: "",
+        companyaddress2: "",
+        companycity: "",
+        companystate: "",
+        companycountry: "",
         ITR: "",
         turnover: "",
         workexp: "",
@@ -256,6 +261,7 @@ const TenderForm = () => {
         url: "",
         gemreg: "",
         refno: "",
+        addressline1: "",
         tenderDetailNoticeType: "",
     });
 
@@ -265,6 +271,7 @@ const TenderForm = () => {
             cPANnum: "",
             cGSTnum: "",
             wmobile: "",
+            des: "",
             accholdername: "",
             expirydate: "",
             website: "",
@@ -274,7 +281,11 @@ const TenderForm = () => {
             regno: "",
             userCategory: "",
             product: "",
-            country: "",
+            companyaddress1: "",
+            companyaddress2: "",
+            companycity: "",
+            companystate: "",
+            companycountry: "",
             ITR: "",
             turnover: "",
             workexp: "",
@@ -309,35 +320,6 @@ const TenderForm = () => {
         }));
     };
 
-    // useEffect(() => {
-    //     // Fetch all sectors
-    //     fetchSectors();
-    //     fetchProducts();
-    // }, []);
-
-    // const [sectors, setSectors] = useState([]);
-    // const [products, setProducts] = useState([]);
-
-    // const fetchSectors = async () => {
-    //     try {
-    //         const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=sectors");
-    //         console.log(response.data[0].sectors)
-    //         setSectors(response.data[0].sectors);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
-    // const fetchProducts = async () => {
-    //     try {
-    //         const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=products");
-    //         console.log(response.data[0].products)
-    //         setProducts(response.data[0].products);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
@@ -367,6 +349,7 @@ const TenderForm = () => {
                 clearInputs();
                 window.location.href = '/forms';
             });
+        clearInputs();
     };
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -402,7 +385,7 @@ const TenderForm = () => {
                                         value={formData.cname}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                                 <label className="block mb-2 font-semibold basis-1/2 mx-1">
@@ -413,7 +396,7 @@ const TenderForm = () => {
                                         value={formData.regno}
                                         onChange={handleChange}
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter CPV No"
+
                                     />
                                 </label>
                             </div>
@@ -428,7 +411,7 @@ const TenderForm = () => {
                                         value={formData.cPANnum}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                                 <label className="block mb-2 font-semibold relative basis-1/2 mx-1">
@@ -441,7 +424,7 @@ const TenderForm = () => {
                                         value={formData.cGSTnum}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                             </div>
@@ -456,7 +439,7 @@ const TenderForm = () => {
                                         value={formData.mobile}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                                 <label className="block mb-2 font-semibold relative basis-1/2 mx-1">
@@ -469,7 +452,7 @@ const TenderForm = () => {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                             </div>
@@ -484,7 +467,7 @@ const TenderForm = () => {
                                         value={formData.wmobile}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                                 <label className="block mb-2 font-semibold relative basis-1/2 mx-1">
@@ -497,42 +480,10 @@ const TenderForm = () => {
                                         value={formData.website}
                                         onChange={handleChange}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Summary"
+
                                     />
                                 </label>
                             </div>
-                            {/* <label className="block mb-2 font-semibold">
-                                User Category
-                                <span className="text-red-700 relative top-0 right-0">*</span>
-                                <select required
-                                    name="userCategory"
-                                    value={formData.userCategory}
-                                    onChange={handleChange}
-                                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                >
-                                    <option value="">Select User Category</option>
-                                    <option value="contractor">Contractor</option>
-                                    <option value="subcontractor">Sub Contractor</option>
-                                </select>
-                            </label>
-                            <label className="block mb-2 font-semibold">
-                                Product
-                                <span className="text-red-700 relative top-0 right-0">*</span>
-                                <select
-                                    required
-                                    name="product"
-                                    value={formData.product}
-                                    onChange={handleChange}
-                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                >
-                                    <option value="">Select Product</option>
-                                    {products.map((product) => (
-                                        <option key={product} value={product}>
-                                            {product}
-                                        </option>
-                                    ))}
-                                </select>
-                            </label> */}
                         </div>
 
 
@@ -559,7 +510,7 @@ const TenderForm = () => {
                                     </label> */}
 
                                     <label className="block font-semibold">
-                                        ITR (3 yrs)
+                                        ITR (Year 1)
                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                         <input required
                                             type="number"
@@ -567,7 +518,31 @@ const TenderForm = () => {
                                             value={formData.ITR}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter State"
+
+                                        />
+                                    </label>
+                                    <label className="block font-semibold">
+                                        ITR (Year 2)
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input required
+                                            type="number"
+                                            name="ITR"
+                                            value={formData.ITR}
+                                            onChange={handleChange}
+                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                        />
+                                    </label>
+                                    <label className="block font-semibold">
+                                        ITR (Year 3)
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input required
+                                            type="number"
+                                            name="ITR"
+                                            value={formData.ITR}
+                                            onChange={handleChange}
+                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
                                         />
                                     </label>
                                     <label className="block font-semibold">
@@ -579,7 +554,7 @@ const TenderForm = () => {
                                             value={formData.vendor}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter State"
+
                                         />
                                     </label>
                                 </div>
@@ -592,7 +567,7 @@ const TenderForm = () => {
                                             value={formData.turnover}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter City"
+
                                         />
                                     </label>
                                     <label className="block font-semibold">
@@ -604,61 +579,104 @@ const TenderForm = () => {
                                             value={formData.noofworkers}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter Deadline"
+
                                         />
                                     </label>
                                 </div>
                                 <div className="flex">
                                     <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                                        Work Exp
+                                        Work Exp.
                                         <input
                                             type="number"
                                             name="workexp"
                                             value={formData.workexp}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter Summary"
+
                                         />
                                     </label>
                                     <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                                        Gem Registration No.
+                                        Gem Reg No.
                                         <input
                                             type="text"
                                             name="gemreg"
                                             value={formData.gemreg}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                            placeholder="Enter Description"
+
                                         />
                                     </label>
+                                </div>
+                                <label className="block mb-2 font-semibold">
+                                    Address Line 1
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="companyaddress1"
+                                        value={formData.companyaddress1}
+                                        onChange={handleChange}
+                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                    />
+                                </label>
+                                <label className="block mb-2 font-semibold">
+                                    Address Line 2
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="companyaddress2"
+                                        value={formData.companyaddress2}
+                                        onChange={handleChange}
+                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
 
-                                </div>
+                                    />
+                                </label>
                                 <div className="flex">
-                                    <div>
-                                        <label className="block mb-2 font-semibold">
-                                            Bidding Documents
-                                            <span className="text-red-700">*</span>
-                                            <input type="file" name="resume" accept=".pdf" required />
-                                        </label>
-                                        <label className="block mb-2 font-semibold">
-                                            Rent Agreements
-                                            <span className="text-red-700">*</span>
-                                            <input type="file" name="profilePhoto" accept=".pdf" required />
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label className="block mb-2 font-semibold">
-                                            Old Work Sample
-                                            <span className="text-red-700">*</span>
-                                            <input type="file" name="aadhar" accept=".pdf" required />
-                                        </label>
-                                        <label className="block mb-2 font-semibold">
-                                            Tender Docs with stamp
-                                            <span className="text-red-700">*</span>
-                                            <input type="file" name="aadhar" accept=".pdf" required />
-                                        </label>
-                                    </div>
+                                    <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                                        City
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input
+                                            required
+                                            type="text"
+                                            name="companycity"
+                                            value={formData.companycity}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                        />
+                                    </label>
+                                    <label className="block mb-2 font-semibold basis-1/2">
+                                        State
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input
+                                            required
+                                            type="text"
+                                            name="state"
+                                            value={formData.companystate}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                        />
+                                    </label>
                                 </div>
+
+                                <label className="block mb-2 font-semibold">
+                                    Country
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <select required
+                                        name="country"
+                                        value={formData.companycountry}
+                                        onChange={handleChange}
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                    >
+                                        {locations.map((country, index) => (
+                                            <option key={index} value={country}>
+                                                {country}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
                             </div>
 
                             {/* tenderDetail Section */}
@@ -672,9 +690,65 @@ const TenderForm = () => {
                                         value={formData.refno}
                                         onChange={handleChange}
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        placeholder="Enter Organization"
+
                                     />
                                 </label>
+                                <label className="block mb-2 font-semibold">
+                                    Others
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input required
+                                        type="description"
+                                        name="des"
+                                        value={formData.des}
+                                        onChange={handleChange}
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                    />
+                                </label>
+                                <form onSubmit={handleSubmit}>
+                                    <div className="flex">
+                                        <div>
+                                            <label className="block mb-2 font-semibold">
+                                                Bidding Documents
+                                                <span className="text-red-700">*</span>
+                                                <input type="file" name="resume" accept=".pdf" required />
+                                            </label>
+                                            <label className="block mb-2 font-semibold">
+                                                Rent Agreements
+                                                <span className="text-red-700">*</span>
+                                                <input type="file" name="profilePhoto" accept=".pdf" required />
+                                            </label>
+                                            <label className="block mb-2 font-semibold">
+                                                Old Work Sample
+                                                <span className="text-red-700">*</span>
+                                                <input type="file" name="aadhar" accept=".pdf" required />
+                                            </label>
+                                            <div className="dropdown my-3 font-semibold">
+                                                Required Licenses
+                                                <span className="text-red-700">*</span>
+                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+                                                    Upload Documents Here
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                </ul>
+                                            </div>
+                                            <div className="dropdown font-semibold">
+                                                Tender Docs with Stamps
+                                                <span className="text-red-700">*</span>
+                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+                                                    Upload Documents Here
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <button
