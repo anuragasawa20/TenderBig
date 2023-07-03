@@ -4,7 +4,8 @@ const {upload} = require('../middleware/multer')
 const employerController = require('../controller/services/employerFormController');
 const seekerController = require('../controller/services/seekerFormController');
 const registrationController = require('../controller/services/registrationFormController');
-const certificationController = require('../controller/services/cerificationFormController');
+const companyCertificationController = require('../controller/services/companyCerificationFormController');
+const individualCertificationController = require('../controller/services/individualCerificationFormController');
 const auctionMaterialsController = require('../controller/services/auctionMaterialFormController');
 const jointventureController = require('../controller/services/jointventureController');
 const tenderOfflineController = require("../controller/services/offlineTenderFormController");
@@ -44,19 +45,29 @@ router.get('/register/registration', registrationController.getAllForms);
 // Route for getting a single registration form by ID
 router.get('/register/registration/:id', registrationController.getFormById);
 
-//Certification
+//Company Certification
 // Route for submitting a certification form
-router.post('/cert/certification', certificationController.submitForm);
+router.post('/ccert/certification',upload.any(), companyCertificationController.submitForm);
 
 // Route for getting all certification forms
-router.get('/cert/certification', certificationController.getAllForms);
+router.get('/ccert/certification', companyCertificationController.getAllForms);
 
 // Route for getting a single certification form by ID
-router.get('/cert/certification/:id', certificationController.getFormById);
+router.get('/ccert/certification/:id', companyCertificationController.getFormById);
+
+//Individual Certification
+// Route for submitting a certification form
+router.post('/icert/certification',upload.any(), individualCertificationController.submitForm);
+
+// Route for getting all certification forms
+router.get('/icert/certification', individualCertificationController.getAllForms);
+
+// Route for getting a single certification form by ID
+router.get('/icert/certification/:id', individualCertificationController.getFormById);
 
 //Auction Materials
 // Route for submitting an auction material form
-router.post('/aumt/auction-material', auctionMaterialsController.submitForm);
+router.post('/aumt/auction-material',upload.any(), auctionMaterialsController.submitForm);
 
 // Route for getting all auction material forms
 router.get('/aumt/auction-material', auctionMaterialsController.getAllForms);

@@ -1,35 +1,47 @@
-const CertificationForm = require('../../models/services/Registration&Certification/certificationModel');
+const IndividualForm = require('../../models/services/Registration&Certification/indivisualCertificationModel');
+const { getFileByFilename, uploadFileToS3, getLink } = require('../../config/s3function')
 
 // Controller for submitting a certification form
 const submitForm = async (req, res) => {
   try {
-    // Extract the form data from the request body
     const {
-      userId,
-      name,
-      company,
-      mobile,
+      aadharNumber,
+      address,
+      dob,
       email,
-      regno
+      fatherName,
+      mobileNumber,
+      name,
+      panNumber,
+      requestLicense,
+      workingField
     } = req.body;
 
-    // Create a new instance of the CertificationForm model
-    const certification = new CertificationForm({
-      userId,
-      name,
-      company,
-      mobile,
+    const docFile = getFileByFilename(req.files, 'doc');
+    const docUrl = (await uploadFileToS3(docFile));
+
+    // Create a new instance of the ModelName model
+    const data = new IndividualForm({
+      aadharNumber,
+      address,
+      dob,
       email,
-      regno
+      fatherName,
+      mobileNumber,
+      name,
+      panNumber,
+      requestLicense,
+      workingField,
+      url:docUrl
     });
 
-    // Save the certification form data to the database
-    const savedForm = await certification.save();
+    // Save the form data to the database
+    const savedData = await data.save();
 
     res.status(200).json({
       success: true,
       message: "Form submitted successfully",
-      data: savedForm,
+      data: savedData,
     });
   } catch (error) {
     res.status(500).json({
@@ -43,7 +55,7 @@ const submitForm = async (req, res) => {
 // Controller for getting all certification forms
 const getAllForms = async (req, res) => {
   try {
-    const forms = await CertificationForm.find();
+    const forms = await IndividualForm.find().select('address name mobileNumber workingField');
     res.json(forms);
   } catch (error) {
     console.error(error);
@@ -55,12 +67,13 @@ const getAllForms = async (req, res) => {
 const getFormById = async (req, res) => {
   try {
     const { id } = req.params;
-    const form = await CertificationForm.findById(id);
-    
+    const form = await IndividualForm.findById(id);
+
     if (!form) {
       return res.status(404).json({ error: 'Form not found' });
     }
-    
+
+    form.url = await getLink(form.url)
     res.json(form);
   } catch (error) {
     console.error(error);

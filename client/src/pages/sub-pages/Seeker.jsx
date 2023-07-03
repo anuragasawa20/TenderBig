@@ -9,6 +9,8 @@ import Footer from "../../components/Footer";
 
 const Employer = () => {
     const [name, setName] = useState("");
+const Seeker = () => {
+
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
@@ -55,7 +57,6 @@ const Employer = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         sendDataToAPI();
-        setName("");
         setCompany("");
         setMobile("");
         setEmail("");
@@ -83,7 +84,6 @@ const Employer = () => {
 
     const sendDataToAPI = () => {
         const formData = {
-            name,
             company,
             mobile,
             email,

@@ -24,11 +24,11 @@ const submitForm = async (req, res) => {
             zip,
             state,
             country,
-            office,
+            officetime,
             holidays,
             workingDays,
             post,
-            url,
+            resumeurl,
         } = req.body;
 
         // Create a new instance of the SeekerForm model
@@ -52,11 +52,11 @@ const submitForm = async (req, res) => {
             zip,
             state,
             country,
-            office,
+            officetime,
             holidays,
             workingDays,
             post,
-            url,
+            resumeurl,
         });
 
         // Save the seeker form data to the database

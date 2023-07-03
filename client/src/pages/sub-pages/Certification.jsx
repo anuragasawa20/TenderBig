@@ -1,8 +1,7 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
+import {AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import {RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -36,11 +35,21 @@ function CompanyForm({ onSubmit }) {
             selectedPositions,
             contractPName,
         };
-        onSubmit(data);
+
+        var requestBody = new FormData();
+
+        // Append form data to the request body
+        Object.entries(data).forEach(([key, value]) => {
+            requestBody.append(key, value);
+        });
+        console.log(requestBody.get("cinReg"))
+        requestBody.append("doc", event.target.doc.files[0]);
+
+        onSubmit(requestBody);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className=" p-2 rounded-lg">
                     <label className="block font-semibold">
@@ -186,9 +195,15 @@ function CompanyForm({ onSubmit }) {
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
-                Reg No.
-                <span className="text-red-700 relative top-0 right-0">* - </span>
-                <input type="file" name="resume" accept=".pdf" required />
+                Upload Document
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <hr />
+                <input
+                    type="file"
+                    name="doc"
+                    accept=".pdf"
+                    required
+                />
             </label>
 
             <label className="block mb-2 font-semibold">
@@ -244,11 +259,19 @@ function IndividualForm({ onSubmit }) {
             requestLicense,
         };
         // Call the individual form submit handler from the parent component
-        onSubmit(data);
+        var requestBody = new FormData();
+
+        // Append form data to the request body
+        Object.entries(data).forEach(([key, value]) => {
+            requestBody.append(key, value);
+        });
+        requestBody.append("doc", event.target.doc.files[0]);
+
+        onSubmit(requestBody);
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className=" p-2 rounded-lg">
                     <label className="block font-semibold">
@@ -376,14 +399,13 @@ function IndividualForm({ onSubmit }) {
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
-                Upload Aadhar, photos, PAN card, Digital Signature
+                Upload Document
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <hr />
                 <input
                     type="file"
                     name="doc"
                     accept=".pdf"
-                    multiple
                     required
                 />
             </label>
@@ -427,15 +449,59 @@ const Certification = () => {
     };
 
     const handleCompanyFormSubmit = (data) => {
-        // Send data to the company form API
-        console.log('Submitting company form data:', data);
-        // Make the API call or perform other operations as needed
+
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:5000/apiTender/services/ccert/certification', {
+            method: 'POST',
+            headers: {
+                auth: token,
+            },
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success == true) {
+                    alert('Submitted');
+                    window.location.href = '/certification';
+                }
+                else {
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/certification';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
+            });
     };
 
     const handleIndividualFormSubmit = (data) => {
-        // Send data to the individual form API
-        console.log('Submitting individual form data:', data);
-        // Make the API call or perform other operations as needed
+
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:5000/apiTender/services/icert/certification', {
+            method: 'POST',
+            headers: {
+                auth: token,
+            },
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success == true) {
+                    alert('Submitted');
+                    window.location.href = '/certification';
+                }
+                else {
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/certification';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
+            });
     };
 
     return (
