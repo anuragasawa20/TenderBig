@@ -12,6 +12,8 @@ const JointVenture2 = () => {
         PANnumber: "",
         pnumber: "",
         name: "",
+        directorname: "",
+        fname: "",
         aadhar: "",
         companyaddress1: "",
         companyaddress2: "",
@@ -58,6 +60,8 @@ const JointVenture2 = () => {
             PANnumber: "",
             pnumber: "",
             name: "",
+            fname: "",
+            directorname: "",
             CIN: "",
             companyaddress1: "",
             companyaddress2: "",
@@ -165,8 +169,8 @@ const JointVenture2 = () => {
                         <input
                             required
                             type="text"
-                            name="name"
-                            value={formData.name}
+                            name="fname"
+                            value={formData.fname}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                         />
@@ -178,8 +182,8 @@ const JointVenture2 = () => {
                         <input
                             required
                             type="text"
-                            name="name"
-                            value={formData.name}
+                            name="directorname"
+                            value={formData.directorname}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                         />

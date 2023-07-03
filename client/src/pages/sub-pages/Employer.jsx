@@ -11,7 +11,7 @@ import FileUpload from "../file-uploading/FileUpload";
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (
         <>
-            <h2 className="text-2xl font-bold mb-4 text-center">Employer Space</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">Seeker Space</h2>
             <p className="text-red-700 font-thin font-serif text-sm">
                 Fields marked with an asterisk (*) are mandatory.
             </p>
@@ -154,7 +154,7 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
     );
 };
 
-const Employer = () => {
+const Seeker = () => {
     const [formData, setFormData] = useState({
         name: "",
         fathername: "",
@@ -488,4 +488,4 @@ const Employer = () => {
     );
 };
 
-export default Employer;
+export default Seeker;

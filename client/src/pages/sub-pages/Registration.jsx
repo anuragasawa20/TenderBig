@@ -116,6 +116,38 @@ const Registration = () => {
                                     onChange={(e) => setCompany(e.target.value)}
                                 />
                             </div>
+
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="mobile" className="flex items-center">
+                                        <AiOutlinePhone className="mr-2" />
+                                        WhatsApp no.
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="mobile"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={mobile}
+                                        onChange={(e) => setMobile(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="email" className="flex items-center">
+                                        <AiOutlineMail className="mr-2" />
+                                        Secondary Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="email"
+                                        id="email"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
                             <div className="mb-4">
                                 <label htmlFor="mobile" className="flex items-center">
                                     <AiOutlinePhone className="mr-2" />
@@ -192,7 +224,35 @@ const Registration = () => {
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="liscence" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Lisence Name / Gem
+                                        Lisence
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="liscence"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={liscence}
+                                        onChange={(e) => setLiscence(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="liscence" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Name
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="liscence"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={liscence}
+                                        onChange={(e) => setLiscence(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="liscence" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Gem
                                     </label>
                                     <input
                                         required
@@ -277,10 +337,23 @@ const Registration = () => {
                                 </div>
                             </div>
 
+                            <label className="block mb-2 font-semibold">
+                                Reg No.
+                                <span className="text-red-700 relative top-0 right-0">* - </span>
+                                <input type="file" name="resume" accept=".pdf" required />
+                            </label>
 
-                            <p className="font-bold">Upload Resume</p>
-                            <hr />
-                            <FileUpload />
+                            <label className="block mb-2 font-semibold">
+                                GST
+                                <span className="text-red-700 relative top-0 right-0">* - </span>
+                                <input type="file" name="resume" accept=".pdf" required />
+                            </label>
+                            
+                            <label className="block mb-2 font-semibold">
+                                PAN
+                                <span className="text-red-700 relative top-0 right-0">* - </span>
+                                <input type="file" name="resume" accept=".pdf" required />
+                            </label>
 
                             <button
                                 type="submit"

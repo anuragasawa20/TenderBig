@@ -186,17 +186,24 @@ function CompanyForm({ onSubmit }) {
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
-                Upload Documents
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <hr />
-                <input
-                    type="file"
-                    name="doc"
-                    accept=".pdf"
-                    multiple
-                    required
-                />
+                Reg No.
+                <span className="text-red-700 relative top-0 right-0">* - </span>
+                <input type="file" name="resume" accept=".pdf" required />
             </label>
+
+            <label className="block mb-2 font-semibold">
+                GST
+                <span className="text-red-700 relative top-0 right-0">* - </span>
+                <input type="file" name="resume" accept=".pdf" required />
+            </label>
+
+            <label className="block mb-2 font-semibold">
+                PAN
+                <span className="text-red-700 relative top-0 right-0">* - </span>
+                <input type="file" name="resume" accept=".pdf" required />
+            </label>
+            {/* request Licence */}
+            {/* dropdown */}
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
@@ -369,7 +376,7 @@ function IndividualForm({ onSubmit }) {
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
-                Upload Documents
+                Upload Aadhar, photos, PAN card, Digital Signature
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <hr />
                 <input

@@ -2,11 +2,12 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { locations } from "../../constants/countriesData";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-const Seeker = () => {
+const Employer = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
@@ -297,7 +298,7 @@ const Seeker = () => {
                                         onChange={(e) => setRegno(e.target.value)}
                                     />
                                 </div>
-                                <div className="mb-4 basis-1/2 mx-1">
+                                {/* <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="GST" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
                                         GST Number
@@ -310,7 +311,7 @@ const Seeker = () => {
                                         value={GST}
                                         onChange={(e) => setGST(e.target.value)}
                                     />
-                                </div>
+                                </div> */}
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="PAN" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -357,62 +358,71 @@ const Seeker = () => {
                                 </div>
                             </div>
                             <div className="flex">
-                                <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="city" className="flex items-center">
-                                        <AiOutlineUser className="mr-2" />
-                                        City
-                                    </label>
-                                    <input
-                                        required
-                                        type="text"
-                                        id="city"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={city}
-                                        onChange={(e) => setCity(e.target.value)}
-                                    />
+                                <div className="flex">
+                                    <div className="mb-4 basis-1/2 mx-1">
+                                        <label htmlFor="city" className="flex items-center">
+                                            <AiOutlineUser className="mr-2" />
+                                            City
+                                        </label>
+                                        <input
+                                            required
+                                            type="text"
+                                            id="city"
+                                            className="border border-gray-300 rounded px-3 py-2 w-full"
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="mb-4 basis-1/2 mx-1">
+                                        <label htmlFor="zipcode" className="flex items-center">
+                                            <AiOutlineUser className="mr-2" />
+                                            Zip Code
+                                        </label>
+                                        <input
+                                            required
+                                            type="text"
+                                            id="zipcode"
+                                            className="border border-gray-300 rounded px-3 py-2 w-full"
+                                            value={zipcode}
+                                            onChange={(e) => setZipcode(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="mb-4 basis-1/2 mx-1">
+                                        <label className="block mb-2 font-semibold">
+                                            State
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
+                                        </label>
+                                        <input
+                                            required
+                                            type="text"
+                                            name="state"
+                                            value={state}
+                                            onChange={(e) => setState(e.target.value)}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                            placeholder="Enter State"
+                                        />
+                                    </div>
+                                    <div className="mb-4 basis-1/2 mx-1">
+                                        <label className="block mb-2 font-semibold">
+                                            Country
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
+                                        </label>
+                                        <select
+                                            required
+                                            name="country"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            {locations.map((country, index) => (
+                                                <option key={index} value={country}>
+                                                    {country}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
-                                <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="zipcode" className="flex items-center">
-                                        <AiOutlineUser className="mr-2" />
-                                        Zip Code
-                                    </label>
-                                    <input
-                                        required
-                                        type="text"
-                                        id="zipcode"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={zipcode}
-                                        onChange={(e) => setZipcode(e.target.value)}
-                                    />
-                                </div>
-                                <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="state" className="flex items-center">
-                                        <AiOutlineUser className="mr-2" />
-                                        State
-                                    </label>
-                                    <input
-                                        required
-                                        type="text"
-                                        id="state"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={state}
-                                        onChange={(e) => setState(e.target.value)}
-                                    />
-                                </div>
-                                <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="country" className="flex items-center">
-                                        <AiOutlineUser className="mr-2" />
-                                        Country
-                                    </label>
-                                    <input
-                                        required
-                                        type="text"
-                                        id="country"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={country}
-                                        onChange={(e) => setCountry(e.target.value)}
-                                    />
-                                </div>
+
                             </div>
                             <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -460,7 +470,7 @@ const Seeker = () => {
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="seekerpost" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Post of the seeker
+                                        Employer Post
                                     </label>
                                     <input
                                         required
@@ -478,6 +488,13 @@ const Seeker = () => {
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
                                 <input type="file" name="resume" accept=".pdf" required />
                             </label>
+                            
+                            <label className="block mb-2 font-semibold">
+                                Others
+                                <span className="text-red-700 relative top-0 right-0">* - </span>
+                                <input type="file" name="resume" accept=".pdf" required />
+                            </label>
+
 
                             <button
                                 type="submit"
@@ -531,4 +548,4 @@ const Seeker = () => {
     );
 };
 
-export default Seeker;
+export default Employer;

@@ -2,7 +2,6 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -12,6 +11,7 @@ const AuctionMaterial = () => {
     const [regNumber, setRegNumber] = useState('');
     const [workExp, setWorkExp] = useState('');
     const [gst, setGst] = useState('');
+    const [tenderLink, setTenderLink] = useState("");
     const [aadharCardDirectors, setAadharCardDirectors] = useState('');
     const [panCardDirectors, setPanCardDirectors] = useState('');
     const [companyAddress, setCompanyAddress] = useState('');
@@ -28,6 +28,7 @@ const AuctionMaterial = () => {
         // You can access the form values using the state variables
         const formValues = {
             tenderNumber,
+            tenderLink,
             companyName,
             regNumber,
             workExp,
@@ -74,7 +75,8 @@ const AuctionMaterial = () => {
                     <h2 className="text-2xl font-bold mb-4 text-center">Auction Material</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className=" p-2 rounded-lg">
-                                <label className="block font-semibold">
+                                <div className="flex">
+                                <label className="block font-semibold basis-1/2 mx-1">
                                     Tender Number
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input required
@@ -85,6 +87,18 @@ const AuctionMaterial = () => {
                                         placeholder="Enter Tender Number"
                                     />
                                 </label>
+                                <label className="block font-semibold basis-1/2 mx-1">
+                                    Tender Link
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input required
+                                        type="URL"
+                                        name="tenderLink"
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={tenderLink}
+                                        onChange={(e) => setTenderLink(e.target.value)}
+                                        placeholder="Enter Tender Number"
+                                    />
+                                </label>
+                                </div>
                                 <label className="block font-semibold mt-2">
                                     Company Name
                                     <span className="text-red-700 relative top-0 right-0">*</span>
@@ -157,7 +171,7 @@ const AuctionMaterial = () => {
 
                             <div className="p-2 rounded-lg">
                                 <label className="block mb-2 font-semibold">
-                                    Director's Aadhar Card
+                                    Directors Aadhar Card
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -228,7 +242,7 @@ const AuctionMaterial = () => {
                                 </label>
 
                                 <label className="block mb-2 font-semibold">
-                                    Auction Materials List
+                                    Auction Materials List (multiple)
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <select
                                         name="auctionMaterials"

@@ -49,21 +49,21 @@ const CareerAndManpower = () => {
               </h1>
 
               <p className="flex justify-center p-2">State you Designation</p>
-              <Link to="/employer">
-                <button
-                  type="submit"
-                  className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-                >
-                  Employer
-                </button>
-              </Link>
-              <p className="flex justify-center p-3">OR</p>
               <Link to="/seeker">
                 <button
                   type="submit"
                   className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
                 >
                   Seeker
+                </button>
+              </Link>
+              <p className="flex justify-center p-3">OR</p>
+              <Link to="/employer">
+                <button
+                  type="submit"
+                  className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
+                >
+                  Employer
                 </button>
               </Link>
             </div>
