@@ -9,7 +9,6 @@ import Footer from "../../components/Footer";
 
 const Employer = () => {
     const [name, setName] = useState("");
-const Seeker = () => {
 
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
