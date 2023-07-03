@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import FileUpload from "../file-uploading/FileUpload";
 import { Link } from "react-router-dom";
 import { MultiStepProgressBar } from "../../components/Progressbar";
+import Director from "../DynamicOpt/directors";
 
 const JointVenture2 = () => {
     const [formData, setFormData] = useState({
@@ -149,32 +149,7 @@ const JointVenture2 = () => {
                 <form onSubmit={handleSubmit}>
                     {/* Global Section */}
                     <h2 className="text-2xl font-bold mb-4">Personal details</h2>
-                    <label className="block mb-2 font-semibold relative">
-                        Full Name
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Name"
-                        />
-                    </label>
-
-                    <label className="block mb-2 font-semibold relative">
-                        Father Name
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="text"
-                            name="fname"
-                            value={formData.fname}
-                            onChange={handleChange}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        />
-                    </label>
+                    <Director />
 
                     <label className="block mb-2 font-semibold relative">
                         Director / Company Post
@@ -189,31 +164,33 @@ const JointVenture2 = () => {
                         />
                     </label>
 
-                    <label className="block mb-2 font-semibold relative">
-                        Email
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        />
-                    </label>
+                    <div className="flex">
+                        <label className="block mb-2 font-semibold relative basis-1/2">
+                            Email
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <input
+                                required
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            />
+                        </label>
 
-                    <label className="block mb-2 font-semibold relative">
-                        Contact Number
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="number"
-                            name="pnumber"
-                            value={formData.pnumber}
-                            onChange={handleChange}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        />
-                    </label>
+                        <label className="block mb-2 font-semibold relative basis-1/2 mx-1">
+                            Contact Number
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <input
+                                required
+                                type="number"
+                                name="pnumber"
+                                value={formData.pnumber}
+                                onChange={handleChange}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            />
+                        </label>
+                    </div>
 
                     <label className="block mb-2 font-semibold relative">
                         16-Digit Aadhar Number
@@ -229,10 +206,30 @@ const JointVenture2 = () => {
                         />
                     </label>
 
-                    <div>
-                        <p className="font-bold">Upload you passport size photo</p>
-                    </div>
-                    <FileUpload />
+                    <label className="block mb-2 font-semibold">
+                        Director GST
+                        <span className="text-red-700 relative top-0 right-0">* - </span>
+                        <input type="file" name="resume" accept=".pdf" required />
+                    </label>
+
+                    <label className="block mb-2 font-semibold">
+                        Director PAN
+                        <span className="text-red-700 relative top-0 right-0">* - </span>
+                        <input type="file" name="resume" accept=".pdf" required />
+                    </label>
+
+                    <label className="block mb-2 font-semibold">
+                        Director aadhar
+                        <span className="text-red-700 relative top-0 right-0">* - </span>
+                        <input type="file" name="resume" accept=".pdf" required />
+                    </label>
+
+                    <label className="block mb-2 font-semibold">
+                        Director photo
+                        <span className="text-red-700 relative top-0 right-0">* - </span>
+                        <input type="file" name="resume" accept=".pdf" required />
+                    </label>
+
                     <Link to="/jointventure1">
                         <button
                             type="button"

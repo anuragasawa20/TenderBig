@@ -5,6 +5,81 @@ import { Link } from "react-router-dom";
 import { MultiStepProgressBar } from "../../components/Progressbar";
 
 
+function FinanceForm({ onSubmit }) {
+    const [financeval, setFinanceval] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = {
+            financeval
+        };
+
+        var requestBody = new FormData();
+
+        // Append form data to the request body
+        Object.entries(data).forEach(([key, value]) => {
+            requestBody.append(key, value);
+        });
+        console.log(requestBody.get("cinReg"))
+        requestBody.append("doc", event.target.doc.files[0]);
+
+        onSubmit(requestBody);
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <div>
+                    <input required
+                        type="text"
+                        name="companyName"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={financeval} onChange={(e) => setFinanceval(e.target.value)}
+                        placeholder="Enter Finance Required"
+                    />
+                </div>
+            </form>
+        </>
+    )
+}
+
+function ManpowerForm({ onSubmit }) {
+    const [manpowerval, setmanpowerval] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = {
+            manpowerval
+        };
+
+        var requestBody = new FormData();
+
+        // Append form data to the request body
+        Object.entries(data).forEach(([key, value]) => {
+            requestBody.append(key, value);
+        });
+        console.log(requestBody.get("cinReg"))
+        requestBody.append("doc", event.target.doc.files[0]);
+
+        onSubmit(requestBody);
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <div>
+                    <input required
+                        type="text"
+                        name="companyName"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={manpowerval} onChange={(e) => setmanpowerval(e.target.value)}
+                        placeholder="Enter Experience of worker"
+                    />
+                </div>
+            </form>
+        </>
+    )
+}
+
+
 const JointVenture3 = () => {
     const [formData, setFormData] = useState({
         summary: "",
@@ -27,6 +102,8 @@ const JointVenture3 = () => {
         CRegnumber: "",
         country: "",
         state: "",
+        RatioNumerator: "",
+        RatioDenominator: "",
         city: "",
         procurementSummarySummary: "",
         procurementSummaryDeadline: "",
@@ -68,6 +145,8 @@ const JointVenture3 = () => {
             webAddress: "",
             aadhar: "",
             GSTnumber: "",
+            RatioNumerator: "",
+            RatioDenominator: "",
             workratio: "",
             userCategory: "",
             TotalValuation: "",
@@ -97,6 +176,68 @@ const JointVenture3 = () => {
             tenderDetailNoticeType: "",
         });
     }
+
+    const [selectedOption, setSelectedOption] = useState('Finance');
+
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    };
+
+    const handleFinanceFormSubmit = (data) => {
+
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:5000/apiTender/services/ccert/certification', {
+            method: 'POST',
+            headers: {
+                auth: token,
+            },
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success == true) {
+                    alert('Submitted');
+                    window.location.href = '/certification';
+                }
+                else {
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/certification';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
+            });
+    };
+
+    const handleManpowerFormSubmit = (data) => {
+
+        const token = localStorage.getItem('token');
+
+        fetch('http://localhost:5000/apiTender/services/icert/certification', {
+            method: 'POST',
+            headers: {
+                auth: token,
+            },
+            body: data,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success == true) {
+                    alert('Submitted');
+                    window.location.href = '/certification';
+                }
+                else {
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/certification';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
+            });
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -177,16 +318,66 @@ const JointVenture3 = () => {
                     <label className="block mb-2 font-semibold relative">
                         Requirement : Finance / manpower (select one)
                         <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Name"
-                        />
                     </label>
+
+                    <div className="flex">
+                        <div className="w-full">
+                            <div className="mb-4">
+                                <input
+                                    type="radio"
+                                    id="company"
+                                    name="option"
+                                    value="company"
+                                    checked={selectedOption === 'company'}
+                                    onChange={handleOptionChange}
+                                />
+                                <label htmlFor="company" className="ml-2 mr-4">Finance</label>
+
+                                <input
+                                    type="radio"
+                                    id="individual"
+                                    name="option"
+                                    value="individual"
+                                    checked={selectedOption === 'individual'}
+                                    onChange={handleOptionChange}
+                                />
+                                <label htmlFor="individual" className="ml-2">Manpower</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex">
+                        <div className="w-full">
+                            {/* Render the selected form */}
+                            {selectedOption === 'company' && <FinanceForm onSubmit={handleFinanceFormSubmit} />}
+                            {selectedOption === 'individual' && <ManpowerForm onSubmit={handleManpowerFormSubmit} />}
+                        </div>
+                    </div>
+
+                    <label className="block mb-2 font-semibold">
+                        Partnership Ratio
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <div className="flex">
+                            <input
+                                required
+                                type="number"
+                                name="RatioNumerator"
+                                value={formData.RatioNumerator}
+                                onChange={handleChange}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none mr-2"
+                            />
+                            <span className="text-lg font-semibold">:</span>
+                            <input
+                                required
+                                type="number"
+                                name="RatioDenominator"
+                                value={formData.RatioDenominator}
+                                onChange={handleChange}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none ml-2"
+                            />
+                        </div>
+                    </label>
+
 
                     <div className="grid grid-cols-2 gap-4 mt-1.5 mb-1.5">
                         <label className="block font-semibold">

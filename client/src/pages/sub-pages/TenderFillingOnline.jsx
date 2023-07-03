@@ -28,7 +28,8 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
             email: PropTypes.string.isRequired,
             url: PropTypes.string.isRequired,
             accholdername: PropTypes.string.isRequired,
-            expirydate: PropTypes.string.isRequired,
+            ifscCode: PropTypes.string.isRequired,
+            branchnum: PropTypes.string.isRequired,
         }).isRequired,
         handleChange: PropTypes.func.isRequired,
         handleSubmit: PropTypes.func.isRequired,
@@ -157,12 +158,23 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                     </label>
                     <div className="flex">
                         <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                            valid till?
+                            IFSC code
                             <span className="text-red-700 relative top-0 right-0">*</span>
                             <input required
-                                type="month"
-                                name="expirydate"
-                                value={formData.expirydate}
+                                type="number"
+                                name="ifscCode"
+                                value={formData.ifscCode}
+                                onChange={handleChange}
+                                className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            />
+                        </label>
+                        <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                            Branch Number
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <input required
+                                type="number"
+                                name="branchnum"
+                                value={formData.branchnum}
                                 onChange={handleChange}
                                 className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                             />
@@ -227,9 +239,10 @@ const TenderForm = () => {
         vendor: "",
         mobile: "",
         accholdername: "",
-        expirydate: "",
+        ifscCode: "",
         sector: "",
         regno: "",
+        knumber: "",
         userCategory: "",
         product: "",
         companyaddress1: "",
@@ -237,6 +250,7 @@ const TenderForm = () => {
         companycity: "",
         companystate: "",
         companycountry: "",
+        branchnum: "",
         ITR: "",
         turnover: "",
         workexp: "",
@@ -273,7 +287,7 @@ const TenderForm = () => {
             wmobile: "",
             des: "",
             accholdername: "",
-            expirydate: "",
+            ifscCode: "",
             website: "",
             vendor: "",
             mobile: "",
@@ -282,8 +296,10 @@ const TenderForm = () => {
             userCategory: "",
             product: "",
             companyaddress1: "",
+            knumber: "",
             companyaddress2: "",
             companycity: "",
+            branchnum: "",
             companystate: "",
             companycountry: "",
             ITR: "",
@@ -365,7 +381,7 @@ const TenderForm = () => {
     return (
         <>
             <Navbar />
-            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+            <div className="max-w-5xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
                 {currentPage === 1 && (
                     <form onSubmit={handleSubmit}>
                         {/* Global Section */}
@@ -487,27 +503,9 @@ const TenderForm = () => {
                         </div>
 
 
-                        {/* procurementSummary and tenderDetail Sections */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* Procurement Summary Section */}
                             <div className=" p-2 rounded-lg mt-2">
                                 <div className="grid grid-cols-2 gap-4">
-                                    {/* <label className="block font-semibold">
-                                        Country
-                                        <span className="text-red-700 relative top-0 right-0">*</span>
-                                        <select required
-                                            name="country"
-                                            value={formData.country}
-                                            onChange={handleChange}
-                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        >
-                                            {locations.map((country, index) => (
-                                                <option key={index} value={country}>
-                                                    {country}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </label> */}
 
                                     <label className="block font-semibold">
                                         ITR (Year 1)
@@ -704,14 +702,20 @@ const TenderForm = () => {
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                     />
                                 </label>
+                                <label className="block mb-2 font-semibold">
+                                    K number
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input required
+                                        type="description"
+                                        name="knumber"
+                                        value={formData.knumber}
+                                        onChange={handleChange}
+                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                    />
+                                </label>
                                 <form onSubmit={handleSubmit}>
                                     <div className="flex">
                                         <div>
-                                            <label className="block mb-2 font-semibold">
-                                                Bidding Documents
-                                                <span className="text-red-700">*</span>
-                                                <input type="file" name="resume" accept=".pdf" required />
-                                            </label>
                                             <label className="block mb-2 font-semibold">
                                                 Rent Agreements
                                                 <span className="text-red-700">*</span>
@@ -723,8 +727,22 @@ const TenderForm = () => {
                                                 <input type="file" name="aadhar" accept=".pdf" required />
                                             </label>
                                             <div className="dropdown my-3 font-semibold">
+                                                Bidding Documents
+                                                <span className="text-red-700">*</span>
+                                                <br />
+                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+                                                    Upload Documents Here
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                </ul>
+                                            </div>
+                                            <div className="dropdown my-3 font-semibold">
                                                 Required Licenses
                                                 <span className="text-red-700">*</span>
+                                                <br />
                                                 <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
                                                     Upload Documents Here
                                                 </button>
@@ -737,6 +755,7 @@ const TenderForm = () => {
                                             <div className="dropdown font-semibold">
                                                 Tender Docs with Stamps
                                                 <span className="text-red-700">*</span>
+                                                <br />
                                                 <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
                                                     Upload Documents Here
                                                 </button>

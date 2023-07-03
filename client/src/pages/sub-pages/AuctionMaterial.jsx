@@ -1,19 +1,19 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
+import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import { RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Directors from "../DynamicOpt/directors";
 
 const AuctionMaterial = () => {
     const [tenderNumber, setTenderNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [regNumber, setRegNumber] = useState('');
-    const [workExp, setWorkExp] = useState('');
+    // const [workExp, setWorkExp] = useState('');
     const [gst, setGst] = useState('');
     const [tenderLink, setTenderLink] = useState("");
-    const [aadharCardDirectors, setAadharCardDirectors] = useState('');
-    const [panCardDirectors, setPanCardDirectors] = useState('');
+    const [panCard, setPanCard] = useState('');
     const [companyAddress, setCompanyAddress] = useState('');
     const [website, setWebsite] = useState('');
     const [projectMailId, setProjectMailId] = useState('');
@@ -30,10 +30,9 @@ const AuctionMaterial = () => {
             tenderLink,
             companyName,
             regNumber,
-            workExp,
+            // workExp,
             gst,
-            aadharCardDirectors,
-            panCardDirectors,
+            panCard,
             companyAddress,
             website,
             projectMailId,
@@ -68,18 +67,18 @@ const AuctionMaterial = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                // if(data.success == true){
-                //     alert('Submitted');
-                //     window.location.href = '/employer';
-                // }
-                // else{
-                //     alert('Something went wrong.Try Again.');
-                //     window.location.href = '/employer';
-                // }
+                if(data.success == true){
+                    alert('Submitted');
+                    window.location.href = '/employer';
+                }
+                else{
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/employer';
+                }
             })
             .catch((error) => {
-                // console.error('Error:', error);
-                // alert('Oops something went wrong!!!');
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
             });
     };
 
@@ -159,17 +158,47 @@ const AuctionMaterial = () => {
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                     />
                                 </label>
-                                <label className="block font-semibold mt-2">
-                                    Work Experience
-                                    <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input required
-                                        type="text"
-                                        name="workExp"
-                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={workExp}
-                                        onChange={(e) => setWorkExp(e.target.value)}
-                                        placeholder="Enter Work Experience"
-                                    />
-                                </label>
+                                
+                                <form id="workExp" onSubmit={handleSubmit}>
+                                    <div className="flex my-2">
+                                        <div>
+                                            <div className="dropdown font-semibold">
+                                                Work Experience
+                                                <span className="text-red-700">*</span>
+                                                <br />
+                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+                                                    Upload Documents Here
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form id="workOrder" onSubmit={handleSubmit}>
+                                    <div className="flex my-2">
+                                        <div>
+                                            <div className="dropdown font-semibold">
+                                                Work Order Sample
+                                                <span className="text-red-700">*</span>
+                                                <br />
+                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+                                                    Upload Documents Here
+                                                </button>
+                                                <ul className="dropdown-menu">
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
                                 <label className="block mb-2 font-semibold mt-3">
                                     Some Work Profile (Work Order Copies)
                                     <span className="text-red-700 relative top-0 right-0">*</span>
@@ -200,25 +229,14 @@ const AuctionMaterial = () => {
                                         type="text"
                                         name="panCardDirectors"
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                        value={panCardDirectors} onChange={(e) => setPanCardDirectors(e.target.value)}
+                                        value={panCard} onChange={(e) => setPanCard(e.target.value)}
                                         placeholder="Enter PAN"
                                     />
                                 </label>
                             </div>
 
                             <div className="p-2 rounded-lg">
-                                <label className="block mb-2 font-semibold">
-                                    Directors Aadhar Card
-                                    <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input
-                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        type="number"
-                                        name="aadharCardDirectors"
-                                        value={aadharCardDirectors}
-                                        onChange={(e) => setAadharCardDirectors(e.target.value)}
-                                        placeholder="Enter Aadhar Number"
-                                    />
-                                </label>
+                                <Directors/>
                                 <label className="block mb-2 font-semibold">
                                     Company Address
                                     <span className="text-red-700 relative top-0 right-0">*</span>
