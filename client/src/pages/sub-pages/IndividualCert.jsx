@@ -237,7 +237,7 @@ const IndividualCert = () => {
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <label className="block mb-2 font-semibold">
-                                    Upload Aadhar
+                                    {/* Upload Aadhar, photos, PAN card, Digital Signature */}
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input type="file" name="aadhar" accept=".pdf" required />
                                 </label>

@@ -1,8 +1,7 @@
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
+import {AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import {RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -206,6 +205,20 @@ function CompanyForm({ onSubmit }) {
                     required
                 />
             </label>
+
+            <label className="block mb-2 font-semibold">
+                GST
+                <span className="text-red-700 relative top-0 right-0">* - </span>
+                <input type="file" name="resume" accept=".pdf" required />
+            </label>
+
+            <label className="block mb-2 font-semibold">
+                PAN
+                <span className="text-red-700 relative top-0 right-0">* - </span>
+                <input type="file" name="resume" accept=".pdf" required />
+            </label>
+            {/* request Licence */}
+            {/* dropdown */}
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
