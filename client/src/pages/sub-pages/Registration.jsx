@@ -75,7 +75,7 @@ const Registration = () => {
             GST,
             PAN,
         };
-
+console.log(formData)
         axios
             .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
             .then((response) => {

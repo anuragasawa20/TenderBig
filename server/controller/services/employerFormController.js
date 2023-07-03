@@ -77,11 +77,10 @@ const submitForm = async (req, res) => {
     }
 };
 
-
 // Controller for getting all forms
 const getAllForms = async (req, res) => {
     try {
-        const forms = await EmployerForm.find().select('name jobexp country expectedSalary');
+        const forms = await EmployerForm.find().select('name jobexp country expectedSalary createdAt');
         res.json(forms);
     } catch (error) {
         console.error(error);

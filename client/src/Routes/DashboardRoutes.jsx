@@ -24,6 +24,10 @@ import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUser
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 //Contact Requests
+import CompanyDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Company/CompanyDetails';
+import CompanyList from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Company/Company';
+import EmployerForms from '../Admin/partials/dashboard/requests/Employer-Form/EmployerForms';
+import EmployerFormDetail from '../Admin/partials/dashboard/requests/Employer-Form/EmployerFormDetail';
 import ContactFormList from '../Admin/partials/dashboard/requests/ContactPage';
 import CareerManPower from '../Admin/partials/dashboard/requests/Career&ManPower';
 import AuctionMaterial from '../Admin/partials/dashboard/requests/Auction-Material';
@@ -112,6 +116,28 @@ const DashboardRoutes = () => {
       />
 
       {/* Requests */}
+
+      {/* Employer */}
+      <Route
+        path="/employerrequests"
+        element={<PrivateRoute element={EmployerForms} />}
+      />
+      <Route
+        path="/employerrequests/:id"
+        element={<PrivateRoute element={EmployerFormDetail} />}
+      />
+
+      {/* Company */}
+       <Route
+        path="/companyrequests"
+        element={<PrivateRoute element={CompanyList} />}
+      />
+      <Route
+        path="/companyrequests/:id"
+        element={<PrivateRoute element={CompanyDetails} />}
+      />
+
+      
       <Route
         path="/contact"
         element={<PrivateRoute element={ContactFormList} />}

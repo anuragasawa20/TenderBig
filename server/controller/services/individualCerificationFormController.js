@@ -55,7 +55,7 @@ const submitForm = async (req, res) => {
 // Controller for getting all certification forms
 const getAllForms = async (req, res) => {
   try {
-    const forms = await IndividualForm.find().select('address name mobileNumber workingField');
+    const forms = await IndividualForm.find().select('address name mobileNumber workingField createdAt');
     res.json(forms);
   } catch (error) {
     console.error(error);
