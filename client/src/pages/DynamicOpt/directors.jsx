@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Directors = ({ onDirectorSubmit }) => {
     const [directorsName, setDirectorsName] = useState(['']);
@@ -125,16 +126,19 @@ const Directors = ({ onDirectorSubmit }) => {
                 ))}
 
                 <button
-                    className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700 my-1"
+                    className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700 my-1 mx-1"
+                    type="button"
                     onClick={addDirectorInput}
                 >
                     Add
                 </button>
-
-                <button type="submit">Submit</button>
             </form>
         </div>
     );
+};
+
+Directors.propTypes = {
+    onDirectorSubmit: PropTypes.func.isRequired,
 };
 
 export default Directors;
