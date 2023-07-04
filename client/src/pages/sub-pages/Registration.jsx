@@ -85,7 +85,7 @@ const Registration = () => {
         };
 console.log(formData)
         axios
-            .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
+            .post("http://localhost:5000/apiTender/services/register/registration", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

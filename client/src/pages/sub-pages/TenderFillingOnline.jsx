@@ -249,7 +249,6 @@ const TenderForm = () => {
         companyaddress2: "",
         companycity: "",
         companystate: "",
-        companycountry: "",
         branchnum: "",
         ITRone: "",
         ITRtwo: "",
@@ -267,11 +266,7 @@ const TenderForm = () => {
         wmobile: "",
         website: "",
         accnumber: "",
-        paddress: "",
-        pcity: "",
-        pdistrict: "",
         pstate: "",
-        ppin: "",
         ptelfax: "",
         email: "",
         url: "",
@@ -346,30 +341,30 @@ const TenderForm = () => {
 
         const token = localStorage.getItem("token");
 
-        const requestBody = JSON.stringify(formData);
+        // const requestBody = JSON.stringify(formData);
 
-        fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                auth: token,
-            },
-            body: requestBody,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-                alert("Submitted")
-                clearInputs();
-                window.location.href = '/forms';
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("Oops something went wrong!!!");
-                clearInputs();
-                window.location.href = '/forms';
-            });
-        clearInputs();
+        // fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         auth: token,
+        //     },
+        //     body: requestBody,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log("Success:", data);
+        //         alert("Submitted")
+        //         clearInputs();
+        //         window.location.href = '/forms';
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error:", error);
+        //         alert("Oops something went wrong!!!");
+        //         clearInputs();
+        //         window.location.href = '/forms';
+        //     });
+        // clearInputs();
     };
 
     const [currentPage, setCurrentPage] = useState(1);
