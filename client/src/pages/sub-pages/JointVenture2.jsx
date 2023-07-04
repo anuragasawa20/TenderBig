@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import { MultiStepProgressBar } from "../../components/Progressbar";
-import Director from "../DynamicOpt/directors";
+import Directors from "../DynamicOpt/directors";
 
 const JointVenture2 = () => {
     const [formData, setFormData] = useState({
@@ -109,6 +109,12 @@ const JointVenture2 = () => {
             [name]: value,
         }));
     };
+
+    const handleDirectorSubmit = (directorData) => {
+        // Log the director data to the console
+        console.log(directorData);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
@@ -149,7 +155,7 @@ const JointVenture2 = () => {
                 <form onSubmit={handleSubmit}>
                     {/* Global Section */}
                     <h2 className="text-2xl font-bold mb-4">Personal details</h2>
-                    <Director />
+                    <Directors onDirectorSubmit={handleDirectorSubmit} />
 
                     <label className="block mb-2 font-semibold relative">
                         Director / Company Post
