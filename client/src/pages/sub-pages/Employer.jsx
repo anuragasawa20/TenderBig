@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData"
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import axios from "axios";
-import FileUpload from "../file-uploading/FileUpload";
 
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (

@@ -1,5 +1,5 @@
-import {AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import {RiMapPin2Line } from "react-icons/ri";
+import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
+import { RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
@@ -398,25 +398,25 @@ function IndividualForm({ onSubmit }) {
             </div>
 
             <label className="block mb-2 font-semibold">
-                        Upload Photo
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="resume" accept=".pdf" required />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Upload Photos
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="aadhar" accept=".pdf" required />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Upload PAN
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="aadhar" accept=".pdf" required />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Upload Digital Signature
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="aadhar" accept=".pdf" required />
-                    </label>
+                Upload Photo
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <input type="file" name="resume" accept=".pdf" required />
+            </label>
+            <label className="block mb-2 font-semibold">
+                Upload Photos
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <input type="file" name="aadhar" accept=".pdf" required />
+            </label>
+            <label className="block mb-2 font-semibold">
+                Upload PAN
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <input type="file" name="aadhar" accept=".pdf" required />
+            </label>
+            <label className="block mb-2 font-semibold">
+                Upload Digital Signature
+                <span className="text-red-700 relative top-0 right-0">*</span>
+                <input type="file" name="aadhar" accept=".pdf" required />
+            </label>
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"

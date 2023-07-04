@@ -10,7 +10,6 @@ const AuctionMaterial = () => {
     const [tenderNumber, setTenderNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [regNumber, setRegNumber] = useState('');
-    // const [workExp, setWorkExp] = useState('');
     const [gst, setGst] = useState('');
     const [tenderLink, setTenderLink] = useState("");
     const [panCard, setPanCard] = useState('');
@@ -30,7 +29,6 @@ const AuctionMaterial = () => {
             tenderLink,
             companyName,
             regNumber,
-            // workExp,
             gst,
             panCard,
             companyAddress,

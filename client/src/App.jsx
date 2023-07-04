@@ -27,14 +27,14 @@ import TenderFillingOnline from './pages/sub-pages/TenderFillingOnline';
 import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
 import CompanyCert from './pages/sub-pages/CompanyCert';
 import IndividualCert from './pages/sub-pages/IndividualCert';
-import Gems from './pages/sub-pages/Gems';
+// import Gems from './pages/sub-pages/Gems';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/gems" element={<Gems />} />
+        {/* <Route path="/gems" element={<Gems />} /> */}
         <Route path='/employer' element={<Employer/>}></Route>
         <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
         <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>

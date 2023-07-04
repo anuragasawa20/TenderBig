@@ -67,10 +67,13 @@ const Registration = () => {
     const sendDataToAPI = () => {
         const formData = {
             name,
+            Gem,
             company,
             mobile,
+            secMobile,
             email,
             CIN,
+            wmobile,
             cprofile,
             companyEstd,
             companypost,
