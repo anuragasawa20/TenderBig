@@ -25,7 +25,7 @@ const IndividualList = () => {
     };
 
     const viewDetails = (id) => {
-        navigate(`/dashboard/individualrequest/${id}`)
+        navigate(`/dashboard/individualrequests/${id}`)
     }
 
     const [sidebarOpen, setSidebarOpen] = useState(false);

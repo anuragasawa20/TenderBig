@@ -24,6 +24,8 @@ import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUser
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 //Contact Requests
+import IndividualDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Individual/IndividualDetails';
+import IndividualList from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Individual/Individual';
 import CompanyDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Company/CompanyDetails';
 import CompanyList from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Company/Company';
 import EmployerForms from '../Admin/partials/dashboard/requests/Employer-Form/EmployerForms';
@@ -137,6 +139,15 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={CompanyDetails} />}
       />
 
+      {/* Individual */}
+      <Route
+        path="/individualrequests"
+        element={<PrivateRoute element={IndividualList} />}
+      />
+      <Route
+        path="/individualrequests/:id"
+        element={<PrivateRoute element={IndividualDetails} />}
+      />
       
       <Route
         path="/contact"

@@ -41,7 +41,7 @@ const CompanyList = () => {
 
 
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <h1 className="text-xl font-bold mb-4">Employer Requests</h1>
+                        <h1 className="text-xl font-bold mb-4">Company Requests</h1>
 
                         {/* Table */}
                         <div className="shadow overflow-hidden rounded-lg border">
