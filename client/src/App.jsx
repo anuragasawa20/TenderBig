@@ -18,10 +18,10 @@ import RegAndCert from './pages/sub-pages/RegAndCert';
 import Registration from './pages/sub-pages/Registration';
 import Certification from './pages/sub-pages/Certification';
 import AuctionMaterial from './pages/sub-pages/AuctionMaterial';
-import JointVenture1 from './pages/sub-pages/JointVenture1';
-import JointVenture2 from './pages/sub-pages/JointVenture2';
-import JointVenture3 from './pages/sub-pages/JointVenture3';
-// import JointVenture from '../src/pages/sub-pages/JointVenture';
+// import JointVenture1 from './pages/sub-pages/JointVenture1';
+// import JointVenture2 from './pages/sub-pages/JointVenture2';
+// import JointVenture3 from './pages/sub-pages/JointVenture3';
+import JointVenture from '../src/pages/sub-pages/JointVenture';
 import TenderFilling from './pages/sub-pages/TenderFilling';
 import TenderFillingOnline from './pages/sub-pages/TenderFillingOnline';
 import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
@@ -43,10 +43,10 @@ const App = () => {
         <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/registration' element={<Registration/>}></Route>
         <Route path='/auctionmaterial' element={<AuctionMaterial/>}></Route>
-        {/* <Route path='/jointventure' element={<JointVenture/>}></Route> */}
-        <Route path='/jointventure1' element={<JointVenture1/>}></Route>
+        <Route path='/jointventure' element={<JointVenture/>}></Route>
+        {/* <Route path='/jointventure1' element={<JointVenture1/>}></Route>
         <Route path='/jointventure2' element={<JointVenture2/>}></Route>
-        <Route path='/jointventure3' element={<JointVenture3/>}></Route>
+        <Route path='/jointventure3' element={<JointVenture3/>}></Route> */}
         <Route path='/certification' element={<Certification/>}></Route>
         <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/seeker' element={<Seeker/>}></Route>

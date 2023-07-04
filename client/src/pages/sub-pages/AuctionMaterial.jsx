@@ -27,6 +27,8 @@ const AuctionMaterial = () => {
     const [contactNumber, setContactNumber] = useState('');
     const [auctionMaterials, setAuctionMaterials] = useState('');
     const [otherDetails, setOtherDetails] = useState('');
+    const [docs, setDocs] = useState("");
+    const [directors, setDirectors] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,7 +51,9 @@ const AuctionMaterial = () => {
             contractPName,
             contactNumber,
             auctionMaterials,
-            otherDetails
+            otherDetails,
+            directors,
+            Docs,
         };
         console.log(formValues);
 
@@ -96,6 +100,9 @@ const AuctionMaterial = () => {
         // Log the director data to the console
         console.log(directorData);
     };
+    const handleDocsSubmit = (docsData) => {
+        console.log(docsData);
+    }
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -189,7 +196,11 @@ const AuctionMaterial = () => {
                                                 Work Experience
                                                 <span className="text-red-700">*</span>
                                             </label>
-                                            <Docs></Docs>
+                                            <Docs 
+                                                onDocsSubmit={handleDocsSubmit}
+                                                value={docs}
+                                                onChange={(e)=>setDocs(e.target.value)}
+                                            ></Docs>
                                         </div>
                                     </div>
                                 </form>
@@ -202,7 +213,11 @@ const AuctionMaterial = () => {
                                                 Work Order Sample
                                                 <span className="text-red-700">*</span>
                                             </label>
-                                            <Docs></Docs>
+                                            <Docs 
+                                                onDocsSubmit={handleDocsSubmit}
+                                                value={docs}
+                                                onChange={(e)=>setDocs(e.target.value)}
+                                            ></Docs>
                                         </div>
                                     </div>
                                 </form>
@@ -250,7 +265,11 @@ const AuctionMaterial = () => {
                             </div>
 
                             <div className="p-2 rounded-lg">
-                                <Directors onDirectorSubmit={handleDirectorSubmit} />
+                                <Directors 
+                                    onDirectorSubmit={handleDirectorSubmit}
+                                    value={directors}
+                                    onChange={(e) => setDirectors(e.target.value)}
+                                />
                                 <label className="block mb-2 font-semibold mt-2">
                                     Address Line 1
                                     <span className="text-red-700 relative top-0 right-0">*</span>

@@ -359,6 +359,7 @@ const TenderForm = () => {
 
 
     return (
+        
         <>
             <Navbar />
             <div className="max-w-5xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
