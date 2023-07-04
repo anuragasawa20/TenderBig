@@ -1,3 +1,6 @@
+// Usability expired for this page
+
+
 import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";

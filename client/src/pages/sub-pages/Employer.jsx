@@ -289,7 +289,7 @@ const Seeker = () => {
                                 />
                             </label>
                             <label className="block mb-2 font-semibold relative">
-                                Father's Name
+                                Father Name
                                 <span className="text-red-700 relative top-0 right-0">*</span>
                                 <input
                                     required

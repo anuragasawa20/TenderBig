@@ -1,3 +1,6 @@
+// Usability expired for this page
+
+
 // import { useState } from "react";
 // import Navbar from "../../components/Navbar";
 // import { locations } from "../../constants/countriesData"

@@ -24,7 +24,7 @@ const AuctionMaterial = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         const formValues = {
             tenderNumber,
             tenderLink,
@@ -53,33 +53,38 @@ const AuctionMaterial = () => {
         const files = e.target.doc.files;
 
         for (let i = 0; i < files.length; i++) {
-          requestBody.append("doc", files[i]);
+            requestBody.append("doc", files[i]);
         }
 
         const token = localStorage.getItem('token');
 
-        // fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
-        //     method: 'POST',
-        //     headers: {
-        //         auth: token,
-        //     },
-        //     body: requestBody,
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         if(data.success == true){
-        //             alert('Submitted');
-        //             window.location.href = '/employer';
-        //         }
-        //         else{
-        //             alert('Something went wrong.Try Again.');
-        //             window.location.href = '/employer';
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //         alert('Oops something went wrong!!!');
-        //     });
+        fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
+            method: 'POST',
+            headers: {
+                auth: token,
+            },
+            body: requestBody,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success == true) {
+                    alert('Submitted');
+                    window.location.href = '/employer';
+                }
+                else {
+                    alert('Something went wrong.Try Again.');
+                    window.location.href = '/employer';
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Oops something went wrong!!!');
+            });
+    };
+
+    const handleDirectorSubmit = (directorData) => {
+        // Log the director data to the console
+        console.log(directorData);
     };
 
     const [isVisible, setIsVisible] = useState(false);
@@ -108,32 +113,32 @@ const AuctionMaterial = () => {
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="shadow-2xl p-6 bg-white rounded-lg  md:flex-row">
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
-                    <h2 className="text-2xl font-bold mb-4 text-center">Auction Material</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-center">Auction Material</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className=" p-2 rounded-lg">
                                 <div className="flex">
-                                <label className="block font-semibold basis-1/2 mx-1">
-                                    Tender Number
-                                    <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input required
-                                        type="text"
-                                        name="tenderNumber"
-                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={tenderNumber}
-                                        onChange={(e) => setTenderNumber(e.target.value)}
-                                        placeholder="Enter Tender Number"
-                                    />
-                                </label>
-                                <label className="block font-semibold basis-1/2 mx-1">
-                                    Tender Link
-                                    <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input required
-                                        type="URL"
-                                        name="tenderLink"
-                                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={tenderLink}
-                                        onChange={(e) => setTenderLink(e.target.value)}
-                                        placeholder="Enter Tender Number"
-                                    />
-                                </label>
+                                    <label className="block font-semibold basis-1/2 mx-1">
+                                        Tender Number
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input required
+                                            type="text"
+                                            name="tenderNumber"
+                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={tenderNumber}
+                                            onChange={(e) => setTenderNumber(e.target.value)}
+                                            placeholder="Enter Tender Number"
+                                        />
+                                    </label>
+                                    <label className="block font-semibold basis-1/2 mx-1">
+                                        Tender Link
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <input required
+                                            type="URL"
+                                            name="tenderLink"
+                                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={tenderLink}
+                                            onChange={(e) => setTenderLink(e.target.value)}
+                                            placeholder="Enter Tender Number"
+                                        />
+                                    </label>
                                 </div>
                                 <label className="block font-semibold mt-2">
                                     Company Name
@@ -158,7 +163,7 @@ const AuctionMaterial = () => {
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                     />
                                 </label>
-                                
+
                                 <form id="workExp" onSubmit={handleSubmit}>
                                     <div className="flex my-2">
                                         <div>
@@ -236,7 +241,7 @@ const AuctionMaterial = () => {
                             </div>
 
                             <div className="p-2 rounded-lg">
-                                <Directors/>
+                                <Directors onDirectorSubmit={handleDirectorSubmit} />
                                 <label className="block mb-2 font-semibold">
                                     Company Address
                                     <span className="text-red-700 relative top-0 right-0">*</span>

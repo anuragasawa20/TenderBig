@@ -217,8 +217,6 @@ function CompanyForm({ onSubmit }) {
                 <span className="text-red-700 relative top-0 right-0">* - </span>
                 <input type="file" name="resume" accept=".pdf" required />
             </label>
-            {/* request Licence */}
-            {/* dropdown */}
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
@@ -398,17 +396,27 @@ function IndividualForm({ onSubmit }) {
 
                 </div>
             </div>
+
             <label className="block mb-2 font-semibold">
-                Upload Document
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <hr />
-                <input
-                    type="file"
-                    name="doc"
-                    accept=".pdf"
-                    required
-                />
-            </label>
+                        Upload Photo
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input type="file" name="resume" accept=".pdf" required />
+                    </label>
+                    <label className="block mb-2 font-semibold">
+                        Upload Photos
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input type="file" name="aadhar" accept=".pdf" required />
+                    </label>
+                    <label className="block mb-2 font-semibold">
+                        Upload PAN
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input type="file" name="aadhar" accept=".pdf" required />
+                    </label>
+                    <label className="block mb-2 font-semibold">
+                        Upload Digital Signature
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input type="file" name="aadhar" accept=".pdf" required />
+                    </label>
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
