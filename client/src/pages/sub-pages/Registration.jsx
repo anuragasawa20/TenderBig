@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import FileUpload from "../file-uploading/FileUpload";
 
 const Registration = () => {
     const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
+    const [wmobile, setWMobile] = useState("");
     const [cprofile, setCprofile] = useState("");
     const [companyEstd, setCompanyEstd] = useState("");
     const [CIN, setCIN] = useState("");
@@ -47,10 +47,13 @@ const Registration = () => {
         e.preventDefault();
         sendDataToAPI();
         setName("");
+        setGem("");
         setCompany("");
         setMobile("");
+        setSecMobile("");
         setEmail("");
         setCIN("");
+        setWMobile("");
         setCprofile("");
         setCompanyEstd("");
         setCompanypost("");
@@ -128,10 +131,10 @@ console.log(formData)
                                     <input
                                         required
                                         type="number"
-                                        id="mobile"
+                                        id="wmobile"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={mobile}
-                                        onChange={(e) => setMobile(e.target.value)}
+                                        value={wmobile}
+                                        onChange={(e) => setWMobile(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
