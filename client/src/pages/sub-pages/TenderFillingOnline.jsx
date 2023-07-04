@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Docs from "../DynamicOpt/docs";
 // import axios from "axios";
 
 const OtherInformation = ({ formData, handleChange, previousPage }) => {
@@ -727,42 +728,15 @@ const TenderForm = () => {
                                             </label>
                                             <div className="dropdown my-3 font-semibold">
                                                 Bidding Documents
-                                                <span className="text-red-700">*</span>
-                                                <br />
-                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
-                                                    Upload Documents Here
-                                                </button>
-                                                <ul className="dropdown-menu">
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                </ul>
+                                                <Docs></Docs>
                                             </div>
                                             <div className="dropdown my-3 font-semibold">
                                                 Required Licenses
-                                                <span className="text-red-700">*</span>
-                                                <br />
-                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
-                                                    Upload Documents Here
-                                                </button>
-                                                <ul className="dropdown-menu">
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                </ul>
+                                                <Docs></Docs>
                                             </div>
                                             <div className="dropdown font-semibold">
                                                 Tender Docs with Stamps
-                                                <span className="text-red-700">*</span>
-                                                <br />
-                                                <button className="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
-                                                    Upload Documents Here
-                                                </button>
-                                                <ul className="dropdown-menu">
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                    <li><input type="file" name="aadhar" accept=".pdf" required /></li>
-                                                </ul>
+                                                <Docs></Docs>
                                             </div>
                                         </div>
                                     </div>
