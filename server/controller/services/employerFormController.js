@@ -90,9 +90,9 @@ const getSingleForm = async (req, res) => {
             return res.status(404).json({ error: 'Form not found' });
         }
 
-        form.cvUrl = await getLink(form.cvUrl)
-        form.profileUrl = await getLink(form.profileUrl)
-        form.aadharUrl = await getLink(form.aadharUrl)
+        // form.cvUrl = await getLink(form.cvUrl)
+        // form.profileUrl = await getLink(form.profileUrl)
+        // form.aadharUrl = await getLink(form.aadharUrl)
         res.json(form);
     } catch (error) {
         console.error(error);
