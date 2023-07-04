@@ -77,19 +77,6 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                     />
                 </label>
                 <label className="block mb-2 font-semibold">
-                    GST Number
-                    <span className="text-red-700 relative top-0 right-0">*</span>
-                    <input
-                        required
-                        type="text"
-                        name="gst"
-                        value={formData.gst}
-                        onChange={handleChange}
-                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        placeholder="Enter GST"
-                    />
-                </label>
-                <label className="block mb-2 font-semibold">
                     PAN Number
                     <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
@@ -267,7 +254,7 @@ const Seeker = () => {
                 {currentPage === 1 && (
                     <form onSubmit={handleSubmit} encType="multipart/form-data" >
                         {/* Global Section */}
-                        <h2 className="text-2xl font-bold mb-4 text-center ">Employer Space</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-center ">Seeker Space</h2>
                         <p className="text-red-700 font-thin font-serif text-sm">
                             Fields marked with an asterisk (*) are mandatory.
                         </p>

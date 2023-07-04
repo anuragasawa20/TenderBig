@@ -309,7 +309,18 @@ const AuctionMaterial = () => {
                             <label className="block mb-2 font-semibold">
                                 Auction Materials List (multiple)
                                 <span className="text-red-700 relative top-0 right-0">*</span>
-                                <Docs></Docs>
+                                <select
+                                    name="auctionMaterials"
+                                    value={auctionMaterials}
+                                    onChange={(e) => setAuctionMaterials(e.target.value)}
+                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                    required
+                                >
+                                    <option value="">Select Auction Materials</option>
+                                    <option value="Material 1">Material 1</option>
+                                    <option value="Material 2">Material 2</option>
+                                    <option value="Material 3">Material 3</option>
+                                </select>
                             </label>
                         </div>
 

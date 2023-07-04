@@ -18,6 +18,7 @@ function CompanyForm({ onSubmit }) {
     const [requestLicense, setRequestLicense] = useState('');
     const [selectedPositions, setSelectedPositions] = useState('');
     const [contractPName, setContractPName] = useState('');
+    const [others, setOthers] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,6 +26,7 @@ function CompanyForm({ onSubmit }) {
             companyName,
             companyProfile,
             cinReg,
+            others,
             workingField,
             gst,
             pan,
@@ -192,6 +194,16 @@ function CompanyForm({ onSubmit }) {
                             placeholder="Enter Name"
                         />
                     </label>
+                    <label className="block mb-2 font-semibold mt-2">
+                        Others
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            type="text"
+                            name="others"
+                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            value={others} onChange={(e) => setOthers(e.target.value)}
+                        />
+                    </label>
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
@@ -238,6 +250,7 @@ function IndividualForm({ onSubmit }) {
     const [workingField, setWorkingField] = useState('');
     const [address, setAddress] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
+    const [others, setOthers] = useState("");
     const [email, setEmail] = useState('');
     const [requestLicense, setRequestLicense] = useState('');
 
@@ -252,6 +265,7 @@ function IndividualForm({ onSubmit }) {
             panNumber,
             workingField,
             address,
+            others,
             mobileNumber,
             email,
             requestLicense,
@@ -283,7 +297,7 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
                     <label className="block font-semibold mt-2">
-                        Father's Name
+                        Father Name
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input
                             type="text"
@@ -378,6 +392,17 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
 
+                    <label className="block mb-2 font-semibold mt-2">
+                        Others
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            type="text"
+                            name="others"
+                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            value={others} onChange={(e) => setOthers(e.target.value)}
+                        />
+                    </label>
+
                     <label className="block mb-2 font-semibold">
                         Request License
                         <span className="text-red-700 relative top-0 right-0">*</span>
@@ -403,7 +428,7 @@ function IndividualForm({ onSubmit }) {
                 <input type="file" name="resume" accept=".pdf" required />
             </label>
             <label className="block mb-2 font-semibold">
-                Upload Photos
+                Upload aadhar
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <input type="file" name="aadhar" accept=".pdf" required />
             </label>
