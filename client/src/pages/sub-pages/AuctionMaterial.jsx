@@ -68,28 +68,28 @@ const AuctionMaterial = () => {
 
         const token = localStorage.getItem('token');
 
-        fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
-            method: 'POST',
-            headers: {
-                auth: token,
-            },
-            body: requestBody,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success == true) {
-                    alert('Submitted');
-                    window.location.href = '/employer';
-                }
-                else {
-                    alert('Something went wrong.Try Again.');
-                    window.location.href = '/employer';
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Oops something went wrong!!!');
-            });
+        // fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
+        //     method: 'POST',
+        //     headers: {
+        //         auth: token,
+        //     },
+        //     body: requestBody,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         if (data.success == true) {
+        //             alert('Submitted');
+        //             window.location.href = '/employer';
+        //         }
+        //         else {
+        //             alert('Something went wrong.Try Again.');
+        //             window.location.href = '/employer';
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //         alert('Oops something went wrong!!!');
+        //     });
     };
 
     const handleDirectorSubmit = (directorData) => {
@@ -122,7 +122,7 @@ const AuctionMaterial = () => {
             <Navbar />
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="shadow-2xl p-6 bg-white rounded-lg  md:flex-row">
-                    <div onSubmit={handleSubmit} encType="multipart/form-data">
+                    <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <h2 className="text-2xl font-bold mb-4 text-center">Auction Material</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className=" p-2 rounded-lg">
@@ -430,7 +430,7 @@ const AuctionMaterial = () => {
                                 Submit
                             </button>
                         </div>
-                    </div>
+                    </form>
 
 
                 </div>

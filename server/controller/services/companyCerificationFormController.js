@@ -16,7 +16,8 @@ const submitForm = async (req, res) => {
       requestLicense,
       selectedPositions,
       website,
-      workingField
+      workingField,
+      others
     } = req.body;
 
     const docFile = getFileByFilename(req.files, 'doc');
@@ -36,6 +37,7 @@ const submitForm = async (req, res) => {
       selectedPositions,
       website,
       workingField,
+      others,
       url:docUrl
     });
 

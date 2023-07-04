@@ -10,6 +10,7 @@ const auctionMaterialsController = require('../controller/services/auctionMateri
 const jointventureController = require('../controller/services/jointventureController');
 const tenderOfflineController = require("../controller/services/offlineTenderFormController");
 const gemregistrationController = require("../controller/services/gemregistrationFormController");
+const tenderOnlineController = require("../controller/services/onlineTenderFormController");
 
 //Career & Man Power
 
@@ -25,7 +26,7 @@ router.get('/employer/forms/:id', employerController.getSingleForm);
 
 //Seeker 
 // Route for form submission
-router.post('/seeker/submit-form', seekerController.submitForm);
+router.post('/seeker/submit-form',upload.any(), seekerController.submitForm);
 
 // Route for getting all forms
 router.get('/seeker/forms', seekerController.getAllForms);
@@ -90,10 +91,20 @@ router.get("/jv/:id", jointventureController.getFormById);
 router.post("/tender/offline", tenderOfflineController.submitForm);
 
 // Get All Tender Offline Forms
-router.get("tender/getall", tenderOfflineController.getAllForms);
+router.get("tender/offline/getall", tenderOfflineController.getAllForms);
 
 // Get Single Tender Offline Form by ID
 router.get("tender/offline/:id", tenderOfflineController.getSingleForm);
+
+//Tender Online
+// Submit Tender Online Form
+router.post("/tender/online", tenderOnlineController.submitForm);
+
+// Get All Tender Online Forms
+router.get("tender/online/getall", tenderOnlineController.getAllForms);
+
+// Get Single Tender Online Form by ID
+router.get("tender/online/offline/:id", tenderOnlineController.getFormById);
 
 //Gem Registration
 // Submit Gem Registration Form

@@ -4,61 +4,54 @@ const { getFileByFilename, uploadFileToS3, getLink} = require('../../config/s3fu
 const submitForm = async (req, res) => {
     try {
         const {
-            name,
-            fathername,
-            aadhar,
-            tenMark,
-            twelveMark,
-            jobpost,
-            jobexp,
-            address,
             company,
-            city,
-            state,
-            country,
             mobile,
             email,
-            zip,
-            pastSalary,
-            expectedSalary,
-            hobbies,
-            gst,
-            pan,
+            cwork,
+            jobpost,
+            experience,
+            salary,
+            curl,
+            GST,
+            companyprofile,
+            contactpnumber,
+            regno,
+            PAN,
+            address,
+            city,
+            zipcode,
+            state,
+            country,
+            officetiming,
+            holidays,
+            workingdays,
+            seekerpost,
         } = req.body;
-
-        const resumeFile = getFileByFilename(req.files, 'resume');
-        const profileFile = getFileByFilename(req.files, 'profilePhoto');
-        const aadharFile = getFileByFilename(req.files, 'aadhar');
-
-        const cvUrl = (await uploadFileToS3(resumeFile));
-        const profileUrl = (await uploadFileToS3(profileFile));
-        const aadharUrl = (await uploadFileToS3(aadharFile));
 
         // Create a new instance of the EmployerForm model
         const employer = new EmployerForm({
-            name,
-            fathername,
-            aadhar,
-            tenMark,
-            twelveMark,
-            jobpost,
-            jobexp,
-            address,
             company,
-            city,
-            state,
-            country,
             mobile,
             email,
-            zip,
-            pastSalary,
-            expectedSalary,
-            hobbies,
-            gst,
-            pan,
-            cvUrl,
-            profileUrl,
-            aadharUrl,
+            cwork,
+            jobpost,
+            experience,
+            salary,
+            curl,
+            GST,
+            companyprofile,
+            contactpnumber,
+            regno,
+            PAN,
+            address,
+            city,
+            zipcode,
+            state,
+            country,
+            officetiming,
+            holidays,
+            workingdays,
+            seekerpost,
         });
 
         const savedForm = await employer.save();
@@ -80,7 +73,7 @@ const submitForm = async (req, res) => {
 // Controller for getting all forms
 const getAllForms = async (req, res) => {
     try {
-        const forms = await EmployerForm.find().select('name jobexp country expectedSalary createdAt');
+        const forms = await EmployerForm.find();
         res.json(forms);
     } catch (error) {
         console.error(error);

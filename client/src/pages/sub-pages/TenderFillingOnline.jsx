@@ -85,7 +85,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
 
                     </div>
                     <label className="block mb-4 font-semibold">
-                        aadhar Card
+                        Aadhar Card
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input required
                             type="number"
@@ -99,7 +99,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                         PAN card
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input required
-                            type="number"
+                            type="text"
                             name="pPANnum"
                             value={formData.pPANnum}
                             onChange={handleChange}
@@ -162,7 +162,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                             IFSC code
                             <span className="text-red-700 relative top-0 right-0">*</span>
                             <input required
-                                type="number"
+                                type="text"
                                 name="ifscCode"
                                 value={formData.ifscCode}
                                 onChange={handleChange}
@@ -241,11 +241,8 @@ const TenderForm = () => {
         mobile: "",
         accholdername: "",
         ifscCode: "",
-        sector: "",
         regno: "",
         knumber: "",
-        userCategory: "",
-        product: "",
         companyaddress1: "",
         companyaddress2: "",
         companycity: "",
@@ -267,14 +264,9 @@ const TenderForm = () => {
         wmobile: "",
         website: "",
         accnumber: "",
-        pstate: "",
-        ptelfax: "",
         email: "",
-        url: "",
         gemreg: "",
         refno: "",
-        addressline1: "",
-        tenderDetailNoticeType: "",
     });
 
     const clearInputs = () => {
@@ -282,24 +274,18 @@ const TenderForm = () => {
             cname: "",
             cPANnum: "",
             cGSTnum: "",
-            wmobile: "",
             des: "",
-            accholdername: "",
-            ifscCode: "",
-            website: "",
             vendor: "",
             mobile: "",
-            sector: "",
+            accholdername: "",
+            ifscCode: "",
             regno: "",
-            userCategory: "",
-            product: "",
-            companyaddress1: "",
             knumber: "",
+            companyaddress1: "",
             companyaddress2: "",
             companycity: "",
-            branchnum: "",
             companystate: "",
-            companycountry: "",
+            branchnum: "",
             ITRone: "",
             ITRtwo: "",
             ITRthree: "",
@@ -313,18 +299,12 @@ const TenderForm = () => {
             paadhar: "",
             pPANnum: "",
             pmobile: "",
+            wmobile: "",
+            website: "",
             accnumber: "",
-            paddress: "",
-            pcity: "",
-            pdistrict: "",
-            pstate: "",
-            ppin: "",
-            ptelfax: "",
             email: "",
-            url: "",
             gemreg: "",
             refno: "",
-            tenderDetailNoticeType: "",
         });
     }
 
@@ -342,30 +322,30 @@ const TenderForm = () => {
 
         const token = localStorage.getItem("token");
 
-        // const requestBody = JSON.stringify(formData);
+        const requestBody = JSON.stringify(formData);
 
-        // fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         auth: token,
-        //     },
-        //     body: requestBody,
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log("Success:", data);
-        //         alert("Submitted")
-        //         clearInputs();
-        //         window.location.href = '/forms';
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error:", error);
-        //         alert("Oops something went wrong!!!");
-        //         clearInputs();
-        //         window.location.href = '/forms';
-        //     });
-        // clearInputs();
+        fetch("http://localhost:5000/apiTender/services/tender/online", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                auth: token,
+            },
+            body: requestBody,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                alert("Submitted")
+                clearInputs();
+                window.location.href = '/tenderfillingonline';
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Oops something went wrong!!!");
+                clearInputs();
+                window.location.href = '/tenderfillingonline';
+            });
+        clearInputs();
     };
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -407,7 +387,7 @@ const TenderForm = () => {
                                 <label className="block mb-2 font-semibold basis-1/2 mx-1">
                                     Registration No.
                                     <input
-                                        type="number"
+                                        type="text"
                                         name="regno"
                                         value={formData.regno}
                                         onChange={handleChange}
@@ -422,7 +402,7 @@ const TenderForm = () => {
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         name="cPANnum"
                                         value={formData.cPANnum}
                                         onChange={handleChange}
@@ -435,7 +415,7 @@ const TenderForm = () => {
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         name="cGSTnum"
                                         value={formData.cGSTnum}
                                         onChange={handleChange}
@@ -547,7 +527,7 @@ const TenderForm = () => {
                                         Vendor Code
                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                         <input required
-                                            type="number"
+                                            type="text"
                                             name="vendor"
                                             value={formData.vendor}
                                             onChange={handleChange}

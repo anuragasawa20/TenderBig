@@ -60,11 +60,12 @@ const TenderFillingOffline = () => {
       company,
       mobile,
       email,
-      selectedService,
+      aadhar,
+      role:selectedService
     };
-
+console.log(formData)
     axios
-      .post("http://localhost:5000/apiTender/post-contactform", formData)
+      .post("http://localhost:5000/apiTender/services/tender/offline", formData)
       .then((response) => {
         console.log("Form data sent successfully:", response.data);
         alert("We will contact you soon!!!")
@@ -171,8 +172,8 @@ const TenderFillingOffline = () => {
                   onChange={handleServiceChange}
                 >
                   <option value="">Select an option</option>
-                  <option value="Career&ManPower">Organization</option>
-                  <option value="Registration/Certificate">Individual</option>
+                  <option value="Organization">Organization</option>
+                  <option value="Individual">Individual</option>
                 </select>
               </div>
               <button

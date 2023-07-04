@@ -5,50 +5,46 @@ const { getFileByFilename, uploadFileToS3, getLink } = require('../../config/s3f
 const submitForm = async (req, res) => {
   try {
     const {
-      aadharNumber,
-      address,
-      dob,
-      email,
-      fatherName,
-      mobileNumber,
       name,
-      panNumber,
-      requestLicense,
-      workingField
-    } = req.body;
-
-    const docFile = getFileByFilename(req.files, 'doc');
-    const docUrl = (await uploadFileToS3(docFile));
-
-    // Create a new instance of the ModelName model
-    const data = new IndividualForm({
-      aadharNumber,
-      address,
-      dob,
-      email,
       fatherName,
-      mobileNumber,
-      name,
+      dob,
+      aadharNumber,
       panNumber,
-      requestLicense,
       workingField,
-      url:docUrl
+      companyaddress1,
+      companyaddress2,
+      companycity,
+      companystate,
+      zipcode,
+      companycountry,
+      others,
+      mobileNumber,
+      email,
+      requestLicense,
+    } = req.body;
+console.log(req.body)
+    const newForm = await IndividualForm.create({
+      name,
+      fatherName,
+      dob,
+      aadharNumber,
+      panNumber,
+      workingField,
+      companyaddress1,
+      companyaddress2,
+      companycity,
+      companystate,
+      zipcode,
+      companycountry,
+      others,
+      mobileNumber,
+      email,
+      requestLicense,
     });
 
-    // Save the form data to the database
-    const savedData = await data.save();
-
-    res.status(200).json({
-      success: true,
-      message: "Form submitted successfully",
-      data: savedData,
-    });
+    res.status(201).json({ success: true, data: newForm });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while submitting the form",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 

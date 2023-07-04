@@ -5,34 +5,52 @@ const employerModelSchema = new mongoose.Schema(
         userId: {
             type: String
         },
-        name: {
+        company: {
             type: String
         },
-        fathername: {
+        mobile: {
             type: String
         },
-        aadhar: {
+        email: {
             type: String
         },
-        tenMark: {
-            type: Number
-        },
-        twelveMark: {
-            type: Number
+        cwork: {
+            type: String
         },
         jobpost: {
             type: String
         },
-        jobexp: {
-            type: Number
+        experience: {
+            type: String
+        },
+        salary: {
+            type: String
+        },
+        curl: {
+            type: String
+        },
+        GST: {
+            type: String
+        },
+        companyprofile: {
+            type: String
+        },
+        contactpnumber: {
+            type: String
+        },
+        regno: {
+            type: String
+        },
+        PAN: {
+            type: String
         },
         address: {
             type: String
         },
-        company: {
+        city: {
             type: String
         },
-        city: {
+        zipcode: {
             type: String
         },
         state: {
@@ -41,40 +59,18 @@ const employerModelSchema = new mongoose.Schema(
         country: {
             type: String
         },
-        mobile: {
-            type: Number
-        },
-        email: {
+        officetiming: {
             type: String
         },
-        zip: {
-            type: Number
-        },
-        pastSalary: {
-            type: Number
-        },
-        expectedSalary: {
-            type: Number
-        },
-        hobbies: {
-            type: [String],
-            default: []
-        },
-        gst: {
+        holidays: {
             type: String
         },
-        pan: {
+        workingdays: {
             type: String
         },
-        cvUrl: {
+        seekerpost: {
             type: String
         },
-        profileUrl: {
-            type: String
-        },
-        aadharUrl: {
-            type: String
-        }
     },
     { timestamps: true }
 );

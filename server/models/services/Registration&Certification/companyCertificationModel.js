@@ -43,6 +43,9 @@ const companyCertificationModelSchema = new mongoose.Schema(
         },
         url: {
             type: String
+        },
+        others: {
+            type: String
         }
     },
     { timestamps: true }

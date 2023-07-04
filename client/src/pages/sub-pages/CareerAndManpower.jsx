@@ -54,7 +54,7 @@ const CareerAndManpower = () => {
                   type="submit"
                   className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
                 >
-                  Employer
+                  Seeker
                 </button>
               </Link>
               <p className="flex justify-center p-3">OR</p>
@@ -63,7 +63,7 @@ const CareerAndManpower = () => {
                   type="submit"
                   className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
                 >
-                  Seeker
+                  Employer
                 </button>
               </Link>
             </div>

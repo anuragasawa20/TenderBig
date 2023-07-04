@@ -3,62 +3,57 @@ const RegistrationForm = require('../../models/services/Registration&Certificati
 // Controller for submitting a registration form
 const submitForm = async (req, res) => {
   try {
-    // Extract the form data from the request body
     const {
-      userId,
-      name,
-      Gem,
       company,
       mobile,
       secMobile,
       email,
+      cwebsite,
       CIN,
       wmobile,
       cprofile,
       companyEstd,
+      otherDetails,
       companypost,
       liscence,
       cpname,
+      category,
       fname,
       GST,
       PAN,
+      address,
+      companycountry,
+      companycity,
+      companystate,
     } = req.body;
 
-    // Create a new instance of the RegistrationForm model
-    const registration = new RegistrationForm({
-      userId,
-      name,
-      Gem,
+    const newReg = await RegistrationForm.create({
       company,
       mobile,
       secMobile,
       email,
+      cwebsite,
       CIN,
       wmobile,
       cprofile,
       companyEstd,
+      otherDetails,
       companypost,
       liscence,
       cpname,
+      category,
       fname,
       GST,
       PAN,
+      address,
+      companycountry,
+      companycity,
+      companystate,
     });
 
-    // Save the registration form data to the database
-    const savedForm = await registration.save();
-
-    res.status(200).json({
-      success: true,
-      message: "Form submitted successfully",
-      data: savedForm,
-    });
+    res.status(201).json({ success: true, data: newReg });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "An error occurred while submitting the form",
-      error: error.message,
-    });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
