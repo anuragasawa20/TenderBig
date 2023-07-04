@@ -15,6 +15,8 @@ const Registration = () => {
     const [cprofile, setCprofile] = useState("");
     const [companyEstd, setCompanyEstd] = useState("");
     const [CIN, setCIN] = useState("");
+    const [secMobile, setSecMobile] = useState("");
+    const [Gem, setGem] = useState("");
     const [liscence, setLiscence] = useState("");
     const [cpname, setCpname] = useState("");
     const [fname, setFname] = useState("");
@@ -139,11 +141,11 @@ console.log(formData)
                                     </label>
                                     <input
                                         required
-                                        type="email"
-                                        id="email"
+                                        type="number"
+                                        id="secMobile"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={secMobile}
+                                        onChange={(e) => setSecMobile(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -243,10 +245,10 @@ console.log(formData)
                                     <input
                                         required
                                         type="text"
-                                        id="liscence"
+                                        id="name"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={liscence}
-                                        onChange={(e) => setLiscence(e.target.value)}
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -256,11 +258,11 @@ console.log(formData)
                                     </label>
                                     <input
                                         required
-                                        type="text"
-                                        id="liscence"
+                                        type="number"
+                                        id="Gem"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={liscence}
-                                        onChange={(e) => setLiscence(e.target.value)}
+                                        value={Gem}
+                                        onChange={(e) => setGem(e.target.value)}
                                     />
                                 </div>
                             </div>
