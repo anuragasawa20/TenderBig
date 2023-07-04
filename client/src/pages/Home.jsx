@@ -94,7 +94,7 @@ const HomePage = () => {
               <hr className="border-gray-400" />
               <li className="p-1 py-2 border-white border-2 hover:border-red-700 ">
                 <NavLink
-                  to="/jointventure"
+                  to="/jointventure1"
                   className="text-gray-600  flex items-center justify-between"
                 >
                   <span>Joint Venture</span>
