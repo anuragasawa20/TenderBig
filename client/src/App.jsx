@@ -21,7 +21,7 @@ import AuctionMaterial from './pages/sub-pages/AuctionMaterial';
 // import JointVenture1 from './pages/sub-pages/JointVenture1';
 // import JointVenture2 from './pages/sub-pages/JointVenture2';
 // import JointVenture3 from './pages/sub-pages/JointVenture3';
-import JointVenture from './pages/GemRegistration';
+import JointVenture from '../src/pages/sub-pages/JointVenture';
 import TenderFilling from './pages/sub-pages/TenderFilling';
 import TenderFillingOnline from './pages/sub-pages/TenderFillingOnline';
 import TenderFillingOffline from './pages/sub-pages/TenderFillingOffline';
