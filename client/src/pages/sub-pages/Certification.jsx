@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { locations } from "../../constants/countriesData";
 
 function CompanyForm({ onSubmit }) {
     const [companyName, setCompanyName] = useState('');
@@ -18,6 +19,7 @@ function CompanyForm({ onSubmit }) {
     const [requestLicense, setRequestLicense] = useState('');
     const [selectedPositions, setSelectedPositions] = useState('');
     const [contractPName, setContractPName] = useState('');
+    const [others, setOthers] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,6 +27,7 @@ function CompanyForm({ onSubmit }) {
             companyName,
             companyProfile,
             cinReg,
+            others,
             workingField,
             gst,
             pan,
@@ -192,6 +195,16 @@ function CompanyForm({ onSubmit }) {
                             placeholder="Enter Name"
                         />
                     </label>
+                    <label className="block mb-2 font-semibold mt-2">
+                        Others
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            type="text"
+                            name="others"
+                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            value={others} onChange={(e) => setOthers(e.target.value)}
+                        />
+                    </label>
                 </div>
             </div>
             <label className="block mb-2 font-semibold">
@@ -236,8 +249,14 @@ function IndividualForm({ onSubmit }) {
     const [aadharNumber, setAadharNumber] = useState('');
     const [panNumber, setPanNumber] = useState('');
     const [workingField, setWorkingField] = useState('');
-    const [address, setAddress] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
+    const [companyaddress1, setAddressline1] = useState('');
+    const [companyaddress2, setAddressline2] = useState('');
+    const [companycity, setCity] = useState('');
+    const [companystate, setState] = useState('');
+    const [zipcode, setZipcode] = useState('');
+    const [companycountry, setCountry] = useState('');
+    const [others, setOthers] = useState("");
     const [email, setEmail] = useState('');
     const [requestLicense, setRequestLicense] = useState('');
 
@@ -251,7 +270,13 @@ function IndividualForm({ onSubmit }) {
             aadharNumber,
             panNumber,
             workingField,
-            address,
+            companyaddress1,
+            companyaddress2,
+            companycity,
+            companystate,
+            zipcode,
+            companycountry,
+            others,
             mobileNumber,
             email,
             requestLicense,
@@ -283,7 +308,7 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
                     <label className="block font-semibold mt-2">
-                        Father's Name
+                        Father Name
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input
                             type="text"
@@ -316,16 +341,80 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
                     <label className="block mb-2 font-semibold mt-2">
-                        Address
+                        Address Line 1
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input
+                            required
                             type="text"
-                            name="address"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={address} onChange={(e) => setAddress(e.target.value)}
-                            placeholder="Enter Address"
+                            name="companyaddress1"
+                            value={companyaddress1}
+                            onChange={(e) => setAddressline1(e.target.value)}
+                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            placeholder="Enter Address Line 1"
                         />
                     </label>
+
+                    <label className="block mb-2 font-semibold">
+                        Address Line 2
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            required
+                            type="text"
+                            name="companyaddress2"
+                            value={companyaddress2}
+                            onChange={(e) => setAddressline2(e.target.value)}
+                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            placeholder="Enter Address Line 2"
+                        />
+                    </label>
+
+                    <div className="flex">
+                        <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                            City
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <input
+                                required
+                                type="text"
+                                name="companycity"
+                                value={companycity}
+                                onChange={(e) => setCity(e.target.value)}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                placeholder="Enter City"
+                            />
+                        </label>
+                        <label className="block mb-2 font-semibold basis-1/2">
+                            State
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <input
+                                required
+                                type="text"
+                                name="companystate"
+                                value={companystate}
+                                onChange={(e) => setState(e.target.value)}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                placeholder="Enter State"
+                            />
+                        </label>
+                    </div>
+
+                    <label className="block mb-2 font-semibold">
+                        Country
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <select
+                            required
+                            name="companycountry"
+                            value={companycountry}
+                            onChange={(e) => setCountry(e.target.value)}
+                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        >
+                            {locations.map((country, index) => (
+                                <option key={index} value={country}>
+                                    {country}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+
                 </div>
 
                 <div className="p-2 rounded-lg">
@@ -378,6 +467,17 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
 
+                    <label className="block mb-2 font-semibold mt-2">
+                        Others
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            type="text"
+                            name="others"
+                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            value={others} onChange={(e) => setOthers(e.target.value)}
+                        />
+                    </label>
+
                     <label className="block mb-2 font-semibold">
                         Request License
                         <span className="text-red-700 relative top-0 right-0">*</span>
@@ -394,6 +494,20 @@ function IndividualForm({ onSubmit }) {
                         </select>
                     </label>
 
+                    <label className="block mb-2 font-semibold basis-1/2">
+                        ZipCode
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <input
+                            required
+                            type="text"
+                            name="companystate"
+                            value={zipcode}
+                            onChange={(e) => setZipcode(e.target.value)}
+                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            placeholder="Enter State"
+                        />
+                    </label>
+
                 </div>
             </div>
 
@@ -403,7 +517,7 @@ function IndividualForm({ onSubmit }) {
                 <input type="file" name="resume" accept=".pdf" required />
             </label>
             <label className="block mb-2 font-semibold">
-                Upload Photos
+                Upload aadhar
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <input type="file" name="aadhar" accept=".pdf" required />
             </label>

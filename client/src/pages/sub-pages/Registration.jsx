@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { locations } from "../../constants/countriesData";
 
 const Registration = () => {
     const [name, setName] = useState("");
@@ -13,8 +14,15 @@ const Registration = () => {
     const [email, setEmail] = useState("");
     const [wmobile, setWMobile] = useState("");
     const [cprofile, setCprofile] = useState("");
+    const [cwebsite, setCwebsite] = useState("");
     const [companyEstd, setCompanyEstd] = useState("");
     const [CIN, setCIN] = useState("");
+    const [companyaddress1, setCompanyaddress1] = useState("");
+    const [companyaddress2, setCompanyaddress2] = useState("");
+    const [otherDetails, setOtherDetails] = useState("");
+    const [companycity, setCompanycity] = useState("");
+    const [companystate, setCompanystate] = useState("");
+    const [companycountry, setCompanycountry] = useState("");
     const [secMobile, setSecMobile] = useState("");
     const [Gem, setGem] = useState("");
     const [liscence, setLiscence] = useState("");
@@ -23,6 +31,7 @@ const Registration = () => {
     const [companypost, setCompanypost] = useState("");
     const [GST, setGST] = useState("");
     const [PAN, setPAN] = useState("");
+    const [category, setCategory] = useState("");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -50,11 +59,14 @@ const Registration = () => {
         setGem("");
         setCompany("");
         setMobile("");
+        setCwebsite("");
         setSecMobile("");
         setEmail("");
         setCIN("");
         setWMobile("");
+        setOtherDetails("");
         setCprofile("");
+        setCategory("");
         setCompanyEstd("");
         setCompanypost("");
         setLiscence("");
@@ -72,18 +84,21 @@ const Registration = () => {
             mobile,
             secMobile,
             email,
+            cwebsite,
             CIN,
             wmobile,
             cprofile,
             companyEstd,
+            otherDetails,
             companypost,
             liscence,
             cpname,
+            category,
             fname,
             GST,
             PAN,
         };
-console.log(formData)
+        console.log(formData)
         axios
             .post("http://localhost:5000/apiTender/services/register/registration", formData)
             .then((response) => {
@@ -156,33 +171,35 @@ console.log(formData)
                                 </div>
                             </div>
 
-                            <div className="mb-4">
-                                <label htmlFor="mobile" className="flex items-center">
-                                    <AiOutlinePhone className="mr-2" />
-                                    Contact Number
-                                </label>
-                                <input
-                                    required
-                                    type="number"
-                                    id="mobile"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={mobile}
-                                    onChange={(e) => setMobile(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="email" className="flex items-center">
-                                    <AiOutlineMail className="mr-2" />
-                                    Email Address
-                                </label>
-                                <input
-                                    required
-                                    type="email"
-                                    id="email"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="mobile" className="flex items-center">
+                                        <AiOutlinePhone className="mr-2" />
+                                        Contact Number
+                                    </label>
+                                    <input
+                                        required
+                                        type="number"
+                                        id="mobile"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={mobile}
+                                        onChange={(e) => setMobile(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="email" className="flex items-center">
+                                        <AiOutlineMail className="mr-2" />
+                                        Email Address
+                                    </label>
+                                    <input
+                                        required
+                                        type="email"
+                                        id="email"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
                             </div>
                             <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -200,9 +217,23 @@ console.log(formData)
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="cwebsite" className="flex items-center">
+                                        <AiOutlineUser className="mr-2" />
+                                        Company Website
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="cwebsite"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={cwebsite}
+                                        onChange={(e) => setCwebsite(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="companyEstd" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Company Establishment Year
+                                        Company Estd. Year
                                     </label>
                                     <input
                                         required
@@ -214,11 +245,12 @@ console.log(formData)
                                     />
                                 </div>
                             </div>
+
                             <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="CIN" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        CIN / Registration Number
+                                        CIN / Reg Number
                                     </label>
                                     <input
                                         required
@@ -232,7 +264,7 @@ console.log(formData)
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="liscence" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Lisence
+                                        Lisence Name
                                     </label>
                                     <input
                                         required
@@ -244,23 +276,26 @@ console.log(formData)
                                     />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="liscence" className="flex items-center">
-                                        <RiBuilding2Line className="mr-2" />
-                                        Name
+                                    <label className="block mb-2 font-semibold">
+                                        Category
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <select
+                                            name="requestLicense"
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                            value={category}
+                                            onChange={(e) => setCategory(e.target.value)}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="License1">category 1</option>
+                                            <option value="License2">category 2</option>
+                                            <option value="License3">category 3</option>
+                                        </select>
                                     </label>
-                                    <input
-                                        required
-                                        type="text"
-                                        id="name"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
                                 </div>
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="liscence" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Gem
+                                        Gem reg No.
                                     </label>
                                     <input
                                         required
@@ -286,33 +321,35 @@ console.log(formData)
                                     onChange={(e) => setCpname(e.target.value)}
                                 />
                             </div>
-                            <div className="mb-4">
-                                <label htmlFor="fname" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Father Name
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="fname"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={fname}
-                                    onChange={(e) => setFname(e.target.value)}
-                                />
-                            </div>
-                            <div className="mb-4">
-                                <label htmlFor="companypost" className="flex items-center">
-                                    <RiBuilding2Line className="mr-2" />
-                                    Post Of Company
-                                </label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="companypost"
-                                    className="border border-gray-300 rounded px-3 py-2 w-full"
-                                    value={companypost}
-                                    onChange={(e) => setCompanypost(e.target.value)}
-                                />
+                            <div className="flex">
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="fname" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Father Name
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="fname"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={fname}
+                                        onChange={(e) => setFname(e.target.value)}
+                                    />
+                                </div>
+                                <div className="mb-4 basis-1/2 mx-1">
+                                    <label htmlFor="companypost" className="flex items-center">
+                                        <RiBuilding2Line className="mr-2" />
+                                        Post Of Company
+                                    </label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="companypost"
+                                        className="border border-gray-300 rounded px-3 py-2 w-full"
+                                        value={companypost}
+                                        onChange={(e) => setCompanypost(e.target.value)}
+                                    />
+                                </div>
                             </div>
                             <div className="flex">
                                 <div className="mb-4 basis-1/2 mx-1">
@@ -346,6 +383,88 @@ console.log(formData)
                             </div>
 
                             <label className="block mb-2 font-semibold">
+                                Address Line 1
+                                <span className="text-red-700 relative top-0 right-0">*</span>
+                                <input
+                                    required
+                                    type="text"
+                                    name="companyaddress1"
+                                    value={companyaddress1}
+                                    onChange={(e) => setCompanyaddress1(e.target.value)}
+                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                />
+                            </label>
+                            <label className="block mb-2 font-semibold">
+                                Address Line 2
+                                <span className="text-red-700 relative top-0 right-0">*</span>
+                                <input
+                                    required
+                                    type="text"
+                                    name="companyaddress2"
+                                    value={companyaddress2}
+                                    onChange={(e) => setCompanyaddress2(e.target.value)}
+                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                />
+                            </label>
+                            <div className="flex">
+                                <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                                    City
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="companycity"
+                                        value={companycity}
+                                        onChange={(e) => setCompanycity(e.target.value)}
+                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                    />
+                                </label>
+                                <label className="block mb-2 font-semibold basis-1/2">
+                                    State
+                                    <span className="text-red-700 relative top-0 right-0">*</span>
+                                    <input
+                                        required
+                                        type="text"
+                                        name="companystate"
+                                        value={companystate}
+                                        onChange={(e) => setCompanystate(e.target.value)}
+                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+
+                                    />
+                                </label>
+                            </div>
+
+                            <label className="block mb-2 font-semibold">
+                                Country
+                                <span className="text-red-700 relative top-0 right-0">*</span>
+                                <select required
+                                    name="country"
+                                    value={companycountry}
+                                    onChange={(e) => setCompanycountry(e.target.value)}
+                                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                >
+                                    {locations.map((country, index) => (
+                                        <option key={index} value={country}>
+                                            {country}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
+
+                            <label className="block mb-2 font-semibold">
+                                Other Details (if required)
+                                <textarea
+                                    name="otherDetails"
+                                    value={otherDetails}
+                                    onChange={(e) => setOtherDetails(e.target.value)}
+                                    placeholder="Enter Other Details"
+                                    className="border rounded-sm px-3 py-2 mt-1 w-full h-24 text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                ></textarea>
+                            </label>
+
+                            <label className="block mb-2 font-semibold">
                                 Reg No.
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
                                 <input type="file" name="resume" accept=".pdf" required />
@@ -356,7 +475,7 @@ console.log(formData)
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
                                 <input type="file" name="resume" accept=".pdf" required />
                             </label>
-                            
+
                             <label className="block mb-2 font-semibold">
                                 PAN
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
@@ -408,8 +527,8 @@ console.log(formData)
                             <p className="mt-2">Info@tender.com</p>
                         </motion.div>
                     </motion.div>
-                </div>
-            </div>
+                </div >
+            </div >
             <Footer />
         </>
     );

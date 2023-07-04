@@ -730,13 +730,24 @@ const TenderForm = () => {
                                                 Bidding Documents
                                                 <Docs></Docs>
                                             </div>
-                                            <div className="dropdown my-3 font-semibold">
-                                                Required Licenses
-                                                <Docs></Docs>
-                                            </div>
                                             <div className="dropdown font-semibold">
                                                 Tender Docs with Stamps
                                                 <Docs></Docs>
+                                            </div>
+                                            <div className="dropdown my-3 font-semibold">
+                                                Required Licenses
+                                                <select
+                                                    name="auctionMaterials"
+                                                    value="option"
+                                                    onChange={(e) => (e.target.value)}
+                                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                    required
+                                                >
+                                                    <option value="">Select Auction Materials</option>
+                                                    <option value="Material 1">Option 1</option>
+                                                    <option value="Material 2">Option 2</option>
+                                                    <option value="Material 3">Option 3</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
