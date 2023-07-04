@@ -8,7 +8,6 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 const Employer = () => {
-    const [name, setName] = useState("");
 
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
@@ -21,7 +20,6 @@ const Employer = () => {
     const [companyprofile, setCompanyprofile] = useState("");
     const [contactpnumber, setContactpnumber] = useState("");
     const [regno, setRegno] = useState("");
-    const [GST, setGST] = useState("");
     const [PAN, setPAN] = useState("");
     const [addressline1, setAddressline1] = useState("");
     const [addressline2, setAddressline2] = useState("");
@@ -67,7 +65,6 @@ const Employer = () => {
         setCompanyprofile("");
         setContactpnumber("");
         setRegno("");
-        setGST("");
         setPAN("");
         setAddressline1("");
         setAddressline2("");
@@ -94,10 +91,8 @@ const Employer = () => {
             companyprofile,
             contactpnumber,
             regno,
-            GST,
             PAN,
-            addressline1,
-            addressline2,
+            address: addressline1 +" "+ addressline2,
             city,
             zipcode,
             state,
@@ -107,6 +102,8 @@ const Employer = () => {
             workingdays,
             seekerpost,
         };
+
+        console.log(formData)
 
         axios
             .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
@@ -270,7 +267,7 @@ const Employer = () => {
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="contactpnumber" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
-                                        Contact P Number
+                                        Contact Person Number
                                     </label>
                                     <input
                                         required
@@ -290,27 +287,13 @@ const Employer = () => {
                                     </label>
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         id="regno"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={regno}
                                         onChange={(e) => setRegno(e.target.value)}
                                     />
                                 </div>
-                                {/* <div className="mb-4 basis-1/2 mx-1">
-                                    <label htmlFor="GST" className="flex items-center">
-                                        <RiBuilding2Line className="mr-2" />
-                                        GST Number
-                                    </label>
-                                    <input
-                                        required
-                                        type="number"
-                                        id="GST"
-                                        className="border border-gray-300 rounded px-3 py-2 w-full"
-                                        value={GST}
-                                        onChange={(e) => setGST(e.target.value)}
-                                    />
-                                </div> */}
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="PAN" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -318,7 +301,7 @@ const Employer = () => {
                                     </label>
                                     <input
                                         required
-                                        type="number"
+                                        type="text"
                                         id="PAN"
                                         className="border border-gray-300 rounded px-3 py-2 w-full"
                                         value={PAN}

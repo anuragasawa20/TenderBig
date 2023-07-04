@@ -58,28 +58,28 @@ const AuctionMaterial = () => {
 
         const token = localStorage.getItem('token');
 
-        fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
-            method: 'POST',
-            headers: {
-                auth: token,
-            },
-            body: requestBody,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if(data.success == true){
-                    alert('Submitted');
-                    window.location.href = '/employer';
-                }
-                else{
-                    alert('Something went wrong.Try Again.');
-                    window.location.href = '/employer';
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Oops something went wrong!!!');
-            });
+        // fetch('http://localhost:5000/apiTender/services/aumt/auction-material', {
+        //     method: 'POST',
+        //     headers: {
+        //         auth: token,
+        //     },
+        //     body: requestBody,
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         if(data.success == true){
+        //             alert('Submitted');
+        //             window.location.href = '/employer';
+        //         }
+        //         else{
+        //             alert('Something went wrong.Try Again.');
+        //             window.location.href = '/employer';
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //         alert('Oops something went wrong!!!');
+        //     });
     };
 
     const [isVisible, setIsVisible] = useState(false);

@@ -6,57 +6,53 @@ const submitForm = async (req, res) => {
         // Extract the form data from the request body
         const {
             userId,
-            companyName,
+            company,
             mobile,
             email,
-            work,
+            cwork,
             jobpost,
-            exp,
+            experience,
             salary,
-            companyUrl,
-            companyProfile,
-            companyPNumber,
-            regNo,
-            gst,
-            pan,
+            curl,
+            companyprofile,
+            contactpnumber,
+            regno,
+            PAN,
             address,
             city,
-            zip,
+            zipcode,
             state,
             country,
-            officetime,
+            officetiming,
             holidays,
-            workingDays,
-            post,
-            resumeurl,
+            workingdays,
+            seekerpost
         } = req.body;
 
         // Create a new instance of the SeekerForm model
         const seeker = new SeekerForm({
             userId,
-            companyName,
+            company,
             mobile,
             email,
-            work,
+            cwork,
             jobpost,
-            exp,
+            experience,
             salary,
-            companyUrl,
-            companyProfile,
-            companyPNumber,
-            regNo,
-            gst,
-            pan,
+            curl,
+            companyprofile,
+            contactpnumber,
+            regno,
+            PAN,
             address,
             city,
-            zip,
+            zipcode,
             state,
             country,
-            officetime,
+            officetiming,
             holidays,
-            workingDays,
-            post,
-            resumeurl,
+            workingdays,
+            seekerpost
         });
 
         // Save the seeker form data to the database
@@ -75,7 +71,6 @@ const submitForm = async (req, res) => {
         });
     }
 };
-
 
 // Controller for getting all forms
 const getAllForms = async (req, res) => {

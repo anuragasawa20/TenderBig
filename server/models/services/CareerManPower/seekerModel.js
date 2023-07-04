@@ -5,43 +5,40 @@ const seekerModelSchema = new mongoose.Schema(
         userId: {
             type: String
         },
-        companyName: {
+        company: {
             type: String
         },
         mobile: {
-            type: Number
+            type: String
         },
         email: {
             type: String
         },
-        work: {
+        cwork: {
             type: String
         },
         jobpost: {
             type: String
         },
-        exp: {
-            type: Number
+        experience: {
+            type: String
         },
         salary: {
-            type: Number
-        },
-        companyUrl: {
             type: String
         },
-        companyProfile: {
+        curl: {
             type: String
         },
-        companyPNumber: {
-            type: Number
-        },
-        regNo: {
+        companyprofile: {
             type: String
         },
-        gst: {
+        contactpnumber: {
             type: String
         },
-        pan: {
+        regno: {
+            type: String
+        },
+        PAN: {
             type: String
         },
         address: {
@@ -50,8 +47,8 @@ const seekerModelSchema = new mongoose.Schema(
         city: {
             type: String
         },
-        zip: {
-            type: Number
+        zipcode: {
+            type: String
         },
         state: {
             type: String
@@ -59,16 +56,16 @@ const seekerModelSchema = new mongoose.Schema(
         country: {
             type: String
         },
-        officetime: {
+        officetiming: {
             type: String
         },
         holidays: {
-            type: Number
+            type: String
         },
-        workingDays: {
-            type: Number
+        workingdays: {
+            type: String
         },
-        post: {
+        seekerpost: {
             type: String
         },
         resumeurl: {
