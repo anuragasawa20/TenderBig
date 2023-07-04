@@ -873,13 +873,13 @@
 
 
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import JointVenture1 from './JointVenture1';
 import JointVenture2 from './JointVenture2';
 import JointVenture3 from './JointVenture3';
 
 const JointVenture = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
 
   const goToPreviousStep = () => {
@@ -903,6 +903,11 @@ const JointVenture = () => {
     }
   };
 
+  const handleSubmit = () => {
+    // Handle form submission
+    navigate('/jointventure');
+  };
+
   return (
     <div>
       {/* Render the current step */}
@@ -916,9 +921,7 @@ const JointVenture = () => {
         <button onClick={goToNextStep}>Next</button>
       )}
       {currentStep === 3 && (
-        <button onClick={() => history.push('/jointventure')}>
-          Submit
-        </button>
+        <button onClick={handleSubmit}>Submit</button>
       )}
     </div>
   );
