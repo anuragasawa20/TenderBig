@@ -18,6 +18,9 @@ const JointVenture = () => {
     country: "",
     state: "",
     city: "",
+    addressline1: "",
+    addressline2: "",
+    zipcode: "",
     procurementSummarySummary: "",
     procurementSummaryDeadline: "",
     noticeType: "",
@@ -56,6 +59,9 @@ const JointVenture = () => {
       country: "",
       state: "",
       city: "",
+      zipcode: "",
+      addressline1: "",
+      addressline2: "",
       procurementSummarySummary: "",
       procurementSummaryDeadline: "",
       noticeType: "",
@@ -268,13 +274,13 @@ const JointVenture = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4">Business Office Building</h2>
                 <label className="block mb-2 font-semibold relative">
-                  Street Address
+                  Address Line 1
                   <span className="text-red-700 relative top-0 right-0">*</span>
                   <input
                     required
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="addressline1"
+                    value={formData.addressline1}
                     onChange={handleChange}
                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                     placeholder="Project"
@@ -285,8 +291,8 @@ const JointVenture = () => {
                   <input
                     required
                     type="text"
-                    name="name"
-                    value={formData.name}
+                    name="addressline2"
+                    value={formData.addressline2}
                     onChange={handleChange}
                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                     placeholder="Project"
@@ -313,9 +319,9 @@ const JointVenture = () => {
                       Zip Code
                       <span className="text-red-700 relative top-0 right-0">*</span>
                       <input
-                        type="text"
-                        name="city"
-                        value={formData.city}
+                        type="number"
+                        name="zipcode"
+                        value={formData.zipcode}
                         onChange={handleChange}
                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                         placeholder="Enter City"
@@ -363,12 +369,12 @@ const JointVenture = () => {
             <input value="test" type="checkbox" onChange={handleCheckbox} />
             <p className="mx-2">Do you agree to the terms and conditions?</p>
           </div>
-            <button
-              type="submit"
-              className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-            >
-              Submit
-            </button>
+          <button
+            type="submit"
+            className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
+          >
+            Submit
+          </button>
         </form>
       </div>
       <Footer />

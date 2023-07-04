@@ -251,7 +251,9 @@ const TenderForm = () => {
         companystate: "",
         companycountry: "",
         branchnum: "",
-        ITR: "",
+        ITRone: "",
+        ITRtwo: "",
+        ITRthree: "",
         turnover: "",
         workexp: "",
         noofworkers: "",
@@ -302,7 +304,9 @@ const TenderForm = () => {
             branchnum: "",
             companystate: "",
             companycountry: "",
-            ITR: "",
+            ITRone: "",
+            ITRtwo: "",
+            ITRthree: "",
             turnover: "",
             workexp: "",
             noofworkers: "",
@@ -512,8 +516,8 @@ const TenderForm = () => {
                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                         <input required
                                             type="number"
-                                            name="ITR"
-                                            value={formData.ITR}
+                                            name="ITRone"
+                                            value={formData.ITRone}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
 
@@ -524,8 +528,8 @@ const TenderForm = () => {
                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                         <input required
                                             type="number"
-                                            name="ITR"
-                                            value={formData.ITR}
+                                            name="ITRtwo"
+                                            value={formData.ITRtwo}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
 
@@ -536,8 +540,8 @@ const TenderForm = () => {
                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                         <input required
                                             type="number"
-                                            name="ITR"
-                                            value={formData.ITR}
+                                            name="ITRthree"
+                                            value={formData.ITRthree}
                                             onChange={handleChange}
                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
 
@@ -596,7 +600,7 @@ const TenderForm = () => {
                                     <label className="block mb-2 font-semibold basis-1/2 mx-1">
                                         Gem Reg No.
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="gemreg"
                                             value={formData.gemreg}
                                             onChange={handleChange}
@@ -650,7 +654,7 @@ const TenderForm = () => {
                                         <input
                                             required
                                             type="text"
-                                            name="state"
+                                            name="companystate"
                                             value={formData.companystate}
                                             onChange={handleChange}
                                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
