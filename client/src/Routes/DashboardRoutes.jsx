@@ -49,6 +49,7 @@ import Sector from '../Admin/partials/dashboard/options/sector';
 import Category from '../Admin/partials/dashboard/options/category';
 import Product from '../Admin/partials/dashboard/options/product';
 
+import AddProject from '../Admin/partials/dashboard/AddProject';
 
 const DashboardRoutes = () => {
   return (
@@ -226,6 +227,12 @@ const DashboardRoutes = () => {
       <Route
         path="/product"
         element={<PrivateRoute element={Product} />}
+      />
+
+      {/* Temp */}
+      <Route
+        path="/addproject"
+        element={<PrivateRoute element={AddProject} />}
       />
     </Routes>
   );
