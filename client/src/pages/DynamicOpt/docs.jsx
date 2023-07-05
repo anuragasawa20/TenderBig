@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const Docs = ({ onDocumentSubmit }) => {
     const [documents, setDocuments] = useState([]);
-    const [options, setOptions] = useState([]);
 
     const handleDocumentUpload = (index, file) => {
         const updatedDocuments = [...documents];
@@ -56,12 +55,12 @@ const Docs = ({ onDocumentSubmit }) => {
                     Add
                 </button>
 
-                {/* <button
+                <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700 my-1 mx-1"
                     type="submit"
                 >
                     Submit
-                </button> */}
+                </button>
             </form>
         </div>
     );
