@@ -5,39 +5,22 @@ const individualCertificationModelSchema = new mongoose.Schema(
         userId: {
             type: String
         },
-        aadharNumber: {
-            type: String
-        },
-        address: {
-            type: String
-        },
-        dob: {
-            type: Date
-        },
-        email: {
-            type: String
-        },
-        fatherName: {
-            type: String
-        },
-        mobileNumber: {
-            type: String
-        },
-        name: {
-            type: String
-        },
-        panNumber: {
-            type: String
-        },
-        requestLicense: {
-            type: String
-        },
-        workingField: {
-            type: String
-        },
-        url: {
-            type: String
-        }
+        name: String,
+        fatherName: String,
+        dob: String,
+        aadharNumber: String,
+        panNumber: String,
+        workingField: String,
+        companyaddress1: String,
+        companyaddress2: String,
+        companycity: String,
+        companystate: String,
+        zipcode: String,
+        companycountry: String,
+        others: String,
+        mobileNumber: String,
+        email: String,
+        requestLicense: String,
     },
     { timestamps: true }
 );

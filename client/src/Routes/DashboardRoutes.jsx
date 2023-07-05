@@ -24,6 +24,10 @@ import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUser
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 //Contact Requests
+import Seeker from '../Admin/partials/dashboard/requests/Seeker/SeekerForm';
+import SeekerFormDetail from '../Admin/partials/dashboard/requests/Seeker/SeekerFormDetail';
+import RegistrationList from '../Admin/partials/dashboard/requests/Registration-Certification/Registration/Registration';
+import RegistrationDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Registration/RegistrationDetail';
 import IndividualDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Individual/IndividualDetails';
 import IndividualList from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Individual/Individual';
 import CompanyDetails from '../Admin/partials/dashboard/requests/Registration-Certification/Certification/Company/CompanyDetails';
@@ -34,7 +38,7 @@ import ContactFormList from '../Admin/partials/dashboard/requests/ContactPage';
 import CareerManPower from '../Admin/partials/dashboard/requests/Career&ManPower';
 import AuctionMaterial from '../Admin/partials/dashboard/requests/Auction-Material';
 import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture';
-import License from '../Admin/partials/dashboard/requests/License';
+import License from '../Admin/partials/dashboard/requests/License/License';
 import OnlineBidding from '../Admin/partials/dashboard/requests/Online-Bidding';
 import RegistrationCertification from '../Admin/partials/dashboard/requests/RegistrationCertificate';
 import TenderResult from '../Admin/partials/dashboard/requests/Tender-Result';
@@ -148,6 +152,33 @@ const DashboardRoutes = () => {
         path="/individualrequests/:id"
         element={<PrivateRoute element={IndividualDetails} />}
       />
+
+      {/* Registration */}
+      <Route
+        path="/registrationrequests"
+        element={<PrivateRoute element={RegistrationList} />}
+      />
+      <Route
+        path="/registrationrequests/:id"
+        element={<PrivateRoute element={RegistrationDetails} />}
+      />
+
+      
+      {/* Seeker */}
+      <Route
+        path="/seekerrequests"
+        element={<PrivateRoute element={Seeker} />}
+      />
+      <Route
+        path="/seekerrequests/:id"
+        element={<PrivateRoute element={SeekerFormDetail} />}
+      />
+      
+      {/* License */}
+      <Route
+        path="/license"
+        element={<PrivateRoute element={License} />}
+      />
       
       <Route
         path="/contact"
@@ -165,10 +196,7 @@ const DashboardRoutes = () => {
         path="/jointventure"
         element={<PrivateRoute element={JointVenture} />}
       />
-      <Route
-        path="/license"
-        element={<PrivateRoute element={License} />}
-      />
+      
       <Route
         path="/onlinebidding"
         element={<PrivateRoute element={OnlineBidding} />}

@@ -5,39 +5,27 @@ const registrationModelSchema = new mongoose.Schema(
         userId: {
             type: String
         },
-        company: {
-            type: String
-        },
-        mobile: {
-            type: Number
-        },
-        email: {
-            type: String
-        },
-        companyProfile:{
-            type: String
-        },
-        estYear:{
-            type: String
-        },
-        regNo:{
-            type: String
-        },
-        lisenceName:{
-            type: String
-        },
-        contactPerson:{
-            type: String
-        },
-        fatherName:{
-            type: String
-        },
-        post:{
-            type: String
-        },
-        gst: {
-            type: String
-        },
+        company: String,
+        mobile: String,
+        secMobile: String,
+        email: String,
+        cwebsite: String,
+        CIN: String,
+        wmobile: String,
+        cprofile: String,
+        companyEstd: String,
+        otherDetails: String,
+        companypost: String,
+        liscence: String,
+        cpname: String,
+        category: String,
+        fname: String,
+        GST: String,
+        PAN: String,
+        address: String,
+        companycountry: String,
+        companycity: String,
+        companystate: String,
         url: {
             type: String
         }

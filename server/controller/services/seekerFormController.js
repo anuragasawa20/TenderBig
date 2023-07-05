@@ -3,72 +3,53 @@ const SeekerForm = require('../../models/services/CareerManPower/seekerModel');
 // Controller for form submission
 const submitForm = async (req, res) => {
     try {
-        // Extract the form data from the request body
         const {
-            userId,
-            company,
-            mobile,
-            email,
-            cwork,
+            name,
+            fathername,
+            aadhar,
+            tenMark,
+            twelveMark,
             jobpost,
-            experience,
-            salary,
-            curl,
-            companyprofile,
-            contactpnumber,
-            regno,
-            PAN,
+            jobexp,
             address,
+            company,
             city,
-            zipcode,
             state,
             country,
-            officetiming,
-            holidays,
-            workingdays,
-            seekerpost
+            mobile,
+            email,
+            zip,
+            pastSalary,
+            expectedSalary,
+            hobbies,
+            pan,
         } = req.body;
 
-        // Create a new instance of the SeekerForm model
-        const seeker = new SeekerForm({
-            userId,
-            company,
-            mobile,
-            email,
-            cwork,
+        const newSeeker = await SeekerForm.create({
+            name,
+            fathername,
+            aadhar,
+            tenMark,
+            twelveMark,
             jobpost,
-            experience,
-            salary,
-            curl,
-            companyprofile,
-            contactpnumber,
-            regno,
-            PAN,
+            jobexp,
             address,
+            company,
             city,
-            zipcode,
             state,
             country,
-            officetiming,
-            holidays,
-            workingdays,
-            seekerpost
+            mobile,
+            email,
+            zip,
+            pastSalary,
+            expectedSalary,
+            hobbies,
+            pan,
         });
 
-        // Save the seeker form data to the database
-        const savedForm = await seeker.save();
-
-        res.status(200).json({
-            success: true,
-            message: "Form submitted successfully",
-            data: savedForm,
-        });
+        res.status(201).json({ success: true, data: newSeeker });
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "An error occurred while submitting the form",
-            error: error.message,
-        });
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 

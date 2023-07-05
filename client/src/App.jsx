@@ -12,8 +12,8 @@ import NotFound from './components/NotFound';
 import DashboardRoutes from './Routes/DashboardRoutes';
 import EarnGems from './pages/GemRegistration';
 import CareerAndManpower from './pages/sub-pages/CareerAndManpower';
-import Employer from './pages/sub-pages/Employer';
 import Seeker from './pages/sub-pages/Seeker';
+import Employer from './pages/sub-pages/Employer';
 import RegAndCert from './pages/sub-pages/RegAndCert';
 import Registration from './pages/sub-pages/Registration';
 import Certification from './pages/sub-pages/Certification';
@@ -35,7 +35,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/gems" element={<Gems />} /> */}
-        <Route path='/employer' element={<Employer/>}></Route>
         <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
         <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>
         <Route path='/tenderfillingoffline' element={<TenderFillingOffline/>}></Route>
@@ -51,6 +50,7 @@ const App = () => {
         <Route path='/certification' element={<Certification/>}></Route>
         <Route path='/regandcert' element={<RegAndCert/>}></Route>
         <Route path='/seeker' element={<Seeker/>}></Route>
+        <Route path='/employer' element={<Employer/>}></Route>
         <Route path='/careerandmanpower' element={<CareerAndManpower/>}></Route>
         <Route path="/gemregistration" element={<EarnGems/>}></Route>
         <Route path="/advance-search" element={<AdvancedSearch />} />

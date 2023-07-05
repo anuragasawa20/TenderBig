@@ -34,74 +34,74 @@ const EmployerFormDetail = () => {
                         </div>
                     </main>
                 </div>
-            </div >    
+            </div >
         );
     }
-return (
-    <div className="flex h-screen overflow-hidden">
-        {/* Sidebar */}
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        {/* Content area */}
-        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
-            <main>
-                {/* Site header */}
-                <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    return (
+        <div className="flex h-screen overflow-hidden">
+            {/* Sidebar */}
+            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            {/* Content area */}
+            <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
+                <main>
+                    {/* Site header */}
+                    <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
 
-                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                    <div className="flex justify-center">
-                        <div className="bg-white rounded-lg shadow-lg p-6">
-                            <h2 className="text-xl font-bold mb-4">Employer Form Detail</h2>
-                            <div className="grid grid-cols-2">
-                                <div>
-                                    <p className="font-bold">Personal Information</p>
-                                    <p>Name: {formData.name}</p>
-                                    <p>Father's Name: {formData.fathername}</p>
-                                    <p>Aadhar: {formData.aadhar}</p>
-                                    <p>Mobile: {formData.mobile}</p>
-                                    <p>Email: {formData.email}</p>
+                    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                        <div className="flex justify-center">
+                            <div className="bg-white rounded-lg shadow-lg p-6">
+                                <h2 className="text-xl font-bold mb-4">Employer Form Detail</h2>
+                                <div className="grid grid-cols-2">
+                                    <div>
+                                        <p className="font-bold">Company Information</p>
+                                        <p>Company: {formData.company}</p>
+                                        <p>Mobile: {formData.mobile}</p>
+                                        <p>Email: {formData.email}</p>
+                                        <p>Company Work: {formData.cwork}</p>
+                                        <p>Job Post: {formData.jobpost}</p>
+                                        <p>Experience: {formData.experience}</p>
+                                        <p>Salary: {formData.salary}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-bold">Company Profile</p>
+                                        <p>Company Profile: {formData.companyprofile}</p>
+                                        <p>Contact Phone Number: {formData.contactpnumber}</p>
+                                        <p>Registration Number: {formData.regno}</p>
+                                        <p>PAN: {formData.PAN}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-bold">Educational Information</p>
-                                    <p>10th Mark: {formData.tenMark}</p>
-                                    <p>12th Mark: {formData.twelveMark}</p>
+
+                                <div className="grid grid-cols-2">
+                                    <div>
+                                        <p className="font-bold">Address Information</p>
+                                        <p>Address: {formData.address}</p>
+                                        <p>City: {formData.city}</p>
+                                        <p>ZIP Code: {formData.zipcode}</p>
+                                        <p>State: {formData.state}</p>
+                                        <p>Country: {formData.country}</p>
+                                    </div>
+                                    <div>
+                                        <p className="font-bold">Office Information</p>
+                                        <p>Office Timing: {formData.officetiming}</p>
+                                        <p>Holidays: {formData.holidays}</p>
+                                        <p>Working Days: {formData.workingdays}</p>
+                                        <p>Seeker Post: {formData.seekerpost}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="font-bold">Employment Details</p>
-                                    <p>Job Post: {formData.jobpost}</p>
-                                    <p>Job Experience: {formData.jobexp}</p>
-                                    <p>Company: {formData.company}</p>
+
+                                <div className="mt-4">
+                                    <p className="font-bold">GST Information</p>
+                                    <p>GST: {formData.GST}</p>
                                 </div>
-                                <div>
-                                    <p className="font-bold">Address</p>
-                                    <p>Address: {formData.address}</p>
-                                    <p>City: {formData.city}</p>
-                                    <p>State: {formData.state}</p>
-                                    <p>Country: {formData.country}</p>
-                                    <p>ZIP: {formData.zip}</p>
-                                </div>
-                            </div>
-                            <div className="mt-4">
-                                <p className="font-bold">Other Information</p>
-                                <p>Past Salary: {formData.pastSalary}</p>
-                                <p>Expected Salary: {formData.expectedSalary}</p>
-                                <p>Hobbies: {formData.hobbies.join(", ")}</p>
-                                <p>GST: {formData.gst}</p>
-                                <p>PAN: {formData.pan}</p>
-                            </div>
-                            <div className="mt-4">
-                                <p className="font-bold">Document URLs</p>
-                                <p><a href={formData.cvUrl} target='_blank' rel="noopener noreferrer">CV URL</a></p>
-                                <p><a href={formData.profileUrl} target='_blank' rel="noopener noreferrer">Profile URL</a></p>
-                                <p> <a href={formData.aadharUrl} target="_blank" rel="noopener noreferrer">Aadhar URL</a></p>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
-    </div>
-);
+    );
 };
 
 export default EmployerFormDetail;

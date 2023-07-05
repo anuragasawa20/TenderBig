@@ -8,7 +8,6 @@ import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData";
 
 const Registration = () => {
-    const [name, setName] = useState("");
     const [company, setCompany] = useState("");
     const [mobile, setMobile] = useState("");
     const [email, setEmail] = useState("");
@@ -55,7 +54,6 @@ const Registration = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         sendDataToAPI();
-        setName("");
         setGem("");
         setCompany("");
         setMobile("");
@@ -78,7 +76,6 @@ const Registration = () => {
 
     const sendDataToAPI = () => {
         const formData = {
-            name,
             Gem,
             company,
             mobile,
@@ -97,10 +94,14 @@ const Registration = () => {
             fname,
             GST,
             PAN,
+            address: companyaddress1 + " " + companyaddress2,
+            companycountry,
+            companycity,
+            companystate,
         };
         console.log(formData)
         axios
-            .post("http://localhost:5000/apiTender/services/seeker/submit-form", formData)
+            .post("http://localhost:5000/apiTender/services/register/registration", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

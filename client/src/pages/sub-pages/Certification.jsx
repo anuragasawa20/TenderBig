@@ -288,7 +288,7 @@ function IndividualForm({ onSubmit }) {
         Object.entries(data).forEach(([key, value]) => {
             requestBody.append(key, value);
         });
-        requestBody.append("doc", event.target.doc.files[0]);
+        // requestBody.append("doc", event.target.doc.files[0]);
 
         onSubmit(requestBody);
     };
@@ -601,7 +601,7 @@ const Certification = () => {
     const handleIndividualFormSubmit = (data) => {
 
         const token = localStorage.getItem('token');
-
+console.log(data)
         fetch('http://localhost:5000/apiTender/services/icert/certification', {
             method: 'POST',
             headers: {
@@ -611,19 +611,19 @@ const Certification = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                if (data.success == true) {
-                    alert('Submitted');
-                    window.location.href = '/certification';
-                }
-                else {
-                    alert('Something went wrong.Try Again.');
-                    window.location.href = '/certification';
-                }
+                // if (data.success == true) {
+                //     alert('Submitted');
+                //     window.location.href = '/certification';
+                // }
+                // else {
+                //     alert('Something went wrong.Try Again.');
+                //     window.location.href = '/certification';
+                // }
             })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Oops something went wrong!!!');
-            });
+            // .catch((error) => {
+            //     console.error('Error:', error);
+            //     alert('Oops something went wrong!!!');
+            // });
     };
 
     return (
