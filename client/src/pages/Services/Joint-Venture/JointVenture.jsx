@@ -7,6 +7,8 @@ import Step3 from './Steps/PersonalDetails';
 import Step4 from './Steps/Partnership';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
+import axios from "axios";
+import uploadFileToS3 from "../../../pages/file-uploading/FileUpload";
 
 const JointVenture = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -94,12 +96,27 @@ const JointVenture = () => {
         }));
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Perform form submission logic
-        // e.g., send form data to server
-        console.log(formData);
+    const uploadFilesForDirectors = async (directors) => {
+        const updatedDirectors = await Promise.all(
+            directors.map(async (director) => {
+                const uploads = await Promise.all(
+                    Object.entries(director.uploads).map(async ([fieldName, file]) => {
+                        const fileUrl = await uploadFileToS3(file);
+                        return { [fieldName]: { name: file.name, url: fileUrl } };
+                    })
+                );
 
+                return {
+                    ...director,
+                    uploads,
+                };
+            })
+        );
+
+        return updatedDirectors;
+    };
+
+    const resetForm = () => {
         // Reset form data and current step
         setFormData({
             // 1. Company Details
@@ -150,6 +167,29 @@ const JointVenture = () => {
             otherDescription: ''
         });
         setCurrentStep(0);
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        let requestBody = formData;
+
+        requestBody.companyUploads.cinUpload[0] = await uploadFileToS3(requestBody.companyUploads.cinUpload[0])
+        requestBody.companyUploads.gstUpload[0] = await uploadFileToS3(requestBody.companyUploads.gstUpload[0])
+        requestBody.companyUploads.panUpload[0] = await uploadFileToS3(requestBody.companyUploads.panUpload[0])
+
+        const updatedDirectors = await uploadFilesForDirectors(requestBody.directors);
+        requestBody.directors = updatedDirectors;
+
+        const response = await axios.post('http://localhost:5000/apiTender/services/jv/submitjv', requestBody);
+        if (response.data.success) {
+          alert('Submitted')
+          resetForm();
+        } else {
+          alert('Something went wrong. Try again.');
+        }
+
+
     };
 
     return (

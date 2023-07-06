@@ -6,6 +6,7 @@ import { locations } from "../../constants/countriesData";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import uploadFileToS3 from "../file-uploading/FileUpload";
 
 const Employer = () => {
 
@@ -52,9 +53,7 @@ const Employer = () => {
         },
     };
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        sendDataToAPI();
+    const clearInputs = () => {
         setCompany("");
         setMobile("");
         setEmail("");
@@ -78,9 +77,17 @@ const Employer = () => {
         setHolidays("");
         setWorkingdays("");
         setSeekerpost("");
-    };
+    }
 
-    const sendDataToAPI = () => {
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        const resume = e.target.resume.files[0];
+        const other = e.target.other.files[0];
+
+        const getresumeUrl = await uploadFileToS3(resume);
+        const getotherUrl = await uploadFileToS3(other);
+
         const formData = {
             company,
             mobile,
@@ -95,7 +102,7 @@ const Employer = () => {
             contactpnumber,
             regno,
             PAN,
-            address: addressline1 +" "+ addressline2,
+            address: addressline1 + " " + addressline2,
             city,
             zipcode,
             state,
@@ -104,16 +111,17 @@ const Employer = () => {
             holidays,
             workingdays,
             seekerpost,
+            resumeUrl: getresumeUrl,
+            otherUrl: getotherUrl
         };
-
-        console.log(formData)
 
         axios
             .post("http://localhost:5000/apiTender/services/employer/submit-form", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
-                setIsVisible(false);
+                // clearInputs();
+                // window.location.href = '/employer';
             })
             .catch((error) => {
                 console.error("Error sending form data:", error);
@@ -487,11 +495,11 @@ const Employer = () => {
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
                                 <input type="file" name="resume" accept=".pdf" required />
                             </label>
-                            
+
                             <label className="block mb-2 font-semibold">
-                                Others
+                                Other
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="resume" accept=".pdf" required />
+                                <input type="file" name="other" accept=".pdf" required />
                             </label>
 
 

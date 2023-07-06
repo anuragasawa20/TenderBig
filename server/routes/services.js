@@ -68,7 +68,7 @@ router.get('/icert/certification/:id', individualCertificationController.getForm
 
 //Auction Materials
 // Route for submitting an auction material form
-router.post('/aumt/auction-material',upload.any(), auctionMaterialsController.submitForm);
+router.post('/aumt/auction-material', auctionMaterialsController.submitForm);
 
 // Route for getting all auction material forms
 router.get('/aumt/auction-material', auctionMaterialsController.getAllForms);

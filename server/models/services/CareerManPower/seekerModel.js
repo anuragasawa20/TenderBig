@@ -8,7 +8,9 @@ const seekerModelSchema = new mongoose.Schema(
         name: String,
         fathername: String,
         aadhar: String,
+        tenMarkType: String,
         tenMark: String,
+        twelveMarkType: String,
         twelveMark: String,
         jobpost: String,
         jobexp: String,
@@ -24,7 +26,13 @@ const seekerModelSchema = new mongoose.Schema(
         expectedSalary: String,
         hobbies: String,
         pan: String,
-        resumeurl: {
+        resumeUrl: {
+            type: String
+        },
+        photoUrl: {
+            type: String
+        },
+        aadharUrl: {
             type: String
         }
     },

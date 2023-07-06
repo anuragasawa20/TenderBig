@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData";
+import uploadFileToS3 from "../file-uploading/FileUpload";
+import axios from "axios";
 
 function CompanyForm({ onSubmit }) {
     const [companyName, setCompanyName] = useState('');
@@ -21,8 +23,17 @@ function CompanyForm({ onSubmit }) {
     const [contractPName, setContractPName] = useState('');
     const [others, setOthers] = useState("");
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const doc = e.target.doc.files[0];
+        const cgst = e.target.cgst.files[0];
+        const cpan = e.target.cpan.files[0];
+
+        const getdocUrl = await uploadFileToS3(doc);
+        const getgstUrl = await uploadFileToS3(cgst);
+        const getpanUrl = await uploadFileToS3(cpan);
+
         const data = {
             companyName,
             companyProfile,
@@ -37,18 +48,12 @@ function CompanyForm({ onSubmit }) {
             requestLicense,
             selectedPositions,
             contractPName,
+            docUrl: getdocUrl,
+            gstUrl: getgstUrl,
+            panUrl: getpanUrl
         };
 
-        var requestBody = new FormData();
-
-        // Append form data to the request body
-        Object.entries(data).forEach(([key, value]) => {
-            requestBody.append(key, value);
-        });
-        console.log(requestBody.get("cinReg"))
-        requestBody.append("doc", event.target.doc.files[0]);
-
-        onSubmit(requestBody);
+        onSubmit(data);
     };
 
     return (
@@ -207,29 +212,26 @@ function CompanyForm({ onSubmit }) {
                     </label>
                 </div>
             </div>
+
             <label className="block mb-2 font-semibold">
                 Upload Document
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <hr />
-                <input
-                    type="file"
-                    name="doc"
-                    accept=".pdf"
-                    required
-                />
+                <input type="file" name="doc" accept=".pdf" required />
             </label>
 
             <label className="block mb-2 font-semibold">
                 GST
                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                <input type="file" name="resume" accept=".pdf" required />
+                <input type="file" name="cgst" accept=".pdf" required />
             </label>
 
             <label className="block mb-2 font-semibold">
                 PAN
                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                <input type="file" name="resume" accept=".pdf" required />
+                <input type="file" name="cpan" accept=".pdf" required />
             </label>
+
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
@@ -260,9 +262,20 @@ function IndividualForm({ onSubmit }) {
     const [email, setEmail] = useState('');
     const [requestLicense, setRequestLicense] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         // Prepare the data object with form values
+
+        const photo = e.target.photo.files[0];
+        const aadhar = e.target.aadhar.files[0];
+        const pan = e.target.pan.files[0];
+        const signature = e.target.signature.files[0];
+
+        const getphotoUrl = await uploadFileToS3(photo);
+        const getaadharUrl = await uploadFileToS3(aadhar);
+        const getpanUrl = await uploadFileToS3(pan);
+        const getsignatureUrl = await uploadFileToS3(signature);
+
         const data = {
             name,
             fatherName,
@@ -280,17 +293,13 @@ function IndividualForm({ onSubmit }) {
             mobileNumber,
             email,
             requestLicense,
+            photoUrl:getphotoUrl,
+            aadharUrl:getaadharUrl,
+            panUrl:getpanUrl,
+            signatureUrl:getsignatureUrl
         };
-        // Call the individual form submit handler from the parent component
-        var requestBody = new FormData();
-
-        // Append form data to the request body
-        Object.entries(data).forEach(([key, value]) => {
-            requestBody.append(key, value);
-        });
-        // requestBody.append("doc", event.target.doc.files[0]);
-
-        onSubmit(requestBody);
+       
+        onSubmit(data);
     };
 
     return (
@@ -514,7 +523,7 @@ function IndividualForm({ onSubmit }) {
             <label className="block mb-2 font-semibold">
                 Upload Photo
                 <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="resume" accept=".pdf" required />
+                <input type="file" name="photo" accept=".jpg,.png,.jpeg" required />
             </label>
             <label className="block mb-2 font-semibold">
                 Upload aadhar
@@ -524,12 +533,12 @@ function IndividualForm({ onSubmit }) {
             <label className="block mb-2 font-semibold">
                 Upload PAN
                 <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="aadhar" accept=".pdf" required />
+                <input type="file" name="pan" accept=".pdf" required />
             </label>
             <label className="block mb-2 font-semibold">
                 Upload Digital Signature
                 <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="aadhar" accept=".pdf" required />
+                <input type="file" name="signature" accept=".jpg,.png,.jpeg" required />
             </label>
             <div className="flex items-center justify-between mb-4">
                 <button
@@ -573,57 +582,35 @@ const Certification = () => {
     const handleCompanyFormSubmit = (data) => {
 
         const token = localStorage.getItem('token');
-
-        fetch('http://localhost:5000/apiTender/services/ccert/certification', {
-            method: 'POST',
-            headers: {
-                auth: token,
-            },
-            body: data,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success == true) {
-                    alert('Submitted');
-                    window.location.href = '/certification';
-                }
-                else {
-                    alert('Something went wrong.Try Again.');
-                    window.location.href = '/certification';
-                }
+        axios
+            .post("http://localhost:5000/apiTender/services/ccert/certification", data)
+            .then((response) => {
+                console.log("Form data sent successfully:", response.data);
+                alert("We will contact you soon!!!");
+                window.location.href = '/certification';
             })
             .catch((error) => {
-                console.error('Error:', error);
-                alert('Oops something went wrong!!!');
+                console.error("Error sending form data:", error);
+                alert("Oops something went wrong!!!");
             });
     };
 
     const handleIndividualFormSubmit = (data) => {
 
         const token = localStorage.getItem('token');
-console.log(data)
-        fetch('http://localhost:5000/apiTender/services/icert/certification', {
-            method: 'POST',
-            headers: {
-                auth: token,
-            },
-            body: data,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // if (data.success == true) {
-                //     alert('Submitted');
-                //     window.location.href = '/certification';
-                // }
-                // else {
-                //     alert('Something went wrong.Try Again.');
-                //     window.location.href = '/certification';
-                // }
+        console.log(data)
+        axios
+            .post("http://localhost:5000/apiTender/services/icert/certification", data)
+            .then((response) => {
+                console.log("Form data sent successfully:", response.data);
+                alert("We will contact you soon!!!");
+                window.location.href = '/certification';
             })
-            // .catch((error) => {
-            //     console.error('Error:', error);
-            //     alert('Oops something went wrong!!!');
-            // });
+            .catch((error) => {
+                console.error("Error sending form data:", error);
+                alert("Oops something went wrong!!!");
+            });
+        
     };
 
     return (

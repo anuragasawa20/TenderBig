@@ -161,6 +161,7 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
               <input
                 type="file"
                 name="uploads.gst"
+                accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'gst', event)}
                 className="mt-1"
               />
@@ -170,6 +171,7 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
               <input
                 type="file"
                 name="uploads.pan"
+                accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'pan', event)}
                 className="mt-1"
               />
@@ -179,6 +181,7 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
               <input
                 type="file"
                 name="uploads.aadhar"
+                accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'aadhar', event)}
                 className="mt-1"
               />
@@ -188,6 +191,7 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
               <input
                 type="file"
                 name="uploads.photo"
+                accept='.png,.jpeg,.jpg'
                 onChange={(event) => handleDirectorFileChange(index, 'photo', event)}
                 className="mt-1"
               />

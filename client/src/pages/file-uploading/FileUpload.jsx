@@ -1,68 +1,27 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useDropzone } from 'react-dropzone';
+async function uploadFileToS3(file) {
+    try {
+        // Step 1: Get the signed URL for file upload
+        const { signedUrl } = await fetch('http://localhost:5000/apiTender/s3/uploadurl')
+            .then((response) => response.json());
 
-const FileUpload = () => {
-    const [selectedFiles, setSelectedFiles] = useState([]);
+       // Step 2: Upload the file to S3 using the signed URL
+        await fetch(signedUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            body: file,
+        });
 
-    // Function to handle file selection
-    const handleFileSelect = (acceptedFiles) => {
-        setSelectedFiles(acceptedFiles);
-    };
+        // Step 3: Extract the file URL
+        const fileUrl = signedUrl.split('?')[0];
 
-    // Function to handle file upload
-    const handleFileUpload = () => {
-        if (selectedFiles.length > 0) {
-            const formData = new FormData();
-            selectedFiles.forEach((file) => {
-                formData.append('files', file);
-            });
-console.log("got file")
-            axios
-                .post('http://localhost:5000/api/upload', formData)
-                .then((response) => {
-                    console.log('Files uploaded successfully:', response.data);
-                    // Handle the successful upload
-                })
-                .catch((error) => {
-                    console.error('Error uploading files:', error);
-                    // Handle the error
-                });
-        }
-    };
+        return fileUrl;
+    } catch (error) {
+        console.error(error);
+        // Handle error
+        throw new Error('File upload to S3 failed.');
+    }
+}
 
-    // Use the `useDropzone` hook to enable file drop functionality
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
-        accept: '.pdf',
-        multiple: true,
-        onDrop: handleFileSelect,
-    });
-
-    return (
-        <div>
-            <div {...getRootProps()} className="dropzone border rounded-md p-3 my-3">
-                <input {...getInputProps()} />
-                {isDragActive ? (
-                    <p>Drop the PDF files here...</p>
-                ) : (
-                    <p style={{ color: 'blue', cursor: 'pointer' }}>
-                        Upload
-                    </p>
-                )}
-            </div>
-            {selectedFiles.length > 0 && (
-                <div className='container'>
-                    <p>Selected files:</p>
-                    <ul>
-                        {selectedFiles.map((file, index) => (
-                            <li key={index}>{file.name}</li>
-                        ))}
-                    </ul>
-                    <button onClick={handleFileUpload}>Upload</button>
-                </div>
-            )}
-        </div>
-    );
-};
-
-export default FileUpload;
+export default uploadFileToS3;

@@ -17,11 +17,11 @@ const submitForm = async (req, res) => {
       selectedPositions,
       website,
       workingField,
-      others
+      others,
+      docUrl,
+      gstUrl,
+      panUrl
     } = req.body;
-
-    const docFile = getFileByFilename(req.files, 'doc');
-    const docUrl = (await uploadFileToS3(docFile));
 
     // Create a new instance of the CertificationForm model
     const certification = new CompanyForm({
@@ -38,7 +38,9 @@ const submitForm = async (req, res) => {
       website,
       workingField,
       others,
-      url:docUrl
+      docUrl,
+      gstUrl,
+      panUrl
     });
 
     // Save the certification form data to the database

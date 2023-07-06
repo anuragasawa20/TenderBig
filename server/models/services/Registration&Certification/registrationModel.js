@@ -26,9 +26,9 @@ const registrationModelSchema = new mongoose.Schema(
         companycountry: String,
         companycity: String,
         companystate: String,
-        url: {
-            type: String
-        }
+        regUrl: String,
+        gstUrl: String,
+        panUrl: String,
     },
     { timestamps: true }
 );

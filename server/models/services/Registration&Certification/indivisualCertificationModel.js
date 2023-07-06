@@ -21,6 +21,10 @@ const individualCertificationModelSchema = new mongoose.Schema(
         mobileNumber: String,
         email: String,
         requestLicense: String,
+        photoUrl: String,
+        aadharUrl: String,
+        panUrl: String,
+        signatureUrl: String
     },
     { timestamps: true }
 );

@@ -6,6 +6,7 @@ import axios from "axios";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData";
+import uploadFileToS3 from "../file-uploading/FileUpload";
 
 const Registration = () => {
     const [company, setCompany] = useState("");
@@ -51,9 +52,7 @@ const Registration = () => {
         },
     };
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        sendDataToAPI();
+    const clearInputs = () => {
         setGem("");
         setCompany("");
         setMobile("");
@@ -74,7 +73,17 @@ const Registration = () => {
         setPAN("");
     };
 
-    const sendDataToAPI = () => {
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+
+        const reg = e.target.reg.files[0];
+        const gst = e.target.gst.files[0];
+        const pan = e.target.pan.files[0];
+
+        const getRegUrl = await uploadFileToS3(reg);
+        const getGstUrl = await uploadFileToS3(gst);
+        const getPanUrl = await uploadFileToS3(pan);
+
         const formData = {
             Gem,
             company,
@@ -98,14 +107,16 @@ const Registration = () => {
             companycountry,
             companycity,
             companystate,
+            regUrl:getRegUrl,
+            gstUrl:getGstUrl,
+            panUrl:getPanUrl
         };
-        console.log(formData)
+
         axios
             .post("http://localhost:5000/apiTender/services/register/registration", formData)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
-                setIsVisible(false);
             })
             .catch((error) => {
                 console.error("Error sending form data:", error);
@@ -468,19 +479,19 @@ const Registration = () => {
                             <label className="block mb-2 font-semibold">
                                 Reg No.
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="resume" accept=".pdf" required />
+                                <input type="file" name="reg" accept=".pdf" required />
                             </label>
 
                             <label className="block mb-2 font-semibold">
                                 GST
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="resume" accept=".pdf" required />
+                                <input type="file" name="gst" accept=".pdf" required />
                             </label>
 
                             <label className="block mb-2 font-semibold">
                                 PAN
                                 <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="resume" accept=".pdf" required />
+                                <input type="file" name="pan" accept=".pdf" required />
                             </label>
 
                             <button

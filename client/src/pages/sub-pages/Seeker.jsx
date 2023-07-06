@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import uploadFileToS3 from "../file-uploading/FileUpload";
 
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (
@@ -143,7 +144,9 @@ const Seeker = () => {
         name: "",
         fathername: "",
         aadhar: "",
+        tenMarkType: "",
         tenMark: "",
+        twelveMarkType: "",
         twelveMark: "",
         jobpost: "",
         jobexp: "",
@@ -159,6 +162,9 @@ const Seeker = () => {
         expectedSalary: "",
         hobbies: "",
         pan: "",
+        resumeUrl: "",
+        photoUrl: "",
+        aadharUrl: ""
     });
 
     const clearInputs = () => {
@@ -182,57 +188,74 @@ const Seeker = () => {
             expectedSalary: "",
             hobbies: "",
             pan: "",
+            resumeUrl: "",
+            photoUrl: "",
+            aadharUrl: ""
         });
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
         }));
     };
 
-    const handleSubmit = (e) => {
+    const updateFormDataWithUrls = async (resumeUrl, photoUrl, aadharUrl) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            resumeUrl: resumeUrl,
+            photoUrl: photoUrl,
+            aadharUrl: aadharUrl
+        }));
+    };
+
+    useEffect(() => {
+        if (formData.resumeUrl && formData.photoUrl && formData.aadharUrl) {
+            StoreAtDB();
+        }
+    }, [formData]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        var requestBody = new FormData();
+        const resume = e.target.resume.files[0];
+        const profilePhoto = e.target.profilePhoto.files[0];
+        const aadhar = e.target.aadhar.files[0];
 
-        // Append form data to the request body
-        Object.entries(formData).forEach(([key, value]) => {
-            requestBody.append(key, value);
-        });
-        // Append uploaded files to the request body
-        requestBody.append("resume", e.target.resume.files[0]);
-        requestBody.append("profilePhoto", e.target.profilePhoto.files[0]);
-        requestBody.append("aadhar", e.target.aadhar.files[0]);
+        const resumeUrl = await uploadFileToS3(resume);
+        const photoUrl = await uploadFileToS3(profilePhoto);
+        const aadharUrl = await uploadFileToS3(aadhar);
 
+        await updateFormDataWithUrls(resumeUrl, photoUrl, aadharUrl);
+    }
+
+    const StoreAtDB = () => {
         console.log(formData)
         const token = localStorage.getItem('token');
 
         fetch('http://localhost:5000/apiTender/services/seeker/submit-form', {
             method: 'POST',
             headers: {
-                auth: token,
+                'Content-Type': 'application/json',
+                auth: token
             },
-            body: requestBody,
+            body: JSON.stringify(formData)
         })
             .then((response) => response.json())
             .then((data) => {
-                if(data.success == true){
+                if (data.success === true) {
                     alert('Submitted');
                     clearInputs();
                     window.location.href = '/seeker';
-                }
-                else{
-                    alert('Something went wrong.Try Again.');
-                    window.location.href = '/seeker';
+                } else {
+                    alert('Something went wrong. Try again.');
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Oops something went wrong!!!');
-                clearInputs();
+                alert('Oops, something went wrong!!!');
             });
     };
 
@@ -244,7 +267,6 @@ const Seeker = () => {
     const previousPage = () => {
         setCurrentPage(1);
     };
-
 
     return (
         <>
@@ -299,41 +321,76 @@ const Seeker = () => {
                                     minLength={16}
                                 />
                             </label>
+
                             <div className=" grid grid-cols-2 gap-4 ">
                                 <div className="relative">
                                     <label className="block mb-2 font-semibold">
-                                        10th Percentage(%)
+                                        10th Score
                                         <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <div className="flex">
+                                        <select
+                                            required
+                                            name="tenMarkType"
+                                            value={formData.tenMarkType}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-24 text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            <option value="fixed">Fixed</option>
+                                            <option value="percentage">Percentage</option>
+                                        </select>
                                         <input
                                             required
                                             type="number"
                                             name="tenMark"
                                             value={formData.tenMark}
                                             onChange={handleChange}
-                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                            placeholder="Enter Percentage"
+                                            className="border rounded-sm px-3 py-2 mt-1 flex-grow text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                            placeholder={
+                                                formData.tenMarkType === "fixed"
+                                                    ? "Enter Fixed Score"
+                                                    : "Enter Percentage"
+                                            }
                                             maxLength={2}
                                             minLength={2}
                                         />
-                                    </label>
+                                    </div>
                                 </div>
 
+                                <div className="relative">
+                                    <label className="block mb-2 font-semibold">
+                                        12th Score
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <div className="flex">
+                                        <select
+                                            required
+                                            name="twelveMarkType"
+                                            value={formData.twelveMarkType}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-24 text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            <option value="fixed">Fixed</option>
+                                            <option value="percentage">Percentage</option>
+                                        </select>
+                                        <input
+                                            required
+                                            type="number"
+                                            name="twelveMark"
+                                            value={formData.twelveMark}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 flex-grow text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                            placeholder={
+                                                formData.tenMarkType === "fixed"
+                                                    ? "Enter Fixed Score"
+                                                    : "Enter Percentage"
+                                            }
+                                            maxLength={2}
+                                            minLength={2}
+                                        />
+                                    </div>
+                                </div>
 
-                                <label className="block mb-2 font-semibold">
-                                    12th Percentage(%)
-                                    <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input
-                                        required
-                                        type="number"
-                                        name="twelveMark"
-                                        value={formData.twelveMark}
-                                        onChange={handleChange}
-                                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                        placeholder="Enter Percentage"
-                                        maxLength={2}
-                                        minLength={2}
-                                    />
-                                </label>
                                 <label className="block mb-2 font-semibold">
                                     Jop Post
                                     <span className="text-red-700 relative top-0 right-0">*</span>
@@ -442,6 +499,8 @@ const Seeker = () => {
                                     />
                                 </label>
                             </div>
+
+
                         </div>
 
 

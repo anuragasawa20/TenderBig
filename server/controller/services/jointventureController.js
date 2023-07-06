@@ -1,92 +1,38 @@
 const JointVentureForm = require("../../models/services/JointVenture/jointventure");
 
-// Submit Joint Venture form
+// Submit a new document
 const submitForm = async (req, res) => {
     try {
-        // Extract the form data from the request body
-        const {
-            projectName,
-            companyName,
-            panNumber,
-            websiteAddress,
-            gst,
-            workRatio,
-            companyemail,
-            companycontact,
-            cin,
-            regNo,
-            address,
-            country,
-            city,
-            zip,
-            tenderName,
-            cinUrl,
-            gstUrl,
-            panUrl,
-        } = req.body;
-
-        // Create a new instance of the JointVentureForm model
-        const jointventure = new JointVentureForm({
-            projectName,
-            companyName,
-            panNumber,
-            websiteAddress,
-            gst,
-            workRatio,
-            companyemail,
-            companycontact,
-            cin,
-            regNo,
-            address,
-            country,
-            city,
-            zip,
-            tenderName,
-            cinUrl,
-            gstUrl,
-            panUrl,
-        });
-
-        // Save the joint venture form data to the database
-        const savedForm = await jointventure.save();
-
-        res.status(200).json({
-            success: true,
-            message: "Form submitted successfully",
-            data: savedForm,
-        });
+        const newDocument = await JointVentureForm.create(req.body);
+        res.status(201).json({success:true, newDocument});
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "An error occurred while submitting the form",
-            error: error.message,
-        });
+        console.log(error)
+        res.status(500).json({ error: 'Failed to submit the document.' });
     }
 };
 
-// Get all Joint Venture forms
+// Get all documents
 const getAllForms = async (req, res) => {
     try {
-        const forms = await JointVentureForm.find();
-        res.json(forms);
+        const documents = await JointVentureForm.find();
+        res.json(documents);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Server Error" });
+        res.status(500).json({ error: 'Failed to retrieve documents.' });
     }
 };
 
-// Get a single Joint Venture form
+// Get a document by ID
 const getFormById = async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const formId = req.params.id;
-        const form = await JointVentureForm.findById(formId);
-        if (!form) {
-            return res.status(404).json({ error: "Form not found" });
+        const document = await JointVentureForm.findById(id);
+        if (!document) {
+            return res.status(404).json({ error: 'Document not found.' });
         }
-        res.json(form);
+        res.json(document);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Server Error" });
+        res.status(500).json({ error: 'Failed to retrieve the document.' });
     }
 };
 

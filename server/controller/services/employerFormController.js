@@ -26,6 +26,8 @@ const submitForm = async (req, res) => {
             holidays,
             workingdays,
             seekerpost,
+            resumeUrl,
+            otherUrl
         } = req.body;
 
         // Create a new instance of the EmployerForm model
@@ -52,6 +54,8 @@ const submitForm = async (req, res) => {
             holidays,
             workingdays,
             seekerpost,
+            resumeUrl,
+            otherUrl
         });
 
         const savedForm = await employer.save();

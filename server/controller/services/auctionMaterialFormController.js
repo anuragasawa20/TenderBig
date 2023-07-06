@@ -1,105 +1,43 @@
 const AuctionMaterialForm = require('../../models/services/AuctionMaterials/auctionmaterials');
-const { uploadMultipleFilesToS3, getLink } = require('../../config/s3function')
 
-// Controller for submitting an auction material form
+// Controller for submitting a form
 const submitForm = async (req, res) => {
   try {
-    const {
-      tenderNumber,
-      companyName,
-      regNumber,
-      workExp,
-      gst,
-      aadharCardDirectors,
-      panCardDirectors,
-      companyAddress,
-      website,
-      projectMailId,
-      contractPName,
-      contactNumber,
-      auctionMaterials,
-      otherDetails
-    } = req.body;
+    const formData = req.body;
 
-    let urls;
-
-    await uploadMultipleFilesToS3(req.files)
-      .then(uploadResults => {
-        console.log(uploadResults);
-        urls = uploadResults;
-      })
-      .catch(error => {
-        console.error('Error uploading files:', error);
-      });
-
-    const auctionForm = new AuctionMaterialForm({
-      tenderNumber,
-      companyName,
-      regNumber,
-      workExp,
-      gst,
-      aadharCardDirectors,
-      panCardDirectors,
-      companyAddress,
-      website,
-      projectMailId,
-      contractPName,
-      contactNumber,
-      auctionMaterials,
-      otherDetails,
-      url: urls
-    });
-
-    const savedForm = await auctionForm.save();
-    res.json(savedForm);
+    const newForm = await AuctionMaterialForm.create(formData);
+    res.status(201).json({ success: true, data: newForm });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server Error' });
+    console.error('Error submitting form:', error);
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 };
 
-// Controller for getting all auction material forms
+// Controller for getting all forms
 const getAllForms = async (req, res) => {
   try {
-    const forms = await AuctionMaterialForm.find().select('tenderNumber companyName contactNumber companyAddress');
-    res.json(forms);
+    const forms = await AuctionMaterialForm.find();
+    res.status(200).json({ success: true, data: forms });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server Error' });
+    console.error('Error getting forms:', error);
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 };
 
-// Controller for getting a single auction material form by ID
+// Controller for getting a form by ID
 const getFormById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const form = await AuctionMaterialForm.findById(id);
-
+    const formId = req.params.id;
+    const form = await AuctionMaterialForm.findById(formId);
+    
     if (!form) {
-      return res.status(404).json({ error: 'Form not found' });
+      return res.status(404).json({ success: false, error: 'Form not found' });
     }
-
-    async function processUrls(form) {
-      const links = [];
-      for (const filename of form.url) {
-        const link = await getLink(filename);
-        links.push(link);
-      }
-      return links;
-    }
-
-    try {
-      const links = await processUrls(form);
-      console.log(links);
-      form.url = links;
-    } catch (error) {
-      console.error('Error processing URLs:', error);
-    }
-    console.log(form.url)
-    res.json(form);
+    
+    res.status(200).json({ success: true, data: form });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server Error' });
+    console.error('Error getting form:', error);
+    res.status(500).json({ success: false, error: 'Server error' });
   }
 };
 

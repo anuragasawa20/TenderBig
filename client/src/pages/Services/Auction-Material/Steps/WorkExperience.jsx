@@ -38,6 +38,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 type="file"
                 id="workExperience"
                 name="workExperience"
+                accept='.pdf'
                 multiple
                 onChange={handleFileChange}
               />
@@ -52,6 +53,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 type="file"
                 id="workOrderSamples"
                 name="workOrderSamples"
+                accept='.pdf'
                 multiple
                 onChange={handleFileChange}
               /></label>
@@ -64,6 +66,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 type="file"
                 id="workProfiles"
                 name="workProfiles"
+                accept='.pdf'
                 multiple
                 onChange={handleFileChange}
               /></label>

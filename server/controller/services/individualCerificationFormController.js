@@ -21,8 +21,12 @@ const submitForm = async (req, res) => {
       mobileNumber,
       email,
       requestLicense,
+      photoUrl,
+      aadharUrl,
+      panUrl,
+      signatureUrl
     } = req.body;
-console.log(req.body)
+
     const newForm = await IndividualForm.create({
       name,
       fatherName,
@@ -40,6 +44,10 @@ console.log(req.body)
       mobileNumber,
       email,
       requestLicense,
+      photoUrl,
+      aadharUrl,
+      panUrl,
+      signatureUrl
     });
 
     res.status(201).json({ success: true, data: newForm });

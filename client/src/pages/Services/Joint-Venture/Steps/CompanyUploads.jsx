@@ -37,6 +37,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 required
                 type="file"
                 id="gstUpload"
+                accept='.pdf'
                 name="gstUpload"
                 onChange={handleFileChange}
               />
@@ -51,6 +52,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 type="file"
                 id="panUpload"
                 name="panUpload"
+                accept='.pdf'
                 onChange={handleFileChange}
               /></label>
           </div>
@@ -62,6 +64,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
                 type="file"
                 id="cinUpload"
                 name="cinUpload"
+                accept='.pdf'
                 onChange={handleFileChange}
               /></label>
           </div>

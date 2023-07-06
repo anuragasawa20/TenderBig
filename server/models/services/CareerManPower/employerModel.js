@@ -71,6 +71,12 @@ const employerModelSchema = new mongoose.Schema(
         seekerpost: {
             type: String
         },
+        resumeUrl: {
+            type: String
+        },
+        otherUrl: {
+            type: String
+        },
     },
     { timestamps: true }
 );

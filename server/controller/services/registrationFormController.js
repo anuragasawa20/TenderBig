@@ -25,6 +25,9 @@ const submitForm = async (req, res) => {
       companycountry,
       companycity,
       companystate,
+      regUrl,
+      gstUrl,
+      panUrl
     } = req.body;
 
     const newReg = await RegistrationForm.create({
@@ -49,6 +52,9 @@ const submitForm = async (req, res) => {
       companycountry,
       companycity,
       companystate,
+      regUrl,
+      gstUrl,
+      panUrl
     });
 
     res.status(201).json({ success: true, data: newReg });

@@ -7,7 +7,9 @@ const submitForm = async (req, res) => {
             name,
             fathername,
             aadhar,
+            tenMarkType,
             tenMark,
+            twelveMarkType,
             twelveMark,
             jobpost,
             jobexp,
@@ -23,13 +25,18 @@ const submitForm = async (req, res) => {
             expectedSalary,
             hobbies,
             pan,
+            resumeUrl,
+            photoUrl,
+            aadharUrl
         } = req.body;
 
         const newSeeker = await SeekerForm.create({
             name,
             fathername,
             aadhar,
+            tenMarkType,
             tenMark,
+            twelveMarkType,
             twelveMark,
             jobpost,
             jobexp,
@@ -45,6 +52,9 @@ const submitForm = async (req, res) => {
             expectedSalary,
             hobbies,
             pan,
+            resumeUrl,
+            photoUrl,
+            aadharUrl
         });
 
         res.status(201).json({ success: true, data: newSeeker });

@@ -1,37 +1,44 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const auctionmaterialsModelSchema = new mongoose.Schema(
+// Define the schema for the director details
+const directorSchema = new mongoose.Schema({
+  directorName: String,
+  directorAadhar: String,
+  directorPan: String,
+  directorDob: String,
+  directorFatherName: String,
+});
+
+// Define the schema for the form data
+const auctionmaterialsModelSchema = new mongoose.Schema({
+  tenderNumber: String,
+  tenderLink: String,
+  companyName: String,
+  cinReg: String,
+  gst: String,
+  pan: String,
+  workExperience: [
     {
-        userId: {
-            type: String
-        },
-        tenderNumber: {
-            type: String
-        },
-        companyName: {
-            type: String
-        },
-        regNumber: {
-            type: String
-        },
-        workExp: { type: String },
-        gst: { type: String },
-        aadharCardDirectors: { type: String },
-        panCardDirectors: { type: String },
-        companyAddress: { type: String },
-        website: { type: String },
-        projectMailId: { type: String },
-        contractPName: { type: String },
-        contactNumber: { type: String },
-        auctionMaterials: { type: String },
-        otherDetails: { type: String },
-        url: {
-            type: [String]
-        }
+      workExperience: [String],
+      workOrderSamples: [String],
+      workProfiles: [String],
     },
-    { timestamps: true }
-);
+  ],
+  directors: [directorSchema],
+  address: String,
+  country: String,
+  state: String,
+  city: String,
+  zipCode: String,
+  website: String,
+  projectMailId: String,
+  contactPersonName: String,
+  contactPersonNumber: String,
+  auctionMaterial: [String],
+  otherDescription: String,
+});
 
-const AuctionMaterialForm = mongoose.model("Auction-Material", auctionmaterialsModelSchema);
+// Create the FormData model
+const AuctionMaterialForm = mongoose.model('Auction-Material', auctionmaterialsModelSchema);
 
 module.exports = AuctionMaterialForm;

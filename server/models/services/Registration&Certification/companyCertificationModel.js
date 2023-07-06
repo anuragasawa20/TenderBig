@@ -41,7 +41,13 @@ const companyCertificationModelSchema = new mongoose.Schema(
         workingField: {
             type: String
         },
-        url: {
+        docUrl: {
+            type: String
+        },
+        panUrl: {
+            type: String
+        },
+        gstUrl: {
             type: String
         },
         others: {
