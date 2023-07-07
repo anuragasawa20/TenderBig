@@ -18,6 +18,14 @@ const optionsModelSchema = new Schema({
   categories: [{
     type: String,
     required: true
+  }],
+  licenses: [{
+    type: String,
+    required: true
+  }],
+  ActionMaterials: [{
+    type: String,
+    required: true
   }]
 },
 { timestamps: true });

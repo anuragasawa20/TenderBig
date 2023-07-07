@@ -50,7 +50,6 @@ const Login = () => {
 
     return (
         <>
-            <Navbar />
             <div className='m-10 place-content-center flex justify-center'>
                 <div className="mx-auto mt-6 px-4 py-8 shadow-2xl p-6 bg-white rounded-lg flex flex-col md:flex-row place-content-center">
                     <div className="w-full md:w-1/2 mb-4 md:mb-0 m-2">
@@ -117,7 +116,6 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

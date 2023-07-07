@@ -194,7 +194,6 @@ const JointVenture = () => {
 
     return (
         <>
-            <Navbar />
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
                 <div className="m-10">
                     <ProgressBar
@@ -254,7 +253,6 @@ const JointVenture = () => {
                     </form>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

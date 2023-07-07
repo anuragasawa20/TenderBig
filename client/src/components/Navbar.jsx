@@ -103,15 +103,14 @@ const Navbar = () => {
                     {dropdownOpen && (
                       <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px] z-10">
                         <Link
-                          to="/contact"
+                          to="/careerandmanpower"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                         >
                           <svg
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                        }`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -123,15 +122,14 @@ const Navbar = () => {
                         </Link>
 
                         <Link
-                          to="/contact"
+                          to="/regandcert"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                         >
                           <svg
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                        }`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -139,7 +137,7 @@ const Navbar = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          Registration / Certificate
+                          Registration/Certificate
                         </Link>
 
                         <Link
@@ -150,7 +148,7 @@ const Navbar = () => {
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90}`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -162,7 +160,7 @@ const Navbar = () => {
                         </Link>
 
                         <Link
-                          to="/contact"
+                          to="/auctionmaterial"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                           onClick={() => setSelectedService("License")}
                         >
@@ -170,8 +168,7 @@ const Navbar = () => {
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                        }`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -183,15 +180,14 @@ const Navbar = () => {
                         </Link>
 
                         <Link
-                          to="/contact"
+                          to="/jointventure"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                         >
                           <svg
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                        }`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -203,15 +199,14 @@ const Navbar = () => {
                         </Link>
 
                         <Link
-                          to="/contact"
+                          to="/tenderfilling"
                           className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                         >
                           <svg
                             xmlns="https://www.svgrepo.com/show/498932/settings.svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90
-                      }`}
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
                           >
                             <path
                               fillRule="evenodd"
@@ -219,7 +214,25 @@ const Navbar = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          Online Bidding
+                          Tender Filling
+                        </Link>
+                        <Link
+                          to="/gemregistration"
+                          className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                        >
+                          <svg
+                            xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`ml-1 h-4 w-4 inline-block transform -rotate-90`}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Gem Registration
                         </Link>
                       </div>
                     )}
@@ -259,6 +272,8 @@ const Navbar = () => {
 
                 </div>
               </div>
+
+              {/* Mobile View */}
               <div className="sm:hidden ml-6">
                 <button
                   type="button"
@@ -337,7 +352,7 @@ const Navbar = () => {
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2  bg-white border border-gray-200 rounded-md shadow-lg w-[290px]">
                     <Link
-                      to="/contact"
+                      to="/careerandmanpower"
                       className="block px-4 py-2 text-white bg-red-700 text-lg "
                     >
                       <svg
@@ -356,7 +371,7 @@ const Navbar = () => {
                       Career & Man Power
                     </Link>
                     <Link
-                      to="/contact"
+                      to="/regandcert"
                       className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                     >
                       <svg
@@ -372,7 +387,7 @@ const Navbar = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                      Registration / Certificate
+                      Registration/Certificate
                     </Link>
                     <Link
                       to="/contact"
@@ -394,7 +409,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      to="/contact"
+                      to="/auctionmaterial"
                       className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                       onClick={() => setSelectedService("License")}
                     >
@@ -414,7 +429,7 @@ const Navbar = () => {
                       Auction Material
                     </Link>
                     <Link
-                      to="/contact"
+                      to="/jointventure"
                       className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                     >
                       <svg
@@ -433,7 +448,7 @@ const Navbar = () => {
                       Joint Venture
                     </Link>
                     <Link
-                      to="/contact"
+                      to="/tenderfilling"
                       className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
                     >
                       <svg
@@ -449,7 +464,26 @@ const Navbar = () => {
                           clipRule="evenodd"
                         />
                       </svg>
-                      Online Bidding
+                      Tender Filling
+                    </Link>
+                    <Link
+                      to="/gemregistration"
+                      className="block px-4 py-2 hover:text-white hover:bg-red-700 text-lg text-gray-800"
+                    >
+                      <svg
+                        xmlns="https://www.svgrepo.com/show/498932/settings.svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className={`ml-1 h-4 w-4 inline-block transform -rotate-90
+                      }`}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.293a1 1 0 0 1 1.414 0L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Gem Registration
                     </Link>
                   </div>
                 )}

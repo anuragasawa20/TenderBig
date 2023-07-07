@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import uploadFileToS3 from "../../pages/file-uploading/FileUpload";
+import { ProgressBar, Step } from 'react-step-progress-bar';
 
 const uploadMultipleFilesToS3 = async (files) => {
     const uploadPromises = files.map(async (file) => {
@@ -336,21 +337,44 @@ const OnlineTenderForm = () => {
         }));
     };
 
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const nextPage = () => {
-        setCurrentPage(2);
-    };
-
-    const previousPage = () => {
         setCurrentPage(1);
     };
 
+    const previousPage = () => {
+        setCurrentPage(0);
+    };
+
+    
+    const stepNames = [
+        '0',
+        '1',
+    ];
+
+    const totalSteps = 2;
+    const gaps = totalSteps - 1;
+    const progress = Math.round((currentPage / gaps) * 100);
+
     return (
         <>
-            <Navbar />
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
-                {currentPage === 1 && (
-                    <form onSubmit={handleSubmit}>
+
+            <ProgressBar
+                    percent={progress}
+                    filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
+                >
+                    {stepNames.map((_, index) => (
+                        <Step key={index}>
+                            {({ accomplished }) => (
+                                <div className={`step ${accomplished ? 'completed' : null}`} />
+                            )}
+                        </Step>
+                    ))}
+                </ProgressBar>
+
+                {currentPage === 0 && (
+                    <form onSubmit={handleSubmit} className="mt-2">
                         {/* Global Section */}
                         <h2 className="text-2xl font-bold mb-4 text-center ">Online Tender</h2>
                         <p className="text-red-700 font-thin font-serif text-sm">
@@ -758,7 +782,7 @@ const OnlineTenderForm = () => {
                     </form>
                 )}
 
-                {currentPage === 2 && (
+                {currentPage === 1 && (
                     <form onSubmit={handleSubmit}>
                         <SecondPage
                             formData={formData}
@@ -769,7 +793,6 @@ const OnlineTenderForm = () => {
                     </form>
                 )}
             </div>
-            <Footer />
         </>
     );
 };

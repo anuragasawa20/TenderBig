@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import { locations } from "../../constants/countriesData"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import uploadFileToS3 from "../file-uploading/FileUpload";
+import { ProgressBar, Step } from 'react-step-progress-bar';
 
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (
@@ -192,6 +191,7 @@ const Seeker = () => {
             photoUrl: "",
             aadharUrl: ""
         });
+        setCurrentPage(0);
     }
 
     const handleChange = (event) => {
@@ -219,7 +219,7 @@ const Seeker = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setSubmitProgress(0);
         const resume = e.target.resume.files[0];
         const profilePhoto = e.target.profilePhoto.files[0];
         const aadhar = e.target.aadhar.files[0];
@@ -232,7 +232,7 @@ const Seeker = () => {
     }
 
     const StoreAtDB = () => {
-        console.log(formData)
+
         const token = localStorage.getItem('token');
 
         fetch('http://localhost:5000/apiTender/services/seeker/submit-form', {
@@ -247,8 +247,7 @@ const Seeker = () => {
             .then((data) => {
                 if (data.success === true) {
                     alert('Submitted');
-                    clearInputs();
-                    window.location.href = '/seeker';
+                     clearInputs();
                 } else {
                     alert('Something went wrong. Try again.');
                 }
@@ -259,21 +258,42 @@ const Seeker = () => {
             });
     };
 
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const nextPage = () => {
-        setCurrentPage(2);
-    };
-
-    const previousPage = () => {
         setCurrentPage(1);
     };
 
+    const previousPage = () => {
+        setCurrentPage(0);
+    };
+
+    const totalSteps = 2;
+    const gaps = totalSteps - 1;
+    const progress = Math.round((currentPage / gaps) * 100);
+
+    const stepNames = [
+        '0',
+        '1',
+    ];
+
     return (
         <>
-            <Navbar />
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
-                {currentPage === 1 && (
-                    <form onSubmit={handleSubmit} encType="multipart/form-data" >
+                <ProgressBar
+                    percent={progress}
+                    filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
+                >
+                    {stepNames.map((_, index) => (
+                        <Step key={index}>
+                            {({ accomplished }) => (
+                                <div className={`step ${accomplished ? 'completed' : null}`} />
+                            )}
+                        </Step>
+                    ))}
+                </ProgressBar>
+
+                {currentPage === 0 && (
+                    <form onSubmit={handleSubmit} encType="multipart/form-data" className="mt-1" >
                         {/* Global Section */}
                         <h2 className="text-2xl font-bold mb-4 text-center ">Seeker Space</h2>
                         <p className="text-red-700 font-thin font-serif text-sm">
@@ -514,7 +534,7 @@ const Seeker = () => {
                     </form>
                 )}
 
-                {currentPage === 2 && (
+                {currentPage === 1 && (
                     <form onSubmit={handleSubmit}>
                         <Secondpage
                             formData={formData}
@@ -525,7 +545,6 @@ const Seeker = () => {
                     </form>
                 )}
             </div>
-            <Footer />
         </>
     );
 };

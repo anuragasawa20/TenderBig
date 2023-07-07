@@ -62,7 +62,6 @@ const Signup = () => {
 
     return (
         <>
-            <Navbar />
             <div className='m-10'>
                 <div className="mx-auto mt-6 px-4 py-8 shadow-2xl p-6 bg-white rounded-lg flex flex-col md:flex-row">
 
@@ -209,7 +208,6 @@ const Signup = () => {
 
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

@@ -58,6 +58,34 @@ const optionsController = {
         }
     },
 
+    insertLicenses: async (req, res) => {
+        try {
+            const { licenses } = req.body;
+            const licensesTitleCase = licenses.map(toTitleCase);
+
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { licenses: { $each: licensesTitleCase } } }, { new: true, upsert: true });
+
+            res.json(updatedModel);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
+
+    insertActionMaterial: async (req, res) => {
+        try {
+            const { actionMaterials } = req.body;
+            const actionMaterialsTitleCase = actionMaterials.map(toTitleCase);
+
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { ActionMaterials: { $each: actionMaterialsTitleCase } } }, { new: true, upsert: true });
+
+            res.json(updatedModel);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
+
     removeSector: async (req, res) => {
         try {
             const { value } = req.params;
@@ -110,6 +138,31 @@ const optionsController = {
         }
     },
 
+    removeLicenses: async (req, res) => {
+        try {
+            const { value } = req.params;
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $pull: { licenses: value } }, { new: true });
+
+            res.json(updatedModel);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
+
+    removeActionMaterial: async (req, res) => {
+        try {
+            const { value } = req.params;
+
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $pull: { ActionMaterials: value } }, { new: true });
+
+            res.json(updatedModel);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    },
+
     getAllOptions: async (req, res) => {
         try {
             const { array } = req.query;
@@ -128,6 +181,12 @@ const optionsController = {
                     break;
                 case 'categories':
                     result = await optionsModel.find({}, 'categories');
+                    break;
+                case 'licenses':
+                    result = await optionsModel.find({}, 'licenses');
+                    break;
+                case 'ActionMaterials':
+                    result = await optionsModel.find({}, 'ActionMaterials');
                     break;
                 default:
                     result = await optionsModel.find({});

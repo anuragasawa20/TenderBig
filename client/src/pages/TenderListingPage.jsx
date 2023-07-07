@@ -209,8 +209,6 @@ const TenderListingPage = () => {
 
   return (
     <>
-      <Navbar />
-
       <div className="mx-auto p-4 max-w-7xl">
         <div className="flex flex-col-reverse md:grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="sm:col-span-2 md:col-span-2">
@@ -456,7 +454,6 @@ const TenderListingPage = () => {
           </div>
         </div>
       </div>
-      <Footer/>
     </>
   );
 };

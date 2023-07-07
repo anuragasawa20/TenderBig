@@ -26,7 +26,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Navbar />
       <div className="px-3 md:p-4 ">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center  ">
           <div className="w-full md:w-1/4 hidden sm:grid mt-10 ">
@@ -219,11 +218,9 @@ const HomePage = () => {
         </div>
         <hr />
       </div>
-
       <Home2 />
       <Home3 />
       <Home4 />
-      <Footer />
     </>
   );
 };

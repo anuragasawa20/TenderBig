@@ -34,6 +34,7 @@
     "react-dropzone": "^14.2.3",
     "react-flatpickr": "^3.10.13",
     "react-icons": "^4.10.1",
+    "react-progressbar": "^15.4.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
     "react-select": "^5.7.3",

@@ -615,7 +615,6 @@ const Certification = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="space-y-8">
                     <div className="mx-auto mt-6 px-4 py-8 shadow-2xl p-6 bg-white rounded-lg flex flex-col md:flex-row">
@@ -705,7 +704,6 @@ const Certification = () => {
                     </motion.div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

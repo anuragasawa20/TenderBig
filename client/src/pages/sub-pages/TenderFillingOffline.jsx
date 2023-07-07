@@ -79,8 +79,6 @@ console.log(formData)
 
   return (
     <>
-      <Navbar selectedService={selectedService} />
-
       <div className="container mx-auto py-8 md:max-w-7xl">
         <div className="space-y-8">
           <div className="flex items-center justify-center flex-col md:flex-row">
@@ -224,7 +222,6 @@ console.log(formData)
           </motion.div>
         </motion.div>
       </div>
-      <Footer/>
     </>
   );
 };

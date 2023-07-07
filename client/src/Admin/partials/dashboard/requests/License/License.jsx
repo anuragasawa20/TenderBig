@@ -3,7 +3,7 @@ import axios from "axios";
 import Sidebar from "../../../Sidebar";
 import Header from "../../../Header";
 
-const License = () => {
+const Licenserequests = () => {
   const [contactForms, setContactForms] = useState([]);
   const [sortOption, setSortOption] = useState("receivedAt");
   const [currentPage, setCurrentPage] = useState(1);
@@ -182,4 +182,4 @@ const License = () => {
   );
 };
 
-export default License;
+export default Licenserequests;

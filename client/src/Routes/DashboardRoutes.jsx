@@ -45,12 +45,13 @@ import EmployerFormDetail from '../Admin/partials/dashboard/requests/Employer-Fo
 import ContactFormList from '../Admin/partials/dashboard/requests/ContactPage';
 import TenderOffline from '../Admin/partials/dashboard/requests/TenderOffline';
 // import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture';
-import License from '../Admin/partials/dashboard/requests/License/License';
+import Licenserequests from '../Admin/partials/dashboard/requests/License/License';
 import OnlineBidding from '../Admin/partials/dashboard/requests/Online-Bidding';
 import RegistrationCertification from '../Admin/partials/dashboard/requests/RegistrationCertificate';
 import TenderResult from '../Admin/partials/dashboard/requests/Tender-Result';
 
 //Options
+import License from '../Admin/partials/dashboard/options/licences';
 import Department from '../Admin/partials/dashboard/options/department';
 import Sector from '../Admin/partials/dashboard/options/sector';
 import Category from '../Admin/partials/dashboard/options/category';
@@ -185,8 +186,8 @@ const DashboardRoutes = () => {
 
       {/* License */}
       <Route
-        path="/license"
-        element={<PrivateRoute element={License} />}
+        path="/licenserequests"
+        element={<PrivateRoute element={Licenserequests} />}
       />
 
       {/* Auction Material*/}
@@ -267,6 +268,10 @@ const DashboardRoutes = () => {
       <Route
         path="/product"
         element={<PrivateRoute element={Product} />}
+      />
+      <Route
+        path="/license"
+        element={<PrivateRoute element={License} />}
       />
 
       {/* Temp */}

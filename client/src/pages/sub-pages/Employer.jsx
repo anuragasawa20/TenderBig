@@ -131,7 +131,6 @@ const Employer = () => {
 
     return (
         <>
-            <Navbar />
             <div className="container mx-auto py-8 md:max-w-7xl">
                 <div className="space-y-8">
                     <div className="flex items-center justify-center flex-col md:flex-row">
@@ -550,7 +549,6 @@ const Employer = () => {
                     </motion.div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

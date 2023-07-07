@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { ProgressBar, Step } from 'react-step-progress-bar';
-import 'react-step-progress-bar/styles.css';
 import Step1 from './Steps/TenderDetails';
 import Step2 from './Steps/WorkExperience';
 import Step3 from './Steps/DirectorDetails';
 import Step4 from './Steps/CompanyInfo';
 import Step5 from './Steps/AuctionMaterial';
-import Navbar from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
 import axios from "axios";
 import uploadFileToS3 from "../../../pages/file-uploading/FileUpload";
 
@@ -157,12 +154,11 @@ const AuctionMaterialForm = () => {
 
   return (
     <>
-      <Navbar />
       <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
         <div className="m-10">
           <ProgressBar
             percent={progress}
-            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+            filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
           >
             {stepNames.map((_, index) => (
               <Step key={index}>
@@ -223,7 +219,6 @@ const AuctionMaterialForm = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

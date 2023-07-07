@@ -23,27 +23,31 @@ import TenderFillingOffline from '../pages/sub-pages/TenderFillingOffline';
 import Projects from '../pages/ProjectListing';
 import AuctionMaterialForm from '../pages/Services/Auction-Material/AuctionMaterialForm'
 import JointVenture from '../pages/Services/Joint-Venture/JointVenture';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const MainRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         {/* <Route path='test' element={<JointVenture/>}/> */}
         {/* <Route path="/gems" element={<Gems />} /> */}
-        <Route path='/tenderfilling' element={<TenderFilling/>}></Route>
-        <Route path='/tenderfillingonline' element={<TenderFillingOnline/>}></Route>
-        <Route path='/tenderfillingoffline' element={<TenderFillingOffline/>}></Route>
-        <Route path='/regandcert' element={<RegAndCert/>}></Route>
-        <Route path='/registration' element={<Registration/>}></Route>
-        <Route path='/auctionmaterial' element={<AuctionMaterialForm/>}></Route>
-        <Route path='/jointventure' element={<JointVenture/>}></Route>
-        <Route path='/certification' element={<Certification/>}></Route>
-        <Route path='/regandcert' element={<RegAndCert/>}></Route>
-        <Route path='/seeker' element={<Seeker/>}></Route>
-        <Route path='/employer' element={<Employer/>}></Route>
-        <Route path='/careerandmanpower' element={<CareerAndManpower/>}></Route>
-        <Route path="/gemregistration" element={<EarnGems/>}></Route>
+        <Route path='/tenderfilling' element={<TenderFilling />}></Route>
+        <Route path='/tenderfillingonline' element={<TenderFillingOnline />}></Route>
+        <Route path='/tenderfillingoffline' element={<TenderFillingOffline />}></Route>
+        <Route path='/regandcert' element={<RegAndCert />}></Route>
+        <Route path='/registration' element={<Registration />}></Route>
+        <Route path='/auctionmaterial' element={<AuctionMaterialForm />}></Route>
+        <Route path='/jointventure' element={<JointVenture />}></Route>
+        <Route path='/certification' element={<Certification />}></Route>
+        <Route path='/regandcert' element={<RegAndCert />}></Route>
+        <Route path='/seeker' element={<Seeker />}></Route>
+        <Route path='/employer' element={<Employer />}></Route>
+        <Route path='/careerandmanpower' element={<CareerAndManpower />}></Route>
+        <Route path="/gemregistration" element={<EarnGems />}></Route>
         <Route path="/advance-search" element={<AdvancedSearch />} />
         <Route path="/category" element={<TenderByCategaries />} />
         <Route path="/tenders" element={<TenderListingPage />} />
@@ -53,7 +57,9 @@ const MainRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
-    </Routes>
+      </Routes>
+      <Footer />
+    </>
   );
 };
 

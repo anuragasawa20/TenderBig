@@ -205,8 +205,6 @@ const AdvancedSearchForm = () => {
 
   return (
     <>
-      <Navbar />
-
       <div className="container mx-auto p-4">
         <div className="max-w-6xl mx-auto p-6 bg-white rounded shadow border-[1px]">
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -441,7 +439,6 @@ const AdvancedSearchForm = () => {
           </div>
         )}
       </div>
-      <Footer/>
     </>
   );
 };

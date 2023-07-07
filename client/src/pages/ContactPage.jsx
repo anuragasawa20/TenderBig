@@ -2,10 +2,8 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../components/Navbar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import Footer from "../components/Footer"
 
 const ContactUsPage = () => {
   const [name, setName] = useState("");
@@ -50,7 +48,7 @@ const ContactUsPage = () => {
 
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
-  };  
+  };
 
   const sendDataToAPI = (selectedService) => {
     const formData = {
@@ -64,9 +62,7 @@ const ContactUsPage = () => {
     axios
       .post("http://localhost:5000/apiTender/post-contactform", formData)
       .then((response) => {
-        console.log("Form data sent successfully:", response.data);
         alert("We will contact you soon!!!")
-        setIsVisible(false);
       })
       .catch((error) => {
         console.error("Error sending form data:", error);
@@ -76,106 +72,112 @@ const ContactUsPage = () => {
 
   return (
     <>
-      <Navbar selectedService={selectedService} />
+      <div className="m-10">
 
-      <div className="container mx-auto py-8 md:max-w-7xl">
-        <div className="space-y-8">
-          <div className="flex items-center justify-center flex-col md:flex-row">
-            <img
+            <h2 className="text-2xl font-bold mb-4 text-center ">Seek Our Support</h2>
+        <div className="flex flex-wrap pr-10 pl-10">
+
+          <div className="w-full md:w-1/2">
+          <img
               src={`${import.meta.env.BASE_URL}illustartion/contact.jpg`}
-              className="w-4/5 md:w-1/2"
-              alt="Contact illustration"
+              alt="Illustration"
             />
-            <form
-              onSubmit={handleFormSubmit}
-              className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
-            >
-              <h1 className="text-3xl font-bold text-center mb-4">
-                Contact Us
-              </h1>
+          </div>
+
+          <div className="w-full md:w-1/2 pr-10 pl-10">
+
+            <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
-                <label htmlFor="name" className="flex items-center">
-                  <AiOutlineUser className="mr-2" />
+                <label className="block mb-2 font-semibold">
                   Name
+                  <span className="text-red-700 relative top-0 right-0">*</span>
+                  <input required
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    placeholder="Enter Name" />
                 </label>
-                <input required
-                  type="text"
-                  id="name"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
               </div>
               <div className="mb-4">
-                <label htmlFor="company" className="flex items-center">
-                  <RiBuilding2Line className="mr-2" />
-                  Company Name
+                <label className="block mb-2 font-semibold">
+                  Company
+                  <input
+                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    type="password"
+                    id="company"
+                    name="company"
+                    value={company}
+                    placeholder="Enter Company Name"
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
                 </label>
-                <input required
-                  type="text"
-                  id="company"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
               </div>
               <div className="mb-4">
-                <label htmlFor="mobile" className="flex items-center">
-                  <AiOutlinePhone className="mr-2" />
-                  Mobile Number
+                <label className="block mb-2 font-semibold">
+                  Contact Number
+                  <input
+                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    type="number"
+                    id="mobile"
+                    name="mobile"
+                    value={mobile}
+                    placeholder="Enter Number"
+                    onChange={(e) => setMobile(e.target.value)}
+                  />
                 </label>
-                <input
-                  type="text"
-                  id="mobile"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                />
               </div>
               <div className="mb-4">
-                <label htmlFor="email" className="flex items-center">
-                  <AiOutlineMail className="mr-2" />
-                  Email Address
+                <label className="block mb-2 font-semibold">
+                  Email
+                  <input
+                    className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    placeholder="Enter Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </label>
-                <input required
-                  type="email"
-                  id="email"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
               </div>
+
               <div className="mb-4">
-                <label htmlFor="services" className="flex items-center">
+                <label className="block mb-2 font-semibold">
                   Select Services
                 </label>
                 <select required
                   id="services"
-                  className="border border-gray-300 rounded px-3 py-2 w-full"
+                  className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                   value={selectedService || selectedServiceFromNavbar}
                   onChange={handleServiceChange}
                 >
-                  <option value="">Select an option</option>
+                  <option value="">Select Service</option>
                   <option value="Career&ManPower">Career & Man Power</option>
-                  <option value="Registration/Certificate">
-                    Registration / Certificate
-                  </option>
+                  <option value="Registration/Certificate">Registration/Certificate</option>
                   <option value="Joint Venture">License</option>
-                  <option value="Auction (Material)">Auction Material</option>
+                  <option value="Auction Material">Auction Material</option>
                   <option value="Joint Venture">Joint Venture</option>
                   <option value="Tender Result">Online Bidding</option>
                   <option value="Tender Result">Tender Result</option>
                 </select>
               </div>
-              <button
-                type="submit"
-                className="bg-red-700 text-white py-2 px-4 rounded transition-colors duration-300 w-full"
-              >
-                Submit
-              </button>
+
+              <div className="flex items-center justify-between mb-4">
+                <button
+                  className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                  type="submit"
+                >
+                  Get In Touch
+                </button>
+              </div>
             </form>
+
           </div>
-        </div>
+
+        </div>     
+
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8"
           variants={sectionVariants}
@@ -215,7 +217,7 @@ const ContactUsPage = () => {
           </motion.div>
         </motion.div>
       </div>
-      <Footer/>
+
     </>
   );
 };

@@ -32,9 +32,10 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
 
   return (
     <div className="mt-4">
-      <div className=" grid grid-cols-2 gap-4 ">
+      <div>
         {formData.directors.map((director, index) => (
-          <div key={index}>
+<>
+          <div key={index} className=" grid grid-cols-2 gap-4 ">
             <label className="block mb-2 font-semibold relative">
               Director Name
               <span className="text-red-700 relative top-0 right-0">*</span>
@@ -105,6 +106,8 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
             </button>
             )}
           </div>
+          <hr className="border-gray-900 border-2 mb-4"/>
+</>
         ))}
       </div>
 
