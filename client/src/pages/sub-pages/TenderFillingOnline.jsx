@@ -1,49 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
-import { locations } from "../../constants/countriesData";
+import { locations } from "../../constants/countriesData"
 import Footer from "../../components/Footer";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import Docs from "../DynamicOpt/docs";
-// import axios from "axios";
+import axios from "axios";
+import uploadFileToS3 from "../../pages/file-uploading/FileUpload";
 
-const OtherInformation = ({ formData, handleChange, previousPage }) => {
-    OtherInformation.propTypes = {
-        formData: PropTypes.shape({
-            // Include all the properties from the formData object
-            directorname: PropTypes.string.isRequired,
-            fname: PropTypes.string.isRequired,
-            iDOB: PropTypes.string.isRequired,
-            pemail: PropTypes.string.isRequired,
-            paadhar: PropTypes.string.isRequired,
-            pPANnum: PropTypes.string.isRequired,
-            pmobile: PropTypes.string.isRequired,
-            accnumber: PropTypes.string.isRequired,
-            paddress: PropTypes.string.isRequired,
-            pcity: PropTypes.string.isRequired,
-            pdistrict: PropTypes.string.isRequired,
-            pstate: PropTypes.string.isRequired,
-            ppin: PropTypes.string.isRequired,
-            ptelfax: PropTypes.string.isRequired,
-            email: PropTypes.string.isRequired,
-            url: PropTypes.string.isRequired,
-            accholdername: PropTypes.string.isRequired,
-            ifscCode: PropTypes.string.isRequired,
-            branchnum: PropTypes.string.isRequired,
-        }).isRequired,
-        handleChange: PropTypes.func.isRequired,
-        handleSubmit: PropTypes.func.isRequired,
-        previousPage: PropTypes.func.isRequired,
-    };
+const uploadMultipleFilesToS3 = async (files) => {
+    const uploadPromises = files.map(async (file) => {
+        const result = await uploadFileToS3(file);
+        return result;
+    });
+
+    const results = await Promise.all(uploadPromises);
+    return results;
+};
+
+const SecondPage = ({ formData, handleChange, previousPage }) => {
 
     return (
         <>
-            <h2 className="text-2xl font-bold mb-4 text-center">Tender Filling</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">Online Tender</h2>
             <p className="text-red-700 font-thin font-serif text-sm">
                 Fields marked with an asterisk (*) are mandatory.
             </p>
-            {/* otherInformation and purchaserDetail Sections */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* otherInformation Section */}
                 <div className="p-2 rounded-lg mt-2">
@@ -100,8 +82,8 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                         <span className="text-red-700 relative top-0 right-0">*</span>
                         <input required
                             type="text"
-                            name="pPANnum"
-                            value={formData.pPANnum}
+                            name="ppan"
+                            value={formData.ppan}
                             onChange={handleChange}
                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                         />
@@ -186,7 +168,7 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
                     <label className="block mb-2 font-semibold">
                         Upload Photo
                         <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="resume" accept=".pdf" required />
+                        <input type="file" name="photo" accept=".png,.jpg,.jpeg" required />
                     </label>
                     <label className="block mb-2 font-semibold">
                         Upload Aadhar
@@ -197,7 +179,6 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
             </div>
 
             <div className="center flex flex-col items-center">
-
                 <div className="flex justify-between w-full">
 
                     <div className="w-1/4">
@@ -221,17 +202,12 @@ const OtherInformation = ({ formData, handleChange, previousPage }) => {
 
                     </div>
                 </div>
-
-
             </div>
-
-
-
         </>
     );
 };
 
-const TenderForm = () => {
+const OnlineTenderForm = () => {
     const [formData, setFormData] = useState({
         cname: "",
         cPANnum: "",
@@ -259,7 +235,7 @@ const TenderForm = () => {
         iDOB: "",
         pemail: "",
         paadhar: "",
-        pPANnum: "",
+        ppan: "",
         pmobile: "",
         wmobile: "",
         website: "",
@@ -267,6 +243,7 @@ const TenderForm = () => {
         email: "",
         gemreg: "",
         refno: "",
+        requestLicense: "",
     });
 
     const clearInputs = () => {
@@ -297,7 +274,7 @@ const TenderForm = () => {
             iDOB: "",
             pemail: "",
             paadhar: "",
-            pPANnum: "",
+            ppan: "",
             pmobile: "",
             wmobile: "",
             website: "",
@@ -305,6 +282,7 @@ const TenderForm = () => {
             email: "",
             gemreg: "",
             refno: "",
+            requestLicense: ""
         });
     }
 
@@ -316,36 +294,46 @@ const TenderForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
 
         const token = localStorage.getItem("token");
 
-        const requestBody = JSON.stringify(formData);
+        var requestBody = formData;
 
-        fetch("http://localhost:5000/apiTender/services/tender/online", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                auth: token,
-            },
-            body: requestBody,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-                alert("Submitted")
-                clearInputs();
-                window.location.href = '/tenderfillingonline';
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("Oops something went wrong!!!");
-                clearInputs();
-                window.location.href = '/tenderfillingonline';
-            });
-        clearInputs();
+        const biddingDocs = requestBody.biddingDocs;
+        const rent = requestBody.rent;
+        const work = requestBody.work;
+        const tenderDocs = requestBody.tenderDocs;
+
+        const biddingDocsUrls = await uploadMultipleFilesToS3(biddingDocs);
+        const rentUrls = await uploadMultipleFilesToS3(rent);
+        const workUrls = await uploadMultipleFilesToS3(work);
+        const tenderDocsUrls = await uploadMultipleFilesToS3(tenderDocs);
+
+        requestBody.biddingDocs = biddingDocsUrls;
+        requestBody.rent = rentUrls;
+        requestBody.work = workUrls;
+        requestBody.tenderDocs = tenderDocsUrls;
+
+        const response = await axios.post('http://localhost:5000/apiTender/services/tender/online', requestBody);
+        if (response.data.success) {
+            alert('Submitted');
+            clearInputs();
+        } else {
+            alert('Something went wrong. Try again.');
+        }
+    };
+
+    const handleFileChange = (event) => {
+        const { name, files } = event.target;
+
+        const updatedFiles = Array.from(files);
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: updatedFiles,
+        }));
     };
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -357,16 +345,14 @@ const TenderForm = () => {
         setCurrentPage(1);
     };
 
-
     return (
-        
         <>
             <Navbar />
-            <div className="max-w-5xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
                 {currentPage === 1 && (
                     <form onSubmit={handleSubmit}>
                         {/* Global Section */}
-                        <h2 className="text-2xl font-bold mb-4 text-center ">Tender Filling</h2>
+                        <h2 className="text-2xl font-bold mb-4 text-center ">Online Tender</h2>
                         <p className="text-red-700 font-thin font-serif text-sm">
                             Fields marked with an asterisk (*) are mandatory.
                         </p>
@@ -694,45 +680,72 @@ const TenderForm = () => {
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                     />
                                 </label>
-                                <form onSubmit={handleSubmit}>
-                                    <div className="flex">
-                                        <div>
-                                            <label className="block mb-2 font-semibold">
-                                                Rent Agreements
-                                                <span className="text-red-700">*</span>
-                                                <input type="file" name="profilePhoto" accept=".pdf" required />
-                                            </label>
-                                            <label className="block mb-2 font-semibold">
-                                                Old Work Sample
-                                                <span className="text-red-700">*</span>
-                                                <input type="file" name="aadhar" accept=".pdf" required />
-                                            </label>
-                                            <div className="dropdown my-3 font-semibold">
-                                                Bidding Documents
-                                                <Docs></Docs>
-                                            </div>
-                                            <div className="dropdown font-semibold">
-                                                Tender Docs with Stamps
-                                                <Docs></Docs>
-                                            </div>
-                                            <div className="dropdown my-3 font-semibold">
-                                                Required Licenses
-                                                <select
-                                                    name="auctionMaterials"
-                                                    value="option"
-                                                    onChange={(e) => (e.target.value)}
-                                                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                                    required
-                                                >
-                                                    <option value="">Select Auction Materials</option>
-                                                    <option value="Material 1">Option 1</option>
-                                                    <option value="Material 2">Option 2</option>
-                                                    <option value="Material 3">Option 3</option>
-                                                </select>
-                                            </div>
+
+                                <div className="flex">
+                                    <div>
+                                        <label className="block mb-2 font-semibold">
+                                            Rent Agreements
+                                            <span className="text-red-700">*</span>
+                                            <input
+                                                type="file"
+                                                name="rent"
+                                                accept=".pdf"
+                                                required
+                                                onChange={handleFileChange}
+                                            />
+                                        </label>
+
+                                        <label className="block mb-2 font-semibold">
+                                            Old Work Sample
+                                            <span className="text-red-700">*</span>
+                                            <input
+                                                type="file"
+                                                name="work"
+                                                accept=".pdf"
+                                                required
+                                                onChange={handleFileChange}
+                                            />
+                                        </label>
+
+                                        <div className="dropdown my-3 font-semibold">
+                                            Bidding Documents
+                                            <input
+                                                type="file"
+                                                accept="application/pdf"
+                                                multiple
+                                                name="biddingDocs"
+                                                onChange={handleFileChange}
+                                            />
+                                        </div>
+
+                                        <div className="dropdown font-semibold">
+                                            Tender Docs with Stamps
+                                            <input
+                                                type="file"
+                                                accept="application/pdf"
+                                                multiple
+                                                name="tenderDocs"
+                                                onChange={handleFileChange}
+                                            />
+                                        </div>
+
+                                        <div className="dropdown my-3 font-semibold">
+                                            Required Licenses
+                                            <select
+                                                name="requestLicense"
+                                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                required
+                                                value={formData.requestLicense}
+                                                onChange={handleChange}
+                                            >
+                                                <option value="">Select License</option>
+                                                <option value="Licence 1">Option 1</option>
+                                                <option value="Licence 2">Option 2</option>
+                                                <option value="Licence 3">Option 3</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <button
@@ -747,7 +760,7 @@ const TenderForm = () => {
 
                 {currentPage === 2 && (
                     <form onSubmit={handleSubmit}>
-                        <OtherInformation
+                        <SecondPage
                             formData={formData}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
@@ -755,10 +768,10 @@ const TenderForm = () => {
                         />
                     </form>
                 )}
-            </div >
+            </div>
             <Footer />
         </>
     );
 };
 
-export default TenderForm;
+export default OnlineTenderForm;

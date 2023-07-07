@@ -8,7 +8,7 @@ const NotFound = () => {
       <Navbar />
       <div className="text-center flex justify-center">
         <img
-          src={`${import.meta.env.BASE_URL}404.jpg`}
+          src={`${import.meta.env.BASE_URL}illustartion/404.jpg`}
           className="w-4/5 md:w-1/2 m-2"
           alt="NOT FOUND"
         />

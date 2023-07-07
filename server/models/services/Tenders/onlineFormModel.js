@@ -15,6 +15,7 @@ const TenderOnline = new mongoose.Schema({
     companyaddress2: String,
     companycity: String,
     companystate: String,
+    country: String,
     branchnum: String,
     ITRone: String,
     ITRtwo: String,
@@ -27,7 +28,7 @@ const TenderOnline = new mongoose.Schema({
     iDOB: String,
     pemail: String,
     paadhar: String,
-    pPANnum: String,
+    ppan: String,
     pmobile: String,
     wmobile: String,
     website: String,
@@ -35,6 +36,11 @@ const TenderOnline = new mongoose.Schema({
     email: String,
     gemreg: String,
     refno: String,
+    requestLicense: String,
+    rent: [String],
+    work: [String],
+    biddingDocs: [String],
+    tenderDocs: [String],
 });
 
 const TenderOnlineModel = mongoose.model('TenderOnline', TenderOnline);

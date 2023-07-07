@@ -2,104 +2,32 @@ const TenderOnlineModel = require("../../models/services/Tenders/onlineFormModel
 
 const submitForm = async (req, res) => {
     try {
-        const {
-            cname,
-            cPANnum,
-            cGSTnum,
-            des,
-            vendor,
-            mobile,
-            accholdername,
-            ifscCode,
-            regno,
-            knumber,
-            companyaddress1,
-            companyaddress2,
-            companycity,
-            companystate,
-            branchnum,
-            ITRone,
-            ITRtwo,
-            ITRthree,
-            turnover,
-            workexp,
-            noofworkers,
-            directorname,
-            fname,
-            iDOB,
-            pemail,
-            paadhar,
-            pPANnum,
-            pmobile,
-            wmobile,
-            website,
-            accnumber,
-            email,
-            gemreg,
-            refno,
-        } = req.body;
-
-        const newForm = await TenderOnlineModel.create({
-            cname,
-            cPANnum,
-            cGSTnum,
-            des,
-            vendor,
-            mobile,
-            accholdername,
-            ifscCode,
-            regno,
-            knumber,
-            companyaddress1,
-            companyaddress2,
-            companycity,
-            companystate,
-            branchnum,
-            ITRone,
-            ITRtwo,
-            ITRthree,
-            turnover,
-            workexp,
-            noofworkers,
-            directorname,
-            fname,
-            iDOB,
-            pemail,
-            paadhar,
-            pPANnum,
-            pmobile,
-            wmobile,
-            website,
-            accnumber,
-            email,
-            gemreg,
-            refno,
-        });
-
-        res.status(201).json({ success: true, data: newForm });
+        const newRecord = await TenderOnlineModel.create(req.body);
+        res.status(200).json({success:true, newRecord});
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ error: "Failed to create a new record" });
     }
 };
 
 const getAllForms = async (req, res) => {
     try {
-        const forms = await TenderOnlineModel.find();
-        res.status(200).json({ success: true, data: forms });
+        const records = await TenderOnlineModel.find();
+        res.json(records);
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ error: "Failed to fetch records" });
     }
 };
 
 const getFormById = async (req, res) => {
+    const { id } = req.params;
     try {
-        const form = await TenderOnlineModel.findById(req.params.id);
-        if (!form) {
-            return res.status(404).json({ success: false, error: 'Form not found' });
+        const record = await TenderOnlineModel.findById(id);
+        if (!record) {
+            return res.status(404).json({ error: "Record not found" });
         }
-        res.status(200).json({ success: true, data: form });
+        res.status(200).json(record);
     } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
+        res.status(500).json({ error: "Failed to fetch the record" });
     }
 };
 

@@ -135,7 +135,7 @@ const DashboardRoutes = () => {
       />
 
       {/* Company */}
-       <Route
+      <Route
         path="/companyrequests"
         element={<PrivateRoute element={CompanyList} />}
       />
@@ -164,7 +164,7 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={RegistrationDetails} />}
       />
 
-      
+
       {/* Seeker */}
       <Route
         path="/seekerrequests"
@@ -174,13 +174,13 @@ const DashboardRoutes = () => {
         path="/seekerrequests/:id"
         element={<PrivateRoute element={SeekerFormDetail} />}
       />
-      
+
       {/* License */}
       <Route
         path="/license"
         element={<PrivateRoute element={License} />}
       />
-      
+
       <Route
         path="/contact"
         element={<PrivateRoute element={ContactFormList} />}
@@ -197,7 +197,7 @@ const DashboardRoutes = () => {
         path="/jointventure"
         element={<PrivateRoute element={JointVenture} />}
       />
-      
+
       <Route
         path="/onlinebidding"
         element={<PrivateRoute element={OnlineBidding} />}
@@ -234,6 +234,8 @@ const DashboardRoutes = () => {
         path="/addproject"
         element={<PrivateRoute element={AddProject} />}
       />
+
+      <Route path="*" element={"NOT Allowed"} />
     </Routes>
   );
 };
