@@ -5,84 +5,38 @@ import Footer from "../components/Footer";
 
 const JointVenture = () => {
   const [formData, setFormData] = useState({
-    summary: "",
-    sector: "",
-    PANnumber: "",
     name: "",
+    email: "",
+    contact: "",
     aadhar: "",
-    webAddress: "",
-    GSTnumber: "",
-    workratio: "",
-    userCategory: "",
-    TotalValuation: "",
+    companyName: "",
+    panNumber: "",
+    websiteAddress: "",
+    gst: "",
+    startDate: "",
+    address: "",
     country: "",
     state: "",
     city: "",
-    addressline1: "",
-    addressline2: "",
-    zipcode: "",
-    procurementSummarySummary: "",
-    procurementSummaryDeadline: "",
-    noticeType: "",
-    totNo: "",
-    documentNo: "",
-    competition: "",
-    financier: "",
-    ownership: "",
-    tenderValue: "",
-    purchaser: "",
-    paddress: "",
-    pcity: "",
-    pdistrict: "",
-    pstate: "",
-    ppin: "",
-    ptelfax: "",
-    email: "",
-    url: "",
-    description: "",
-    organization: "",
-    tenderDetailNoticeType: "",
+    zip: "",
   });
 
   const clearInputs = () => {
     setFormData({
-      summary: "",
-      sector: "",
-      PANnumber: "",
       name: "",
-      webAddress: "",
+      email: "",
+      contact: "",
       aadhar: "",
-      GSTnumber: "",
-      workratio: "",
-      userCategory: "",
-      TotalValuation: "",
+      companyName: "",
+      panNumber: "",
+      websiteAddress: "",
+      gst: "",
+      startDate: "",
+      address: "",
       country: "",
       state: "",
       city: "",
-      zipcode: "",
-      addressline1: "",
-      addressline2: "",
-      procurementSummarySummary: "",
-      procurementSummaryDeadline: "",
-      noticeType: "",
-      totNo: "",
-      documentNo: "",
-      competition: "",
-      financier: "",
-      ownership: "",
-      tenderValue: "",
-      purchaser: "",
-      paddress: "",
-      pcity: "",
-      pdistrict: "",
-      pstate: "",
-      ppin: "",
-      ptelfax: "",
-      email: "",
-      url: "",
-      description: "",
-      organization: "",
-      tenderDetailNoticeType: "",
+      zip: "",
     });
   }
 
@@ -104,13 +58,11 @@ const JointVenture = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-
     const token = localStorage.getItem("token");
 
     const requestBody = JSON.stringify(formData);
 
-    fetch("/apiTender/tenderdetails/add-tender", {
+    fetch("http://localhost:5000/apiTender/services/gem/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -123,13 +75,11 @@ const JointVenture = () => {
         console.log("Success:", data);
         alert("Submitted")
         clearInputs();
-        window.location.href = '/forms';
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Oops something went wrong!!!");
         clearInputs();
-        window.location.href = '/forms';
       });
   };
 
@@ -177,15 +127,15 @@ const JointVenture = () => {
               <input
                 required
                 type="tel"
-                name="number"
-                value={formData.number}
+                name="contact"
+                value={formData.contact}
                 onChange={handleChange}
                 className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                 placeholder="Mobile"
               />
             </label>
             <label className="block mb-2 font-semibold relative">
-              16-Digit Aadhar Number
+              Aadhar Number
               <span className="text-red-700 relative top-0 right-0">*</span>
               <input
                 required
@@ -206,8 +156,8 @@ const JointVenture = () => {
                 <input
                   required
                   type="text"
-                  name="sector"
-                  value={formData.sector}
+                  name="companyName"
+                  value={formData.companyName}
                   onChange={handleChange}
                   className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                   placeholder="Company Name"
@@ -219,8 +169,8 @@ const JointVenture = () => {
                 </label>
                 <input
                   type="text"
-                  name="PANnumber"
-                  value={formData.PANnumber}
+                  name="panNumber"
+                  value={formData.panNumber}
                   onChange={handleChange}
                   className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                   placeholder="Enter PAN No"
@@ -232,8 +182,8 @@ const JointVenture = () => {
                 </label>
                 <input
                   type="URL"
-                  name="webAddress"
-                  value={formData.webAddress}
+                  name="websiteAddress"
+                  value={formData.websiteAddress}
                   onChange={handleChange}
                   className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                   placeholder="Website URL"
@@ -244,9 +194,9 @@ const JointVenture = () => {
                 <span className="text-red-700 relative top-0 right-0">*</span>
                 <input
                   required
-                  type="number"
-                  name="GSTnumber"
-                  value={formData.GSTnumber}
+                  type="text"
+                  name="gst"
+                  value={formData.gst}
                   onChange={handleChange}
                   className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                   placeholder="GST number"
@@ -274,28 +224,16 @@ const JointVenture = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4">Business Office Building</h2>
                 <label className="block mb-2 font-semibold relative">
-                  Address Line 1
+                  Address
                   <span className="text-red-700 relative top-0 right-0">*</span>
                   <input
                     required
                     type="text"
-                    name="addressline1"
-                    value={formData.addressline1}
+                    name="address"
+                    value={formData.address}
                     onChange={handleChange}
                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                    placeholder="Project"
-                  />
-                </label>
-                <label className="block mb-2 font-semibold relative">
-                  Adress Line 2
-                  <input
-                    required
-                    type="text"
-                    name="addressline2"
-                    value={formData.addressline2}
-                    onChange={handleChange}
-                    className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                    placeholder="Project"
+                    placeholder="Enter Address"
                   />
                 </label>
                 <div className="flex">
@@ -320,11 +258,11 @@ const JointVenture = () => {
                       <span className="text-red-700 relative top-0 right-0">*</span>
                       <input
                         type="number"
-                        name="zipcode"
-                        value={formData.zipcode}
+                        name="zip"
+                        value={formData.zip}
                         onChange={handleChange}
                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        placeholder="Enter City"
+                        placeholder="Enter Code"
                       />
                     </label>
                   </div>

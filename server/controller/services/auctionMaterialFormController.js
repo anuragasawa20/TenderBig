@@ -27,8 +27,9 @@ const getAllForms = async (req, res) => {
 // Controller for getting a form by ID
 const getFormById = async (req, res) => {
   try {
-    const formId = req.params.id;
-    const form = await AuctionMaterialForm.findById(formId);
+    const {id} = req.params;
+    console.log(id, req.params)
+    const form = await AuctionMaterialForm.findById(id);
     
     if (!form) {
       return res.status(404).json({ success: false, error: 'Form not found' });

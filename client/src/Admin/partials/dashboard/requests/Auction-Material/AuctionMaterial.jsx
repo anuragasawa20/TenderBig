@@ -3,17 +3,17 @@ import Sidebar from "../../../Sidebar";
 import Header from "../../../Header";
 import { useNavigate } from "react-router-dom";
 
-const EmployerForms = () => {
+const AuctionMaterial = () => {
     const [forms, setForms] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         // Fetch data from the API
-        fetch("http://localhost:5000/apiTender/services/employer/forms")
+        fetch("http://localhost:5000/apiTender/services/aumt/auction-material")
             .then((response) => response.json())
-            .then((data) => setForms(data))
+            .then((data) => setForms(data.data))
             .catch((error) => console.log(error));
     }, []);
-
+console.log(forms)
     const formatReceivedAt = (dateString) => {
         const date = new Date(dateString);
         const formattedDate = date.toLocaleDateString("en-GB", {
@@ -25,10 +25,34 @@ const EmployerForms = () => {
     };
 
     const viewDetails = (id) => {
-        navigate(`/dashboard/employerrequests/${id}`)
+        navigate(`/dashboard/auctionmaterialrequests/${id}`)
     }
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    if (!forms) {
+        return (
+            <div className="flex h-screen overflow-hidden">
+                {/* Sidebar */}
+                <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+                {/* Content area */}
+                <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
+                    <main>
+                        {/* Site header */}
+                        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+                        <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                            <div className="flex justify-center">
+                                <div className="bg-white rounded-lg shadow-lg p-6">
+                                    <h2 className="text-xl font-bold mb-4">Auction Material</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div >
+        );
+    }
+
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
@@ -38,27 +62,21 @@ const EmployerForms = () => {
                 <main>
                     {/* Site header */}
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <h1 className="text-xl font-bold mb-4">Employer Requests</h1>
-
+                        <h1 className="text-xl font-bold mb-4">Auction Material</h1>
                         {/* Table */}
                         <div className="shadow overflow-hidden rounded-lg border">
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company
+                                            Company Name
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company Work
+                                            Contact Person Name
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Job Post
-                                        </th>
-                                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company Profile
+                                            Contact Person Number
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                                             Country
@@ -72,16 +90,13 @@ const EmployerForms = () => {
                                     {forms.map((form) => (
                                         <tr key={form._id}>
                                             <td className="py-2 px-4 whitespace-nowrap border-b cursor-pointer" onClick={() => viewDetails(form._id)}>
-                                                {form.company}
+                                                {form.companyName}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.cwork}
+                                                {form.contactPersonName}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.jobpost}
-                                            </td>
-                                            <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.companyprofile}
+                                                {form.contactPersonNumber}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
                                                 {form.country}
@@ -102,4 +117,4 @@ const EmployerForms = () => {
     );
 };
 
-export default EmployerForms;
+export default AuctionMaterial;

@@ -51,32 +51,35 @@ const RegistrationDetails = () => {
                         <div className="flex justify-center">
                             <div className="bg-white rounded-lg shadow-lg p-6">
                                 <h2 className="text-xl font-bold mb-4">Registration Detail</h2>
-                                <div className="grid grid-cols-2">
+                                <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <p>Company Name: {formData.company}</p>
-                                        <p>Company Profile: {formData.cprofile}</p>
-                                        <p>Mobile: {formData.mobile}</p>
-                                        <p>Secondary Mobile: {formData.secMobile}</p>
-                                        <p>WhatsApp Number: {formData.wmobile}</p>
+                                        <p className="font-bold">Company: {formData.company}</p>
+                                        <p className="font-bold">Mobile: {formData.mobile}</p>
+                                        <p className="font-bold">Secondary Mobile: {formData.secMobile}</p>
+                                        <p className="font-bold">Email: {formData.email}</p>
+                                        <p className="font-bold">Website: <a href={formData.cwebsite} target="_blank" rel="noopener noreferrer">{formData.cwebsite}</a></p>
+                                        <p className="font-bold">CIN: {formData.CIN}</p>
+                                        <p className="font-bold">Work Mobile: {formData.wmobile}</p>
+                                        <p className="font-bold">Company Profile: {formData.cprofile}</p>
+                                        <p className="font-bold">Company Established: {formData.companyEstd}</p>
+                                        <p className="font-bold">Other Details: {formData.otherDetails}</p>
+                                        <p className="font-bold">Company Post: {formData.companypost}</p>
+                                        <p className="font-bold">License: {formData.liscence}</p>
+                                        <p className="font-bold">Contact Person Name: {formData.cpname}</p>
+                                        <p className="font-bold">Category: {formData.category}</p>
+                                        <p className="font-bold">Father's Name: {formData.fname}</p>
+                                        <p className="font-bold">GST: {formData.GST}</p>
+                                        <p className="font-bold">PAN: {formData.PAN}</p>
+                                        <p className="font-bold">Address: {formData.address}</p>
+                                        <p className="font-bold">Country: {formData.companycountry}</p>
+                                        <p className="font-bold">City: {formData.companycity}</p>
+                                        <p className="font-bold">State: {formData.companystate}</p>
                                     </div>
+
                                     <div>
-                                        <p>Email: {formData.email}</p>
-                                        <p>Company Website: {formData.cwebsite}</p>
-                                        <p>CIN: {formData.CIN}</p>
-                                        <p>Company Establishment: {formData.companyEstd}</p>
-                                    </div>
-                                    <div>
-                                        <p>Company Post: {formData.companypost}</p>
-                                        <p>License: {formData.liscence}</p>
-                                        <p>Contact Person Name: {formData.cpname} </p>
-                                        <p>Father Name: {formData.fname}</p>
-                                        <p>Category: {formData.category}</p>
-                                        <p>GST: {formData.GST} </p>
-                                        <p>PAN: {formData.PAN}</p>
-                                        <p>Address: {formData.address}</p>
-                                        <p>Country: {formData.companycountry} </p>
-                                        <p>City: {formData.companycity}</p>
-                                        <p>State: {formData.companystate} </p>
+                                        <p className="font-bold">Registration URL: <a href={formData.regUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
+                                        <p className="font-bold">GST URL: <a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
+                                        <p className="font-bold">PAN URL: <a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
                                     </div>
                                 </div>
 

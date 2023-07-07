@@ -53,22 +53,36 @@ const IndividualDetails = () => {
                             <div className="bg-white rounded-lg shadow-lg p-6">
                                 <h2 className="text-xl font-bold mb-4">Individual Detail</h2>
                                 <div className="grid grid-cols-2">
-                                    <div>
-                                        <p>Name: {formData.name}</p>
-                                        <p>Father's Name: {formData.fatherName}</p>
-                                        <p>DOB: {formData.dob}</p>
-                                        <p>Mobile: {formData.mobileNumber}</p>
-                                        <p>Address: {formData.address}</p>
-                                        <p>Email: {formData.email}</p>
-                                    </div>
-                                    <div>
-                                        <p>Aadhar :{formData.aadharNumber}</p>
-                                        <p>Request License: {formData.requestLicense}</p>
-                                        <p>PAN: {formData.panNumber}</p>
-                                    </div>
-                                    <div>
-                                        <p>Working Field: {formData.workingField}</p>
-                                        <p>Document: <a href={formData.url} target="_blank" rel="noopener noreferrer">Here</a></p>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p className="font-bold">Name: {formData.name}</p>
+                                            <p className="font-bold">Father's Name: {formData.fatherName}</p>
+                                            <p className="font-bold">Date of Birth: {formData.dob}</p>
+                                            <p className="font-bold">Aadhar Number: {formData.aadharNumber}</p>
+                                            <p className="font-bold">PAN Number: {formData.panNumber}</p>
+                                            <p className="font-bold">Working Field: {formData.workingField}</p>
+                                            <p className="font-bold">Company Address 1: {formData.companyaddress1}</p>
+                                            <p className="font-bold">Company Address 2: {formData.companyaddress2}</p>
+                                            <p className="font-bold">City: {formData.companycity}</p>
+                                            <p className="font-bold">State: {formData.companystate}</p>
+                                            <p className="font-bold">Zip Code: {formData.zipcode}</p>
+                                            <p className="font-bold">Country: {formData.companycountry}</p>
+                                            <p className="font-bold">Others: {formData.others}</p>
+                                        </div>
+
+                                        <div>
+                                            <p className="font-bold">Mobile Number: {formData.mobileNumber}</p>
+                                            <p className="font-bold">Email: {formData.email}</p>
+                                            <p className="font-bold">Request License: {formData.requestLicense}</p>
+                                            <p className="font-bold">Photo:</p>
+                                            <img src={formData.photoUrl} alt="Photo" className="max-w-full h-auto" />
+                                            <p className="font-bold">Aadhar Card:</p>
+                                            <img src={formData.aadharUrl} alt="Aadhar Card" className="max-w-full h-auto" />
+                                            <p className="font-bold">PAN Card:</p>
+                                            <img src={formData.panUrl} alt="PAN Card" className="max-w-full h-auto" />
+                                            <p className="font-bold">Signature:</p>
+                                            <img src={formData.signatureUrl} alt="Signature" className="max-w-full h-auto" />
+                                        </div>
                                     </div>
                                 </div>
 

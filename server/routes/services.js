@@ -16,7 +16,7 @@ const tenderOnlineController = require("../controller/services/onlineTenderFormC
 
 //Employer
 // Route for form submission
-router.post('/employer/submit-form',upload.any(),employerController.submitForm);
+router.post('/employer/submit-form',employerController.submitForm);
 
 // Route for getting all forms
 router.get('/employer/forms', employerController.getAllForms);
@@ -26,7 +26,7 @@ router.get('/employer/forms/:id', employerController.getSingleForm);
 
 //Seeker 
 // Route for form submission
-router.post('/seeker/submit-form',upload.any(), seekerController.submitForm);
+router.post('/seeker/submit-form',seekerController.submitForm);
 
 // Route for getting all forms
 router.get('/seeker/forms', seekerController.getAllForms);
@@ -91,29 +91,29 @@ router.get("/jv/:id", jointventureController.getFormById);
 router.post("/tender/offline", tenderOfflineController.submitForm);
 
 // Get All Tender Offline Forms
-router.get("tender/offline/getall", tenderOfflineController.getAllForms);
+router.get("/tender/offline/getall", tenderOfflineController.getAllForms);
 
 // Get Single Tender Offline Form by ID
-router.get("tender/offline/:id", tenderOfflineController.getSingleForm);
+router.get("/tender/offline/:id", tenderOfflineController.getSingleForm);
 
 //Tender Online
 // Submit Tender Online Form
 router.post("/tender/online", tenderOnlineController.submitForm);
 
 // Get All Tender Online Forms
-router.get("tender/online/getall", tenderOnlineController.getAllForms);
+router.get("/tender/online/getall", tenderOnlineController.getAllForms);
 
 // Get Single Tender Online Form by ID
-router.get("tender/online/offline/:id", tenderOnlineController.getFormById);
+router.get("/tender/online/:id", tenderOnlineController.getFormById);
 
 //Gem Registration
 // Submit Gem Registration Form
 router.post("/gem/submit", gemregistrationController.submitForm);
 
 // Get All Gem Registration Forms
-router.get("gem/getall", gemregistrationController.getAllForms);
+router.get("/gem/getall", gemregistrationController.getAllForms);
 
 // Get Single Gem Registration by ID
-router.get("gem/:id", gemregistrationController.getFormById);
+router.get("/gem/:id", gemregistrationController.getFormById);
 
 module.exports = router;

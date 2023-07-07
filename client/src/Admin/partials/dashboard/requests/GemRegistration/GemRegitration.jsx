@@ -3,12 +3,11 @@ import Sidebar from "../../../Sidebar";
 import Header from "../../../Header";
 import { useNavigate } from "react-router-dom";
 
-const EmployerForms = () => {
+const GemRegistration = () => {
     const [forms, setForms] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        // Fetch data from the API
-        fetch("http://localhost:5000/apiTender/services/employer/forms")
+        fetch("http://localhost:5000/apiTender/services/gem/getall")
             .then((response) => response.json())
             .then((data) => setForms(data))
             .catch((error) => console.log(error));
@@ -25,7 +24,7 @@ const EmployerForms = () => {
     };
 
     const viewDetails = (id) => {
-        navigate(`/dashboard/employerrequests/${id}`)
+        navigate(`/dashboard/gemregistration/${id}`)
     }
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -41,7 +40,7 @@ const EmployerForms = () => {
 
 
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <h1 className="text-xl font-bold mb-4">Employer Requests</h1>
+                        <h1 className="text-xl font-bold mb-4">Gem Registration Requests</h1>
 
                         {/* Table */}
                         <div className="shadow overflow-hidden rounded-lg border">
@@ -49,16 +48,16 @@ const EmployerForms = () => {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company
+                                            Company Name
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company Work
+                                            Contact Person Name
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Job Post
+                                            Email
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
-                                            Company Profile
+                                            Contact Number
                                         </th>
                                         <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
                                             Country
@@ -72,16 +71,16 @@ const EmployerForms = () => {
                                     {forms.map((form) => (
                                         <tr key={form._id}>
                                             <td className="py-2 px-4 whitespace-nowrap border-b cursor-pointer" onClick={() => viewDetails(form._id)}>
-                                                {form.company}
+                                                {form.companyName}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.cwork}
+                                                {form.name}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.jobpost}
+                                                {form.email}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
-                                                {form.companyprofile}
+                                                {form.contact}
                                             </td>
                                             <td className="py-2 px-4 whitespace-nowrap border-b">
                                                 {form.country}
@@ -102,4 +101,4 @@ const EmployerForms = () => {
     );
 };
 
-export default EmployerForms;
+export default GemRegistration;

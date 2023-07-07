@@ -36,7 +36,8 @@ const auctionmaterialsModelSchema = new mongoose.Schema({
   contactPersonNumber: String,
   auctionMaterial: [String],
   otherDescription: String,
-});
+},
+{ timestamps: true });
 
 // Create the FormData model
 const AuctionMaterialForm = mongoose.model('Auction-Material', auctionmaterialsModelSchema);

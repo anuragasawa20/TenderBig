@@ -24,6 +24,14 @@ import DashboardUserDetail from '../Admin/partials/dashboard/users/DashboardUser
 import DashboardCurrentTenders from '../Admin/partials/dashboard/DashboardCurrentTenders'
 
 //Contact Requests
+import GemRegistrationDetail from '../Admin/partials/dashboard/requests/GemRegistration/GemRegistrationDetail';
+import GemRegistration from '../Admin/partials/dashboard/requests/GemRegistration/GemRegitration';
+import TenderOnlineDetail from '../Admin/partials/dashboard/requests/TenderOnline/TenderOnlineDetail';
+import TenderOnline from '../Admin/partials/dashboard/requests/TenderOnline/TenderOnline';
+import JointVentureDetail from '../Admin/partials/dashboard/requests/Joint-Venture/JointVentureDetail';
+import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture/JointVenture';
+import AuctionMaterialDetail from '../Admin/partials/dashboard/requests/Auction-Material/AuctionMaterialDetail';
+import AuctionMaterial from '../Admin/partials/dashboard/requests/Auction-Material/AuctionMaterial';
 import Seeker from '../Admin/partials/dashboard/requests/Seeker/SeekerForm';
 import SeekerFormDetail from '../Admin/partials/dashboard/requests/Seeker/SeekerFormDetail';
 import RegistrationList from '../Admin/partials/dashboard/requests/Registration-Certification/Registration/Registration';
@@ -35,9 +43,8 @@ import CompanyList from '../Admin/partials/dashboard/requests/Registration-Certi
 import EmployerForms from '../Admin/partials/dashboard/requests/Employer-Form/EmployerForms';
 import EmployerFormDetail from '../Admin/partials/dashboard/requests/Employer-Form/EmployerFormDetail';
 import ContactFormList from '../Admin/partials/dashboard/requests/ContactPage';
-import CareerManPower from '../Admin/partials/dashboard/requests/Career&ManPower';
-import AuctionMaterial from '../Admin/partials/dashboard/requests/Auction-Material';
-import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture';
+import TenderOffline from '../Admin/partials/dashboard/requests/TenderOffline';
+// import JointVenture from '../Admin/partials/dashboard/requests/Joint-Venture';
 import License from '../Admin/partials/dashboard/requests/License/License';
 import OnlineBidding from '../Admin/partials/dashboard/requests/Online-Bidding';
 import RegistrationCertification from '../Admin/partials/dashboard/requests/RegistrationCertificate';
@@ -53,6 +60,7 @@ import AddProject from '../Admin/partials/dashboard/AddProject';
 
 const DashboardRoutes = () => {
   return (
+  <div>
     <Routes>
       {/* <Route
         path="/admin"
@@ -181,21 +189,53 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={License} />}
       />
 
+      {/* Auction Material*/}
+      <Route
+        path="/auctionmaterialrequests"
+        element={<PrivateRoute element={AuctionMaterial} />}
+      />
+       <Route
+        path="/auctionmaterialrequests/:id"
+        element={<PrivateRoute element={AuctionMaterialDetail} />}
+      />
+
+      {/* Joint Venture */}
+      <Route
+        path="/jointventurerequests"
+        element={<PrivateRoute element={JointVenture} />}
+      />
+       <Route
+        path="/jointventurerequests/:id"
+        element={<PrivateRoute element={JointVentureDetail} />}
+      />
+
+      {/* Tender Online */}
+      <Route
+        path="/tenderonlinerequests"
+        element={<PrivateRoute element={TenderOnline} />}
+      />
+       <Route
+        path="/tenderonlinerequests/:id"
+        element={<PrivateRoute element={TenderOnlineDetail} />}
+      />
+
+      {/* Gem Registration */}
+      <Route
+        path="/gemregistration"
+        element={<PrivateRoute element={GemRegistration} />}
+      />
+       <Route
+        path="/gemregistration/:id"
+        element={<PrivateRoute element={GemRegistrationDetail} />}
+      />
+
       <Route
         path="/contact"
         element={<PrivateRoute element={ContactFormList} />}
       />
       <Route
-        path="/career&manpower"
-        element={<PrivateRoute element={CareerManPower} />}
-      />
-      <Route
-        path="/actionmaterial"
-        element={<PrivateRoute element={AuctionMaterial} />}
-      />
-      <Route
-        path="/jointventure"
-        element={<PrivateRoute element={JointVenture} />}
+        path="/tenderofflinerequests"
+        element={<PrivateRoute element={TenderOffline} />}
       />
 
       <Route
@@ -237,6 +277,7 @@ const DashboardRoutes = () => {
 
       <Route path="*" element={"NOT Allowed"} />
     </Routes>
+    </div>
   );
 };
 

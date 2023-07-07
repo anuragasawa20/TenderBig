@@ -14,6 +14,10 @@ const EmployerFormDetail = () => {
             .catch((error) => console.log(error));
     }, [id]);
 
+    const openPdfInBrowser = (url) => {
+        window.open(url, '_blank');
+      };
+
     const [sidebarOpen, setSidebarOpen] = useState(false);
     if (!formData) {
         return (
@@ -50,51 +54,122 @@ const EmployerFormDetail = () => {
 
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                         <div className="flex justify-center">
-                            <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Employer Form Detail</h2>
-                                <div className="grid grid-cols-2">
+                            <div className=" p-4">
+                                <h1 className="text-2xl font-bold mb-4">Employer Information</h1>
+
+                                <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <p className="font-bold">Company Information</p>
-                                        <p>Company: {formData.company}</p>
-                                        <p>Mobile: {formData.mobile}</p>
-                                        <p>Email: {formData.email}</p>
-                                        <p>Company Work: {formData.cwork}</p>
-                                        <p>Job Post: {formData.jobpost}</p>
-                                        <p>Experience: {formData.experience}</p>
-                                        <p>Salary: {formData.salary}</p>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Company:</strong>
+                                            <span>{formData.company}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Mobile:</strong>
+                                            <span>{formData.mobile}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Email:</strong>
+                                            <span>{formData.email}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Company Work:</strong>
+                                            <span>{formData.cwork}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Job Post:</strong>
+                                            <span>{formData.jobpost}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Experience:</strong>
+                                            <span>{formData.experience}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Salary:</strong>
+                                            <span>{formData.salary}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Company URL:</strong>
+                                            <a href={formData.curl} target="_blank" rel="noopener noreferrer">{formData.curl}</a>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">GST:</strong>
+                                            <span>{formData.GST}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Company Profile:</strong>
+                                            <span>{formData.companyprofile}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Contact Phone Number:</strong>
+                                            <span>{formData.contactpnumber}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Registration Number:</strong>
+                                            <span>{formData.regno}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">PAN:</strong>
+                                            <span>{formData.PAN}</span>
+                                        </div>
                                     </div>
+
                                     <div>
-                                        <p className="font-bold">Company Profile</p>
-                                        <p>Company Profile: {formData.companyprofile}</p>
-                                        <p>Contact Phone Number: {formData.contactpnumber}</p>
-                                        <p>Registration Number: {formData.regno}</p>
-                                        <p>PAN: {formData.PAN}</p>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Address:</strong>
+                                            <span>{formData.address}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">City:</strong>
+                                            <span>{formData.city}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Zip Code:</strong>
+                                            <span>{formData.zipcode}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">State:</strong>
+                                            <span>{formData.state}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Country:</strong>
+                                            <span>{formData.country}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Office Timing:</strong>
+                                            <span>{formData.officetiming}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Holidays:</strong>
+                                            <span>{formData.holidays}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Working Days:</strong>
+                                            <span>{formData.workingdays}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Seeker Post:</strong>
+                                            <span>{formData.seekerpost}</span>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Resume:</strong>
+                                            <button
+                                                className="text-blue-600 underline"
+                                                onClick={() => openPdfInBrowser(formData.resumeUrl)}
+                                            >
+                                                Click Here
+                                            </button>
+                                        </div>
+                                        <div className="flex items-baseline">
+                                            <strong className="mr-2">Other:</strong>
+                                            <button
+                                                className="text-blue-600 underline"
+                                                onClick={() => openPdfInBrowser(formData.otherUrl)}
+                                            >
+                                                Click Here
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div className="grid grid-cols-2">
-                                    <div>
-                                        <p className="font-bold">Address Information</p>
-                                        <p>Address: {formData.address}</p>
-                                        <p>City: {formData.city}</p>
-                                        <p>ZIP Code: {formData.zipcode}</p>
-                                        <p>State: {formData.state}</p>
-                                        <p>Country: {formData.country}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-bold">Office Information</p>
-                                        <p>Office Timing: {formData.officetiming}</p>
-                                        <p>Holidays: {formData.holidays}</p>
-                                        <p>Working Days: {formData.workingdays}</p>
-                                        <p>Seeker Post: {formData.seekerpost}</p>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4">
-                                    <p className="font-bold">GST Information</p>
-                                    <p>GST: {formData.GST}</p>
-                                </div>
-
                             </div>
                         </div>
                     </div>

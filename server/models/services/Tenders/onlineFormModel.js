@@ -41,7 +41,8 @@ const TenderOnline = new mongoose.Schema({
     work: [String],
     biddingDocs: [String],
     tenderDocs: [String],
-});
+},
+{ timestamps: true });
 
 const TenderOnlineModel = mongoose.model('TenderOnline', TenderOnline);
 

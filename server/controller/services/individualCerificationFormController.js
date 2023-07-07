@@ -77,7 +77,6 @@ const getFormById = async (req, res) => {
       return res.status(404).json({ error: 'Form not found' });
     }
 
-    form.url = await getLink(form.url)
     res.json(form);
   } catch (error) {
     console.error(error);

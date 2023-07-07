@@ -3,7 +3,7 @@ import axios from "axios";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 
-const CareerManPower = () => {
+const TenderOffline = () => {
   const [contactForms, setContactForms] = useState([]);
   const [sortOption, setSortOption] = useState("receivedAt");
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +18,7 @@ const CareerManPower = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        "http://localhost:5000/apiTender/Career%20%26%20Man%20Power",
+        "http://localhost:5000/apiTender/services/tender/offline/getall",
         {
           headers: {
             auth: token,
@@ -123,6 +123,14 @@ const CareerManPower = () => {
                       Mobile
                     </th>
                     <th
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                      Aadhar Number
+                    </th>
+                    <th
+                      className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                      Role
+                    </th>
+                    <th
                       className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer border-b">
                       Received At
                     </th>
@@ -142,6 +150,12 @@ const CareerManPower = () => {
                       </td>
                       <td className="py-2 px-4 whitespace-nowrap border-b">
                         {form.mobile}
+                      </td>
+                      <td className="py-2 px-4 whitespace-nowrap border-b">
+                        {form.aadhar}
+                      </td>
+                      <td className="py-2 px-4 whitespace-nowrap border-b">
+                        {form.role}
                       </td>
                       <td className="py-2 px-4 whitespace-nowrap border-b">
                         {formatReceivedAt(form.createdAt)}
@@ -182,4 +196,4 @@ const CareerManPower = () => {
   );
 };
 
-export default CareerManPower;
+export default TenderOffline;

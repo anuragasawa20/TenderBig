@@ -19,7 +19,8 @@ const optionsModelSchema = new Schema({
     type: String,
     required: true
   }]
-});
+},
+{ timestamps: true });
 
 const optionsModel = mongoose.model('options', optionsModelSchema);
 

@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Sidebar from "../../../../../Sidebar";
-import Header from "../../../../../Header";
+import { useNavigate, useParams } from 'react-router-dom';
+import Sidebar from "../../../Sidebar";
+import Header from "../../../Header";
 
-const CompanyDetails = () => {
-    const [formData, setFormData] = useState(null);
+const GemRegistrationDetail = () => {
+    const [data, setFormData] = useState(null);
     const { id } = useParams();
     useEffect(() => {
         // Fetch data from the API
-        fetch(`http://localhost:5000/apiTender/services/ccert/certification/${id}`)
+        fetch(`http://localhost:5000/apiTender/services/gem/${id}`)
             .then((response) => response.json())
             .then((data) => setFormData(data))
             .catch((error) => console.log(error));
     }, [id]);
 
+    const formatReceivedAt = (dateString) => {
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+        });
+        return formattedDate;
+    };
+
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    if (!formData) {
+    if (!data) {
         return (
             <div className="flex h-screen overflow-hidden">
                 {/* Sidebar */}
@@ -28,7 +38,7 @@ const CompanyDetails = () => {
                         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                             <div className="flex justify-center">
                                 <div className="bg-white rounded-lg shadow-lg p-6">
-                                    <h2 className="text-xl font-bold mb-4">Company Detail</h2>
+                                    <h2 className="text-xl font-bold mb-4">Gem Registration Detail</h2>
                                 </div>
                             </div>
                         </div>
@@ -47,32 +57,26 @@ const CompanyDetails = () => {
                     {/* Site header */}
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                         <div className="flex justify-center">
                             <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Company Detail</h2>
+                                <h2 className="text-xl font-bold mb-4">Gem Registration Detail</h2>
                                 <div className="grid grid-cols-2">
-                                    <div>
-                                        <p>CIN Registration: {formData.cinReg}</p>
-                                        <p>Company Name: {formData.companyName}</p>
-                                        <p>Company Profile: {formData.companyProfile}</p>
-                                        <p>Contact Number: {formData.contactNumber}</p>
-                                        <p>Contract Person Name: {formData.contractPName}</p>
-                                        <p>Email: {formData.email}</p>
-                                        <p>GST: {formData.gst}</p>
-                                        <p>PAN: {formData.pan}</p>
-                                        <p>Request License: {formData.requestLicense}</p>
-                                        <p>Selected Positions: {formData.selectedPositions}</p>
-                                        <p>Website: <a href={formData.website} target="_blank" rel="noopener noreferrer">{formData.website}</a></p>
-                                        <p>Working Field: {formData.workingField}</p>
-                                        <p>Document URL: <a href={formData.docUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>PAN URL: <a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>GST URL: <a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>Others: {formData.others}</p>
-                                    </div>
+                                    <p><strong>Name:</strong> {data.name}</p>
+                                    <p><strong>Email:</strong> {data.email}</p>
+                                    <p><strong>Contact:</strong> {data.contact}</p>
+                                    <p><strong>Aadhar:</strong> {data.aadhar}</p>
+                                    <p><strong>Company Name:</strong> {data.companyName}</p>
+                                    <p><strong>PAN Number:</strong> {data.panNumber}</p>
+                                    <p><strong>Website Address:</strong> {data.websiteAddress}</p>
+                                    <p><strong>GST:</strong> {data.gst}</p>
+                                    <p><strong>Start Date:</strong>{formatReceivedAt(data.startDate)}</p>
+                                    <p><strong>Address:</strong> {data.address}</p>
+                                    <p><strong>Country:</strong> {data.country}</p>
+                                    <p><strong>State:</strong> {data.state}</p>
+                                    <p><strong>City:</strong> {data.city}</p>
+                                    <p><strong>Zip:</strong> {data.zip}</p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -82,4 +86,4 @@ const CompanyDetails = () => {
     );
 };
 
-export default CompanyDetails;
+export default GemRegistrationDetail;
