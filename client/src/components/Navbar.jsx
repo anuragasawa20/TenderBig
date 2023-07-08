@@ -68,7 +68,7 @@ const Navbar = () => {
                   </Link> */}
 
                   <Link
-                    to="/tenderfillingonline"
+                    to="/forms"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
                     Apply for Tenders

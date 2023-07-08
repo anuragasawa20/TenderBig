@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { locations } from "../../constants/countriesData";
 import axios from "axios";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import payment from "../../components/payment"
 import uploadFileToS3 from "../file-uploading/FileUpload";
 
 const Employer = () => {
@@ -82,52 +81,64 @@ const Employer = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const resume = e.target.resume.files[0];
-        const other = e.target.other.files[0];
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                const resume = e.target.resume.files[0];
+                const other = e.target.other.files[0];
 
-        const getresumeUrl = await uploadFileToS3(resume);
-        const getotherUrl = await uploadFileToS3(other);
+                const getresumeUrl = await uploadFileToS3(resume);
+                const getotherUrl = await uploadFileToS3(other);
 
-        const formData = {
-            company,
-            mobile,
-            email,
-            cwork,
-            jobpost,
-            experience,
-            salary,
-            curl,
-            GST,
-            companyprofile,
-            contactpnumber,
-            regno,
-            PAN,
-            address: addressline1 + " " + addressline2,
-            city,
-            zipcode,
-            state,
-            country,
-            officetiming,
-            holidays,
-            workingdays,
-            seekerpost,
-            resumeUrl: getresumeUrl,
-            otherUrl: getotherUrl
-        };
+                const formData = {
+                    company,
+                    mobile,
+                    email,
+                    cwork,
+                    jobpost,
+                    experience,
+                    salary,
+                    curl,
+                    GST,
+                    companyprofile,
+                    contactpnumber,
+                    regno,
+                    PAN,
+                    address: addressline1 + " " + addressline2,
+                    city,
+                    zipcode,
+                    state,
+                    country,
+                    officetiming,
+                    holidays,
+                    workingdays,
+                    seekerpost,
+                    resumeUrl: getresumeUrl,
+                    otherUrl: getotherUrl
+                };
+                StoreAtDB(formData);
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
+    };
 
+    const StoreAtDB = (requestBody) => {
+
+        const token = localStorage.getItem('token');
         axios
-            .post("http://localhost:5000/apiTender/services/employer/submit-form", formData)
+            .post("http://localhost:5000/apiTender/services/employer/submit-form", requestBody)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
-                // clearInputs();
-                // window.location.href = '/employer';
+                clearInputs();
             })
             .catch((error) => {
                 console.error("Error sending form data:", error);
                 alert("Oops something went wrong!!!");
             });
-    };
+    }
 
     return (
         <>

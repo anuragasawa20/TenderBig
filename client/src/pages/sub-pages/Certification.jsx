@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import uploadFileToS3 from "../file-uploading/FileUpload";
 import axios from "axios";
 import { Country, State, City } from 'country-state-city';
+import payment from "../../components/payment";
 
 function CompanyForm({ onSubmit, licenses }) {
     const [companyName, setCompanyName] = useState('');
@@ -24,34 +25,44 @@ function CompanyForm({ onSubmit, licenses }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const doc = e.target.doc.files[0];
-        const cgst = e.target.cgst.files[0];
-        const cpan = e.target.cpan.files[0];
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                const doc = e.target.doc.files[0];
+                const cgst = e.target.cgst.files[0];
+                const cpan = e.target.cpan.files[0];
 
-        const getdocUrl = await uploadFileToS3(doc);
-        const getgstUrl = await uploadFileToS3(cgst);
-        const getpanUrl = await uploadFileToS3(cpan);
+                const getdocUrl = await uploadFileToS3(doc);
+                const getgstUrl = await uploadFileToS3(cgst);
+                const getpanUrl = await uploadFileToS3(cpan);
 
-        const data = {
-            companyName,
-            companyProfile,
-            cinReg,
-            others,
-            workingField,
-            gst,
-            pan,
-            website,
-            email,
-            contactNumber,
-            requestLicense,
-            selectedPositions,
-            contractPName,
-            docUrl: getdocUrl,
-            gstUrl: getgstUrl,
-            panUrl: getpanUrl
-        };
+                const data = {
+                    companyName,
+                    companyProfile,
+                    cinReg,
+                    others,
+                    workingField,
+                    gst,
+                    pan,
+                    website,
+                    email,
+                    contactNumber,
+                    requestLicense,
+                    selectedPositions,
+                    contractPName,
+                    docUrl: getdocUrl,
+                    gstUrl: getgstUrl,
+                    panUrl: getpanUrl
+                };
 
-        onSubmit(data);
+                onSubmit(data);
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
+
+
     };
 
     return (
@@ -301,40 +312,49 @@ function IndividualForm({ onSubmit, licenses }) {
         e.preventDefault();
         // Prepare the data object with form values
 
-        const photo = e.target.photo.files[0];
-        const aadhar = e.target.aadhar.files[0];
-        const pan = e.target.pan.files[0];
-        const signature = e.target.signature.files[0];
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                const photo = e.target.photo.files[0];
+                const aadhar = e.target.aadhar.files[0];
+                const pan = e.target.pan.files[0];
+                const signature = e.target.signature.files[0];
 
-        const getphotoUrl = await uploadFileToS3(photo);
-        const getaadharUrl = await uploadFileToS3(aadhar);
-        const getpanUrl = await uploadFileToS3(pan);
-        const getsignatureUrl = await uploadFileToS3(signature);
+                const getphotoUrl = await uploadFileToS3(photo);
+                const getaadharUrl = await uploadFileToS3(aadhar);
+                const getpanUrl = await uploadFileToS3(pan);
+                const getsignatureUrl = await uploadFileToS3(signature);
 
-        const data = {
-            name,
-            fatherName,
-            dob,
-            aadharNumber,
-            panNumber,
-            workingField,
-            companyaddress1,
-            companyaddress2,
-            companycity,
-            companystate,
-            zipcode,
-            companycountry,
-            others,
-            mobileNumber,
-            email,
-            requestLicense,
-            photoUrl: getphotoUrl,
-            aadharUrl: getaadharUrl,
-            panUrl: getpanUrl,
-            signatureUrl: getsignatureUrl
-        };
+                const data = {
+                    name,
+                    fatherName,
+                    dob,
+                    aadharNumber,
+                    panNumber,
+                    workingField,
+                    companyaddress1,
+                    companyaddress2,
+                    companycity,
+                    companystate,
+                    zipcode,
+                    companycountry,
+                    others,
+                    mobileNumber,
+                    email,
+                    requestLicense,
+                    photoUrl: getphotoUrl,
+                    aadharUrl: getaadharUrl,
+                    panUrl: getpanUrl,
+                    signatureUrl: getsignatureUrl
+                };
 
-        onSubmit(data);
+                onSubmit(data);
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
+
     };
 
     return (

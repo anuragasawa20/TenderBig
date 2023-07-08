@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const TenderByCategory = () => {
   const { referenceNo } = useParams();
@@ -35,8 +33,6 @@ const TenderByCategory = () => {
   if (!tenderDetails) {
     return (
       <>
-        <Navbar />
-
         <div className="flex items-center justify-center h-screen">
           <div className="flex items-center space-x-2 animate-bounce">
             <div className="w-6 h-6 bg-purple-500 rounded-full"></div>

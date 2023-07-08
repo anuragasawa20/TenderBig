@@ -7,6 +7,7 @@ import Step4 from './Steps/CompanyInfo';
 import Step5 from './Steps/AuctionMaterial';
 import axios from "axios";
 import uploadFileToS3 from "../../../pages/file-uploading/FileUpload";
+import payment from '../../../components/payment';
 
 const uploadMultipleFilesToS3 = async (files) => {
   const uploadPromises = files.map(async (file) => {
@@ -140,33 +141,41 @@ const AuctionMaterialForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    var requestBody = formData;
+    payment()
+      .then(async success => {
+        console.log('Payment success:', success);
+        var requestBody = formData;
 
-    const workExperienceFiles = requestBody.workExperience.workExperience;
-    const workOrderSamplesFiles = requestBody.workExperience.workOrderSamples;
-    const workProfilesFiles = requestBody.workExperience.workProfiles;
+        const workExperienceFiles = requestBody.workExperience.workExperience;
+        const workOrderSamplesFiles = requestBody.workExperience.workOrderSamples;
+        const workProfilesFiles = requestBody.workExperience.workProfiles;
 
-    const workExperienceUrls = await uploadMultipleFilesToS3(workExperienceFiles);
-    const workOrderSamplesUrls = await uploadMultipleFilesToS3(workOrderSamplesFiles);
-    const workProfilesUrls = await uploadMultipleFilesToS3(workProfilesFiles);
+        const workExperienceUrls = await uploadMultipleFilesToS3(workExperienceFiles);
+        const workOrderSamplesUrls = await uploadMultipleFilesToS3(workOrderSamplesFiles);
+        const workProfilesUrls = await uploadMultipleFilesToS3(workProfilesFiles);
 
-    requestBody.workExperience.workExperience = workExperienceUrls;
-    requestBody.workExperience.workOrderSamples = workOrderSamplesUrls;
-    requestBody.workExperience.workProfiles = workProfilesUrls;
+        requestBody.workExperience.workExperience = workExperienceUrls;
+        requestBody.workExperience.workOrderSamples = workOrderSamplesUrls;
+        requestBody.workExperience.workProfiles = workProfilesUrls;
 
-    const response = await axios.post('http://localhost:5000/apiTender/services/aumt/auction-material', requestBody);
-    if (response.data.success) {
-      alert('Submitted');
-      resetForm();
-    } else {
-      alert('Something went wrong. Try again.');
-    }
+        const response = await axios.post('http://localhost:5000/apiTender/services/aumt/auction-material', requestBody);
+        if (response.data.success) {
+          alert('Submitted');
+          resetForm();
+        } else {
+          alert('Something went wrong. Try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Payment error:', error);
+        // Handle the error if the payment fails
+      });
 
   };
 
   return (
     <>
-      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
         <div className="m-10">
           <ProgressBar
             percent={progress}

@@ -3,9 +3,8 @@ import { RiBuilding2Line, RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { locations } from "../../constants/countriesData";
+import { Country, State, City } from 'country-state-city';
+import payment from "../../components/payment";
 import uploadFileToS3 from "../file-uploading/FileUpload";
 
 const Registration = () => {
@@ -76,53 +75,85 @@ const Registration = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        const reg = e.target.reg.files[0];
-        const gst = e.target.gst.files[0];
-        const pan = e.target.pan.files[0];
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                const reg = e.target.reg.files[0];
+                const gst = e.target.gst.files[0];
+                const pan = e.target.pan.files[0];
 
-        const getRegUrl = await uploadFileToS3(reg);
-        const getGstUrl = await uploadFileToS3(gst);
-        const getPanUrl = await uploadFileToS3(pan);
+                const getRegUrl = await uploadFileToS3(reg);
+                const getGstUrl = await uploadFileToS3(gst);
+                const getPanUrl = await uploadFileToS3(pan);
 
-        const formData = {
-            Gem,
-            company,
-            mobile,
-            secMobile,
-            email,
-            cwebsite,
-            CIN,
-            wmobile,
-            cprofile,
-            companyEstd,
-            otherDetails,
-            companypost,
-            liscence,
-            cpname,
-            category,
-            fname,
-            GST,
-            PAN,
-            address: companyaddress1 + " " + companyaddress2,
-            companycountry,
-            companycity,
-            companystate,
-            regUrl: getRegUrl,
-            gstUrl: getGstUrl,
-            panUrl: getPanUrl
-        };
+                const formData = {
+                    Gem,
+                    company,
+                    mobile,
+                    secMobile,
+                    email,
+                    cwebsite,
+                    CIN,
+                    wmobile,
+                    cprofile,
+                    companyEstd,
+                    otherDetails,
+                    companypost,
+                    liscence,
+                    cpname,
+                    category,
+                    fname,
+                    GST,
+                    PAN,
+                    address: companyaddress1 + " " + companyaddress2,
+                    companycountry,
+                    companycity,
+                    companystate,
+                    regUrl: getRegUrl,
+                    gstUrl: getGstUrl,
+                    panUrl: getPanUrl
+                };
+                StoreAtDB(formData);
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
 
+    };
+
+    const StoreAtDB = (requestBody) => {
+
+        const token = localStorage.getItem('token');
         axios
-            .post("http://localhost:5000/apiTender/services/register/registration", formData)
+            .post("http://localhost:5000/apiTender/services/register/registration", requestBody)
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
+                clearInputs();
             })
             .catch((error) => {
                 console.error("Error sending form data:", error);
                 alert("Oops something went wrong!!!");
             });
-    };
+    }
+
+    const countryData = Country.getAllCountries();
+    const countryNames = Object.values(countryData).map((country) => country.name);
+
+    let stateNames = [];
+    if (companycountry) {
+        const countryCode = countryData.find((country) => country.name === companycountry)?.isoCode;
+        const stateData = State.getStatesOfCountry(countryCode);
+        stateNames = Array.from(new Set(Object.values(stateData).map((state) => state.name)));
+    }
+
+    let cityNames = [];
+    if (companycountry) {
+        const countryCode = countryData.find((country) => country.name === companycountry)?.isoCode;
+        const cityData = City.getCitiesOfCountry(countryCode);
+        cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
+    }
 
     return (
         <>
@@ -131,7 +162,7 @@ const Registration = () => {
                     <div className="flex items-center justify-center flex-col md:flex-row">
                         <form
                             onSubmit={handleFormSubmit}
-                            className="md:w-2/3 mx-auto border-2 p-8 rounded-xl shadow-md"
+                            className="md:w-2/3 mx-auto p-8 border-2 border-gray-900 rounded-md"
                         >
                             <h1 className="text-3xl font-bold text-center mb-4">
                                 Registration
@@ -429,21 +460,35 @@ const Registration = () => {
                                         value={companycity}
                                         onChange={(e) => setCompanycity(e.target.value)}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-
+                                        placeholder="Enter a city"
+                                        autoComplete="off"
+                                        list="cityNamesList"
                                     />
+                                    <datalist id="cityNamesList">
+                                        {cityNames.map((city) => (
+                                            <option key={city} value={city} />
+                                        ))}
+                                    </datalist>
+
                                 </label>
                                 <label className="block mb-2 font-semibold basis-1/2">
                                     State
                                     <span className="text-red-700 relative top-0 right-0">*</span>
-                                    <input
+                                    <select
                                         required
                                         type="text"
                                         name="companystate"
                                         value={companystate}
                                         onChange={(e) => setCompanystate(e.target.value)}
                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-
-                                    />
+                                    >
+                                        <option value="">Select a state</option>
+                                        {stateNames.map((state) => (
+                                            <option key={state} value={state}>
+                                                {state}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </label>
                             </div>
 
@@ -456,8 +501,9 @@ const Registration = () => {
                                     onChange={(e) => setCompanycountry(e.target.value)}
                                     className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                 >
-                                    {locations.map((country, index) => (
-                                        <option key={index} value={country}>
+                                    <option value="">Select a country</option>
+                                    {countryNames.map((country) => (
+                                        <option key={country} value={country}>
                                             {country}
                                         </option>
                                     ))}

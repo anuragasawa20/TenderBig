@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { locations } from "../constants/countriesData"
+import payment from "../components/payment";
 import { Country, State, City } from 'country-state-city';
 
 const JointVenture = () => {
@@ -75,33 +75,40 @@ const JointVenture = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
+    payment()
+      .then(async success => {
+        console.log('Payment success:', success);
+        const requestBody = JSON.stringify(formData);
 
-    const requestBody = JSON.stringify(formData);
-
-    fetch("http://localhost:5000/apiTender/services/gem/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        auth: token,
-      },
-      body: requestBody,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        alert("Submitted")
-        clearInputs();
+        fetch("http://localhost:5000/apiTender/services/gem/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            auth: token,
+          },
+          body: requestBody,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            alert("Submitted")
+            clearInputs();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Oops something went wrong!!!");
+            clearInputs();
+          });
       })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Oops something went wrong!!!");
-        clearInputs();
+      .catch(error => {
+        console.error('Payment error:', error);
+        // Handle the error if the payment fails
       });
   };
 
   return (
     <>
-      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
         <form onSubmit={handleSubmit}>
           {/* Global Section */}
           <h2 className="text-2xl font-bold mb-4 text-center ">Gem Registration</h2>

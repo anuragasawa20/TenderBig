@@ -6,6 +6,7 @@ import axios from "axios";
 import uploadFileToS3 from "../../pages/file-uploading/FileUpload";
 import { ProgressBar, Step } from 'react-step-progress-bar';
 import { Country, State, City } from 'country-state-city';
+import payment from "../../components/payment";
 
 const uploadMultipleFilesToS3 = async (files) => {
     const uploadPromises = files.map(async (file) => {
@@ -335,34 +336,40 @@ const OnlineTenderForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-
         const token = localStorage.getItem("token");
 
-        var requestBody = formData;
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                var requestBody = formData;
 
-        const biddingDocs = requestBody.biddingDocs;
-        const rent = requestBody.rent;
-        const work = requestBody.work;
-        const tenderDocs = requestBody.tenderDocs;
+                const biddingDocs = requestBody.biddingDocs;
+                const rent = requestBody.rent;
+                const work = requestBody.work;
+                const tenderDocs = requestBody.tenderDocs;
 
-        const biddingDocsUrls = await uploadMultipleFilesToS3(biddingDocs);
-        const rentUrls = await uploadMultipleFilesToS3(rent);
-        const workUrls = await uploadMultipleFilesToS3(work);
-        const tenderDocsUrls = await uploadMultipleFilesToS3(tenderDocs);
+                const biddingDocsUrls = await uploadMultipleFilesToS3(biddingDocs);
+                const rentUrls = await uploadMultipleFilesToS3(rent);
+                const workUrls = await uploadMultipleFilesToS3(work);
+                const tenderDocsUrls = await uploadMultipleFilesToS3(tenderDocs);
 
-        requestBody.biddingDocs = biddingDocsUrls;
-        requestBody.rent = rentUrls;
-        requestBody.work = workUrls;
-        requestBody.tenderDocs = tenderDocsUrls;
+                requestBody.biddingDocs = biddingDocsUrls;
+                requestBody.rent = rentUrls;
+                requestBody.work = workUrls;
+                requestBody.tenderDocs = tenderDocsUrls;
 
-        const response = await axios.post('http://localhost:5000/apiTender/services/tender/online', requestBody);
-        if (response.data.success) {
-            alert('Submitted');
-            clearInputs();
-        } else {
-            alert('Something went wrong. Try again.');
-        }
+                const response = await axios.post('http://localhost:5000/apiTender/services/tender/online', requestBody);
+                if (response.data.success) {
+                    alert('Submitted');
+                    clearInputs();
+                } else {
+                    alert('Something went wrong. Try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
     };
 
     const handleFileChange = (event) => {
@@ -396,7 +403,7 @@ const OnlineTenderForm = () => {
 
     return (
         <>
-            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
 
                 <ProgressBar
                     percent={progress}

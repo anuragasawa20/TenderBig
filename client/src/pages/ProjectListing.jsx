@@ -83,40 +83,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const region = encodeURIComponent(selectedRegion);
-        const country = encodeURIComponent(selectedCountry);
-        const financier = encodeURIComponent(selectedFundingAgency);
-        const geopolitical = encodeURIComponent(selectedGeoPolitical);
-        const product = encodeURIComponent(selectedProduct);
-        const userCategory =  encodeURIComponent(selectedUserCategory);
-
         const baseUrl = "http://localhost:5000/apiTender/tenderdetails/search";
-
-        const detailsArray = [
-          "summary",
-          "procurementSummary.deadline",
-          "procurementSummary.country",
-          "otherInformation.totNo",
-          "tenderId"
-        ];
-
-        let searchUrl = `${baseUrl}?`;
-
-        if (country) {
-          searchUrl += `&country=${country}`;
-        }
-        if (financier) {
-          searchUrl += `&financier=${financier}`;
-        }
-        if (geopolitical) {
-          searchUrl += `&geopolitical=${geopolitical}`;
-        }
-        if (product) {
-          searchUrl += `&product=${product}`;
-        }
-        if(userCategory){
-          searchUrl += `&userCategory=${userCategory}`;
-        }
 
         const token = localStorage.getItem("token");
 

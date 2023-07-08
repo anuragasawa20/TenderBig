@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { locations } from "../../constants/countriesData"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import uploadFileToS3 from "../file-uploading/FileUpload";
 import { ProgressBar, Step } from 'react-step-progress-bar';
 import { Country, State, City } from 'country-state-city';
+import payment from "../../components/payment"
 
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (
@@ -100,7 +100,7 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                    type="file" name="resume" accept=".pdf" required
+                        type="file" name="resume" accept=".pdf" required
                         id="resume"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
@@ -108,11 +108,11 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
 
                 <div>
                     <label htmlFor="file-input" className="block mb-2 font-semibold">
-                    Upload Profile Photo
+                        Upload Profile Photo
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                    type="file" name="profilePhoto" accept=".jpg,.jpeg,.png" required 
+                        type="file" name="profilePhoto" accept=".jpg,.jpeg,.png" required
                         id="profilePhoto"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
@@ -120,11 +120,11 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
 
                 <div>
                     <label htmlFor="file-input" className="block mb-2 font-semibold">
-                    Upload Aadhar
+                        Upload Aadhar
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                    type="file" name="aadhar" accept=".pdf" required 
+                        type="file" name="aadhar" accept=".pdf" required
                         id="aadhar"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
@@ -205,7 +205,6 @@ const Seeker = () => {
         cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
     }
 
-
     const clearInputs = () => {
         setFormData({
             name: "",
@@ -242,36 +241,32 @@ const Seeker = () => {
         }));
     };
 
-    const updateFormDataWithUrls = async (resumeUrl, photoUrl, aadharUrl) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            resumeUrl: resumeUrl,
-            photoUrl: photoUrl,
-            aadharUrl: aadharUrl
-        }));
-    };
-
-    useEffect(() => {
-        if (formData.resumeUrl && formData.photoUrl && formData.aadharUrl) {
-            StoreAtDB();
-        }
-    }, [formData]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitProgress(0);
-        const resume = e.target.resume.files[0];
-        const profilePhoto = e.target.profilePhoto.files[0];
-        const aadhar = e.target.aadhar.files[0];
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                const resume = e.target.resume.files[0];
+                const profilePhoto = e.target.profilePhoto.files[0];
+                const aadhar = e.target.aadhar.files[0];
 
-        const resumeUrl = await uploadFileToS3(resume);
-        const photoUrl = await uploadFileToS3(profilePhoto);
-        const aadharUrl = await uploadFileToS3(aadhar);
+                const resumeUrl = await uploadFileToS3(resume);
+                const photoUrl = await uploadFileToS3(profilePhoto);
+                const aadharUrl = await uploadFileToS3(aadhar);
 
-        await updateFormDataWithUrls(resumeUrl, photoUrl, aadharUrl);
+                const requestBody = formData;
+                requestBody.resumeUrl = resumeUrl;
+                requestBody.photoUrl = photoUrl;
+                requestBody.aadharUrl = aadharUrl;
+                StoreAtDB(requestBody);
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
     }
 
-    const StoreAtDB = () => {
+    const StoreAtDB = (requestBody) => {
 
         const token = localStorage.getItem('token');
 
@@ -281,7 +276,7 @@ const Seeker = () => {
                 'Content-Type': 'application/json',
                 auth: token
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(requestBody)
         })
             .then((response) => response.json())
             .then((data) => {
@@ -318,7 +313,7 @@ const Seeker = () => {
 
     return (
         <>
-            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
                 <ProgressBar
                     percent={progress}
                     filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
@@ -584,6 +579,8 @@ const Seeker = () => {
                         >
                             Next
                         </button>
+
+
                     </form>
                 )}
 

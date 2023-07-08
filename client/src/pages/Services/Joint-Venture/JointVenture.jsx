@@ -7,6 +7,7 @@ import Step3 from './Steps/PersonalDetails';
 import Step4 from './Steps/Partnership';
 import axios from "axios";
 import uploadFileToS3 from "../../../pages/file-uploading/FileUpload";
+import payment from '../../../components/payment';
 
 const JointVenture = () => {
     const [currentStep, setCurrentStep] = useState(0);
@@ -170,32 +171,40 @@ const JointVenture = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        let requestBody = formData;
+        payment()
+            .then(async success => {
+                console.log('Payment success:', success);
+                let requestBody = formData;
 
-        requestBody.companyUploads.cinUpload[0] = await uploadFileToS3(requestBody.companyUploads.cinUpload[0])
-        requestBody.companyUploads.gstUpload[0] = await uploadFileToS3(requestBody.companyUploads.gstUpload[0])
-        requestBody.companyUploads.panUpload[0] = await uploadFileToS3(requestBody.companyUploads.panUpload[0])
+                requestBody.companyUploads.cinUpload[0] = await uploadFileToS3(requestBody.companyUploads.cinUpload[0])
+                requestBody.companyUploads.gstUpload[0] = await uploadFileToS3(requestBody.companyUploads.gstUpload[0])
+                requestBody.companyUploads.panUpload[0] = await uploadFileToS3(requestBody.companyUploads.panUpload[0])
 
-        const updatedDirectors = await uploadFilesForDirectors(requestBody.directors);
-        requestBody.directors = updatedDirectors;
+                const updatedDirectors = await uploadFilesForDirectors(requestBody.directors);
+                requestBody.directors = updatedDirectors;
 
-        const response = await axios.post('http://localhost:5000/apiTender/services/jv/submitjv', requestBody);
-        if (response.data.success) {
-          alert('Submitted')
-          resetForm();
-        } else {
-          alert('Something went wrong. Try again.');
-        }
+                const response = await axios.post('http://localhost:5000/apiTender/services/jv/submitjv', requestBody);
+                if (response.data.success) {
+                    alert('Submitted')
+                    resetForm();
+                } else {
+                    alert('Something went wrong. Try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Payment error:', error);
+                // Handle the error if the payment fails
+            });
 
     };
 
     return (
         <>
-            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
+            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
                 <div className="m-10">
                     <ProgressBar
                         percent={progress}
-                        filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                        filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
                     >
                         {stepNames.map((_, index) => (
                             <Step key={index}>
