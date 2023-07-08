@@ -102,9 +102,6 @@ const Projects = () => {
 
         let searchUrl = `${baseUrl}?`;
 
-        if (region) {
-          searchUrl += `&region=${region}`;
-        }
         if (country) {
           searchUrl += `&country=${country}`;
         }
