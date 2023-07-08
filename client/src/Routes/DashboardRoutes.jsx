@@ -174,7 +174,6 @@ const DashboardRoutes = () => {
         element={<PrivateRoute element={RegistrationDetails} />}
       />
 
-
       {/* Seeker */}
       <Route
         path="/seekerrequests"
