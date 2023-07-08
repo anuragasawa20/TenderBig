@@ -24,6 +24,7 @@ const optionsRouter = require("./routes/optionsRoutes")
 const paymentRouter = require("./routes/paymentRoutes");
 const s3Router = require("./routes/s3Routes");
 const projectRouter = require("./routes/projectRoutes");
+const formPriceRouter = require("./routes/formPriceRoutes");
 
 // Routes
 app.use("/apiTender/tenderdetails", tenderRouter);
@@ -35,6 +36,7 @@ app.use("/apiTender/options", optionsRouter);
 app.use("/apiTender/payment", paymentRouter);
 app.use("/apiTender/s3", s3Router);
 app.use("/apiTender/projects", projectRouter);
+app.use("/apiTender/formprice", formPriceRouter);
 
 // Serve the React app for all other routes
 app.get('*', (req, res) => {

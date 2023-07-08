@@ -78,10 +78,17 @@ const Employer = () => {
         setSeekerpost("");
     }
 
+    const getAmount = async () => {
+        const { data: { price } } = await axios.get("http://localhost:5000/apiTender/formprice/Employer/price");
+        return price;
+    }
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
-        payment()
+        const price = await getAmount();
+        const receipt = "Employer Form";
+        payment(price, receipt)
             .then(async success => {
                 console.log('Payment success:', success);
                 const resume = e.target.resume.files[0];

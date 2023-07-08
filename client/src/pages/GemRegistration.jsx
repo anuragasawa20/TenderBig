@@ -1,6 +1,7 @@
 import { useState } from "react";
 import payment from "../components/payment";
 import { Country, State, City } from 'country-state-city';
+import axios from "axios";
 
 const JointVenture = () => {
   const [formData, setFormData] = useState({
@@ -71,11 +72,18 @@ const JointVenture = () => {
     setCheckbox(e.target.checked);
   }
   <input value="test" type="checkbox" onChange={handleChange} />
+  const getAmount=async()=>{
+    const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Gem%20Registration/price");
+    return price;
+}
 
-  const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
+    const price = await getAmount();
+    const receipt = "Gem Registration";
+    
     const token = localStorage.getItem("token");
-    payment()
+    payment(price,receipt)
       .then(async success => {
         console.log('Payment success:', success);
         const requestBody = JSON.stringify(formData);

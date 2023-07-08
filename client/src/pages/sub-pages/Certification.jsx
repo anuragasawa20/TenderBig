@@ -22,10 +22,16 @@ function CompanyForm({ onSubmit, licenses }) {
     const [contractPName, setContractPName] = useState('');
     const [others, setOthers] = useState("");
 
+    const getAmount=async()=>{
+        const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Company%20Certification/price");
+        return price;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        payment()
+        const price = await getAmount();
+        const receipt = "Company Certification";
+        payment(price,receipt)
             .then(async success => {
                 console.log('Payment success:', success);
                 const doc = e.target.doc.files[0];
@@ -307,12 +313,16 @@ function IndividualForm({ onSubmit, licenses }) {
         const cityData = City.getCitiesOfCountry(countryCode);
         cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
     }
+    const getAmount=async()=>{
+        const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Individual%20Certification/price");
+        return price;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Prepare the data object with form values
-
-        payment()
+        const price = await getAmount();
+        const receipt = "Individual Certification";
+        payment(price,receipt)
             .then(async success => {
                 console.log('Payment success:', success);
                 const photo = e.target.photo.files[0];

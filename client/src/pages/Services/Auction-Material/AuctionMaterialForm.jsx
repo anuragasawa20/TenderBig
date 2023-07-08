@@ -137,11 +137,16 @@ const AuctionMaterialForm = () => {
     });
     setCurrentStep(0);
   }
+  const getAmount=async()=>{
+    const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Auction%20Material/price");
+    return price;
+}
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    payment()
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    const price = await getAmount();
+    const receipt = "Auction Material";
+    payment(price,receipt)
       .then(async success => {
         console.log('Payment success:', success);
         var requestBody = formData;

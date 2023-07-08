@@ -5,6 +5,7 @@ import uploadFileToS3 from "../file-uploading/FileUpload";
 import { ProgressBar, Step } from 'react-step-progress-bar';
 import { Country, State, City } from 'country-state-city';
 import payment from "../../components/payment"
+import axios from "axios";
 
 const Secondpage = ({ formData, handleChange, previousPage }) => {
     return (
@@ -241,9 +242,16 @@ const Seeker = () => {
         }));
     };
 
+    const getAmount=async()=>{
+        const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Seeker/price");
+        return price;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        payment()
+        const price = await getAmount();
+        const receipt = "Seeker Form";
+        payment(price,receipt)
             .then(async success => {
                 console.log('Payment success:', success);
                 const resume = e.target.resume.files[0];

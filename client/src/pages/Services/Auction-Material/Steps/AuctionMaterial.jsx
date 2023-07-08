@@ -58,7 +58,10 @@ const Step5 = ({ formData, handleChange, handleSubmit, handlePrevious, auctionMa
 
   return (
     <div className='mt-4 mb-4'>
-
+      <label className="block mb-2 font-semibold relative">
+        Auction Material
+        <span className="text-red-700 relative top-0 right-0">*</span>
+      </label>
       <select
         onChange={handleSelectChange}
         required

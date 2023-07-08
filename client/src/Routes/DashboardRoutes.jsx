@@ -60,232 +60,242 @@ import Product from '../Admin/partials/dashboard/options/product';
 import AddProject from '../Admin/partials/dashboard/AddProject';
 import Material from '../Admin/partials/dashboard/options/auctionMaterial';
 
+import Prices from "../Admin/partials/dashboard/Prices"
+
 const DashboardRoutes = () => {
   return (
-  <div>
-    <Routes>
-      {/* <Route
+    <div>
+      <Routes>
+        {/* <Route
         path="/admin"
         element={<PrivateRoute element={DashboardHome} />}
       /> */}
 
-      {/* Users */}
-      <Route
-        path="/users"
-        element={<PrivateRoute element={DashboardUsers} />}
-      />
-      <Route
-        path="/user/:userId"
-        element={<PrivateRoute element={DashboardUserDetail} />}
-      />
-      <Route
-        path="/alladmin"
-        element={<PrivateRoute element={AllAdmin} />}
-      />
-      <Route
-        path="/allhr"
-        element={<PrivateRoute element={AllHR} />}
-      />
-      <Route
-        path="/allemployee"
-        element={<PrivateRoute element={AllEmployee} />}
-      />
+        {/* Users */}
+        <Route
+          path="/users"
+          element={<PrivateRoute element={DashboardUsers} />}
+        />
+        <Route
+          path="/user/:userId"
+          element={<PrivateRoute element={DashboardUserDetail} />}
+        />
+        <Route
+          path="/alladmin"
+          element={<PrivateRoute element={AllAdmin} />}
+        />
+        <Route
+          path="/allhr"
+          element={<PrivateRoute element={AllHR} />}
+        />
+        <Route
+          path="/allemployee"
+          element={<PrivateRoute element={AllEmployee} />}
+        />
 
-      {/* Add User */}
-      <Route
-        path="/addadmin"
-        element={<PrivateRoute element={AddAdmin} />}
-      />
-      <Route
-        path="/addhr"
-        element={<PrivateRoute element={AddHR} />}
-      />
-      <Route
-        path="/addemployee"
-        element={<PrivateRoute element={AddEmployee} />}
-      />
+        {/* Add User */}
+        <Route
+          path="/addadmin"
+          element={<PrivateRoute element={AddAdmin} />}
+        />
+        <Route
+          path="/addhr"
+          element={<PrivateRoute element={AddHR} />}
+        />
+        <Route
+          path="/addemployee"
+          element={<PrivateRoute element={AddEmployee} />}
+        />
 
-      {/* Tenders */}
-      <Route
-        path="/tenders"
-        element={<PrivateRoute element={AllTendersSection} />}
-      />
-      <Route
-        path="/contractor"
-        element={<PrivateRoute element={Contractor} />}
-      />
-      <Route
-        path="/subcontractor"
-        element={<PrivateRoute element={Subcontractor} />}
-      />
+        {/* Tenders */}
+        <Route
+          path="/tenders"
+          element={<PrivateRoute element={AllTendersSection} />}
+        />
+        <Route
+          path="/contractor"
+          element={<PrivateRoute element={Contractor} />}
+        />
+        <Route
+          path="/subcontractor"
+          element={<PrivateRoute element={Subcontractor} />}
+        />
 
-      <Route
-        path="/tenders/currenttenders"
-        element={<PrivateRoute element={DashboardCurrentTenders} />}
-      />
-      <Route
-        path="/tender/forms"
-        element={<PrivateRoute element={AdminForm} />}
-      />
-      <Route
-        path="/tender/:tenderId"
-        element={<PrivateRoute element={DashboardTenderDetail} />}
-      />
+        <Route
+          path="/tenders/currenttenders"
+          element={<PrivateRoute element={DashboardCurrentTenders} />}
+        />
+        <Route
+          path="/tender/forms"
+          element={<PrivateRoute element={AdminForm} />}
+        />
+        <Route
+          path="/tender/:tenderId"
+          element={<PrivateRoute element={DashboardTenderDetail} />}
+        />
 
-      {/* Requests */}
+        {/* Requests */}
 
-      {/* Employer */}
-      <Route
-        path="/employerrequests"
-        element={<PrivateRoute element={EmployerForms} />}
-      />
-      <Route
-        path="/employerrequests/:id"
-        element={<PrivateRoute element={EmployerFormDetail} />}
-      />
+        {/* Employer */}
+        <Route
+          path="/employerrequests"
+          element={<PrivateRoute element={EmployerForms} />}
+        />
+        <Route
+          path="/employerrequests/:id"
+          element={<PrivateRoute element={EmployerFormDetail} />}
+        />
 
-      {/* Company */}
-      <Route
-        path="/companyrequests"
-        element={<PrivateRoute element={CompanyList} />}
-      />
-      <Route
-        path="/companyrequests/:id"
-        element={<PrivateRoute element={CompanyDetails} />}
-      />
+        {/* Company */}
+        <Route
+          path="/companyrequests"
+          element={<PrivateRoute element={CompanyList} />}
+        />
+        <Route
+          path="/companyrequests/:id"
+          element={<PrivateRoute element={CompanyDetails} />}
+        />
 
-      {/* Individual */}
-      <Route
-        path="/individualrequests"
-        element={<PrivateRoute element={IndividualList} />}
-      />
-      <Route
-        path="/individualrequests/:id"
-        element={<PrivateRoute element={IndividualDetails} />}
-      />
+        {/* Individual */}
+        <Route
+          path="/individualrequests"
+          element={<PrivateRoute element={IndividualList} />}
+        />
+        <Route
+          path="/individualrequests/:id"
+          element={<PrivateRoute element={IndividualDetails} />}
+        />
 
-      {/* Registration */}
-      <Route
-        path="/registrationrequests"
-        element={<PrivateRoute element={RegistrationList} />}
-      />
-      <Route
-        path="/registrationrequests/:id"
-        element={<PrivateRoute element={RegistrationDetails} />}
-      />
+        {/* Registration */}
+        <Route
+          path="/registrationrequests"
+          element={<PrivateRoute element={RegistrationList} />}
+        />
+        <Route
+          path="/registrationrequests/:id"
+          element={<PrivateRoute element={RegistrationDetails} />}
+        />
 
-      {/* Seeker */}
-      <Route
-        path="/seekerrequests"
-        element={<PrivateRoute element={Seeker} />}
-      />
-      <Route
-        path="/seekerrequests/:id"
-        element={<PrivateRoute element={SeekerFormDetail} />}
-      />
+        {/* Seeker */}
+        <Route
+          path="/seekerrequests"
+          element={<PrivateRoute element={Seeker} />}
+        />
+        <Route
+          path="/seekerrequests/:id"
+          element={<PrivateRoute element={SeekerFormDetail} />}
+        />
 
-      {/* License */}
-      <Route
-        path="/licenserequests"
-        element={<PrivateRoute element={Licenserequests} />}
-      />
+        {/* License */}
+        <Route
+          path="/licenserequests"
+          element={<PrivateRoute element={Licenserequests} />}
+        />
 
-      {/* Auction Material*/}
-      <Route
-        path="/auctionmaterialrequests"
-        element={<PrivateRoute element={AuctionMaterial} />}
-      />
-       <Route
-        path="/auctionmaterialrequests/:id"
-        element={<PrivateRoute element={AuctionMaterialDetail} />}
-      />
+        {/* Auction Material*/}
+        <Route
+          path="/auctionmaterialrequests"
+          element={<PrivateRoute element={AuctionMaterial} />}
+        />
+        <Route
+          path="/auctionmaterialrequests/:id"
+          element={<PrivateRoute element={AuctionMaterialDetail} />}
+        />
 
-      {/* Joint Venture */}
-      <Route
-        path="/jointventurerequests"
-        element={<PrivateRoute element={JointVenture} />}
-      />
-       <Route
-        path="/jointventurerequests/:id"
-        element={<PrivateRoute element={JointVentureDetail} />}
-      />
+        {/* Joint Venture */}
+        <Route
+          path="/jointventurerequests"
+          element={<PrivateRoute element={JointVenture} />}
+        />
+        <Route
+          path="/jointventurerequests/:id"
+          element={<PrivateRoute element={JointVentureDetail} />}
+        />
 
-      {/* Tender Online */}
-      <Route
-        path="/tenderonlinerequests"
-        element={<PrivateRoute element={TenderOnline} />}
-      />
-       <Route
-        path="/tenderonlinerequests/:id"
-        element={<PrivateRoute element={TenderOnlineDetail} />}
-      />
+        {/* Tender Online */}
+        <Route
+          path="/tenderonlinerequests"
+          element={<PrivateRoute element={TenderOnline} />}
+        />
+        <Route
+          path="/tenderonlinerequests/:id"
+          element={<PrivateRoute element={TenderOnlineDetail} />}
+        />
 
-      {/* Gem Registration */}
-      <Route
-        path="/gemregistration"
-        element={<PrivateRoute element={GemRegistration} />}
-      />
-       <Route
-        path="/gemregistration/:id"
-        element={<PrivateRoute element={GemRegistrationDetail} />}
-      />
+        {/* Gem Registration */}
+        <Route
+          path="/gemregistration"
+          element={<PrivateRoute element={GemRegistration} />}
+        />
+        <Route
+          path="/gemregistration/:id"
+          element={<PrivateRoute element={GemRegistrationDetail} />}
+        />
 
-      <Route
-        path="/contact"
-        element={<PrivateRoute element={ContactFormList} />}
-      />
-      <Route
-        path="/tenderofflinerequests"
-        element={<PrivateRoute element={TenderOffline} />}
-      />
+        <Route
+          path="/contact"
+          element={<PrivateRoute element={ContactFormList} />}
+        />
 
-      <Route
-        path="/onlinebidding"
-        element={<PrivateRoute element={OnlineBidding} />}
-      />
-      <Route
-        path="/regcert"
-        element={<PrivateRoute element={RegistrationCertification} />}
-      />
-      <Route
-        path="/tenderresult"
-        element={<PrivateRoute element={TenderResult} />}
-      />
+        {/* Offline Tender */}
+        <Route
+          path="/tenderofflinerequests"
+          element={<PrivateRoute element={TenderOffline} />}
+        />
 
-      {/* Options */}
-      <Route
-        path="/department"
-        element={<PrivateRoute element={Department} />}
-      />
-      <Route
-        path="/category"
-        element={<PrivateRoute element={Category} />}
-      />
-      <Route
-        path="/sector"
-        element={<PrivateRoute element={Sector} />}
-      />
-      <Route
-        path="/product"
-        element={<PrivateRoute element={Product} />}
-      />
-      <Route
-        path="/license"
-        element={<PrivateRoute element={License} />}
-      />
-      <Route
-        path="/auctionmaterial"
-        element={<PrivateRoute element={Material} />}
-      />
+        {/* <Route
+          path="/onlinebidding"
+          element={<PrivateRoute element={OnlineBidding} />}
+        />
+        <Route
+          path="/regcert"
+          element={<PrivateRoute element={RegistrationCertification} />}
+        />
+        <Route
+          path="/tenderresult"
+          element={<PrivateRoute element={TenderResult} />}
+        /> */}
 
-      {/* Temp */}
-      <Route
-        path="/addproject"
-        element={<PrivateRoute element={AddProject} />}
-      />
+        {/* Options */}
+        <Route
+          path="/department"
+          element={<PrivateRoute element={Department} />}
+        />
+        <Route
+          path="/category"
+          element={<PrivateRoute element={Category} />}
+        />
+        <Route
+          path="/sector"
+          element={<PrivateRoute element={Sector} />}
+        />
+        <Route
+          path="/product"
+          element={<PrivateRoute element={Product} />}
+        />
+        <Route
+          path="/license"
+          element={<PrivateRoute element={License} />}
+        />
+        <Route
+          path="/auctionmaterial"
+          element={<PrivateRoute element={Material} />}
+        />
 
-      <Route path="*" element={"NOT Allowed"} />
-    </Routes>
+        <Route
+          path="/formprices"
+          element={<PrivateRoute element={Prices} />}
+        />
+
+        {/* Temp */}
+        <Route
+          path="/addproject"
+          element={<PrivateRoute element={AddProject} />}
+        />
+
+        <Route path='/test' element={<Prices />} />
+        <Route path="*" element={"NOT Allowed"} />
+      </Routes>
     </div>
   );
 };

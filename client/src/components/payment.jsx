@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const payment = async () => {
+const payment = async (amount,receipt) => {
     const { data: { key } } = await axios.get("http://localhost:5000/apiTender/payment/razorpaykey");
 
-    const { data: { order_id } } = await axios.post("http://localhost:5000/apiTender/payment/createorder");
+    const { data: { order_id } } = await axios.post("http://localhost:5000/apiTender/payment/createorder",{
+        amount,
+        receipt
+    });
 
     return new Promise((resolve, reject) => {
         var options = {

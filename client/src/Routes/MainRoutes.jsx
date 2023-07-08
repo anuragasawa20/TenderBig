@@ -33,7 +33,7 @@ const MainRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
-        {/* <Route path='test' element={<JointVenture/>}/> */}
+        {/* <Route path='/test' element={<JointVenture/>}/> */}
         {/* <Route path="/gems" element={<Gems />} /> */}
         <Route path='/tenderfilling' element={<TenderFilling />}></Route>
         <Route path='/tenderfillingonline' element={<TenderFillingOnline />}></Route>

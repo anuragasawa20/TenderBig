@@ -96,10 +96,12 @@ const razorpay = new Razorpay({
 
 module.exports.createOrder = async (req, res) => {
     try {
+        const {amount,receipt} = req.body;
+        console.log(amount);
         const options = {
-            amount: 100000, // Amount in paise (e.g., ₹10.00 = 1000)
+            amount: Number(amount*100),
             currency: 'INR',
-            receipt: 'order_receipt',
+            receipt: receipt,
             payment_capture: 1,
         };
 
