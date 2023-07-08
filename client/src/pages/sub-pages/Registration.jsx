@@ -107,9 +107,9 @@ const Registration = () => {
             companycountry,
             companycity,
             companystate,
-            regUrl:getRegUrl,
-            gstUrl:getGstUrl,
-            panUrl:getPanUrl
+            regUrl: getRegUrl,
+            gstUrl: getGstUrl,
+            panUrl: getPanUrl
         };
 
         axios
@@ -475,23 +475,45 @@ const Registration = () => {
                                 ></textarea>
                             </label>
 
-                            <label className="block mb-2 font-semibold">
-                                Reg No.
-                                <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="reg" accept=".pdf" required />
-                            </label>
+                            <div className="grid grid-cols-2 gap-4 mb-5">
 
-                            <label className="block mb-2 font-semibold">
-                                GST
-                                <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="gst" accept=".pdf" required />
-                            </label>
+                                <div>
+                                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                                        Registraion
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <input
+                                        type="file" name="reg" accept=".pdf" required
+                                        id="reg"
+                                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                    />
+                                </div>
 
-                            <label className="block mb-2 font-semibold">
-                                PAN
-                                <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="pan" accept=".pdf" required />
-                            </label>
+                                <div>
+                                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                                        GST
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <input
+                                        type="file" name="gst" accept=".pdf"
+                                        id="gst"
+                                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                                        PAN
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <input
+                                        type="file" name="pan" accept=".pdf"
+                                        id="pan"
+                                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                    />
+                                </div>
+
+                            </div>
 
                             <button
                                 type="submit"

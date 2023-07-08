@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProgressBar, Step } from 'react-step-progress-bar';
 import Step1 from './Steps/TenderDetails';
 import Step2 from './Steps/WorkExperience';
@@ -21,6 +21,18 @@ const uploadMultipleFilesToS3 = async (files) => {
 
 const AuctionMaterialForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [auctionMaterials, setAuctionMaterials] = useState([]);
+
+  useEffect(() => {
+    fetchAuctionMaterial();
+  }, []);
+
+
+  const fetchAuctionMaterial = async () => {
+    const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=AuctionMaterials");
+    setAuctionMaterials(response.data[0].AuctionMaterials);
+  }
+
   const totalSteps = 5;
   const gaps = totalSteps - 1;
   const progress = Math.round((currentStep / gaps) * 100);
@@ -213,6 +225,7 @@ const AuctionMaterialForm = () => {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handlePrevious={handlePrevious}
+                auctionMaterials={auctionMaterials}
               />
             )}
 

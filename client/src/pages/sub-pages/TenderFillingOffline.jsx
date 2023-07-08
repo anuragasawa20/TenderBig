@@ -63,7 +63,7 @@ const TenderFillingOffline = () => {
       aadhar,
       role:selectedService
     };
-console.log(formData)
+
     axios
       .post("http://localhost:5000/apiTender/services/tender/offline", formData)
       .then((response) => {

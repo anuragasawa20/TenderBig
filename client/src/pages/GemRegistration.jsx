@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
 import { locations } from "../constants/countriesData"
-import Footer from "../components/Footer";
+import { Country, State, City } from 'country-state-city';
 
 const JointVenture = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +37,23 @@ const JointVenture = () => {
       city: "",
       zip: "",
     });
+  }
+
+  const countryData = Country.getAllCountries();
+  const countryNames = Object.values(countryData).map((country) => country.name);
+
+  let stateNames = [];
+  if (formData.country) {
+    const countryCode = countryData.find((country) => country.name === formData.country)?.isoCode;
+    const stateData = State.getStatesOfCountry(countryCode);
+    stateNames = Array.from(new Set(Object.values(stateData).map((state) => state.name)));
+  }
+
+  let cityNames = [];
+  if (formData.country) {
+    const countryCode = countryData.find((country) => country.name === formData.country)?.isoCode;
+    const cityData = City.getCitiesOfCountry(countryCode);
+    cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
   }
 
   // const [currentPage, setCurrentPage] = useState(1);
@@ -235,65 +251,78 @@ const JointVenture = () => {
                     placeholder="Enter Address"
                   />
                 </label>
-                <div className="flex">
-                  <div className="grid gap-4 mt-1.5 mb-1.5 basis-1/2 m-1">
-                    <label className="block font-semibold">
-                      City
-                      <span className="text-red-700 relative top-0 right-0">*</span>
-                      <input
-                        type="text"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleChange}
-                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        placeholder="Enter City"
-                      />
-                    </label>
-                  </div>
 
-                  <div className="grid gap-4 mt-1.5 mb-1.5 basis-1/2 m-1">
-                    <label className="block font-semibold">
-                      Zip Code
-                      <span className="text-red-700 relative top-0 right-0">*</span>
-                      <input
-                        type="number"
-                        name="zip"
-                        value={formData.zip}
-                        onChange={handleChange}
-                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        placeholder="Enter Code"
-                      />
-                    </label>
-                  </div>
-                </div>
-                <div className="flex">
-                  <label className="block font-semibold py-2 basis-1/2 m-1">
-                    State
-                    <span className="text-red-700 relative top-0 right-0">*</span>
-                    <input required
-                      type="text"
-                      name="state"
-                      value={formData.state}
-                      onChange={handleChange}
-                      className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                      placeholder="Enter State"
-                    />
-                  </label>
-                  <label className="block font-semibold py-2 basis-1/2 m-1">
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="block mb-2 font-semibold relative">
                     Country
                     <span className="text-red-700 relative top-0 right-0">*</span>
-                    <select required
+                    <select
+                      required
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
-                      className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                      className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                     >
-                      {locations.map((country, index) => (
-                        <option key={index} value={country}>
+                      <option value="">Select a country</option>
+                      {countryNames.map((country) => (
+                        <option key={country} value={country}>
                           {country}
                         </option>
                       ))}
                     </select>
+                  </label>
+
+                  <label className="block mb-2 font-semibold relative">
+                    State
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <select
+                      required
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    >
+                      <option value="">Select a state</option>
+                      {stateNames.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="block mb-2 font-semibold relative">
+                    City
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                      placeholder="Enter a city"
+                      autoComplete="off"
+                      list="cityNamesList"
+                    />
+                    <datalist id="cityNamesList">
+                      {cityNames.map((city) => (
+                        <option key={city} value={city} />
+                      ))}
+                    </datalist>
+                  </label>
+
+                  <label className="block mb-2 font-semibold relative">
+                    ZIP Code
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                      required
+                      type="number"
+                      name="zip"
+                      value={formData.zip}
+                      onChange={handleChange}
+                      className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                      placeholder="Enter ZIP"
+                    />
                   </label>
                 </div>
               </div>
@@ -314,7 +343,7 @@ const JointVenture = () => {
           </button>
         </form>
       </div>
-      </>
+    </>
   );
 };
 

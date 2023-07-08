@@ -22,8 +22,6 @@ const Step4 = ({ formData, handleChange, handleNext, handlePrevious }) => {
     cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
   }
 
-
-
   return (
     <div className="mt-4">
       <div className="p-2 rounded-lg">

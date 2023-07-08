@@ -58,6 +58,7 @@ import Category from '../Admin/partials/dashboard/options/category';
 import Product from '../Admin/partials/dashboard/options/product';
 
 import AddProject from '../Admin/partials/dashboard/AddProject';
+import Material from '../Admin/partials/dashboard/options/auctionMaterial';
 
 const DashboardRoutes = () => {
   return (
@@ -272,6 +273,10 @@ const DashboardRoutes = () => {
       <Route
         path="/license"
         element={<PrivateRoute element={License} />}
+      />
+      <Route
+        path="/auctionmaterial"
+        element={<PrivateRoute element={Material} />}
       />
 
       {/* Temp */}

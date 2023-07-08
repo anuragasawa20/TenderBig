@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import Navbar from "../../components/Navbar";
 import { locations } from "../../constants/countriesData"
-import Footer from "../../components/Footer";
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import uploadFileToS3 from "../../pages/file-uploading/FileUpload";
 import { ProgressBar, Step } from 'react-step-progress-bar';
+import { Country, State, City } from 'country-state-city';
 
 const uploadMultipleFilesToS3 = async (files) => {
     const uploadPromises = files.map(async (file) => {
@@ -165,17 +163,27 @@ const SecondPage = ({ formData, handleChange, previousPage }) => {
                         </label>
                     </div>
 
+                    <div>
+                        <label className="block mb-2 font-semibold">
+                            Upload Photo
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                        </label>
+                        <input
+                            type="file" name="photo" accept=".png,.jpg,.jpeg" required
+                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        />
+                    </div>
 
-                    <label className="block mb-2 font-semibold">
-                        Upload Photo
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="photo" accept=".png,.jpg,.jpeg" required />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Upload Aadhar
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input type="file" name="aadhar" accept=".pdf" required />
-                    </label>
+                    <div>
+                        <label className="block mb-2 font-semibold">
+                            Upload Aadhar
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                        </label>
+                        <input
+                            type="file" name="aadhar" accept=".pdf" required
+                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -245,7 +253,36 @@ const OnlineTenderForm = () => {
         gemreg: "",
         refno: "",
         requestLicense: "",
+        companycountry: "",
     });
+
+    const countryData = Country.getAllCountries();
+    const countryNames = Object.values(countryData).map((country) => country.name);
+
+    let stateNames = [];
+    if (formData.companycountry) {
+        const countryCode = countryData.find((country) => country.name === formData.companycountry)?.isoCode;
+        const stateData = State.getStatesOfCountry(countryCode);
+        stateNames = Array.from(new Set(Object.values(stateData).map((state) => state.name)));
+    }
+
+    let cityNames = [];
+    if (formData.companycountry) {
+        const countryCode = countryData.find((country) => country.name === formData.companycountry)?.isoCode;
+        const cityData = City.getCitiesOfCountry(countryCode);
+        cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
+    }
+
+    const [licenses, setLicenses] = useState([]);
+
+    useEffect(() => {
+        fetchLicenses();
+    }, []);
+
+    const fetchLicenses = async () => {
+        const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=licenses");
+        setLicenses(response.data[0].licenses);
+    }
 
     const clearInputs = () => {
         setFormData({
@@ -283,6 +320,7 @@ const OnlineTenderForm = () => {
             email: "",
             gemreg: "",
             refno: "",
+            companycountry: "",
             requestLicense: ""
         });
     }
@@ -346,7 +384,7 @@ const OnlineTenderForm = () => {
         setCurrentPage(0);
     };
 
-    
+
     const stepNames = [
         '0',
         '1',
@@ -360,7 +398,7 @@ const OnlineTenderForm = () => {
         <>
             <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
 
-            <ProgressBar
+                <ProgressBar
                     percent={progress}
                     filledBackground="linear-gradient(to right, #E97451, #D22B2B)"
                 >
@@ -621,51 +659,64 @@ const OnlineTenderForm = () => {
 
                                     />
                                 </label>
-                                <div className="flex">
-                                    <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                                        City
-                                        <span className="text-red-700 relative top-0 right-0">*</span>
-                                        <input
-                                            required
-                                            type="text"
-                                            name="companycity"
-                                            value={formData.companycity}
-                                            onChange={handleChange}
-                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-
-                                        />
-                                    </label>
-                                    <label className="block mb-2 font-semibold basis-1/2">
-                                        State
-                                        <span className="text-red-700 relative top-0 right-0">*</span>
-                                        <input
-                                            required
-                                            type="text"
-                                            name="companystate"
-                                            value={formData.companystate}
-                                            onChange={handleChange}
-                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-
-                                        />
-                                    </label>
-                                </div>
 
                                 <label className="block mb-2 font-semibold">
                                     Country
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <select required
-                                        name="country"
+                                        name="companycountry"
                                         value={formData.companycountry}
                                         onChange={handleChange}
                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                     >
-                                        {locations.map((country, index) => (
-                                            <option key={index} value={country}>
+                                        <option value="">Select a country</option>
+                                        {countryNames.map((country) => (
+                                            <option key={country} value={country}>
                                                 {country}
                                             </option>
                                         ))}
                                     </select>
                                 </label>
+                                <div className="flex">
+                                    <label className="block mb-2 font-semibold basis-1/2">
+                                        State
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <select
+                                            required
+                                            name="companystate"
+                                            value={formData.companystate}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            <option value="">Select State</option>
+                                            {stateNames.map((state) => (
+                                                <option key={state} value={state}>
+                                                    {state}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
+
+                                    <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                                        City
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                        <select
+                                            required
+                                            name="companycity"
+                                            value={formData.companycity}
+                                            onChange={handleChange}
+                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                        >
+                                            <option value="">Select City</option>
+                                            {cityNames.map((city) => (
+                                                <option key={city} value={city}>
+                                                    {city}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </label>
+
+                                </div>
                             </div>
 
                             {/* tenderDetail Section */}
@@ -705,54 +756,69 @@ const OnlineTenderForm = () => {
                                     />
                                 </label>
 
-                                <div className="flex">
+                                <div>
+
                                     <div>
                                         <label className="block mb-2 font-semibold">
                                             Rent Agreements
-                                            <span className="text-red-700">*</span>
-                                            <input
-                                                type="file"
-                                                name="rent"
-                                                accept=".pdf"
-                                                required
-                                                onChange={handleFileChange}
-                                            />
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
                                         </label>
+                                        <input
+                                            type="file"
+                                            name="rent"
+                                            accept=".pdf"
+                                            required
+                                            onChange={handleFileChange}
+                                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                        />
+                                    </div>
 
+                                    <div>
                                         <label className="block mb-2 font-semibold">
                                             Old Work Sample
-                                            <span className="text-red-700">*</span>
-                                            <input
-                                                type="file"
-                                                name="work"
-                                                accept=".pdf"
-                                                required
-                                                onChange={handleFileChange}
-                                            />
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
                                         </label>
+                                        <input
+                                            type="file"
+                                            name="work"
+                                            accept=".pdf"
+                                            required
+                                            onChange={handleFileChange}
+                                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                        />
+                                    </div>
 
-                                        <div className="dropdown my-3 font-semibold">
+                                    <div>
+                                        <label className="block mb-2 font-semibold">
                                             Bidding Documents
-                                            <input
-                                                type="file"
-                                                accept="application/pdf"
-                                                multiple
-                                                name="biddingDocs"
-                                                onChange={handleFileChange}
-                                            />
-                                        </div>
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            accept="application/pdf"
+                                            multiple
+                                            name="biddingDocs"
+                                            onChange={handleFileChange}
+                                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                        />
+                                    </div>
 
-                                        <div className="dropdown font-semibold">
+                                    <div>
+                                        <label className="block mb-2 font-semibold">
                                             Tender Docs with Stamps
-                                            <input
-                                                type="file"
-                                                accept="application/pdf"
-                                                multiple
-                                                name="tenderDocs"
-                                                onChange={handleFileChange}
-                                            />
-                                        </div>
+                                            <span className="text-red-700 relative top-0 right-0">*</span>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            accept="application/pdf"
+                                            multiple
+                                            name="tenderDocs"
+                                            onChange={handleFileChange}
+                                            className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                        />
+                                    </div>
 
+                                    <div>
                                         <div className="dropdown my-3 font-semibold">
                                             Required Licenses
                                             <select
@@ -762,10 +828,12 @@ const OnlineTenderForm = () => {
                                                 value={formData.requestLicense}
                                                 onChange={handleChange}
                                             >
-                                                <option value="">Select License</option>
-                                                <option value="Licence 1">Option 1</option>
-                                                <option value="Licence 2">Option 2</option>
-                                                <option value="Licence 3">Option 3</option>
+                                                <option value="">Select</option>
+                                                {licenses.map((license) => (
+                                                    <option key={license} value={license}>
+                                                        {license}
+                                                    </option>
+                                                ))}
                                             </select>
                                         </div>
                                     </div>

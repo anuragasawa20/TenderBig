@@ -2,13 +2,11 @@ import { AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
 import { RiMapPin2Line } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import { locations } from "../../constants/countriesData";
 import uploadFileToS3 from "../file-uploading/FileUpload";
 import axios from "axios";
+import { Country, State, City } from 'country-state-city';
 
-function CompanyForm({ onSubmit }) {
+function CompanyForm({ onSubmit, licenses }) {
     const [companyName, setCompanyName] = useState('');
     const [companyProfile, setCompanyProfile] = useState('');
     const [cinReg, setCinReg] = useState('');
@@ -173,9 +171,11 @@ function CompanyForm({ onSubmit }) {
                             onChange={(e) => setRequestLicense(e.target.value)}
                         >
                             <option value="">Select</option>
-                            <option value="License1">License 1</option>
-                            <option value="License2">License 2</option>
-                            <option value="License3">License 3</option>
+                            {licenses.map((license) => (
+                                <option key={license} value={license}>
+                                    {license}
+                                </option>
+                            ))}
                         </select>
                     </label>
                     <label className="block mb-2 font-semibold">
@@ -213,24 +213,42 @@ function CompanyForm({ onSubmit }) {
                 </div>
             </div>
 
-            <label className="block mb-2 font-semibold">
-                Upload Document
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <hr />
-                <input type="file" name="doc" accept=".pdf" required />
-            </label>
+            <div className="grid grid-cols-2 gap-4 mb-4">
 
-            <label className="block mb-2 font-semibold">
-                GST
-                <span className="text-red-700 relative top-0 right-0">* - </span>
-                <input type="file" name="cgst" accept=".pdf" required />
-            </label>
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        Upload Document
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="doc" accept=".pdf" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
 
-            <label className="block mb-2 font-semibold">
-                PAN
-                <span className="text-red-700 relative top-0 right-0">* - </span>
-                <input type="file" name="cpan" accept=".pdf" required />
-            </label>
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        GST
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="cgst" accept=".pdf" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        PAN
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="cpan" accept=".pdf" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+            </div>
 
             <div className="flex items-center justify-between mb-4">
                 <button
@@ -244,7 +262,7 @@ function CompanyForm({ onSubmit }) {
     );
 }
 
-function IndividualForm({ onSubmit }) {
+function IndividualForm({ onSubmit, licenses }) {
     const [name, setName] = useState('');
     const [fatherName, setFatherName] = useState('');
     const [dob, setDob] = useState('');
@@ -261,6 +279,23 @@ function IndividualForm({ onSubmit }) {
     const [others, setOthers] = useState("");
     const [email, setEmail] = useState('');
     const [requestLicense, setRequestLicense] = useState('');
+
+    const countryData = Country.getAllCountries();
+    const countryNames = Object.values(countryData).map((country) => country.name);
+
+    let stateNames = [];
+    if (companycountry) {
+        const countryCode = countryData.find((country) => country.name === companycountry)?.isoCode;
+        const stateData = State.getStatesOfCountry(countryCode);
+        stateNames = Array.from(new Set(Object.values(stateData).map((state) => state.name)));
+    }
+
+    let cityNames = [];
+    if (companycountry) {
+        const countryCode = countryData.find((country) => country.name === companycountry)?.isoCode;
+        const cityData = City.getCitiesOfCountry(countryCode);
+        cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -293,12 +328,12 @@ function IndividualForm({ onSubmit }) {
             mobileNumber,
             email,
             requestLicense,
-            photoUrl:getphotoUrl,
-            aadharUrl:getaadharUrl,
-            panUrl:getpanUrl,
-            signatureUrl:getsignatureUrl
+            photoUrl: getphotoUrl,
+            aadharUrl: getaadharUrl,
+            panUrl: getpanUrl,
+            signatureUrl: getsignatureUrl
         };
-       
+
         onSubmit(data);
     };
 
@@ -377,34 +412,6 @@ function IndividualForm({ onSubmit }) {
                         />
                     </label>
 
-                    <div className="flex">
-                        <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                            City
-                            <span className="text-red-700 relative top-0 right-0">*</span>
-                            <input
-                                required
-                                type="text"
-                                name="companycity"
-                                value={companycity}
-                                onChange={(e) => setCity(e.target.value)}
-                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                placeholder="Enter City"
-                            />
-                        </label>
-                        <label className="block mb-2 font-semibold basis-1/2">
-                            State
-                            <span className="text-red-700 relative top-0 right-0">*</span>
-                            <input
-                                required
-                                type="text"
-                                name="companystate"
-                                value={companystate}
-                                onChange={(e) => setState(e.target.value)}
-                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                                placeholder="Enter State"
-                            />
-                        </label>
-                    </div>
 
                     <label className="block mb-2 font-semibold">
                         Country
@@ -416,14 +423,55 @@ function IndividualForm({ onSubmit }) {
                             onChange={(e) => setCountry(e.target.value)}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                         >
-                            {locations.map((country, index) => (
-                                <option key={index} value={country}>
+                            <option value="">Select a country</option>
+                            {countryNames.map((country) => (
+                                <option key={country} value={country}>
                                     {country}
                                 </option>
                             ))}
                         </select>
                     </label>
 
+                    <div className="flex">
+                        <label className="block mb-2 font-semibold basis-1/2">
+                            State
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <select
+                                required
+                                name="companystate"
+                                value={companystate}
+                                onChange={(e) => setState(e.target.value)}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            >
+                                <option value="">Select State</option>
+                                {stateNames.map((state) => (
+                                    <option key={state} value={state}>
+                                        {state}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+
+                        <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                            City
+                            <span className="text-red-700 relative top-0 right-0">*</span>
+                            <select
+                                required
+                                name="companycity"
+                                value={companycity}
+                                onChange={(e) => setCity(e.target.value)}
+                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                            >
+                                <option value="">Select City</option>
+                                {cityNames.map((city) => (
+                                    <option key={city} value={city}>
+                                        {city}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+
+                    </div>
                 </div>
 
                 <div className="p-2 rounded-lg">
@@ -497,9 +545,11 @@ function IndividualForm({ onSubmit }) {
                             onChange={(e) => setRequestLicense(e.target.value)}
                         >
                             <option value="">Select</option>
-                            <option value="License1">License 1</option>
-                            <option value="License2">License 2</option>
-                            <option value="License3">License 3</option>
+                            {licenses.map((license) => (
+                                <option key={license} value={license}>
+                                    {license}
+                                </option>
+                            ))}
                         </select>
                     </label>
 
@@ -520,26 +570,54 @@ function IndividualForm({ onSubmit }) {
                 </div>
             </div>
 
-            <label className="block mb-2 font-semibold">
-                Upload Photo
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="photo" accept=".jpg,.png,.jpeg" required />
-            </label>
-            <label className="block mb-2 font-semibold">
-                Upload aadhar
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="aadhar" accept=".pdf" required />
-            </label>
-            <label className="block mb-2 font-semibold">
-                Upload PAN
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="pan" accept=".pdf" required />
-            </label>
-            <label className="block mb-2 font-semibold">
-                Upload Digital Signature
-                <span className="text-red-700 relative top-0 right-0">*</span>
-                <input type="file" name="signature" accept=".jpg,.png,.jpeg" required />
-            </label>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        Upload Photo
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="photo" accept=".jpg,.png,.jpeg" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        Upload Aadhar Card
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="aadhar" accept=".pdf" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        Upload PAN
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="pan" accept=".pdf" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                        Upload Digital Signature
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                    </label>
+                    <input
+                        type="file" name="signature" accept=".jpg,.png,.jpeg" required
+                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                    />
+                </div>
+
+            </div>
+
             <div className="flex items-center justify-between mb-4">
                 <button
                     className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
@@ -554,10 +632,18 @@ function IndividualForm({ onSubmit }) {
 
 const Certification = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const [licenses, setLicenses] = useState([]);
 
     useEffect(() => {
         setIsVisible(true);
+        fetchLicenses();
     }, []);
+
+
+    const fetchLicenses = async () => {
+        const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=licenses");
+        setLicenses(response.data[0].licenses);
+    }
 
     const sectionVariants = {
         hidden: {
@@ -610,7 +696,7 @@ const Certification = () => {
                 console.error("Error sending form data:", error);
                 alert("Oops something went wrong!!!");
             });
-        
+
     };
 
     return (
@@ -658,8 +744,8 @@ const Certification = () => {
                             <div className="flex">
                                 <div className="w-full">
                                     {/* Render the selected form */}
-                                    {selectedOption === 'company' && <CompanyForm onSubmit={handleCompanyFormSubmit} />}
-                                    {selectedOption === 'individual' && <IndividualForm onSubmit={handleIndividualFormSubmit} />}
+                                    {selectedOption === 'company' && <CompanyForm onSubmit={handleCompanyFormSubmit} licenses={licenses} />}
+                                    {selectedOption === 'individual' && <IndividualForm onSubmit={handleIndividualFormSubmit} licenses={licenses} />}
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-const Step5 = ({ formData, handleChange, handleSubmit, handlePrevious }) => {
+const Step5 = ({ formData, handleChange, handleSubmit, handlePrevious, auctionMaterials }) => {
   const [inputArray, setInputArray] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -62,38 +62,18 @@ const Step5 = ({ formData, handleChange, handleSubmit, handlePrevious }) => {
       <select
         onChange={handleSelectChange}
         required
-        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none">
+        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+      >
         <option value="">Select Auction Materials</option>
-        <option value="Option 1" disabled={selectedOptions.includes("Option 1")}>
-          Option 1
-        </option>
-        <option value="Option 2" disabled={selectedOptions.includes("Option 2")}>
-          Option 2
-        </option>
-        <option value="Option 3" disabled={selectedOptions.includes("Option 3")}>
-          Option 3
-        </option>
-        <option value="Option 4" disabled={selectedOptions.includes("Option 4")}>
-          Option 4
-        </option>
-        <option value="Option 5" disabled={selectedOptions.includes("Option 5")}>
-          Option 5
-        </option>
-        <option value="Option 6" disabled={selectedOptions.includes("Option 6")}>
-          Option 6
-        </option>
-        <option value="Option 7" disabled={selectedOptions.includes("Option 7")}>
-          Option 7
-        </option>
-        <option value="Option 8" disabled={selectedOptions.includes("Option 8")}>
-          Option 8
-        </option>
-        <option value="Option 9" disabled={selectedOptions.includes("Option 9")}>
-          Option 9
-        </option>
-        <option value="Option 10" disabled={selectedOptions.includes("Option 10")}>
-          Option 10
-        </option>
+        {auctionMaterials.map((option) => (
+          <option
+            key={option}
+            value={option}
+            disabled={selectedOptions.includes(option)}
+          >
+            {option}
+          </option>
+        ))}
       </select>
 
       {/* Display the selected options in rows */}
@@ -154,7 +134,7 @@ const Step5 = ({ formData, handleChange, handleSubmit, handlePrevious }) => {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

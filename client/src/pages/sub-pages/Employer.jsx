@@ -489,18 +489,33 @@ const Employer = () => {
                                 </div>
                             </div>
 
-                            <label className="block mb-2 font-semibold">
-                                Upload Resume
-                                <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="resume" accept=".pdf" required />
-                            </label>
+                            <div className="grid grid-cols-2 gap-4 mb-5">
 
-                            <label className="block mb-2 font-semibold">
-                                Other
-                                <span className="text-red-700 relative top-0 right-0">* - </span>
-                                <input type="file" name="other" accept=".pdf" required />
-                            </label>
+                                <div>
+                                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                                        Upload Resume
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <input
+                                        type="file" name="resume" accept=".pdf" required
+                                        id="resume"
+                                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                    />
+                                </div>
 
+                                <div>
+                                    <label htmlFor="file-input" className="block mb-2 font-semibold">
+                                        Other File
+                                        <span className="text-red-700 relative top-0 right-0">*</span>
+                                    </label>
+                                    <input
+                                        type="file" name="other" accept=".pdf"
+                                        id="other"
+                                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                                    />
+                                </div>
+
+                            </div>
 
                             <button
                                 type="submit"

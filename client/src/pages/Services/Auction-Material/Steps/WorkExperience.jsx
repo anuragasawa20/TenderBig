@@ -28,49 +28,60 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
   return (
     <div className="mt-4">
       <div className="p-2 rounded-lg">
+
         <div className="grid grid-cols-2 gap-4">
+
           <div>
-            <label htmlFor='workExperience' className="block mb-2 font-semibold relative">
+            <label className="block mb-2 font-semibold">
               Work Experience
               <span className="text-red-700 relative top-0 right-0">*</span>
-              <input
-                required
-                type="file"
-                id="workExperience"
-                name="workExperience"
-                accept='.pdf'
-                multiple
-                onChange={handleFileChange}
-              />
             </label>
+            <input
+              required
+              type="file"
+              id="workExperience"
+              name="workExperience"
+              accept='.pdf'
+              multiple
+              onChange={handleFileChange}
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
           <div>
-            <label htmlFor="workOrderSamples" className="block mb-2 font-semibold relative">
+            <label className="block mb-2 font-semibold">
               Work Order Samples
               <span className="text-red-700 relative top-0 right-0">*</span>
-              <input
-                required
-                type="file"
-                id="workOrderSamples"
-                name="workOrderSamples"
-                accept='.pdf'
-                multiple
-                onChange={handleFileChange}
-              /></label>
+            </label>
+            <input
+              required
+              type="file"
+              id="workOrderSamples"
+              name="workOrderSamples"
+              accept='.pdf'
+              multiple
+              onChange={handleFileChange}
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
           <div>
-            <label htmlFor="workProfiles" className="block mb-2 font-semibold relative">
-              Work Profiles
-              <input
-                required
-                type="file"
-                id="workProfiles"
-                name="workProfiles"
-                accept='.pdf'
-                multiple
-                onChange={handleFileChange}
-              /></label>
+            <label className="block mb-2 font-semibold">
+            Work Profiles
+              <span className="text-red-700 relative top-0 right-0">*</span>
+            </label>
+            <input
+              required
+              type="file"
+              id="workProfiles"
+              name="workProfiles"
+              accept='.pdf'
+              multiple
+              onChange={handleFileChange}             
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
         </div>
       </div>
 
@@ -96,7 +107,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

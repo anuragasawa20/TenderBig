@@ -17,8 +17,8 @@ router.post('/categories', optionsController.insertCategories);
 // Route for inserting licenses
 router.post('/licenses', optionsController.insertLicenses);
 
-// Route for inserting actionMaterial
-router.post('/actionmaterials', optionsController.insertActionMaterial);
+// Route for inserting auctionMaterial
+router.post('/auctionmaterials', optionsController.insertAuctionMaterial);
 
 // Route for removing a value from sectors array
 router.delete('/sectors/:value', optionsController.removeSector);
@@ -35,8 +35,8 @@ router.delete('/categories/:value', optionsController.removeCategory);
 // Route for removing a value from licenses array
 router.delete('/licenses/:value', optionsController.removeLicenses);
 
-// Route for removing a value from actionMaterial array
-router.delete('/actionmaterials/:value', optionsController.removeActionMaterial);
+// Route for removing a value from auctionMaterial array
+router.delete('/auctionmaterials/:value', optionsController.removeAuctionMaterial);
 
 // Route for getting all arrays
 router.get('/alloptions', optionsController.getAllOptions);

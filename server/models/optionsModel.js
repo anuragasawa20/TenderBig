@@ -23,7 +23,7 @@ const optionsModelSchema = new Schema({
     type: String,
     required: true
   }],
-  ActionMaterials: [{
+  AuctionMaterials: [{
     type: String,
     required: true
   }]

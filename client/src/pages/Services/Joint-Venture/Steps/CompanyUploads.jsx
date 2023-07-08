@@ -28,47 +28,59 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
   return (
     <div className="mt-4">
       <div className="p-2 rounded-lg">
+
         <div className="grid grid-cols-2 gap-4">
+
           <div>
-            <label htmlFor='gstUpload' className="block mb-2 font-semibold relative">
+            <label htmlFor='gstUpload' className="block mb-2 font-semibold">
               GST
               <span className="text-red-700 relative top-0 right-0">*</span>
-              <input
-                required
-                type="file"
-                id="gstUpload"
-                accept='.pdf'
-                name="gstUpload"
-                onChange={handleFileChange}
-              />
             </label>
+            <input
+              required
+              type="file"
+              id="gstUpload"
+              accept='.pdf'
+              name="gstUpload"
+              onChange={handleFileChange}
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
           <div>
-            <label htmlFor="panUpload" className="block mb-2 font-semibold relative">
-             PAN Card
+            <label htmlFor="panUpload" className="block mb-2 font-semibold">
+              PAN Card
               <span className="text-red-700 relative top-0 right-0">*</span>
-              <input
-                required
-                type="file"
-                id="panUpload"
-                name="panUpload"
-                accept='.pdf'
-                onChange={handleFileChange}
-              /></label>
+            </label>
+            <input
+              required
+              type="file"
+              id="panUpload"
+              name="panUpload"
+              accept='.pdf'
+              onChange={handleFileChange}
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
           <div>
-            <label htmlFor="cinUpload" className="block mb-2 font-semibold relative">
+            <label htmlFor="cinUpload" className="block mb-2 font-semibold">
               CIN
-              <input
-                required
-                type="file"
-                id="cinUpload"
-                name="cinUpload"
-                accept='.pdf'
-                onChange={handleFileChange}
-              /></label>
+              <span className="text-red-700 relative top-0 right-0">*</span>
+            </label>
+            <input
+              required
+              type="file"
+              id="cinUpload"
+              name="cinUpload"
+              accept='.pdf'
+              onChange={handleFileChange}
+              className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+            />
           </div>
+
         </div>
+
       </div>
 
       <div className="center flex flex-col items-center">
@@ -93,7 +105,7 @@ const Step2 = ({ formData, handleChange, handleNext, handlePrevious }) => {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

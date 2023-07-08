@@ -5,8 +5,6 @@ import Step1 from './Steps/CompanyDetails';
 import Step2 from './Steps/CompanyUploads';
 import Step3 from './Steps/PersonalDetails';
 import Step4 from './Steps/Partnership';
-import Navbar from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
 import axios from "axios";
 import uploadFileToS3 from "../../../pages/file-uploading/FileUpload";
 
@@ -188,7 +186,6 @@ const JointVenture = () => {
         } else {
           alert('Something went wrong. Try again.');
         }
-
 
     };
 

@@ -5,45 +5,45 @@ import Header from "../../Header";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const License = () => {
+const Material = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [actionMaterial, setActionMaterial] = useState([]);
-  const [newActionMaterial, setNewActionMaterial] = useState("");
+  const [auctionMaterials, setAuctionMaterial] = useState([]);
+  const [newAuctionMaterial, setNewAuctionMaterial] = useState("");
 
   useEffect(() => {
     // Fetch all licenses
-    fetchActionMaterial();
+    fetchAuctionMaterial();
   }, []);
 
-  const fetchActionMaterial = async () => {
+  const fetchAuctionMaterial = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=actionmaterials");
-      console.log(response.data[0].actionmaterials);
-      setActionMaterial(response.data[0].actionmaterials);
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=AuctionMaterials");
+      console.log(response.data[0].AuctionMaterials);
+      setAuctionMaterial(response.data[0].AuctionMaterials);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const addLicenses = async () => {
-    if (!newLicenses.trim()) {
+  const addAuctionMaterials = async () => {
+    if (!newAuctionMaterial.trim()) {
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/apiTender/options/licenses", { licenses: [newLicenses] });
-      setLicenses(response.data.licenses);
-      setNewLicenses("");
+      const response = await axios.post("http://localhost:5000/apiTender/options/auctionmaterials", { auctionMaterials: [newAuctionMaterial] });
+      setAuctionMaterial(response.data.AuctionMaterials);
+      setNewAuctionMaterial("");
     } catch (error) {
       console.error(error);
     }
   };
 
 
-  const deleteLicenses = async (license) => {
+  const deleteAuctionMaterials = async (auctionmaterial) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/apiTender/options/licenses/${license}`);
-      setLicenses(response.data.licenses);
+      const response = await axios.delete(`http://localhost:5000/apiTender/options/auctionmaterials/${auctionmaterial}`);
+      setAuctionMaterial(response.data.AuctionMaterials);
     } catch (error) {
       console.error(error);
     }
@@ -60,44 +60,44 @@ const License = () => {
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-            <h1 className="text-xl font-bold mb-4">License</h1>
+            <h1 className="text-xl font-bold mb-4">Auction Material</h1>
 
             {/* Add licenses form */}
             <div className="flex">
               <input
                 type="text"
-                placeholder="Enter new license"
+                placeholder="Enter new material"
                 className="mr-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 flex-1"
-                value={newLicenses}
-                onChange={(e) => setNewLicenses(e.target.value)}
+                value={newAuctionMaterial}
+                onChange={(e) => setNewAuctionMaterial(e.target.value)}
               />
               <button
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                onClick={addLicenses}
+                onClick={addAuctionMaterials}
               >
-                Add License
+                Add Material
               </button>
             </div>
 
             {/* Category list */}
             <div className="mb-4">
-              <h2 className="text-lg font-medium mb-2">Existing Licenses:</h2>
-              {licenses.length > 0 ? (
+              <h2 className="text-lg font-medium mb-2">Existing Auction Material:</h2>
+              {auctionMaterials.length > 0 ? (
                 <table className="min-w-full">
                   <thead>
                     <tr>
-                      <th className="py-2 px-4 bg-gray-100 border-b font-medium text-gray-700">License Name</th>
+                      <th className="py-2 px-4 bg-gray-100 border-b font-medium text-gray-700">Auction Material Name</th>
                       <th className="py-2 px-4 bg-gray-100 border-b"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {licenses.map((license) => (
-                      <tr key={license}>
-                        <td className="py-2 px-4 border-b">{license}</td>
+                    {auctionMaterials.map((auctionmaterial) => (
+                      <tr key={auctionmaterial}>
+                        <td className="py-2 px-4 border-b">{auctionmaterial}</td>
                         <td className="py-2 px-4 border-b">
                           <button
                             className="text-red-600 hover:text-red-800 focus:outline-none"
-                            onClick={() => deleteLicenses(license)}
+                            onClick={() => deleteAuctionMaterials(auctionmaterial)}
                           >
                             <FontAwesomeIcon icon={faTrash} />
                           </button>
@@ -107,7 +107,7 @@ const License = () => {
                   </tbody>
                 </table>
               ) : (
-                <p>No licenses found.</p>
+                <p>No material found.</p>
               )}
             </div>
           </div>
@@ -117,4 +117,4 @@ const License = () => {
   );
 };
 
-export default License;
+export default Material;

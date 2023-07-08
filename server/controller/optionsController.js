@@ -72,12 +72,12 @@ const optionsController = {
         }
     },
 
-    insertActionMaterial: async (req, res) => {
+    insertAuctionMaterial: async (req, res) => {
         try {
-            const { actionMaterials } = req.body;
-            const actionMaterialsTitleCase = actionMaterials.map(toTitleCase);
+            const { auctionMaterials } = req.body;
+            const auctionMaterialsTitleCase = auctionMaterials.map(toTitleCase);
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { ActionMaterials: { $each: actionMaterialsTitleCase } } }, { new: true, upsert: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $push: { AuctionMaterials: { $each: auctionMaterialsTitleCase } } }, { new: true, upsert: true });
 
             res.json(updatedModel);
         } catch (error) {
@@ -150,11 +150,11 @@ const optionsController = {
         }
     },
 
-    removeActionMaterial: async (req, res) => {
+    removeAuctionMaterial: async (req, res) => {
         try {
             const { value } = req.params;
 
-            const updatedModel = await optionsModel.findOneAndUpdate({}, { $pull: { ActionMaterials: value } }, { new: true });
+            const updatedModel = await optionsModel.findOneAndUpdate({}, { $pull: { AuctionMaterials: value } }, { new: true });
 
             res.json(updatedModel);
         } catch (error) {
@@ -185,8 +185,8 @@ const optionsController = {
                 case 'licenses':
                     result = await optionsModel.find({}, 'licenses');
                     break;
-                case 'ActionMaterials':
-                    result = await optionsModel.find({}, 'ActionMaterials');
+                case 'AuctionMaterials':
+                    result = await optionsModel.find({}, 'AuctionMaterials');
                     break;
                 default:
                     result = await optionsModel.find({});

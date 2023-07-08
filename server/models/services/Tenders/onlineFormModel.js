@@ -37,6 +37,7 @@ const TenderOnline = new mongoose.Schema({
     gemreg: String,
     refno: String,
     requestLicense: String,
+    companycountry:String,
     rent: [String],
     work: [String],
     biddingDocs: [String],

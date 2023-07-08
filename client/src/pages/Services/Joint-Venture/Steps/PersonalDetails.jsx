@@ -156,46 +156,63 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
                 required
               />
             </label>
-            <label className="block mb-2 font-semibold relative">
+
+            <div>
+              <label htmlFor="file-input" className="block mb-2 font-semibold">
               GST Certificate
+                <span className="text-red-700 relative top-0 right-0">*</span>
+              </label>
               <input
                 type="file"
                 name="uploads.gst"
                 accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'gst', event)}
-                className="mt-1"
+                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
               />
-            </label>
-            <label className="block mb-2 font-semibold relative">
+            </div>
+
+            <div>
+              <label htmlFor="file-input" className="block mb-2 font-semibold">
               PAN Card
+                <span className="text-red-700 relative top-0 right-0">*</span>
+              </label>
               <input
                 type="file"
                 name="uploads.pan"
                 accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'pan', event)}
-                className="mt-1"
+                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
               />
-            </label>
-            <label className="block mb-2 font-semibold relative">
+            </div>
+
+            <div>
+              <label htmlFor="file-input" className="block mb-2 font-semibold">
               Aadhar Card
+                <span className="text-red-700 relative top-0 right-0">*</span>
+              </label>
               <input
                 type="file"
                 name="uploads.aadhar"
                 accept='.pdf'
                 onChange={(event) => handleDirectorFileChange(index, 'aadhar', event)}
-                className="mt-1"
+                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
               />
-            </label>
-            <label className="block mb-2 font-semibold relative">
+            </div>
+            
+            <div>
+              <label htmlFor="file-input" className="block mb-2 font-semibold">
               Photo
+                <span className="text-red-700 relative top-0 right-0">*</span>
+              </label>
               <input
                 type="file"
                 name="uploads.photo"
                 accept='.png,.jpeg,.jpg'
                 onChange={(event) => handleDirectorFileChange(index, 'photo', event)}
-                className="mt-1"
+                className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
               />
-            </label>
+            </div>
+
             <div></div>
             {index > 0 && (
               <button type="button" onClick={() => removeDirector(index)}>
@@ -203,7 +220,7 @@ const Step3 = ({ formData, handleChange, handleNext, handlePrevious, setFormData
               </button>
             )}
           </div>
-          <hr className="border-gray-900 border-2 mb-4"/>
+          <hr className="border-gray-900 border-2 mb-4" />
         </div>
       ))}
 
