@@ -64,21 +64,9 @@ const Projects = () => {
     setSelectedCountry(e.target.value);
   };
 
-  const handleFundingAgencyChange = (e) => {
-    setSelectedFundingAgency(e.target.value);
-  };
-
-  const handleGeoPoliticalChange = (e) => {
-    setSelectedGeoPolitical(e.target.value);
-  };
-
   const handleProductChange = (e) => {
     setSelectedProduct(e.target.value);
   };
-
-  const handleUserCategoryChange = (e) => {
-    setUserCategory(e.target.value);
-  }
 
   useEffect(() => {
     const fetchData = async () => {

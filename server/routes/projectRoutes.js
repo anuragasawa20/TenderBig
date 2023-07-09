@@ -6,7 +6,7 @@ const projectController = require('../controller/projectController');
 router.post('/submit', projectController.submitForm);
 
 // Get all projects
-router.get('/', projectController.getAllProjects);
+router.get('/getall', projectController.getAllProjects);
 
 // Get project by ID
 router.get('/:id', projectController.getProjectById);

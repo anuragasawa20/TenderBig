@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import { locations } from "../../../../constants/countriesData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
+import axios from "axios";
 
 const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit, previousPage }) => {
   return (
@@ -357,6 +357,35 @@ const Forms = () => {
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    // Fetch all sectors
+    fetchSectors();
+    fetchProducts();
+  }, []);
+
+  const [sectors, setSectors] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const fetchSectors = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=sectors");
+      console.log(response.data[0].sectors)
+      setSectors(response.data[0].sectors);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/apiTender/options/alloptions?array=products");
+      console.log(response.data[0].products)
+      setProducts(response.data[0].products);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="flex h-screen overflow-hidden ">
@@ -406,15 +435,20 @@ const Forms = () => {
                             Sector
                             <span className="text-red-700 relative top-0 right-0">*</span>
                           </label>
-                          <input
+                          <select
                             required
-                            type="text"
                             name="sector"
                             value={formData.sector}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Sector"
-                          />
+                          >
+                            <option value="">Select Sector</option>
+                            {sectors.map((sector) => (
+                              <option key={sector} value={sector}>
+                                {sector}
+                              </option>
+                            ))}
+                          </select>
                         </div>
 
                         <label className="block mb-2 font-semibold">
@@ -430,16 +464,39 @@ const Forms = () => {
                         </label>
 
                         <label className="block mb-2 font-semibold">
+                          Category
+                          <span className="text-red-700 relative top-0 right-0">*</span>
+                          <select required
+                            name="userCategory"
+                            value={formData.userCategory}
+                            onChange={handleChange}
+                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                          >
+                            <option value="">Select Category</option>
+                            <option value="contractor">Contractor</option>
+                            <option value="subcontractor">Sub Contractor</option>
+                            <option value="government">Government</option>
+                            <option value="private">Private</option>
+                            <option value="gem">Gem</option>
+                          </select>
+                        </label>
+                        <label className="block mb-2 font-semibold">
                           Product
                           <span className="text-red-700 relative top-0 right-0">*</span>
-                          <input required
-                            type="text"
+                          <select
+                            required
                             name="product"
                             value={formData.product}
                             onChange={handleChange}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Product"
-                          />
+                          >
+                            <option value="">Select Product</option>
+                            {products.map((product) => (
+                              <option key={product} value={product}>
+                                {product}
+                              </option>
+                            ))}
+                          </select>
                         </label>
                       </div>
                     </div>

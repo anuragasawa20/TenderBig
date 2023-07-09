@@ -38,7 +38,7 @@ async function getProjectById(req, res) {
 
 // Search projects by sector, country, or both
 async function searchProjects(req, res) {
-  const { sector, country } = req.query;
+  const { sector, country } = req.body;
   const query = {};
 
   if (sector) {
@@ -53,6 +53,7 @@ async function searchProjects(req, res) {
     const projects = await Project.find(query);
     res.status(200).json(projects);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Failed to search projects' });
   }
 }

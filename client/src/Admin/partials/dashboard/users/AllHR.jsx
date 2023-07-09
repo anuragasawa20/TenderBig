@@ -14,6 +14,10 @@ function AllHR() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  const AddHR=()=>{
+    navigate("/dashboard/addhr")
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -98,7 +102,7 @@ function AllHR() {
               {/*---------> Table (Top Channels) */}
               <section className="container mx-auto p-6 font-mono overflow-x-auto">
               <h1 className="text-xl font-bold mb-4">All HR</h1>
-                <div className="flex mb-4">
+                <div className="flex mb-4 justify-between">
                   {/* Search bar */}
                   <input
                     type="text"
@@ -107,6 +111,12 @@ function AllHR() {
                     value={searchTerm}
                     onChange={handleSearchChange}
                   />
+                  <button
+                    className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
+                  onClick={AddHR()}
+                  >
+                    Add New HR
+                  </button>
                 </div>
 
                 <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
