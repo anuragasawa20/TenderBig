@@ -60,12 +60,12 @@ const Navbar = () => {
                     Projects
                   </Link>
 
-                  {/* <Link
+                  <Link
                     to="/gems"
                     className="text-gray-600 hover:text-red-700 px-3 py-2 text-lg font-medium transition-colors duration-300 rounded-md"
                   >
                     Gems
-                  </Link> */}
+                  </Link>
 
                   <Link
                     to="/forms"

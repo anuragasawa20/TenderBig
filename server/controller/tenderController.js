@@ -142,6 +142,15 @@ class Tender {
                 noticeType: tenderDetailNoticeType
             };
 
+            // console.log(req.userRole)
+            
+            // let approved, active;
+
+            // if(userRole=="admin") {
+            //     approved:true,
+            //     active:true
+            // }
+
             const newTender = new tenderModel({
                 tenderId,
                 userId,
@@ -152,9 +161,10 @@ class Tender {
                 otherInformation,
                 purchaserDetail,
                 tenderDetail,
-                approvedStatus: false,
+                approvedStatus: approved,
                 userCategory,
-                product
+                product,
+                active:true
             });
 
             newTender.save()
@@ -312,7 +322,7 @@ class Tender {
 
             const { region, geopolitical, country, sector, financier, state, city, product, userCategory } = req.query;
             const { details } = req.body;
-            console.log(req.body);
+
             if (region && regionData.hasOwnProperty(region)) {
                 const countriesInRegion = regionData[region];
                 query['procurementSummary.country'] = { $in: countriesInRegion };
@@ -342,7 +352,7 @@ class Tender {
             if (userCategory) {
                 query['userCategory'] = userCategory;
             }
-            console.log(details);
+
             let projection;
             if (details) {
                 projection = details.reduce((acc, field) => {
@@ -350,7 +360,6 @@ class Tender {
                     return acc;
                 }, {});
             }
-
 
             const results = await tenderModel.find(query, projection);
 

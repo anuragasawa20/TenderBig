@@ -10,11 +10,9 @@ exports.verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    console.log(decoded.data);
     req.userRole = decoded.data.userRole;
     req.userId = decoded.data.userId;
     req._id = decoded.data._id;
-    console.log(req.userId);
     next();
   } catch (err) {
     console.error(err);

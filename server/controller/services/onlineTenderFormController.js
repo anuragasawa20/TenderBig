@@ -12,7 +12,6 @@ const submitForm = async (req, res) => {
 };
 
 const getAllForms = async (req, res) => {
-    console.log("hit")
     try {
         const records = await TenderOnlineModel.find();
         res.json(records);

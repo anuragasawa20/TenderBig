@@ -18,6 +18,7 @@ async function getAllProjects(req, res) {
     const projects = await Project.find();
     res.status(200).json(projects);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Failed to retrieve projects' });
   }
 }

@@ -5,6 +5,7 @@ import { locations } from "../../../../constants/countriesData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit, previousPage }) => {
   return (
@@ -317,6 +318,8 @@ const Forms = () => {
     }));
   };
 
+  const navigate = useNavigate()
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -338,13 +341,11 @@ const Forms = () => {
         console.log("Success:", data);
         alert("Submitted")
         clearInputs();
-        window.location.href = '/dashboard/tenders';
+        navigate('/dashboard/tenders');
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("Oops something went wrong!!!");
-        clearInputs();
-        window.location.href = '/dashboard/tenders';
       });
   };
 
