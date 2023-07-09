@@ -114,7 +114,7 @@ navigate("/dashboard/addadmin")
                   
                   <button
                     className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
-                    onClick={AddAdmin()}
+                    onClick={()=>{AddAdmin()}}
                   >
                     Add New Admin
                   </button>

@@ -112,7 +112,7 @@ function AllEmployee() {
                   />
                   <button
                     className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
-                  onClick={AddEmployee()}
+                  onClick={()=>{AddEmployee()}}
                   >
                     Add New Employee
                   </button>

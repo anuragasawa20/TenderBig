@@ -14,7 +14,7 @@ function AllHR() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const AddHR=()=>{
+  const AddHR = () => {
     navigate("/dashboard/addhr")
   }
 
@@ -50,11 +50,11 @@ function AllHR() {
 
   const filteredData = userData.filter((user) => {
     const nameMatch = user.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const emailMatch = user.email.toLowerCase().includes(searchTerm.toLowerCase());  
+    const emailMatch = user.email.toLowerCase().includes(searchTerm.toLowerCase());
     // Check if any of the conditions is true
     return (nameMatch || emailMatch);
   });
-  
+
 
   // Pagination
   const indexOfLastUser = currentPage * usersPerPage;
@@ -101,7 +101,7 @@ function AllHR() {
             <div className="grid grid-cols-15 gap-6">
               {/*---------> Table (Top Channels) */}
               <section className="container mx-auto p-6 font-mono overflow-x-auto">
-              <h1 className="text-xl font-bold mb-4">All HR</h1>
+                <h1 className="text-xl font-bold mb-4">All HR</h1>
                 <div className="flex mb-4 justify-between">
                   {/* Search bar */}
                   <input
@@ -113,7 +113,7 @@ function AllHR() {
                   />
                   <button
                     className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
-                  onClick={AddHR()}
+                    onClick={() => { AddHR() }}
                   >
                     Add New HR
                   </button>
@@ -164,11 +164,11 @@ function AllHR() {
                         disabled={currentPage === 1}
                       >
                         <FontAwesomeIcon icon={faArrowLeft} />
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 6.707a1 1 0 010-1.414L2.414 2.343A1 1 0 113.828.93L7.586 4.686a1 1 0 010 1.414L3.828 9.07a1 1 0 11-1.414-1.414L5.293 6.707z"
-                            clipRule="evenodd"
-                          ></path>
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 6.707a1 1 0 010-1.414L2.414 2.343A1 1 0 113.828.93L7.586 4.686a1 1 0 010 1.414L3.828 9.07a1 1 0 11-1.414-1.414L5.293 6.707z"
+                          clipRule="evenodd"
+                        ></path>
                       </button>
                       <span className="px-2 text-sm">{currentPage}</span>
                       <button
@@ -177,11 +177,11 @@ function AllHR() {
                         disabled={currentPage === Math.ceil(filteredData.length / usersPerPage)}
                       >
                         <FontAwesomeIcon icon={faArrowRight} />
-                          <path
-                            fillRule="evenodd"
-                            d="M14.707 13.293a1 1 0 010 1.414l-3.758 3.758a1 1 0 11-1.414-1.414L12.586 14H7a1 1 0 110-2h5.586l-3.293-3.293a1 1 0 111.414-1.414l3.758 3.758z"
-                            clipRule="evenodd"
-                          ></path>
+                        <path
+                          fillRule="evenodd"
+                          d="M14.707 13.293a1 1 0 010 1.414l-3.758 3.758a1 1 0 11-1.414-1.414L12.586 14H7a1 1 0 110-2h5.586l-3.293-3.293a1 1 0 111.414-1.414l3.758 3.758z"
+                          clipRule="evenodd"
+                        ></path>
                       </button>
                     </div>
                   </div>

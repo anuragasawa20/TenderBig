@@ -14,6 +14,7 @@ import DashboardTenderDetail from '../Admin/partials/dashboard/tenders/Dashboard
 import AddAdmin from '../Admin/partials/dashboard/users/AddAdmin';
 import AddEmployee from '../Admin/partials/dashboard/users/AddEmployee';
 import AddHR from '../Admin/partials/dashboard/users/Addhr';
+import AddUser from '../Admin/partials/dashboard/users/AddUser';
 
 import AllAdmin from '../Admin/partials/dashboard/users/AllAdmin';
 import AllEmployee from '../Admin/partials/dashboard/users/AllEmployee';
@@ -66,10 +67,10 @@ const DashboardRoutes = () => {
   return (
     <div>
       <Routes>
-        {/* <Route
+       <Route
         path="/admin"
-        element={<PrivateRoute element={DashboardHome} />}
-      /> */}
+        element={<PrivateRoute element={DashboardHome}/>}
+        />
 
         {/* Users */}
         <Route
@@ -105,6 +106,10 @@ const DashboardRoutes = () => {
         <Route
           path="/addemployee"
           element={<PrivateRoute element={AddEmployee} />}
+        />
+        <Route
+          path="/adduser"
+          element={<PrivateRoute element={AddUser} />}
         />
 
         {/* Tenders */}
