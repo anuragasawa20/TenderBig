@@ -58,9 +58,13 @@ const ContactUsPage = () => {
       email,
       selectedService,
     };
-
+    const token = localStorage.getItem('token');
     axios
-      .post("http://localhost:5000/apiTender/post-contactform", formData)
+      .post("http://localhost:5000/apiTender/post-contactform", formData, {
+        headers: {
+          'auth': token
+        }
+      })
       .then((response) => {
         alert("We will contact you soon!!!")
       })

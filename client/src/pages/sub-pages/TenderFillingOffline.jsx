@@ -52,7 +52,7 @@ const TenderFillingOffline = () => {
 
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
-  };  
+  };
 
   const sendDataToAPI = (selectedService) => {
     const formData = {
@@ -61,11 +61,15 @@ const TenderFillingOffline = () => {
       mobile,
       email,
       aadhar,
-      role:selectedService
+      role: selectedService
     };
-
+    const token = localStorage.getItem('token');
     axios
-      .post("http://localhost:5000/apiTender/services/tender/offline", formData)
+      .post("http://localhost:5000/apiTender/services/tender/offline", formData, {
+        headers: {
+          'auth': token
+        }
+      })
       .then((response) => {
         console.log("Form data sent successfully:", response.data);
         alert("We will contact you soon!!!")

@@ -182,8 +182,12 @@ const JointVenture = () => {
 
                 const updatedDirectors = await uploadFilesForDirectors(requestBody.directors);
                 requestBody.directors = updatedDirectors;
-
-                const response = await axios.post('http://localhost:5000/apiTender/services/jv/submitjv', requestBody);
+                const token = localStorage.getItem('token');
+                const response = await axios.post('http://localhost:5000/apiTender/services/jv/submitjv', requestBody, {
+                    headers: {
+                        'auth': token
+                    }
+                });
                 if (response.data.success) {
                     alert('Submitted')
                     resetForm();

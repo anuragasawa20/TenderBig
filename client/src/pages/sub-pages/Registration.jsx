@@ -126,7 +126,11 @@ const Registration = () => {
 
         const token = localStorage.getItem('token');
         axios
-            .post("http://localhost:5000/apiTender/services/register/registration", requestBody)
+            .post("http://localhost:5000/apiTender/services/register/registration", requestBody, {
+                headers: {
+                    'auth': token
+                }
+            })
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

@@ -17,6 +17,7 @@ const companyUploadsSchema = new mongoose.Schema({
 
 const jointventureSchema = new mongoose.Schema(
     {
+        userId: String,
         cin: { type: String, required: true },
         city: { type: String, required: true },
         companyAddress: { type: String, required: true },

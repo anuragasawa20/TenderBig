@@ -3,8 +3,10 @@ const JointVentureForm = require("../../models/services/JointVenture/jointventur
 // Submit a new document
 const submitForm = async (req, res) => {
     try {
+        const userId = req.userId;
+        req.body.userId = userId;
         const newDocument = await JointVentureForm.create(req.body);
-        res.status(201).json({success:true, newDocument});
+        res.status(201).json({ success: true, newDocument });
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: 'Failed to submit the document.' });

@@ -3,8 +3,9 @@ const AuctionMaterialForm = require('../../models/services/AuctionMaterials/auct
 // Controller for submitting a form
 const submitForm = async (req, res) => {
   try {
+    const userId = req.userId;
     const formData = req.body;
-
+    formData.userId = userId;
     const newForm = await AuctionMaterialForm.create(formData);
     res.status(201).json({ success: true, data: newForm });
   } catch (error) {
@@ -27,14 +28,14 @@ const getAllForms = async (req, res) => {
 // Controller for getting a form by ID
 const getFormById = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     console.log(id, req.params)
     const form = await AuctionMaterialForm.findById(id);
-    
+
     if (!form) {
       return res.status(404).json({ success: false, error: 'Form not found' });
     }
-    
+
     res.status(200).json({ success: true, data: form });
   } catch (error) {
     console.error('Error getting form:', error);

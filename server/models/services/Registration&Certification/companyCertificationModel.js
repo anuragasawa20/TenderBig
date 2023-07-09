@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const userModel = require("../../userModel");
 
 const companyCertificationModelSchema = new mongoose.Schema(
     {
         userId: {
-            type: String
+            type: String,
+            ref: 'userModel'
         },
         cinReg: {
             type: String
