@@ -32,7 +32,6 @@ const Login = () => {
             .then((response) => response.json())
             .then((data) => {
                 // Store response in local storage
-
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user.data));
                 // Navigate to the desired page

@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
+const userModel = require('../../userModel');
 
 const TenderOnline = new mongoose.Schema({
+    userId: {
+        type: String,
+        ref: 'userModel'
+    },
     cname: String,
     cPANnum: String,
     cGSTnum: String,
@@ -37,13 +42,13 @@ const TenderOnline = new mongoose.Schema({
     gemreg: String,
     refno: String,
     requestLicense: String,
-    companycountry:String,
+    companycountry: String,
     rent: [String],
     work: [String],
     biddingDocs: [String],
     tenderDocs: [String],
 },
-{ timestamps: true });
+    { timestamps: true });
 
 const TenderOnlineModel = mongoose.model('TenderOnline', TenderOnline);
 

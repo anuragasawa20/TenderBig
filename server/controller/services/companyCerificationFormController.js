@@ -4,6 +4,7 @@ const { getFileByFilename, uploadFileToS3, getLink } = require('../../config/s3f
 // Controller for submitting a certification form
 const submitForm = async (req, res) => {
   try {
+    const userId = req.userId;
     const {
       cinReg,
       companyName,
@@ -25,6 +26,7 @@ const submitForm = async (req, res) => {
 
     // Create a new instance of the CertificationForm model
     const certification = new CompanyForm({
+      userId,
       cinReg,
       companyName,
       companyProfile,

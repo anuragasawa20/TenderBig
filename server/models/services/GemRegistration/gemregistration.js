@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
+const userModel = require("../../userModel");
 
 const gemregistrationSchema = new mongoose.Schema(
     {
+        userId: {
+            type: String,
+            ref: 'userModel'
+        },
         name: {
             type: String
         },
@@ -11,7 +16,7 @@ const gemregistrationSchema = new mongoose.Schema(
         contact: {
             type: Number
         },
-        aadhar:{
+        aadhar: {
             type: Number
         },
         companyName: {
@@ -26,8 +31,8 @@ const gemregistrationSchema = new mongoose.Schema(
         gst: {
             type: String
         },
-        startDate:{
-            type:Date
+        startDate: {
+            type: Date
         },
         address: {
             type: String
@@ -35,8 +40,8 @@ const gemregistrationSchema = new mongoose.Schema(
         country: {
             type: String
         },
-        state:{
-            type:String
+        state: {
+            type: String
         },
         city: {
             type: String

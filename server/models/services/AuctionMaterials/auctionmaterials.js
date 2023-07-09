@@ -11,6 +11,7 @@ const directorSchema = new mongoose.Schema({
 
 // Define the schema for the form data
 const auctionmaterialsModelSchema = new mongoose.Schema({
+  userId: String,
   tenderNumber: String,
   tenderLink: String,
   companyName: String,
@@ -37,7 +38,7 @@ const auctionmaterialsModelSchema = new mongoose.Schema({
   auctionMaterial: [String],
   otherDescription: String,
 },
-{ timestamps: true });
+  { timestamps: true });
 
 // Create the FormData model
 const AuctionMaterialForm = mongoose.model('Auction-Material', auctionmaterialsModelSchema);

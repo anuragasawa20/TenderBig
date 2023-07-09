@@ -128,7 +128,11 @@ const Employer = () => {
 
         const token = localStorage.getItem('token');
         axios
-            .post("http://localhost:5000/apiTender/services/employer/submit-form", requestBody)
+            .post("http://localhost:5000/apiTender/services/employer/submit-form", requestBody, {
+                headers: {
+                    'auth': token
+                }
+            })
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

@@ -357,8 +357,12 @@ const OnlineTenderForm = () => {
                 requestBody.rent = rentUrls;
                 requestBody.work = workUrls;
                 requestBody.tenderDocs = tenderDocsUrls;
-
-                const response = await axios.post('http://localhost:5000/apiTender/services/tender/online', requestBody);
+                const token = localStorage.getItem('token');
+                const response = await axios.post('http://localhost:5000/apiTender/services/tender/online', requestBody, {
+                    headers: {
+                        'auth': token
+                    }
+                });
                 if (response.data.success) {
                     alert('Submitted');
                     clearInputs();
