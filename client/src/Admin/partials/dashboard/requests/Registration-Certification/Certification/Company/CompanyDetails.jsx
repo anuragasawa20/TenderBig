@@ -39,46 +39,97 @@ const CompanyDetails = () => {
     }
     return (
         <div className="flex h-screen overflow-hidden">
-            {/* Sidebar */}
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            {/* Content area */}
-            <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
-                <main>
-                    {/* Site header */}
-                    <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {/* Content area */}
+        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
+            <main>
+                {/* Site header */}
+                <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-
-                    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <div className="flex justify-center">
-                            <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Company Detail</h2>
-                                <div className="grid grid-cols-2">
-                                    <div>
-                                        <p>CIN Registration: {formData.cinReg}</p>
-                                        <p>Company Name: {formData.companyName}</p>
-                                        <p>Company Profile: {formData.companyProfile}</p>
-                                        <p>Contact Number: {formData.contactNumber}</p>
-                                        <p>Contract Person Name: {formData.contractPName}</p>
-                                        <p>Email: {formData.email}</p>
-                                        <p>GST: {formData.gst}</p>
-                                        <p>PAN: {formData.pan}</p>
-                                        <p>Request License: {formData.requestLicense}</p>
-                                        <p>Selected Positions: {formData.selectedPositions}</p>
-                                        <p>Website: <a href={formData.website} target="_blank" rel="noopener noreferrer">{formData.website}</a></p>
-                                        <p>Working Field: {formData.workingField}</p>
-                                        <p>Document URL: <a href={formData.docUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>PAN URL: <a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>GST URL: <a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p>Others: {formData.others}</p>
-                                    </div>
+                <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                    <div className="flex justify-center">
+                        <div className="bg-white rounded-lg shadow-lg p-6">
+                            <h2 className="text-xl font-bold mb-4">Company Detail</h2>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <table className="w-full">
+                                        <tbody>
+                                            <tr>
+                                                <th className="font-bold p-4 border">CIN Registration</th>
+                                                <td className="p-4 border">{formData.cinReg}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Company Name</th>
+                                                <td className="p-4 border">{formData.companyName}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Company Profile</th>
+                                                <td className="p-4 border">{formData.companyProfile}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Contact Number</th>
+                                                <td className="p-4 border">{formData.contactNumber}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Contract Person Name</th>
+                                                <td className="p-4 border">{formData.contractPName}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Email</th>
+                                                <td className="p-4 border">{formData.email}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">GST</th>
+                                                <td className="p-4 border">{formData.gst}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">PAN</th>
+                                                <td className="p-4 border">{formData.pan}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Request License</th>
+                                                <td className="p-4 border">{formData.requestLicense}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Selected Positions</th>
+                                                <td className="p-4 border">{formData.selectedPositions}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Website</th>
+                                                <td className="p-4 border"><a href={formData.website} target="_blank" rel="noopener noreferrer">{formData.website}</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Working Field</th>
+                                                <td className="p-4 border">{formData.workingField}</td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Document URL</th>
+                                                <td className="p-4 border"><a href={formData.docUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">PAN URL</th>
+                                                <td className="p-4 border"><a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">GST URL</th>
+                                                <td className="p-4 border"><a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th className="font-bold p-4 border">Others</th>
+                                                <td className="p-4 border">{formData.others}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
+    </div>
     );
 };
 

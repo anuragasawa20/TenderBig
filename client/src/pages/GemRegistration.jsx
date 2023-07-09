@@ -3,7 +3,7 @@ import payment from "../components/payment";
 import { Country, State, City } from 'country-state-city';
 import axios from "axios";
 
-const JointVenture = () => {
+const GemRegistration = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -116,15 +116,16 @@ const handleSubmit = async (e) => {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 border-2 border-gray-900 rounded-md">
+            <div className="max-w-3xl mx-auto mt-6 px-4 py-8 mb-6 shadow-2xl rounded-lg">
         <form onSubmit={handleSubmit}>
           {/* Global Section */}
-          <h2 className="text-2xl font-bold mb-4 text-center ">Gem Registration</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">Gem Registration</h2>
 
           <div className="p-2 rounded-lg">
             <p className="text-red-700 font-thin font-serif text-sm">
               Fields marked with an asterisk (*) are mandatory.
             </p>
+            {/* Name */}
             <label className="block mb-2 font-semibold relative">
               Full Name
               <span className="text-red-700 relative top-0 right-0">*</span>
@@ -177,7 +178,7 @@ const handleSubmit = async (e) => {
                 placeholder="Aadhar Number"
               />
             </label>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="relative">
                 <label className="block mb-2 font-semibold">
                   Company Name
@@ -362,4 +363,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default JointVenture;
+export default GemRegistration;

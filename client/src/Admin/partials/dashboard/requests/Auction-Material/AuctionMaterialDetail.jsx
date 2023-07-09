@@ -39,83 +39,172 @@ const AuctionMaterialDetail = () => {
     }
     return (
         <div className="flex h-screen overflow-hidden">
-            {/* Sidebar */}
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            {/* Content area */}
-            <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
-                <main>
-                    {/* Site header */}
-                    <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-
-                    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <div className="flex justify-center">
-                            <div className="bg-white rounded-lg shadow-lg p-6">
-                                <h2 className="text-xl font-bold mb-4">Auction Material Detail</h2>
-                                <p className="font-bold">Tender Number: {formData.tenderNumber}</p>
-                                <p className="font-bold">Tender Link: <a href={formData.tenderLink} target="_blank" rel="noopener noreferrer">{formData.tenderLink}</a></p>
-                                <p className="font-bold">Company Name: {formData.companyName}</p>
-                                <p className="font-bold">CIN Registration: {formData.cinReg}</p>
-                                <p className="font-bold">GST: {formData.gst}</p>
-                                <p className="font-bold">PAN: {formData.pan}</p>
-
-                                <h2 className="text-2xl font-bold mb-4">Work Experience</h2>
-                                {formData.workExperience.map((exp) => (
-                                    <div key={exp._id}>
-                                        <h3 className="text-lg font-bold">Work Experience</h3>
-                                        <ul className="list-disc ml-6">
-                                            {exp.workExperience.map((url) => (
-                                                <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></li>
-                                            ))}
-                                        </ul>
-
-                                        <h3 className="text-lg font-bold mt-2">Work Order Samples</h3>
-                                        <ul className="list-disc ml-6">
-                                            {exp.workOrderSamples.map((url) => (
-                                                <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></li>
-                                            ))}
-                                        </ul>
-
-                                        <h3 className="text-lg font-bold mt-2">Work Profiles</h3>
-                                        <ul className="list-disc ml-6">
-                                            {exp.workProfiles.map((url) => (
-                                                <li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{url}</a></li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ))}
-                                <h2 className="text-2xl font-bold mb-4">Directors</h2>
-
-                                {formData.directors.map((director, index) => (
-                                    <div key={director._id.$oid}>
-                                        <h3 className="text-lg font-bold">Director {index + 1}</h3>
-                                        <p className="font-bold">Director Name: {director.directorName}</p>
-                                        <p className="font-bold">Director Aadhar: {director.directorAadhar}</p>
-                                        <p className="font-bold">Director PAN: {director.directorPan}</p>
-                                        <p className="font-bold">Director DOB: {director.directorDob}</p>
-                                        <p className="font-bold">Director Father's Name: {director.directorFatherName}</p>
-                                    </div>
-                                ))}
-
-
-                                <p className="font-bold">Address: {formData.address}</p>
-                                <p className="font-bold">Country: {formData.country}</p>
-                                <p className="font-bold">State: {formData.state}</p>
-                                <p className="font-bold">City: {formData.city}</p>
-                                <p className="font-bold">Zip Code: {formData.zipCode}</p>
-                                <p className="font-bold">Website: <a href={formData.website} target="_blank" rel="noopener noreferrer">{formData.website}</a></p>
-                                <p className="font-bold">Project Mail ID: {formData.projectMailId}</p>
-                                <p className="font-bold">Contact Person Name: {formData.contactPersonName}</p>
-                                <p className="font-bold">Contact Person Number: {formData.contactPersonNumber}</p>
-                                <p className="font-bold">Auction Material: {formData.auctionMaterial}</p>
-                                <p className="font-bold">Other Description: {formData.otherDescription}</p>
-
-                            </div>
-                        </div>
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        {/* Content area */}
+        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-auto">
+          <main>
+            {/* Site header */}
+            <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+  
+            <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+              <div className="flex justify-center">
+                <div className="flex flex-wrap justify-center">
+                  {/* First Table: Auction Material Detail */}
+                  {/* <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4"> */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-300">
+                      <h2 className="text-xl font-bold mb-4">
+                        Auction Material Detail
+                      </h2>
+                      <table className="w-full mb-8">
+                        <thead>
+                          <tr>
+                            <th className="font-bold border">Tender Number</th>
+                            <th className="font-bold border">Tender Link</th>
+                            <th className="font-bold border">Company Name</th>
+                            <th className="font-bold border">CIN Registration</th>
+                            <th className="font-bold border">GST</th>
+                            <th className="font-bold border">PAN</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border p-3">{formData.tenderNumber}</td>
+                            <td className="border p-3">
+                              <a
+                                href={formData.tenderLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {formData.tenderLink}
+                              </a>
+                            </td>
+                            <td className="border p-3">{formData.companyName}</td>
+                            <td className="border p-3">{formData.cinReg}</td>
+                            <td className="border p-3">{formData.gst}</td>
+                            <td className="border p-3">{formData.pan}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-                </main>
+                  {/* </div> */}
+                </div>
+              </div>
+  
+              {/* Second Table: Work Experience */}
+              <div className="flex justify-center">
+                <div className="flex flex-wrap justify-center">
+                  {/* <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4"> */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-300">
+                      <h2 className="text-xl font-bold mb-4">Work Experience</h2>
+                      {formData.workExperience.map((exp) => (
+                        <div key={exp._id}>
+                          <h3 className="text-lg font-bold mb-2">{exp.title}</h3>
+                          <div className="flex flex-wrap">
+                            <div className="w-full md:w-1/2 mb-4">
+                              <h4 className="text-md font-bold mb-2">
+                                Work Experience:
+                              </h4>
+                              <ul className="list-disc ml-6">
+                                {exp.workExperience.map((url) => (
+                                  <li key={url}>
+                                    <a
+                                      href={url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {url}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="w-full md:w-1/2 mb-4">
+                              <h4 className="text-md font-bold mb-2">
+                                Work Order Samples:
+                              </h4>
+                              <ul className="list-disc ml-6">
+                                {exp.workOrderSamples.map((url) => (
+                                  <li key={url}>
+                                    <a
+                                      href={url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {url}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="w-full md:w-1/2 mb-4">
+                              <h4 className="text-md font-bold mb-2">
+                                Work Profiles:
+                              </h4>
+                              <ul className="list-disc ml-6">
+                                {exp.workProfiles.map((url) => (
+                                  <li key={url}>
+                                    <a
+                                      href={url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {url}
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  {/* </div> */}
+                </div>
+              </div>
+  
+              {/* Third Table: Directors */}
+              <div className="flex justify-center">
+                <div className="flex flex-wrap justify-center">
+                  {/* <div className="w-full md:w-1/2 lg:w-1/3 px-4 mb-4"> */}
+                    <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-300">
+                      <h2 className="text-xl font-bold mb-4">Directors</h2>
+                      <table className="w-full">
+                        <thead>
+                          <tr>
+                            <th className="font-bold border">Director Name</th>
+                            <th className="font-bold border">Director Aadhar</th>
+                            <th className="font-bold border">Director PAN</th>
+                            <th className="font-bold border">Director DOB</th>
+                            <th className="font-bold border">
+                              Director Father's Name
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {formData.directors.map((director, index) => (
+                            <tr key={director._id.$oid}>
+                              <td className="border p-3">{director.directorName}</td>
+                              <td className="border p-3">
+                                {director.directorAadhar}
+                              </td>
+                              <td className="border p-3">{director.directorPan}</td>
+                              <td className="border p-3">{director.directorDob}</td>
+                              <td className="border p-3">
+                                {director.directorFatherName}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  {/* </div> */}
+                </div>
+              </div>
             </div>
+          </main>
         </div>
+      </div>
     );
 };
 

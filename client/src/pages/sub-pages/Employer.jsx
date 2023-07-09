@@ -163,7 +163,7 @@ const Employer = () => {
                             <h1 className="text-3xl font-bold text-center mb-4">
                                 Employer Space
                             </h1>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="company" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -193,7 +193,7 @@ const Employer = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="email" className="flex items-center">
                                         <AiOutlineMail className="mr-2" />
@@ -223,7 +223,7 @@ const Employer = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="jobpost" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -267,7 +267,7 @@ const Employer = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="curl" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -311,7 +311,7 @@ const Employer = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="regno" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -385,8 +385,8 @@ const Employer = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="flex">
-                                <div className="flex">
+                            <div className="md:flex">
+                                <div className="md:flex">
                                     <div className="mb-4 basis-1/2 mx-1">
                                         <label htmlFor="city" className="flex items-center">
                                             <AiOutlineUser className="mr-2" />
@@ -452,7 +452,7 @@ const Employer = () => {
                                 </div>
 
                             </div>
-                            <div className="flex">
+                            <div className="md:flex">
                                 <div className="mb-4 basis-1/2 mx-1">
                                     <label htmlFor="officetiming" className="flex items-center">
                                         <RiBuilding2Line className="mr-2" />
@@ -511,7 +511,7 @@ const Employer = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 mb-5">
+                            <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-5">
 
                                 <div>
                                     <label htmlFor="file-input" className="block mb-2 font-semibold">

@@ -369,294 +369,294 @@ function IndividualForm({ onSubmit, licenses }) {
 
     return (
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className=" p-2 rounded-lg">
-                    <label className="block font-semibold">
-                        Name
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input required
-                            type="text"
-                            name="name"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={name} onChange={(e) => setName(e.target.value)}
-                            placeholder="Enter Name"
-                        />
-                    </label>
-                    <label className="block font-semibold mt-2">
-                        Father Name
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            type="text"
-                            name="fatherName"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={fatherName} onChange={(e) => setFatherName(e.target.value)}
-                            placeholder="Enter Name"
-                        />
-                    </label>
-                    <label className="block font-semibold mt-2">
-                        DOB
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input required
-                            type="date"
-                            name="dob"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={dob} onChange={(e) => setDob(e.target.value)}
-                            placeholder="Enter DOB"
-                        />
-                    </label>
-                    <label className="block mb-2 font-semibold mt-2">
-                        Working Field
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            type="text"
-                            name="workingField"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={workingField} onChange={(e) => setWorkingField(e.target.value)}
-                            placeholder="Enter Working Field"
-                        />
-                    </label>
-                    <label className="block mb-2 font-semibold mt-2">
-                        Address Line 1
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="text"
-                            name="companyaddress1"
-                            value={companyaddress1}
-                            onChange={(e) => setAddressline1(e.target.value)}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Address Line 1"
-                        />
-                    </label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className=" p-2 rounded-lg">
+                <label className="block font-semibold">
+                    Name
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input required
+                        type="text"
+                        name="name"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none" value={name} onChange={(e) => setName(e.target.value)}
+                        placeholder="Enter Name"
+                    />
+                </label>
+                <label className="block font-semibold mt-2">
+                    Father Name
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        type="text"
+                        name="fatherName"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={fatherName} onChange={(e) => setFatherName(e.target.value)}
+                        placeholder="Enter Name"
+                    />
+                </label>
+                <label className="block font-semibold mt-2">
+                    DOB
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input required
+                        type="date"
+                        name="dob"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={dob} onChange={(e) => setDob(e.target.value)}
+                        placeholder="Enter DOB"
+                    />
+                </label>
+                <label className="block mb-2 font-semibold mt-2">
+                    Working Field
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        type="text"
+                        name="workingField"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={workingField} onChange={(e) => setWorkingField(e.target.value)}
+                        placeholder="Enter Working Field"
+                    />
+                </label>
+                <label className="block mb-2 font-semibold mt-2">
+                    Address Line 1
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        required
+                        type="text"
+                        name="companyaddress1"
+                        value={companyaddress1}
+                        onChange={(e) => setAddressline1(e.target.value)}
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        placeholder="Enter Address Line 1"
+                    />
+                </label>
 
-                    <label className="block mb-2 font-semibold">
-                        Address Line 2
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            required
-                            type="text"
-                            name="companyaddress2"
-                            value={companyaddress2}
-                            onChange={(e) => setAddressline2(e.target.value)}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter Address Line 2"
-                        />
-                    </label>
+                <label className="block mb-2 font-semibold">
+                    Address Line 2
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        required
+                        type="text"
+                        name="companyaddress2"
+                        value={companyaddress2}
+                        onChange={(e) => setAddressline2(e.target.value)}
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        placeholder="Enter Address Line 2"
+                    />
+                </label>
 
 
-                    <label className="block mb-2 font-semibold">
-                        Country
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <select
-                            required
-                            name="companycountry"
-                            value={companycountry}
-                            onChange={(e) => setCountry(e.target.value)}
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                        >
-                            <option value="">Select a country</option>
-                            {countryNames.map((country) => (
-                                <option key={country} value={country}>
-                                    {country}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
+                <label className="block mb-2 font-semibold">
+                    Country
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <select
+                        required
+                        name="companycountry"
+                        value={companycountry}
+                        onChange={(e) => setCountry(e.target.value)}
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                    >
+                        <option value="">Select a country</option>
+                        {countryNames.map((country) => (
+                            <option key={country} value={country}>
+                                {country}
+                            </option>
+                        ))}
+                    </select>
+                </label>
 
-                    <div className="flex">
-                        <label className="block mb-2 font-semibold basis-1/2">
-                            State
-                            <span className="text-red-700 relative top-0 right-0">*</span>
-                            <select
-                                required
-                                name="companystate"
-                                value={companystate}
-                                onChange={(e) => setState(e.target.value)}
-                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            >
-                                <option value="">Select State</option>
-                                {stateNames.map((state) => (
-                                    <option key={state} value={state}>
-                                        {state}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-
-                        <label className="block mb-2 font-semibold basis-1/2 mx-1">
-                            City
-                            <span className="text-red-700 relative top-0 right-0">*</span>
-                            <select
-                                required
-                                name="companycity"
-                                value={companycity}
-                                onChange={(e) => setCity(e.target.value)}
-                                className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            >
-                                <option value="">Select City</option>
-                                {cityNames.map((city) => (
-                                    <option key={city} value={city}>
-                                        {city}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-
-                    </div>
-                </div>
-
-                <div className="p-2 rounded-lg">
-                    <label className="block mb-2 font-semibold">
-                        Email
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            type="email"
-                            name="email"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={email} onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter Email"
-                        />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Contact Number
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            type="number"
-                            id="mobileNumber"
-                            name="mobileNumber"
-                            value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)}
-                            placeholder="Enter Contact Number"
-                            required
-                        />
-                    </label>
-                    <label className="block mb-2 font-semibold">
-                        Aadhar Number
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            type="number"
-                            id="aadharNumber"
-                            name="aadharNumber"
-                            value={aadharNumber} onChange={(e) => setAadharNumber(e.target.value)}
-                            placeholder="Enter Aadhar Number"
-                            required
-                        />
-                    </label>
-                    <label className="block mb-2 font-semibold mt-2">
-                        PAN
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            type="text"
-                            name="panNumber"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={panNumber} onChange={(e) => setPanNumber(e.target.value)}
-                            placeholder="Enter PAN"
-                        />
-                    </label>
-
-                    <label className="block mb-2 font-semibold mt-2">
-                        Others
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
-                            type="text"
-                            name="others"
-                            className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={others} onChange={(e) => setOthers(e.target.value)}
-                        />
-                    </label>
-
-                    <label className="block mb-2 font-semibold">
-                        Request License
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                        <select
-                            name="requestLicense"
-                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            value={requestLicense}
-                            onChange={(e) => setRequestLicense(e.target.value)}
-                        >
-                            <option value="">Select</option>
-                            {licenses.map((license) => (
-                                <option key={license} value={license}>
-                                    {license}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-
+                <div className="flex">
                     <label className="block mb-2 font-semibold basis-1/2">
-                        ZipCode
+                        State
                         <span className="text-red-700 relative top-0 right-0">*</span>
-                        <input
+                        <select
                             required
-                            type="text"
                             name="companystate"
-                            value={zipcode}
-                            onChange={(e) => setZipcode(e.target.value)}
+                            value={companystate}
+                            onChange={(e) => setState(e.target.value)}
                             className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
-                            placeholder="Enter State"
-                        />
+                        >
+                            <option value="">Select State</option>
+                            {stateNames.map((state) => (
+                                <option key={state} value={state}>
+                                    {state}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label className="block mb-2 font-semibold basis-1/2 mx-1">
+                        City
+                        <span className="text-red-700 relative top-0 right-0">*</span>
+                        <select
+                            required
+                            name="companycity"
+                            value={companycity}
+                            onChange={(e) => setCity(e.target.value)}
+                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        >
+                            <option value="">Select City</option>
+                            {cityNames.map((city) => (
+                                <option key={city} value={city}>
+                                    {city}
+                                </option>
+                            ))}
+                        </select>
                     </label>
 
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-4">
-
-                <div>
-                    <label htmlFor="file-input" className="block mb-2 font-semibold">
-                        Upload Photo
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                    </label>
+            <div className="p-2 rounded-lg">
+                <label className="block mb-2 font-semibold">
+                    Email
+                    <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
-                        type="file" name="photo" accept=".jpg,.png,.jpeg" required
-                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        type="email"
+                        name="email"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={email} onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Email"
                     />
-                </div>
-
-                <div>
-                    <label htmlFor="file-input" className="block mb-2 font-semibold">
-                        Upload Aadhar Card
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                    </label>
+                </label>
+                <label className="block mb-2 font-semibold">
+                    Contact Number
+                    <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
-                        type="file" name="aadhar" accept=".pdf" required
-                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        type="number"
+                        id="mobileNumber"
+                        name="mobileNumber"
+                        value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)}
+                        placeholder="Enter Contact Number"
+                        required
                     />
-                </div>
-
-                <div>
-                    <label htmlFor="file-input" className="block mb-2 font-semibold">
-                        Upload PAN
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                    </label>
+                </label>
+                <label className="block mb-2 font-semibold">
+                    Aadhar Number
+                    <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
-                        type="file" name="pan" accept=".pdf" required
-                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        type="number"
+                        id="aadharNumber"
+                        name="aadharNumber"
+                        value={aadharNumber} onChange={(e) => setAadharNumber(e.target.value)}
+                        placeholder="Enter Aadhar Number"
+                        required
                     />
-                </div>
-
-                <div>
-                    <label htmlFor="file-input" className="block mb-2 font-semibold">
-                        Upload Digital Signature
-                        <span className="text-red-700 relative top-0 right-0">*</span>
-                    </label>
+                </label>
+                <label className="block mb-2 font-semibold mt-2">
+                    PAN
+                    <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
-                        type="file" name="signature" accept=".jpg,.png,.jpeg" required
-                        className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                        type="text"
+                        name="panNumber"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={panNumber} onChange={(e) => setPanNumber(e.target.value)}
+                        placeholder="Enter PAN"
                     />
-                </div>
+                </label>
+
+                <label className="block mb-2 font-semibold mt-2">
+                    Others
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        type="text"
+                        name="others"
+                        className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={others} onChange={(e) => setOthers(e.target.value)}
+                    />
+                </label>
+
+                <label className="block mb-2 font-semibold">
+                    Request License
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <select
+                        name="requestLicense"
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        value={requestLicense}
+                        onChange={(e) => setRequestLicense(e.target.value)}
+                    >
+                        <option value="">Select</option>
+                        {licenses.map((license) => (
+                            <option key={license} value={license}>
+                                {license}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+
+                <label className="block mb-2 font-semibold basis-1/2">
+                    ZipCode
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                    <input
+                        required
+                        type="text"
+                        name="companystate"
+                        value={zipcode}
+                        onChange={(e) => setZipcode(e.target.value)}
+                        className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                        placeholder="Enter State"
+                    />
+                </label>
 
             </div>
+        </div>
 
-            <div className="flex items-center justify-between mb-4">
-                <button
-                    className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
-                    type="submit"
-                >
-                    Submit
-                </button>
+        <div className="grid grid-cols-2 gap-4 mb-4">
+
+            <div>
+                <label htmlFor="file-input" className="block mb-2 font-semibold">
+                    Upload Photo
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                </label>
+                <input
+                    type="file" name="photo" accept=".jpg,.png,.jpeg" required
+                    className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                />
             </div>
-        </form>
+
+            <div>
+                <label htmlFor="file-input" className="block mb-2 font-semibold">
+                    Upload Aadhar Card
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                </label>
+                <input
+                    type="file" name="aadhar" accept=".pdf" required
+                    className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                />
+            </div>
+
+            <div>
+                <label htmlFor="file-input" className="block mb-2 font-semibold">
+                    Upload PAN
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                </label>
+                <input
+                    type="file" name="pan" accept=".pdf" required
+                    className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                />
+            </div>
+
+            <div>
+                <label htmlFor="file-input" className="block mb-2 font-semibold">
+                    Upload Digital Signature
+                    <span className="text-red-700 relative top-0 right-0">*</span>
+                </label>
+                <input
+                    type="file" name="signature" accept=".jpg,.png,.jpeg" required
+                    className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
+                />
+            </div>
+
+        </div>
+
+        <div className="flex items-center justify-between mb-4">
+            <button
+                className="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-700"
+                type="submit"
+            >
+                Submit
+            </button>
+        </div>
+    </form>
     );
 }
 

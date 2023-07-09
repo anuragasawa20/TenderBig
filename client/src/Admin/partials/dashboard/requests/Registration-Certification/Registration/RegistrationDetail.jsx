@@ -51,38 +51,107 @@ const RegistrationDetails = () => {
                         <div className="flex justify-center">
                             <div className="bg-white rounded-lg shadow-lg p-6">
                                 <h2 className="text-xl font-bold mb-4">Registration Detail</h2>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p className="font-bold">Company: {formData.company}</p>
-                                        <p className="font-bold">Mobile: {formData.mobile}</p>
-                                        <p className="font-bold">Secondary Mobile: {formData.secMobile}</p>
-                                        <p className="font-bold">Email: {formData.email}</p>
-                                        <p className="font-bold">Website: <a href={formData.cwebsite} target="_blank" rel="noopener noreferrer">{formData.cwebsite}</a></p>
-                                        <p className="font-bold">CIN: {formData.CIN}</p>
-                                        <p className="font-bold">Work Mobile: {formData.wmobile}</p>
-                                        <p className="font-bold">Company Profile: {formData.cprofile}</p>
-                                        <p className="font-bold">Company Established: {formData.companyEstd}</p>
-                                        <p className="font-bold">Other Details: {formData.otherDetails}</p>
-                                        <p className="font-bold">Company Post: {formData.companypost}</p>
-                                        <p className="font-bold">License: {formData.liscence}</p>
-                                        <p className="font-bold">Contact Person Name: {formData.cpname}</p>
-                                        <p className="font-bold">Category: {formData.category}</p>
-                                        <p className="font-bold">Father's Name: {formData.fname}</p>
-                                        <p className="font-bold">GST: {formData.GST}</p>
-                                        <p className="font-bold">PAN: {formData.PAN}</p>
-                                        <p className="font-bold">Address: {formData.address}</p>
-                                        <p className="font-bold">Country: {formData.companycountry}</p>
-                                        <p className="font-bold">City: {formData.companycity}</p>
-                                        <p className="font-bold">State: {formData.companystate}</p>
-                                    </div>
-
-                                    <div>
-                                        <p className="font-bold">Registration URL: <a href={formData.regUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p className="font-bold">GST URL: <a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                        <p className="font-bold">PAN URL: <a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></p>
-                                    </div>
-                                </div>
-
+                                <table className="w-full">
+                                    <tbody >
+                                        
+                                        <tr className='border '>
+                                            <td className='p-3'>Company</td>
+                                            <td className='p-4'>{formData.company}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                            <td className='p-3'>Mobile</td>
+                                            <td className='p-4'>{formData.mobile}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Secondary Mobile</td>
+                                        <td className='p-4'>{formData.secMobile}</td>
+                                        </tr>
+                                        <tr className='border'> 
+                                        <td className='p-3'>Email</td>
+                                        <td className='p-4'>{formData.email}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Website</td>
+                                        <td className='p-4'><a href={formData.cwebsite} target="_blank" rel="noopener noreferrer">{formData.cwebsite}</a></td>
+                                        </tr >
+                                        <tr className='border'> 
+                                        <td className='p-3'>CIN</td>
+                                        <td className='p-4'>{formData.CIN}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Work Mobile</td>
+                                        <td className='p-4'>{formData.wmobile}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Company Profile</td>
+                                        <td className='p-4'>{formData.cprofile}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Company Established</td>
+                                        <td className='p-4'>{formData.companyEstd}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Other Details</td>
+                                        <td className='p-4'>{formData.otherDetails}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Company Post</td>
+                                        <td className='p-4'>{formData.companypost}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>License</td>
+                                        <td className='p-4'>{formData.liscence}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Contact Person Name</td>
+                                        <td className='p-4'>{formData.cpname}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                            <td className='p-3'>Category</td>
+                                            <td className='p-4'>{formData.category}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                            <td className='p-3'>Father's Name</td>
+                                            <td className='p-4'>{formData.fname}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>GST</td>
+                                        <td className='p-4'>{formData.GST}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>PAN</td>
+                                        <td className='p-4'>{formData.PAN}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Address</td>
+                                        <td className='p-4'>{formData.address}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Country</td>
+                                        <td className='p-4'>{formData.companycountry}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>City</td>
+                                        <td className='p-4'>{formData.companycity}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>State</td>
+                                        <td className='p-4'>{formData.companystate}</td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>Registration URL</td>
+                                            <td className='p-4'><a href={formData.regUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>GST URL</td>
+                                        <td className='p-4'><a href={formData.gstUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                        </tr>
+                                        <tr className='border'>
+                                        <td className='p-3'>PAN URL</td>
+                                        <td className='p-4'><a href={formData.panUrl} target="_blank" rel="noopener noreferrer">Click Here</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
