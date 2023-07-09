@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const userModel = require("../../userModel");
 
 const registrationModelSchema = new mongoose.Schema(
     {
         userId: {
-            type: String
+            type: String,
+            ref: 'userModel'
         },
         company: String,
         mobile: String,

@@ -1,9 +1,12 @@
 const EmployerForm = require('../../models/services/CareerManPower/employerModel');
-const { getFileByFilename, uploadFileToS3, getLink} = require('../../config/s3function')
+const { getFileByFilename, uploadFileToS3, getLink } = require('../../config/s3function')
 
 const submitForm = async (req, res) => {
     try {
+        const userId = req.userId;
+        console.log(userId);
         const {
+
             company,
             mobile,
             email,
@@ -32,6 +35,7 @@ const submitForm = async (req, res) => {
 
         // Create a new instance of the EmployerForm model
         const employer = new EmployerForm({
+            userId,
             company,
             mobile,
             email,

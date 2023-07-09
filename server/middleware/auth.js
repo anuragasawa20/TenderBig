@@ -3,16 +3,18 @@ const { JWT_SECRET } = require("../config/keys");
 
 exports.verifyToken = (req, res, next) => {
   const token = req.headers.auth;
-  
+
   if (!token) {
     return res.status(401).json({ error: "Access denied. No token provided." });
   }
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
+    console.log(decoded.data);
     req.userRole = decoded.data.userRole;
     req.userId = decoded.data.userId;
     req._id = decoded.data._id;
+    console.log(req.userId);
     next();
   } catch (err) {
     console.error(err);
@@ -30,7 +32,7 @@ exports.isAdmin = (req, res, next) => {
   try {
     console.log(token);
     const decoded = jwt.verify(token, JWT_SECRET);
-    if ( decoded.data.userRole != "admin" ) {
+    if (decoded.data.userRole != "admin") {
       return res.status(403).json({ error: "Access denied. Admin role required." });
     }
     next();

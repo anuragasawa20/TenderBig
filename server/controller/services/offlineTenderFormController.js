@@ -3,7 +3,8 @@ const TenderOfflineForm = require("../../models/services/Tenders/offlineFormMode
 // Submit Tender Offline Form
 const submitForm = async (req, res) => {
   try {
-    const { name, userId, company, mobile, email, aadhar, role } = req.body;
+    const userId = req.userId;
+    const { name, company, mobile, email, aadhar, role } = req.body;
     const tenderOfflineForm = new TenderOfflineForm({
       name,
       userId,

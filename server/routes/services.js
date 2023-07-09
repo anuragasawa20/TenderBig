@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {upload} = require('../middleware/multer')
+const { upload } = require('../middleware/multer')
 const employerController = require('../controller/services/employerFormController');
 const seekerController = require('../controller/services/seekerFormController');
 const registrationController = require('../controller/services/registrationFormController');
@@ -11,12 +11,13 @@ const jointventureController = require('../controller/services/jointventureContr
 const tenderOfflineController = require("../controller/services/offlineTenderFormController");
 const gemregistrationController = require("../controller/services/gemregistrationFormController");
 const tenderOnlineController = require("../controller/services/onlineTenderFormController");
+const { verifyToken } = require('../middleware/auth');
 
 //Career & Man Power
 
 //Employer
 // Route for form submission
-router.post('/employer/submit-form',employerController.submitForm);
+router.post('/employer/submit-form', verifyToken, employerController.submitForm);
 
 // Route for getting all forms
 router.get('/employer/forms', employerController.getAllForms);
@@ -26,7 +27,7 @@ router.get('/employer/forms/:id', employerController.getSingleForm);
 
 //Seeker 
 // Route for form submission
-router.post('/seeker/submit-form',seekerController.submitForm);
+router.post('/seeker/submit-form', verifyToken, seekerController.submitForm);
 
 // Route for getting all forms
 router.get('/seeker/forms', seekerController.getAllForms);
@@ -38,7 +39,7 @@ router.get('/seeker/forms/:id', seekerController.getSingleForm);
 
 //Registration
 // Route for submitting a registration form
-router.post('/register/registration', registrationController.submitForm);
+router.post('/register/registration', verifyToken, registrationController.submitForm);
 
 // Route for getting all registration forms
 router.get('/register/registration', registrationController.getAllForms);
@@ -48,7 +49,7 @@ router.get('/register/registration/:id', registrationController.getFormById);
 
 //Company Certification
 // Route for submitting a certification form
-router.post('/ccert/certification',upload.any(), companyCertificationController.submitForm);
+router.post('/ccert/certification', verifyToken, upload.any(), companyCertificationController.submitForm);
 
 // Route for getting all certification forms
 router.get('/ccert/certification', companyCertificationController.getAllForms);
@@ -58,7 +59,7 @@ router.get('/ccert/certification/:id', companyCertificationController.getFormByI
 
 //Individual Certification
 // Route for submitting a certification form
-router.post('/icert/certification',upload.any(), individualCertificationController.submitForm);
+router.post('/icert/certification', verifyToken, upload.any(), individualCertificationController.submitForm);
 
 // Route for getting all certification forms
 router.get('/icert/certification', individualCertificationController.getAllForms);
@@ -68,7 +69,7 @@ router.get('/icert/certification/:id', individualCertificationController.getForm
 
 //Auction Materials
 // Route for submitting an auction material form
-router.post('/aumt/auction-material', auctionMaterialsController.submitForm);
+router.post('/aumt/auction-material', verifyToken, auctionMaterialsController.submitForm);
 
 // Route for getting all auction material forms
 router.get('/aumt/auction-material', auctionMaterialsController.getAllForms);
@@ -78,7 +79,7 @@ router.get('/aumt/auction-material/:id', auctionMaterialsController.getFormById)
 
 //Joint Venture
 // Submit Joint Venture form
-router.post("/jv/submitjv", jointventureController.submitForm);
+router.post("/jv/submitjv", verifyToken, jointventureController.submitForm);
 
 // Get all Joint Venture forms
 router.get("/jv/getjv", jointventureController.getAllForms);
@@ -88,7 +89,7 @@ router.get("/jv/:id", jointventureController.getFormById);
 
 //Tender Offline
 // Submit Tender Offline Form
-router.post("/tender/offline", tenderOfflineController.submitForm);
+router.post("/tender/offline", verifyToken, tenderOfflineController.submitForm);
 
 // Get All Tender Offline Forms
 router.get("/tender/offline/getall", tenderOfflineController.getAllForms);
@@ -98,7 +99,7 @@ router.get("/tender/offline/:id", tenderOfflineController.getSingleForm);
 
 //Tender Online
 // Submit Tender Online Form
-router.post("/tender/online", tenderOnlineController.submitForm);
+router.post("/tender/online", verifyToken, tenderOnlineController.submitForm);
 
 // Get All Tender Online Forms
 router.get("/tender/online/getall", tenderOnlineController.getAllForms);
@@ -108,7 +109,7 @@ router.get("/tender/online/:id", tenderOnlineController.getFormById);
 
 //Gem Registration
 // Submit Gem Registration Form
-router.post("/gem/submit", gemregistrationController.submitForm);
+router.post("/gem/submit", verifyToken, gemregistrationController.submitForm);
 
 // Get All Gem Registration Forms
 router.get("/gem/getall", gemregistrationController.getAllForms);

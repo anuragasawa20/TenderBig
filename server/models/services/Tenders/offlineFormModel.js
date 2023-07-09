@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
+const userModel = require("../../userModel");
 
 const offlineTenderModelSchema = new mongoose.Schema(
     {
+        userId: {
+            type: String,
+            ref: 'userModel',
+        },
         name: {
             type: String
         },

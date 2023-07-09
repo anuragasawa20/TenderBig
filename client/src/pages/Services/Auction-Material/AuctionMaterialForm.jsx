@@ -162,8 +162,12 @@ const handleSubmit = async (e) => {
         requestBody.workExperience.workExperience = workExperienceUrls;
         requestBody.workExperience.workOrderSamples = workOrderSamplesUrls;
         requestBody.workExperience.workProfiles = workProfilesUrls;
-
-        const response = await axios.post('http://localhost:5000/apiTender/services/aumt/auction-material', requestBody);
+        const token = localStorage.getItem('token');
+        const response = await axios.post('http://localhost:5000/apiTender/services/aumt/auction-material', requestBody, {
+          headers: {
+            'auth': token
+          }
+        });
         if (response.data.success) {
           alert('Submitted');
           resetForm();

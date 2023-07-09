@@ -118,19 +118,19 @@ class User {
                 inactiveSubscriptionCount
             });
         } catch (error) {
-            res.status(500).json({ error: 'An error occurred while fetching user statistics.',error });
+            res.status(500).json({ error: 'An error occurred while fetching user statistics.', error });
         }
     }
 
-    async ByUserRole (req, res){
+    async ByUserRole(req, res) {
         try {
             const { userRole } = req.params;
             const users = await userModel.find({ userRole });
             res.json(users);
-          } catch (error) {
+        } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Server Error' });
-          }
+        }
     }
 }
 

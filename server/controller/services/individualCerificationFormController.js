@@ -4,6 +4,7 @@ const { getFileByFilename, uploadFileToS3, getLink } = require('../../config/s3f
 // Controller for submitting a certification form
 const submitForm = async (req, res) => {
   try {
+    const userId = req.userId;
     const {
       name,
       fatherName,
@@ -28,6 +29,7 @@ const submitForm = async (req, res) => {
     } = req.body;
 
     const newForm = await IndividualForm.create({
+      userId,
       name,
       fatherName,
       dob,

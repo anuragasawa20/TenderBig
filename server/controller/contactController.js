@@ -4,6 +4,7 @@ class Contact {
 
     async postContactForm(req, res) {
         try {
+            const userId = req.userId;
             const { name, company, mobile, email, selectedService } = req.body;
 
             if (!name || !company || !mobile || !email || !selectedService) {
@@ -11,6 +12,7 @@ class Contact {
             }
 
             const contactForm = new ContactForm({
+                userId,
                 name,
                 company,
                 mobile,

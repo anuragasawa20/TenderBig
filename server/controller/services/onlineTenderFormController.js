@@ -2,8 +2,10 @@ const TenderOnlineModel = require("../../models/services/Tenders/onlineFormModel
 
 const submitForm = async (req, res) => {
     try {
+        const userId = req.userId;
+        req.body.userId = userId;
         const newRecord = await TenderOnlineModel.create(req.body);
-        res.status(200).json({success:true, newRecord});
+        res.status(200).json({ success: true, newRecord });
     } catch (error) {
         res.status(500).json({ error: "Failed to create a new record" });
     }

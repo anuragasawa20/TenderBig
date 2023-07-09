@@ -3,7 +3,9 @@ const SeekerForm = require('../../models/services/CareerManPower/seekerModel');
 // Controller for form submission
 const submitForm = async (req, res) => {
     try {
+        const userId = req.userId;
         const {
+
             name,
             fathername,
             aadhar,
@@ -31,6 +33,7 @@ const submitForm = async (req, res) => {
         } = req.body;
 
         const newSeeker = await SeekerForm.create({
+            userId,
             name,
             fathername,
             aadhar,

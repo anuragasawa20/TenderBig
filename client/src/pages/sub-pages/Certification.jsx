@@ -699,7 +699,11 @@ const Certification = () => {
 
         const token = localStorage.getItem('token');
         axios
-            .post("http://localhost:5000/apiTender/services/ccert/certification", data)
+            .post("http://localhost:5000/apiTender/services/ccert/certification", data, {
+                headers: {
+                    'auth': token
+                }
+            })
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");
@@ -716,7 +720,11 @@ const Certification = () => {
         const token = localStorage.getItem('token');
         console.log(data)
         axios
-            .post("http://localhost:5000/apiTender/services/icert/certification", data)
+            .post("http://localhost:5000/apiTender/services/icert/certification", data, {
+                headers: {
+                    'auth': token
+                }
+            })
             .then((response) => {
                 console.log("Form data sent successfully:", response.data);
                 alert("We will contact you soon!!!");

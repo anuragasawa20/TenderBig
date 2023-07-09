@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
+const userModel = require("./userModel");
 
 const contactFormSchema = new mongoose.Schema({
+    userId: {
+        type: String,
+        ref: userModel
+    },
     name: {
         type: String,
         required: true,
@@ -26,7 +31,7 @@ const contactFormSchema = new mongoose.Schema({
         default: Date.now,
     },
 },
-{ timestamps: true });
+    { timestamps: true });
 
 const ContactForm = mongoose.model("ContactForm", contactFormSchema);
 
