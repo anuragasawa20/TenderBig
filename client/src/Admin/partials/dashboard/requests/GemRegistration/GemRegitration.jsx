@@ -7,7 +7,7 @@ const GemRegistration = () => {
     const [forms, setForms] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch("http://localhost:5000/apiTender/services/gem/getall")
+        fetch("http://localhost:3000/apiTender/services/gem/getall")
             .then((response) => response.json())
             .then((data) => setForms(data))
             .catch((error) => console.log(error));
