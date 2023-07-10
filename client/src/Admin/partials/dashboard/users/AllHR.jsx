@@ -3,10 +3,12 @@ import axios from "axios";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-
+import * as XLSX from "xlsx";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 function AllHR() {
   const [userData, setUserData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +17,8 @@ function AllHR() {
   const navigate = useNavigate();
 
   const AddHR = () => {
-    navigate("/dashboard/addhr")
-  }
+    navigate("/dashboard/addhr");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +43,7 @@ function AllHR() {
   }, []);
 
   const showDetails = (userId) => {
-    navigate(`/dashboard/user/${userId}`)
+    navigate(`/dashboard/user/${userId}`);
   };
 
   const handleSearchChange = (e) => {
@@ -49,12 +51,15 @@ function AllHR() {
   };
 
   const filteredData = userData.filter((user) => {
-    const nameMatch = user.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const emailMatch = user.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const nameMatch = user.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const emailMatch = user.email
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
     // Check if any of the conditions is true
-    return (nameMatch || emailMatch);
+    return nameMatch || emailMatch;
   });
-
 
   // Pagination
   const indexOfLastUser = currentPage * usersPerPage;
@@ -78,10 +83,73 @@ function AllHR() {
     }
   };
 
+  const downloadAsExcel = () => {
+    const selectedData = currentUsers.map((user) => ({
+      User: user.name,
+      Role: user.userRole,
+      Email: user.email,
+      Phone: user.phoneNumber,
+      Country: user.country,
+      City: user.city,
+      Subscription: user.subscription ? user.subscription.status : "",
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(selectedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Users");
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    const data = new Blob([excelBuffer], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    saveAs(data, "users.xlsx");
+  };
+
+  const downloadAsPDF = () => {
+    const doc = new jsPDF();
+
+    const headers = [
+      "User",
+      "Role",
+      "Email",
+      "Phone",
+      "Country",
+      "City",
+      "Subscription",
+    ];
+
+    const selectedData = currentUsers.map((user) => [
+      user.name,
+      user.userRole,
+      user.email,
+      user.phoneNumber,
+      user.country,
+      user.city,
+      user.subscription ? user.subscription.status : "",
+    ]);
+
+    const data = {
+      headers,
+      rows: selectedData,
+    };
+
+    const tableConfig = {
+      startY: 20,
+      headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+      bodyStyles: { fillColor: 255, textColor: 0 },
+      alternateRowStyles: { fillColor: 245 },
+      margin: { top: 20 },
+    };
+
+    doc.autoTable(data.headers, data.rows, tableConfig);
+
+    doc.save("users.pdf");
+  };
   const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
-
-
     <div className="flex h-screen overflow-hidden ">
       {/* Sidebar */}
 
@@ -113,9 +181,26 @@ function AllHR() {
                   />
                   <button
                     className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
-                    onClick={() => { AddHR() }}
+                    onClick={() => {
+                      AddHR();
+                    }}
                   >
                     Add New HR
+                  </button>
+                </div>
+                {/* Download buttons */}
+                <div className="flex justify-end mb-4">
+                  <button
+                    className="bg-green-700  text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 mr-2"
+                    onClick={downloadAsExcel}
+                  >
+                    Download Excel
+                  </button>
+                  <button
+                    className="bg-red-700  text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
+                    onClick={downloadAsPDF}
+                  >
+                    Download PDF
                   </button>
                 </div>
 
@@ -136,8 +221,14 @@ function AllHR() {
                           <tr className="text-gray-700" key={user._id}>
                             <td className="px-4 py-3 border">
                               <div className="flex items-center text-sm">
-                                <div onClick={() => { showDetails(user.userId) }}>
-                                  <p className="font-semibold text-black cursor-pointer">{user.name}</p>
+                                <div
+                                  onClick={() => {
+                                    showDetails(user.userId);
+                                  }}
+                                >
+                                  <p className="font-semibold text-black cursor-pointer">
+                                    {user.name}
+                                  </p>
                                 </div>
                               </div>
                             </td>
@@ -149,8 +240,12 @@ function AllHR() {
                                 {user.phoneNumber}
                               </span>
                             </td>
-                            <td className="px-4 py-3 text-sm border">{user.country}</td>
-                            <td className="px-4 py-3 text-sm border">{user.city}</td>
+                            <td className="px-4 py-3 text-sm border">
+                              {user.country}
+                            </td>
+                            <td className="px-4 py-3 text-sm border">
+                              {user.city}
+                            </td>
                           </tr>
                         ))}
                       </tbody>
@@ -174,7 +269,10 @@ function AllHR() {
                       <button
                         className="px-3 py-1 rounded-full focus:outline-none focus:shadow-outline-purple"
                         onClick={nextPage}
-                        disabled={currentPage === Math.ceil(filteredData.length / usersPerPage)}
+                        disabled={
+                          currentPage ===
+                          Math.ceil(filteredData.length / usersPerPage)
+                        }
                       >
                         <FontAwesomeIcon icon={faArrowRight} />
                         <path
@@ -190,10 +288,8 @@ function AllHR() {
             </div>
           </div>
         </main>
-
       </div>
     </div>
-
   );
 }
 
