@@ -1,4 +1,5 @@
 import React from 'react';
+import AdminTenderResultForm from '../Admin/partials/dashboard/tenders/AdminTenderResultForm';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 
@@ -67,9 +68,9 @@ const DashboardRoutes = () => {
   return (
     <div>
       <Routes>
-       <Route
-        path="/admin"
-        element={<PrivateRoute element={DashboardHome}/>}
+        <Route
+          path="/admin"
+          element={<PrivateRoute element={DashboardHome} />}
         />
 
         {/* Users */}
@@ -137,6 +138,11 @@ const DashboardRoutes = () => {
         <Route
           path="/tender/:tenderId"
           element={<PrivateRoute element={DashboardTenderDetail} />}
+        />
+
+        <Route
+          path='/tender/results/forms'
+          element={<PrivateRoute element={AdminTenderResultForm} />}
         />
 
         {/* Requests */}
