@@ -208,10 +208,12 @@ class Tender {
             };
 
             const newTender = new tenderResultModel({
-                tenderId,
                 userId,
                 summary,
-                procurementSummary,
+                country,
+                state,
+                city,
+                deadline: new Date(deadline),
                 description,
                 BRR,
                 Authority,
