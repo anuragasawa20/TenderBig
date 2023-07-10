@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import { locations } from "../../../../constants/countriesData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Country, State, City } from 'country-state-city';
+
 
 
 const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubmit, previousPage }) => {
+
+
     return (
         <>
             <h2 className="text-2xl font-bold mb-4 text-center">Submit Tender Request</h2>
@@ -32,7 +37,7 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
                         </label>
 
                         <label className="block mb-2 font-semibold">
-                            TOT No
+                            BRR
                             <span className="text-red-700 relative top-0 right-0">*</span>
                             <input required
                                 type="text"
@@ -241,69 +246,55 @@ const OtherInformationAndPurchaserDetail = ({ formData, handleChange, handleSubm
 };
 
 const Forms = () => {
+    const countryData = Country.getAllCountries();  //
+    const countryNames = Object.values(countryData).map((country) => country.name);
+
 
     const [formData, setFormData] = useState({
         summary: "",
-        sector: "",
-        cpvNo: "",
+        BRR: "",
+        Authority: "",
         userCategory: "admin",
-        product: "",
+        TendorNo: "",
+        TenderId: "",
         country: "",
         state: "",
         city: "",
-        procurementSummarySummary: "",
-        procurementSummaryDeadline: "",
-        noticeType: "",
-        totNo: "",
-        documentNo: "",
-        competition: "",
-        financier: "",
-        ownership: "",
+        deadline: "",
+        contractValue: "",
         tenderValue: "",
-        purchaser: "",
-        paddress: "",
-        pcity: "",
-        pdistrict: "",
-        pstate: "",
-        ppin: "",
-        ptelfax: "",
-        email: "",
-        url: "",
         description: "",
-        organization: "",
-        tenderDetailNoticeType: "",
     });
+
+    let stateNames = [];
+    if (formData.country) {
+        const countryCode = countryData.find((country) => country.name === formData.country)?.isoCode;
+        const stateData = State.getStatesOfCountry(countryCode);
+        stateNames = Array.from(new Set(Object.values(stateData).map((state) => state.name)));
+    }
+
+    let cityNames = [];
+    if (formData.country) {
+        const countryCode = countryData.find((country) => country.name === formData.country)?.isoCode;
+        const cityData = City.getCitiesOfCountry(countryCode);
+        cityNames = Array.from(new Set(Object.values(cityData).map((city) => city.name)));
+    }
 
     const clearInputs = () => {
         setFormData({
             summary: "",
-            sector: "",
-            cpvNo: "",
-            product: "",
+            BRR: "",
+            Authority: "",
+            userCategory: "admin",
+            TendorNo: "",
+            TenderId: "",
             country: "",
             state: "",
             city: "",
-            procurementSummarySummary: "",
-            procurementSummaryDeadline: "",
-            noticeType: "",
-            totNo: "",
-            documentNo: "",
-            competition: "",
-            financier: "",
-            ownership: "",
+            deadline: "",
+            contractValue: "",
             tenderValue: "",
-            purchaser: "",
-            paddress: "",
-            pcity: "",
-            pdistrict: "",
-            pstate: "",
-            ppin: "",
-            ptelfax: "",
-            email: "",
-            url: "",
             description: "",
-            organization: "",
-            tenderDetailNoticeType: "",
         });
     }
 
@@ -324,8 +315,9 @@ const Forms = () => {
         const token = localStorage.getItem("token");
 
         const requestBody = JSON.stringify(formData);
+        // console.log(requestBody);
 
-        fetch("http://localhost:5000/apiTender/tenderdetails/add-tender", {
+        fetch("http://localhost:5000/apiTender/tenderdetails/add-tenderResults", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -338,13 +330,13 @@ const Forms = () => {
                 console.log("Success:", data);
                 alert("Submitted")
                 clearInputs();
-                window.location.href = '/dashboard/tenders';
+                window.location.href = '/dashboard';
             })
             .catch((error) => {
                 console.error("Error:", error);
                 alert("Oops something went wrong!!!");
                 clearInputs();
-                window.location.href = '/dashboard/tenders';
+                // window.location.href = '/dashboard';
             });
     };
 
@@ -393,8 +385,8 @@ const Forms = () => {
                                                 <input
                                                     required
                                                     type="text"
-                                                    name="summary"
-                                                    value={formData.summary}
+                                                    name="BRR"
+                                                    value={formData.BRR}
                                                     onChange={handleChange}
                                                     className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                     placeholder="Enter BRR"
@@ -409,8 +401,8 @@ const Forms = () => {
                                                     <input
                                                         required
                                                         type="text"
-                                                        name="sector"
-                                                        value={formData.sector}
+                                                        name="Authority"
+                                                        value={formData.Authority}
                                                         onChange={handleChange}
                                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Authority"
@@ -421,8 +413,8 @@ const Forms = () => {
                                                     Tender No
                                                     <input
                                                         type="text"
-                                                        name="cpvNo"
-                                                        value={formData.cpvNo}
+                                                        name="TendorNo"
+                                                        value={formData.TendorNo}
                                                         onChange={handleChange}
                                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Tender No"
@@ -434,8 +426,8 @@ const Forms = () => {
                                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                                     <input required
                                                         type="text"
-                                                        name="product"
-                                                        value={formData.product}
+                                                        name="TenderId"
+                                                        value={formData.TenderId}
                                                         onChange={handleChange}
                                                         className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Tender Id"
@@ -459,8 +451,14 @@ const Forms = () => {
                                                             onChange={handleChange}
                                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         >
-                                                            {locations.map((country, index) => (
+                                                            {/* {locations.map((country, index) => (
                                                                 <option key={index} value={country}>
+                                                                    {country}
+                                                                </option>
+                                                            ))} */}
+                                                            <option value="">Select a country</option>
+                                                            {countryNames.map((country) => (
+                                                                <option key={country} value={country}>
                                                                     {country}
                                                                 </option>
                                                             ))}
@@ -470,35 +468,63 @@ const Forms = () => {
                                                     <label className="block font-semibold">
                                                         State
                                                         <span className="text-red-700 relative top-0 right-0">*</span>
-                                                        <input required
+                                                        {/* <input required
                                                             type="text"
                                                             name="state"
                                                             value={formData.state}
                                                             onChange={handleChange}
                                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                             placeholder="Enter State"
-                                                        />
+                                                        /> */}
+                                                        <select
+                                                            required
+                                                            name="state"
+                                                            value={formData.state}
+                                                            onChange={handleChange}
+                                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                        >
+                                                            <option value="">Select State</option>
+                                                            {stateNames.map((state) => (
+                                                                <option key={state} value={state}>
+                                                                    {state}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </label>
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-4 mt-1.5 mb-1.5">
                                                     <label className="block font-semibold">
                                                         City
-                                                        <input
+                                                        {/* <input
                                                             type="text"
                                                             name="city"
                                                             value={formData.city}
                                                             onChange={handleChange}
                                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                             placeholder="Enter City"
-                                                        />
+                                                        /> */}
+                                                        <select
+                                                            required
+                                                            name="city"
+                                                            value={formData.city}
+                                                            onChange={handleChange}
+                                                            className="border rounded-sm px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
+                                                        >
+                                                            <option value="">Select City</option>
+                                                            {cityNames.map((city) => (
+                                                                <option key={city} value={city}>
+                                                                    {city}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </label>
                                                     <label className="block font-semibold">
                                                         Deadline
                                                         <span className="text-red-700 relative top-0 right-0">*</span>
                                                         <input required
                                                             type="date"
-                                                            name="procurementSummaryDeadline"
-                                                            value={formData.procurementSummaryDeadline}
+                                                            name="deadline"
+                                                            value={formData.deadline}
                                                             onChange={handleChange}
                                                             className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                             placeholder="Enter Deadline"
@@ -509,8 +535,8 @@ const Forms = () => {
                                                     Summary
                                                     <input
                                                         type="text"
-                                                        name="procurementSummarySummary"
-                                                        value={formData.procurementSummarySummary}
+                                                        name="summary"
+                                                        value={formData.summary}
                                                         onChange={handleChange}
                                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Summary"
@@ -537,8 +563,8 @@ const Forms = () => {
                                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                                     <input required
                                                         type="text"
-                                                        name="organization"
-                                                        value={formData.organization}
+                                                        name="contractValue"
+                                                        value={formData.contractValue}
                                                         onChange={handleChange}
                                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Contract Value"
@@ -549,8 +575,8 @@ const Forms = () => {
                                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                                     <input required
                                                         type="text"
-                                                        name="tenderDetailNoticeType"
-                                                        value={formData.tenderDetailNoticeType}
+                                                        name="tenderValue"
+                                                        value={formData.tenderValue}
                                                         onChange={handleChange}
                                                         className="border rounded-sm  px-3 py-2 mt-1 w-full text-black bg-gray-100 focus:border-red-700 focus:ring-2 focus:ring-red-700 focus:outline-none"
                                                         placeholder="Enter Tender Value"
@@ -561,23 +587,12 @@ const Forms = () => {
                                         <div className="ml-64">
                                             <button
                                                 type="button"
-                                                onClick={nextPage}
+                                                onClick={handleSubmit}
                                                 className="bg-[#182235] hover:bg-[#111a2b] text-white px-4 py-2 mt-8 rounded mx-auto "
                                             >
                                                 Submit
                                             </button>
                                         </div>
-                                    </form>
-                                )}
-
-                                {currentPage === 2 && (
-                                    <form onSubmit={handleSubmit}>
-                                        <OtherInformationAndPurchaserDetail
-                                            formData={formData}
-                                            handleChange={handleChange}
-                                            handleSubmit={handleSubmit}
-                                            previousPage={previousPage}
-                                        />
                                     </form>
                                 )}
                             </div>
@@ -598,3 +613,50 @@ export default Forms;
 
 
 
+=======
+const express = require("express");
+const router = express.Router();
+const tenderController = require("../controller/tenderController");
+const { verifyToken, isNotUser } = require("../middleware/auth")
+
+//To get all tenders registered and can also be filtered based on approved status and active
+router.post("/all-tenders", verifyToken, tenderController.getAllTender);
+
+//Prograsive search by query in url
+router.post("/search", verifyToken, tenderController.search);
+
+//Search from Form Data filled
+router.post("/advance-search", verifyToken, tenderController.advanceSearch);
+
+//Submit a new tender
+router.post("/add-tender", verifyToken, tenderController.postAddTender);
+
+//Edit an existing tender
+router.post("/tender/edit/:tenderId", verifyToken, tenderController.postEditTender);
+
+//Get all details of a single tender
+router.get("/tender/:tenderId", verifyToken, tenderController.getSingleTender);
+
+//All thender by a user
+router.get("/tender/byuserid", verifyToken, tenderController.getTendersByUserId);
+
+//Switch approved status of a tender
+router.post("/tender/:tenderId/switchApprovedStatus", verifyToken, isNotUser, tenderController.switchStatus);
+
+//Switch active status of a tender
+router.post("/tender/:tenderId/switchActiveStatus", verifyToken, isNotUser, tenderController.switchActive);
+
+//Delete tender
+router.delete("/tender/:tenderId", verifyToken, tenderController.deleteTender);
+
+//Statistics
+router.get("/statistics", verifyToken, isNotUser, tenderController.statistics);
+
+//tender by User category
+router.get("/:userCategory", tenderController.tenderByUser);
+
+// tender results giving admin
+router.post("/add-tenderResults", verifyToken, isNotUser, tenderController.postAddTenderResults);
+
+module.exports = router;
+>>>>>>> 6453261bf38f23bbd5957e0d6ef503739ccd7458
