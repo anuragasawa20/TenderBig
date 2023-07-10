@@ -70,6 +70,7 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                 <label className="block mb-2 font-semibold">
                     Hobbies
                     <input
+                        required
                         type="text"
                         name="hobbies"
                         value={formData.hobbies}
@@ -83,7 +84,7 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                     <span className="text-red-700 relative top-0 right-0">*</span>
                     <input
                         required
-                        type="text"
+                        type="number"
                         name="pan"
                         value={formData.pan}
                         onChange={handleChange}
@@ -101,7 +102,10 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                        type="file" name="resume" accept=".pdf" required
+                        type="file" 
+                        name="resume" 
+                        accept=".pdf" 
+                        required
                         id="resume"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
@@ -113,7 +117,10 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                        type="file" name="profilePhoto" accept=".jpg,.jpeg,.png" required
+                        type="file" 
+                        name="profilePhoto" 
+                        accept=".jpg,.jpeg,.png" 
+                        required
                         id="profilePhoto"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
@@ -125,11 +132,16 @@ const Secondpage = ({ formData, handleChange, previousPage }) => {
                         <span className="text-red-700 relative top-0 right-0">*</span>
                     </label>
                     <input
-                        type="file" name="aadhar" accept=".pdf" required
+                        type="text"
+                        name="aadhar"
+                        required
+                        pattern="\d{16}"
+                        title="Aadhar number must be 16 digits"
                         id="aadhar"
                         className="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 focus:border-red-900 focus:ring-red-900 dark:bg-red-100 dark:border-red-700 dark:text-black file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-red-700 dark:file:text-white"
                     />
                 </div>
+
 
             </div>
 
@@ -242,8 +254,8 @@ const Seeker = () => {
         }));
     };
 
-    const getAmount=async()=>{
-        const {data:{price}} = await axios.get("http://localhost:5000/apiTender/formprice/Seeker/price");
+    const getAmount = async () => {
+        const { data: { price } } = await axios.get("http://localhost:5000/apiTender/formprice/Seeker/price");
         return price;
     }
 
@@ -251,7 +263,7 @@ const Seeker = () => {
         e.preventDefault();
         const price = await getAmount();
         const receipt = "Seeker Form";
-        payment(price,receipt)
+        payment(price, receipt)
             .then(async success => {
                 console.log('Payment success:', success);
                 const resume = e.target.resume.files[0];
@@ -472,7 +484,7 @@ const Seeker = () => {
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input
                                         required
-                                        type="text"
+                                        type="number"
                                         name="jobexp"
                                         value={formData.jobexp}
                                         onChange={handleChange}
@@ -546,6 +558,7 @@ const Seeker = () => {
                                     City
                                     <span className="text-red-700 relative top-0 right-0">*</span>
                                     <input
+                                        required
                                         type="text"
                                         name="city"
                                         value={formData.city}
