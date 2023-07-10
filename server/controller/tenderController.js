@@ -1,6 +1,7 @@
 const tenderModel = require("../models/tenderModel");
 const { toTitleCase, toUpperCase, generateUUID } = require("../config/functions")
 const { regionData, geopoliticalData } = require("../config/countriesData");
+const tenderResultModel = require("../models/tenderResultModel");
 
 class Tender {
 
@@ -165,6 +166,71 @@ class Tender {
                 })
                 .catch((err) => {
                     console.log(err);
+                });
+
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ error: err });
+        }
+
+    }
+
+    async postAddTenderResults(req, res) {
+        let {
+            summary,
+            BRR,
+            Authority,
+            userCategory,
+            TendorNo,
+            TenderId,
+            country,
+            state,
+            city,
+            deadline,
+            contractValue,
+            tenderValue,
+            description
+
+        } = req.body;
+
+        const userId = req.userId;
+
+        try {
+            summary = toTitleCase(summary);
+
+            const tenderId = generateUUID();
+
+            const procurementSummary = {
+                country,
+                state,
+                city,
+                deadline: new Date(deadline)
+            };
+
+            const newTender = new tenderResultModel({
+                tenderId,
+                userId,
+                summary,
+                procurementSummary,
+                description,
+                BRR,
+                Authority,
+                userCategory,
+                TendorNo,
+                TenderId,
+                contractValue,
+                tenderValue,
+            });
+            console.log(newTender);
+            newTender.save()
+                .then((data) => {
+                    return res.json({
+                        success: "Tender filled successfully.",
+                    });
+                })
+                .catch((err) => {
+                    // console.log(err);
+                    console.log('not run');
                 });
 
         } catch (err) {
