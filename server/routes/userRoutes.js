@@ -25,6 +25,6 @@ router.get("/users/:userRole", usersController.ByUserRole);
 router.get("/statistics", verifyToken, isNotUser, usersController.statistics);
 
 // getting all forms by id
-router.get("/DetailsbyId/id", usersController.DetailsById);
+router.get("/DetailsbyId/:id", usersController.DetailsById);
 
 module.exports = router;

@@ -9,6 +9,7 @@ const userModel = require("../models/userModel");
 const jointventureForm = require("../models/services/JointVenture/jointventure");
 const TenderOnlineModel = require("../models/services/Tenders/onlineFormModel");
 const gemregistrationForm = require("../models/services/GemRegistration/gemregistration");
+const TenderOfflineForm = require("../models/services/Tenders/offlineFormModel");
 
 class User {
 
@@ -145,9 +146,7 @@ class User {
 
     async DetailsById(req, res) {
         const userId = req.params.userId;
-        const allForms = [{
-            formName, number
-        }];
+        const allForms = [];
         try {
 
             const form = await AuctionMaterialForm.find({ userId });
