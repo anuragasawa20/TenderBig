@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0bb8a751ba34c7e2720fff21e7b79d36a721aa7e
 const UserCards = ({ title, description, buttonLink }) => {
     return (
         <div>
@@ -30,4 +33,8 @@ const UserCards = ({ title, description, buttonLink }) => {
     );
 };
 
+<<<<<<< HEAD
 export default UserCards;
+=======
+export default UserCards;
+>>>>>>> 0bb8a751ba34c7e2720fff21e7b79d36a721aa7e

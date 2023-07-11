@@ -6,9 +6,10 @@ import Help from '../components/DropdownHelp';
 import UserMenu from '../components/DropdownProfile';
 import ThemeToggle from '../components/ThemeToggle';
 
-function Header({ sidebarOpen, setSidebarOpen }) {
+function Header() {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <header className={`sticky top-0 dark:bg-[#182235] border-b border-slate-200 dark:border-slate-700 z-30`}>
@@ -25,6 +26,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
                 e.stopPropagation();
                 setSidebarOpen(!sidebarOpen);
               }}
+              // Correct the `aria-controls` attribute
             >
               <span className="sr-only">Open sidebar</span>
               <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +38,7 @@ function Header({ sidebarOpen, setSidebarOpen }) {
           </div>
 
           {/* Header: Right side */}
-          
+
         </div>
       </div>
     </header>
