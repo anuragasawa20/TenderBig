@@ -66,6 +66,7 @@ import Prices from "../Admin/partials/dashboard/Prices"
 
 // adding routes for user dashboard
 import UserCards from "../Admin/partials/dashboard/userDashboards/UserCards";
+import AllProjects from '../Admin/partials/dashboard/AllProjects';
 // import UserDetails from '../Admin/partials/dashboard/users/DashboardUserDetail';
 
 const DashboardRoutes = () => {
@@ -316,6 +317,10 @@ const DashboardRoutes = () => {
         <Route
           path="/addproject"
           element={<PrivateRoute element={AddProject} />}
+        />
+        <Route
+          path="/allprojects"
+          element={<PrivateRoute element={AllProjects} />}
         />
 
         <Route path='/test' element={<Prices />} />
