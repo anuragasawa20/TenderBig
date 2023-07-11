@@ -6,7 +6,6 @@ const CompanyForm = require("../models/services/Registration&Certification/compa
 const IndividualForm = require("../models/services/Registration&Certification/indivisualCertificationModel");
 const RegistrationForm = require("../models/services/Registration&Certification/registrationModel");
 const userModel = require("../models/userModel");
-const IndividualForm = require('../../models/services/Registration&Certification/indivisualCertificationModel');
 const jointventureForm = require("../models/services/JointVenture/jointventure");
 const TenderOnlineModel = require("../models/services/Tenders/onlineFormModel");
 const gemregistrationForm = require("../models/services/GemRegistration/gemregistration");
@@ -184,9 +183,9 @@ class User {
                 allForms.push({ formName: 'registration', number: registrationForm.length })
             }
 
-            const jointventureForm = await jointventureForm.find({ userId });
-            if (jointventureForm) {
-                allForms.push({ formName: 'joint venture', number: jointventureForm.length })
+            const JointventureForm = await jointventureForm.find({ userId });
+            if (JointventureForm) {
+                allForms.push({ formName: 'joint venture', number: JointventureForm.length })
             }
             const tenderOffilneForm = await TenderOfflineForm.find({ userId });
             if (tenderOffilneForm) {

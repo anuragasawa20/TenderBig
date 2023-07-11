@@ -1,4 +1,4 @@
-import React from 'react';
+
 import AdminTenderResultForm from '../Admin/partials/dashboard/tenders/AdminTenderResultForm';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
@@ -65,7 +65,7 @@ import Material from '../Admin/partials/dashboard/options/auctionMaterial';
 import Prices from "../Admin/partials/dashboard/Prices"
 
 // adding routes for user dashboard
-import UserCards from "../Admin/partials/dashboard/userDashboards/UserCards";
+import UserPanel from '../Admin/pages/UserPanel';
 import AllProjects from '../Admin/partials/dashboard/AllProjects';
 // import UserDetails from '../Admin/partials/dashboard/users/DashboardUserDetail';
 
@@ -156,7 +156,7 @@ const DashboardRoutes = () => {
         /> */}
 
 
-        <Route path='/userDashboard' element={<UserCards />} />
+        <Route path='/userDashboard' element={<UserPanel />} />
 
 
 
