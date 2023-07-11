@@ -64,6 +64,10 @@ import Material from '../Admin/partials/dashboard/options/auctionMaterial';
 
 import Prices from "../Admin/partials/dashboard/Prices"
 
+// adding routes for user dashboard
+import UserCards from "../Admin/partials/dashboard/userDashboards/UserCards";
+// import UserDetails from '../Admin/partials/dashboard/users/DashboardUserDetail';
+
 const DashboardRoutes = () => {
   return (
     <div>
@@ -149,6 +153,12 @@ const DashboardRoutes = () => {
           path='//tenderResults/:TenderResultId'
           element={ }
         /> */}
+
+
+        <Route path='/userDashboard' element={<UserCards />} />
+
+
+
         {/* Requests */}
 
         {/* Employer */}
