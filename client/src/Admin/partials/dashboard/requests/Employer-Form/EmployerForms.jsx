@@ -8,7 +8,7 @@ const EmployerForms = () => {
     const navigate = useNavigate();
     useEffect(() => {
         // Fetch data from the API
-        fetch("http://localhost:3000/apiTender/services/employer/forms")
+        fetch("http://localhost:5000/apiTender/services/employer/forms")
             .then((response) => response.json())
             .then((data) => setForms(data))
             .catch((error) => console.log(error));
