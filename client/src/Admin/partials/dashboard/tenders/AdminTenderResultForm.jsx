@@ -330,7 +330,7 @@ const Forms = () => {
                 console.log("Success:", data);
                 alert("Submitted")
                 clearInputs();
-                window.location.href = '/dashboard';
+                window.location.href = '/dashboard/users';
             })
             .catch((error) => {
                 console.error("Error:", error);
