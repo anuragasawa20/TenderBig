@@ -1,4 +1,15 @@
+
+const AuctionMaterialForm = require("../models/services/AuctionMaterials/auctionmaterials");
+const EmployerForm = require("../models/services/CareerManPower/employerModel");
+const SeekerForm = require("../models/services/CareerManPower/seekerModel");
+const CompanyForm = require("../models/services/Registration&Certification/companyCertificationModel");
+const IndividualForm = require("../models/services/Registration&Certification/indivisualCertificationModel");
+const RegistrationForm = require("../models/services/Registration&Certification/registrationModel");
 const userModel = require("../models/userModel");
+const IndividualForm = require('../../models/services/Registration&Certification/indivisualCertificationModel');
+const jointventureForm = require("../models/services/JointVenture/jointventure");
+const TenderOnlineModel = require("../models/services/Tenders/onlineFormModel");
+const gemregistrationForm = require("../models/services/GemRegistration/gemregistration");
 
 class User {
 
@@ -128,6 +139,71 @@ class User {
             const users = await userModel.find({ userRole });
             res.json(users);
         } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Server Error' });
+        }
+    }
+
+    async DetailsById(req, res) {
+        const userId = req.params.userId;
+        const allForms = [{
+            formName, number
+        }];
+        try {
+
+            const form = await AuctionMaterialForm.find({ userId });
+            if (form) {
+                allForms.push({ formName: 'Auction Material', number: form.length })
+            }
+            const companyForm = await CompanyForm.find({ userId });
+            if (companyForm) {
+                allForms.push({ formName: 'Company', number: companyForm.length })
+            }
+
+            const employerForm = await EmployerForm.find({ userId });
+            if (employerForm) {
+                allForms.push({ formName: 'employer', number: employerForm.length })
+            }
+
+            const seekerForm = await SeekerForm.find({ userId });
+            if (seekerForm) {
+                allForms.push({ formName: 'seeker', number: seekerForm.length })
+            }
+            const iCertficationForm = await IndividualForm.find({ userId });
+            if (iCertficationForm) {
+                allForms.push({ formName: 'Individual Certification', number: iCertficationForm.length })
+            }
+
+            const CompanyCertficationForm = await CompanyForm.find({ userId });
+            if (CompanyCertficationForm) {
+                allForms.push({ formName: 'Company Certification', number: CompanyCertficationForm.length })
+            }
+
+            const registrationForm = await RegistrationForm.find({ userId });
+            if (registrationForm) {
+                allForms.push({ formName: 'registration', number: registrationForm.length })
+            }
+
+            const jointventureForm = await jointventureForm.find({ userId });
+            if (jointventureForm) {
+                allForms.push({ formName: 'joint venture', number: jointventureForm.length })
+            }
+            const tenderOffilneForm = await TenderOfflineForm.find({ userId });
+            if (tenderOffilneForm) {
+                allForms.push({ formName: 'Tender Offline', number: tenderOffilneForm.length })
+            }
+            const tenderOnlilneForm = await TenderOnlineModel.find({ userId });
+            if (tenderOnlilneForm) {
+                allForms.push({ formName: 'Tender Online', number: tenderOnlilneForm.length })
+            }
+            const gemRegistrationForm = await gemregistrationForm.find({ userId });
+            if (gemRegistrationForm) {
+                allForms.push({ formName: 'Gem Registration', number: gemRegistrationForm.length })
+            }
+            console.log(allForms);
+            res.json(allForms);
+        }
+        catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Server Error' });
         }
