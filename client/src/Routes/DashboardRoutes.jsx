@@ -145,6 +145,10 @@ const DashboardRoutes = () => {
           element={<PrivateRoute element={AdminTenderResultForm} />}
         />
 
+        {/* <Router
+          path='//tenderResults/:TenderResultId'
+          element={ }
+        /> */}
         {/* Requests */}
 
         {/* Employer */}
