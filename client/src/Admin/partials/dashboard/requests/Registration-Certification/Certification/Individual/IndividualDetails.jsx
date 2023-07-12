@@ -17,7 +17,6 @@ const IndividualDetails = () => {
             .then((response) => response.json())
             .then((data) => {
                 setFormData(data)
-                alert('form submitted')
             })
             .catch((error) => console.log(error));
     }, [id]);
@@ -44,6 +43,7 @@ const IndividualDetails = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+                alert('form submitted')
                 // Perform any necessary actions after successful update
                 // For example, you can navigate to a different page or display a success message
             })
@@ -423,7 +423,7 @@ const IndividualDetails = () => {
                                 </div>
                                 <div className="flex justify-center mt-4">
                                     <button
-                                        className="px-4 py-2 bg-blue-900 font-bold  text-white rounded-md"
+                                        className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2"
                                         onClick={() => updateDetails(formData._id)}
                                     >
                                         Submit
