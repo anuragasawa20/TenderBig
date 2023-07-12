@@ -17,8 +17,4 @@ function UserPanel() {
     );
 }
 
-<<<<<<< HEAD
 export default UserPanel;
-=======
-export default UserPanel;
->>>>>>> 0bb8a751ba34c7e2720fff21e7b79d36a721aa7e

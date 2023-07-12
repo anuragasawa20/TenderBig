@@ -135,7 +135,7 @@ router.post("/tender/offline", verifyToken, tenderOfflineController.submitForm);
 router.get("/tender/offline/getall", tenderOfflineController.getAllForms);
 
 // Get Single Tender Offline Form by ID
-router.get("/tender/offline/:id", tenderOfflineController.getSingleForm);
+router.delete("/tender/offline/:id", tenderOfflineController.getSingleForm);
 // router.put("/tender/offline/:id", tenderOfflineController.updateSingleForm);
 // router.delete("/tender/offline/:id", tenderOfflineController.deleteSingleForm);
 
