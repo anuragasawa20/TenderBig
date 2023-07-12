@@ -8,6 +8,11 @@ import DashboardHome from '../Admin/partials/dashboard/DashboardHome';
 import AllTendersSection from '../Admin/partials/dashboard/tenders/DashboardTenders';
 import Subcontractor from '../Admin/partials/dashboard/tenders/SubcontractorTenders';
 import Contractor from '../Admin/partials/dashboard/tenders/ContractorTenders';
+import Government from '../Admin/partials/dashboard/tenders/GovernmentTenders';
+import Private from '../Admin/partials/dashboard/tenders/privateTenders';
+import Gem from '../Admin/partials/dashboard/tenders/GemTendersForm';
+
+
 import AdminForm from '../Admin/partials/dashboard/tenders/AdminTenderForm';
 import DashboardTenderDetail from '../Admin/partials/dashboard/tenders/DashboardTenderDetail';
 
@@ -66,7 +71,9 @@ import Prices from "../Admin/partials/dashboard/Prices"
 
 // adding routes for user dashboard
 import UserPanel from '../Admin/pages/UserPanel';
-import AllProjects from '../Admin/partials/dashboard/AllProjects';
+import AllProjects from "../Admin/partials/dashboard/AllProjects";
+import DashboardProjectDetail from "../Admin/partials/dashboard/users/DashboardProjectDetail";
+// import Government from '../Admin/partials/dashboard/tenders/GovernmentTenders';
 // import UserDetails from '../Admin/partials/dashboard/users/DashboardUserDetail';
 
 const DashboardRoutes = () => {
@@ -132,6 +139,20 @@ const DashboardRoutes = () => {
           element={<PrivateRoute element={Subcontractor} />}
         />
 
+        <Route
+          path="/Government"
+          element={<PrivateRoute element={Government} />}
+        />
+        <Route
+          path="/Gem"
+          element={<PrivateRoute element={Gem} />}
+        />
+
+
+        <Route
+          path="/Private"
+          element={<PrivateRoute element={Private} />}
+        />
         <Route
           path="/tenders/currenttenders"
           element={<PrivateRoute element={DashboardCurrentTenders} />}
@@ -319,9 +340,14 @@ const DashboardRoutes = () => {
           element={<PrivateRoute element={AddProject} />}
         />
         <Route
-          path="/allprojects"
+          path="/allproject"
           element={<PrivateRoute element={AllProjects} />}
         />
+        <Route
+          path="/allprojects/:projectId"
+          element={<PrivateRoute element={DashboardProjectDetail} />}
+        />
+
 
         <Route path='/test' element={<Prices />} />
         <Route path="*" element={"NOT Allowed"} />
