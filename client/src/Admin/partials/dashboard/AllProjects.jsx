@@ -42,12 +42,12 @@ function AllProjects() {
     fetchData();
   }, []);
 
-  const showDetails = (projectId) => {
-    navigate(`/dashboard/allprojects/${projectId}`);
+  const showDetails = (userId) => {
+    navigate(`/dashboard/allprojects/${userId}`);
   };
 
-  const editProject = (projectId) => {
-    navigate(`/dashboard/editproject/${projectId}`);
+  const editProject = (userId) => {
+    navigate(`/dashboard/allprojects/${userId}`);
   };
 
   const handleSearchChange = (e) => {
@@ -223,65 +223,65 @@ function AllProjects() {
                       </thead>
                       <tbody className="bg-white">
                         {currentUsers.map((user) => (
-                          <tr key={user.id}>
+                          <tr key={user._id}>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.pnr}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.companyname}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.detail}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.value}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.status}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.country}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.state}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.city}
                             </td>
                             <td
                               className="px-4 py-3 cursor-pointer"
-                              onClick={() => showDetails(user.id)}
+                              onClick={() => showDetails(user._id)}
                             >
                               {user.sector}
                             </td>
                             <td>
                               <button
                                 className="text-indigo-600 hover:text-indigo-900 focus:outline-none"
-                                onClick={() => editProject(user.id)}
+                                onClick={() => editProject(user._id)}
                               >
                                 Edit
                               </button>
