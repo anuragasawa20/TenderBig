@@ -473,7 +473,8 @@ const EmployerFormDetail = () => {
                                     </div>
                                     <div className="flex justify-center mt-4">
                                         <button
-                                            className="px-4 py-2 bg-blue-900 font-bold  text-white rounded-md"
+                                            className="bg-[#182235] hover:bg-[#111a2b] text-white font-bold py-2 px-4
+                                             ml-28 rounded focus:outline-none focus:ring-2"
                                             onClick={() => updateDetails(formData._id)}
                                         >
                                             Submit
